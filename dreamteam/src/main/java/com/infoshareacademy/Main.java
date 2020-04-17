@@ -1,13 +1,10 @@
 package com.infoshareacademy;
 
 /**
- * Hello world!
- *
+ * DreamTeam
  */
-public class Main
-{
-    public static void main( String[] args )
-    {
-        System.out.println( "DreamTeam" );
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("DreamTeam");
     }
 }
