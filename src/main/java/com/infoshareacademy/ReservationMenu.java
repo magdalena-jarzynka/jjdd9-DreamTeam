@@ -1,6 +1,16 @@
 package com.infoshareacademy;
 
 public enum ReservationMenu {
-    DODAJ_REZERWACJĘ,
-    USUŃ_REZERWACJĘ
+    NEW_RESERVATION("NOWA_REZERWACJA"),
+    CANCEL_RESERVATION("ANULUJ_REZERWACJĘ");
+
+    String reservationValue;
+
+    ReservationMenu(String rv){
+        reservationValue =rv;
+    }
+
+    public String getReservationValue(){
+        return reservationValue;
+    }
 }

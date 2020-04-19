@@ -1,10 +1,10 @@
 package com.infoshareacademy;
 
 public class ChangeConfiguration {
-    static void Print() {
+    static void print() {
         System.out.println("");
         System.out.println("");
-        System.out.println("This is the method allowing you to change the configuration or to load it from a file.");
+        System.out.println("To jest metoda umożliwiająca zmianę konfiguracji lub wczytanie jej z pliku.");
         System.out.println("");
         System.out.println("");
     }

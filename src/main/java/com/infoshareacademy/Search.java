@@ -1,10 +1,10 @@
 package com.infoshareacademy;
 
 public class Search {
-    static void Print() {
+    static void print() {
         System.out.println("");
         System.out.println("");
-        System.out.println("This is the search engine.");
+        System.out.println("To jest metoda umożliwiająca wyszukiwanie książek.");
         System.out.println("");
         System.out.println("");
     }

@@ -5,95 +5,84 @@ public class Menu {
     private ReservationMenu reservationChoice;
     private SettingsMenu settingsChoice;
 
-    public void booksMenu(BookListMenu bookChoice){
+    public void booksMenu(BookListMenu bookChoice) {
         this.bookChoice = bookChoice;
         switch (bookChoice) {
-            case PEŁNA_LISTA:
-                FullList.Print();
+            case BOOK_LIST:
+                FullList.print();
                 break;
-            case SZUKAJ_POZYCJI:
-                Search.Print();
+            case SEARCH:
+                Search.print();
                 break;
-            case SZCZEGÓŁY_POZYCJI:
-                Details.Print();
+            case BOOK_DETAILS:
+                Details.print();
                 break;
         }
     }
 
-    public void reservationMenu(ReservationMenu reservationChoice){
+    public void reservationMenu(ReservationMenu reservationChoice) {
         this.reservationChoice = reservationChoice;
-        switch(reservationChoice){
-            case DODAJ_REZERWACJĘ:
-                AddReservation.Print();
+        switch (reservationChoice) {
+            case NEW_RESERVATION:
+                AddReservation.print();
                 break;
-            case USUŃ_REZERWACJĘ:
-                DeleteReservation.Print();
+            case CANCEL_RESERVATION:
+                DeleteReservation.print();
                 break;
         }
     }
 
-    public void settingsMenu(SettingsMenu settingsChoice){
+    public void settingsMenu(SettingsMenu settingsChoice) {
         this.settingsChoice = settingsChoice;
-        switch (settingsChoice){
-            case ZMIEŃ_KONFIGURACJĘ:
-                ChangeConfiguration.Print();
+        switch (settingsChoice) {
+            case CONFIGURATIONS:
+                ChangeConfiguration.print();
                 break;
-            case SOROTWANIE_POZYCJI:
-                SortingOptions.Print();
+            case SORTING:
+                SortingOptions.print();
                 break;
-            case ZMIEŃ_FORMAT:
-                DataFormat.Print();
+            case FORMAT:
+                DataFormat.print();
                 break;
         }
     }
 
-    static int showMenu() {
-        Choice[] choices = Choice.values();
-        for (int i = 0; i < choices.length; i++) {
-            int j = i + 1;
-            System.out.println(j + ". " + choices[i]);
+    static void showMenu() {
+        for (MainMenu mainMenu : MainMenu.values()) {
+            int mainMenuPosition = mainMenu.ordinal() + 1;
+            System.out.println(mainMenuPosition + ". " + mainMenu.getMenuValue());
         }
-        int menuLength = choices.length;
-        return menuLength;
     }
 
-    static int showBooksMenu(){
+    static void showBooksMenu() {
         System.out.println("W tej sekcji możesz przegladać zbiory książek.");
         System.out.println("Możesz również wyszukać danej pozycji i wyświetlić jej szczegóły.");
         System.out.println("Wybierz pozycję z menu wprowadzając jej numer.");
-        BookListMenu[] books = BookListMenu.values();
-        for (int i = 0; i < books.length; i++) {
-            int j = i + 1;
-            System.out.println(j + ". " + books[i]);
+        for (BookListMenu bookListMenu : BookListMenu.values()) {
+            int bookPosition = bookListMenu.ordinal() + 1;
+            System.out.println(bookPosition + ". " + bookListMenu.getBookValue());
         }
         System.out.println("Wybierz 0 aby wrócić do głównego Menu.");
-        int booksLength = books.length;
-        return booksLength;
     }
 
-    static int showReservationMenu(){
+    static void showReservationMenu() {
         System.out.println("W tej sekcji możesz dokonać rezerwacji lub anulować rezerwację.");
         System.out.println("Wybierz czynność, którą chcesz wykonać wprowadzając jej numer.");
-        ReservationMenu[] reservationMenu = ReservationMenu.values();
-        for (int i = 0; i < reservationMenu.length; i++) {
-            int j = i + 1;
-            System.out.println(j + ". " + reservationMenu[i]);
+        for (ReservationMenu reservationMenu : ReservationMenu.values()) {
+            int reservationPosition = reservationMenu.ordinal() + 1;
+            System.out.println(reservationPosition + ". " + reservationMenu.getReservationValue());
         }
         System.out.println("Wybierz 0 aby wrócić do głównego Menu.");
-        int reservationMenuLength = reservationMenu.length;
-        return reservationMenuLength;
+
     }
 
-    static int showSettingsMenu(){
+    static void showSettingsMenu() {
         System.out.println("W tej sekcji możesz dokonać konfiguracji sortowania i formatu wyświetlania daty.");
         System.out.println("Wybierz pozycję z menu wprowadzając jej numer.");
-        SettingsMenu[] settingsMenu = SettingsMenu.values();
-        for (int i = 0; i < settingsMenu.length; i++) {
-            int j = i + 1;
-            System.out.println(j + ". " + settingsMenu[i]);
+        for (SettingsMenu settingsMenu : SettingsMenu.values()) {
+            int settingsPosition = settingsMenu.ordinal() + 1;
+            System.out.println(settingsPosition + ". " + settingsMenu.getSettingsValue());
         }
         System.out.println("Wybierz 0 aby wrócić do głównego Menu.");
-        int settingsMenuLength = settingsMenu.length;
-        return settingsMenuLength;
     }
 }

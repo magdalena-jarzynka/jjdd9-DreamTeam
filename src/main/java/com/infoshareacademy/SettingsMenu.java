@@ -1,7 +1,17 @@
 package com.infoshareacademy;
 
 public enum SettingsMenu {
-    ZMIEŃ_KONFIGURACJĘ,
-    SOROTWANIE_POZYCJI,
-    ZMIEŃ_FORMAT
+    CONFIGURATIONS("KONFIGURACJA"),
+    SORTING("SORTOWANIE"),
+    FORMAT("FORMAT");
+
+    String settingsValue;
+
+    SettingsMenu(String sv){
+        settingsValue = sv;
+    }
+
+    public String getSettingsValue(){
+        return settingsValue;
+    }
 }

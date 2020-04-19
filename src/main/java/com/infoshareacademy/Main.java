@@ -1,4 +1,5 @@
 package com.infoshareacademy;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -12,7 +13,7 @@ public class Main {
         Main.run();
     }
 
-    static void run() throws IllegalArgumentException  {
+    static void run() throws NumberFormatException {
         while (true) {
             try {
                 int input = mainMenu();
@@ -21,13 +22,13 @@ public class Main {
                     int bookChoice = booksMenu();
                     switch (bookChoice) {
                         case 1:
-                            menu.booksMenu(BookListMenu.PEŁNA_LISTA);
+                            menu.booksMenu(BookListMenu.BOOK_LIST);
                             break;
                         case 2:
-                            menu.booksMenu(BookListMenu.SZUKAJ_POZYCJI);
+                            menu.booksMenu(BookListMenu.SEARCH);
                             break;
                         case 3:
-                            menu.booksMenu(BookListMenu.SZCZEGÓŁY_POZYCJI);
+                            menu.booksMenu(BookListMenu.BOOK_DETAILS);
                             break;
                         case 0:
                             input = mainMenu();
@@ -38,10 +39,10 @@ public class Main {
                     int reservationChoice = reservationMenu();
                     switch (reservationChoice) {
                         case 1:
-                            menu.reservationMenu(ReservationMenu.DODAJ_REZERWACJĘ);
+                            menu.reservationMenu(ReservationMenu.NEW_RESERVATION);
                             break;
                         case 2:
-                            menu.reservationMenu(ReservationMenu.USUŃ_REZERWACJĘ);
+                            menu.reservationMenu(ReservationMenu.CANCEL_RESERVATION);
                         case 0:
                             input = mainMenu();
                             break;
@@ -52,23 +53,30 @@ public class Main {
                     int settingsChoice = settingsMenu();
                     switch (settingsChoice) {
                         case 1:
-                            menu.settingsMenu(SettingsMenu.ZMIEŃ_KONFIGURACJĘ);
+                            menu.settingsMenu(SettingsMenu.CONFIGURATIONS);
                             break;
                         case 2:
-                            menu.settingsMenu(SettingsMenu.SOROTWANIE_POZYCJI);
+                            menu.settingsMenu(SettingsMenu.SORTING);
                             break;
                         case 3:
-                            menu.settingsMenu(SettingsMenu.ZMIEŃ_FORMAT);
+                            menu.settingsMenu(SettingsMenu.FORMAT);
                             break;
                     }
                 }
 
                 if (input == 4) {
-                    System.out.println("The program has terminated. Thank you for using the program. Have a nice day!");
+                    System.out.println("Program został wyłączony. Miłego dnia!");
                     System.exit(0);
                 }
+                else{
+                    System.out.println("");
+                    System.out.println("");
+                    System.out.println("Wprowadzono nieprawidłowy numer. Spróbuj ponownie.");
+                    System.out.println("");
+                    System.out.println("");
+                }
 
-            } catch (Exception e) {
+            } catch (NumberFormatException e) {
                 System.out.println("");
                 System.out.println("");
                 System.out.println("Proszę wybrać odpowiedni numer.");

@@ -1,10 +1,10 @@
 package com.infoshareacademy;
 
 public class Details {
-    static void Print() {
+    static void print() {
         System.out.println("");
         System.out.println("");
-        System.out.println("This is the chosen book details.");
+        System.out.println("Ta metoda pozwala na wyświetlenie szczegółowych informacji o książce.");
         System.out.println("");
         System.out.println("");
     }
