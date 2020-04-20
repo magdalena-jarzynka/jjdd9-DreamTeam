@@ -67,34 +67,34 @@ public class Menu {
     }
 
     public static void showBooksMenu() {
-        STDOUT.info("W tej sekcji możesz przegladać zbiory książek.");
-        STDOUT.info("Możesz również wyszukać danej pozycji i wyświetlić jej szczegóły.");
+        STDOUT.info("W tej sekcji możesz przegladać zbiory książek. \n");
+        STDOUT.info("Możesz również wyszukać daną pozycję i wyświetlić jej szczegóły. \n");
         STDOUT.info("Wybierz pozycję z menu wprowadzając jej numer. \n");
         for (BookListMenu bookListMenu : BookListMenu.values()) {
             int bookPosition = bookListMenu.ordinal() + 1;
             STDOUT.info("{}. {} \n", bookPosition, bookListMenu.getBookDescription());
         }
-        STDOUT.info("Wybierz 0 aby wrócić do głównego Menu.");
+        STDOUT.info("Wybierz 0 aby wrócić do głównego Menu.\n");
     }
 
     public static void showReservationMenu() {
-        STDOUT.info("W tej sekcji możesz dokonać rezerwacji lub anulować rezerwację.");
+        STDOUT.info("W tej sekcji możesz dokonać rezerwacji lub anulować rezerwację.\n");
         STDOUT.info("Wybierz czynność, którą chcesz wykonać wprowadzając jej numer. \n");
         for (ReservationMenu reservationMenu : ReservationMenu.values()) {
             int reservationPosition = reservationMenu.ordinal() + 1;
             STDOUT.info("{}. {} \n", reservationPosition, reservationMenu.getReservationValue());
         }
-        STDOUT.info("Wybierz 0 aby wrócić do głównego Menu.");
+        STDOUT.info("Wybierz 0 aby wrócić do głównego Menu. \n");
 
     }
 
     public static void showSettingsMenu() {
-        STDOUT.info("W tej sekcji możesz dokonać konfiguracji sortowania i formatu wyświetlania daty.");
+        STDOUT.info("W tej sekcji możesz dokonać konfiguracji sortowania i formatu wyświetlania daty. \n");
         STDOUT.info("Wybierz pozycję z menu wprowadzając jej numer. \n");
         for (SettingsMenu settingsMenu : SettingsMenu.values()) {
             int settingsPosition = settingsMenu.ordinal() + 1;
             STDOUT.info("{}. {} \n", settingsPosition, settingsMenu.getSettingsValue());
         }
-        STDOUT.info("Wybierz 0 aby wrócić do głównego Menu.");
+        STDOUT.info("Wybierz 0 aby wrócić do głównego Menu. \n");
     }
 }
