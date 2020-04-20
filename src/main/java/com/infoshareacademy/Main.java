@@ -1,11 +1,21 @@
 package com.infoshareacademy;
-import java.util.InputMismatchException;
+
+import com.infoshareacademy.menu.item.BookListMenu;
+import com.infoshareacademy.menu.Menu;
+import com.infoshareacademy.menu.item.ReservationMenu;
+import com.infoshareacademy.menu.item.SettingsMenu;
+import org.apache.commons.lang3.math.NumberUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Scanner;
 
 /**
  * DreamTeam
  */
 public class Main {
+    private static Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
+
     private static final Scanner scanner = new Scanner(System.in);
     private static final Menu menu = new Menu();
 
@@ -13,104 +23,112 @@ public class Main {
         Main.run();
     }
 
-    static void run() throws NumberFormatException {
+    static void run() {
         while (true) {
-            try {
-                int input = mainMenu();
-                System.out.println("");
-                if (input == 1) {
-                    int bookChoice = booksMenu();
-                    switch (bookChoice) {
-                        case 1:
-                            menu.booksMenu(BookListMenu.BOOK_LIST);
-                            break;
-                        case 2:
-                            menu.booksMenu(BookListMenu.SEARCH);
-                            break;
-                        case 3:
-                            menu.booksMenu(BookListMenu.BOOK_DETAILS);
-                            break;
-                        case 0:
-                            input = mainMenu();
-                            break;
-                    }
-                }
-                if (input == 2) {
-                    int reservationChoice = reservationMenu();
-                    switch (reservationChoice) {
-                        case 1:
-                            menu.reservationMenu(ReservationMenu.NEW_RESERVATION);
-                            break;
-                        case 2:
-                            menu.reservationMenu(ReservationMenu.CANCEL_RESERVATION);
-                        case 0:
-                            input = mainMenu();
-                            break;
-                    }
-                }
 
-                if (input == 3) {
-                    int settingsChoice = settingsMenu();
-                    switch (settingsChoice) {
-                        case 1:
-                            menu.settingsMenu(SettingsMenu.CONFIGURATIONS);
-                            break;
-                        case 2:
-                            menu.settingsMenu(SettingsMenu.SORTING);
-                            break;
-                        case 3:
-                            menu.settingsMenu(SettingsMenu.FORMAT);
-                            break;
-                    }
+            int input = mainMenu();
+            STDOUT.info("\n");
+            if (input == 1) {
+                int bookChoice = booksMenu();
+                switch (bookChoice) {
+                    case 1:
+                        menu.booksMenu(BookListMenu.BOOK_LIST);
+                        break;
+                    case 2:
+                        menu.booksMenu(BookListMenu.SEARCH);
+                        break;
+                    case 3:
+                        menu.booksMenu(BookListMenu.BOOK_DETAILS);
+                        break;
+                    case 0:
+                        input = mainMenu();
+                        break;
                 }
+            }
+            if (input == 2) {
+                int reservationChoice = reservationMenu();
+                switch (reservationChoice) {
+                    case 1:
+                        menu.reservationMenu(ReservationMenu.NEW_RESERVATION);
+                        break;
+                    case 2:
+                        menu.reservationMenu(ReservationMenu.CANCEL_RESERVATION);
+                    case 0:
+                        input = mainMenu();
+                        break;
+                }
+            }
 
-                if (input == 4) {
-                    System.out.println("Program został wyłączony. Miłego dnia!");
-                    System.exit(0);
+            if (input == 3) {
+                int settingsChoice = settingsMenu();
+                switch (settingsChoice) {
+                    case 1:
+                        menu.settingsMenu(SettingsMenu.CONFIGURATIONS);
+                        break;
+                    case 2:
+                        menu.settingsMenu(SettingsMenu.SORTING);
+                        break;
+                    case 3:
+                        menu.settingsMenu(SettingsMenu.FORMAT);
+                        break;
                 }
-                else{
-                    System.out.println("");
-                    System.out.println("");
-                    System.out.println("Wprowadzono nieprawidłowy numer. Spróbuj ponownie.");
-                    System.out.println("");
-                    System.out.println("");
-                }
+            }
 
-            } catch (NumberFormatException e) {
-                System.out.println("");
-                System.out.println("");
-                System.out.println("Proszę wybrać odpowiedni numer.");
-                System.out.println("");
-                System.out.println("");
+            if (input == 4) {
+                STDOUT.info("Program został wyłączony. Miłego dnia!");
+                break;
             }
 
         }
 
     }
 
-
     private static int mainMenu() {
-        System.out.println("Witaj! Wybierz pozycję z Menu wpisując jej numer lub wciśnij ENTER by wyjść:");
+        STDOUT.info("Witaj! Wybierz pozycję z Menu wpisując jej numer lub wciśnij ENTER by wyjść: \n");
         menu.showMenu();
-        int input = Integer.parseInt(scanner.nextLine());
+        String lineInput = scanner.nextLine();
+        int input = 0;
+        if (NumberUtils.isCreatable(lineInput)) {
+            input = Integer.parseInt(lineInput);
+        } else {
+            STDOUT.info("Proszę wpisać odpowiednią cyfrę.");
+        }
         return input;
     }
 
     private static int booksMenu() {
         menu.showBooksMenu();
-        int input = Integer.parseInt(scanner.nextLine());
+        String lineInput = scanner.nextLine();
+        int input = 0;
+        if (NumberUtils.isCreatable(lineInput)) {
+            input = Integer.parseInt(lineInput);
+        } else {
+            STDOUT.info("Proszę wpisać odpowiednią cyfrę.");
+        }
         return input;
     }
 
     private static int reservationMenu() {
         menu.showReservationMenu();
-        int input = Integer.parseInt(scanner.nextLine());
+        String lineInput = scanner.nextLine();
+        int input = 0;
+        if (NumberUtils.isCreatable(lineInput)) {
+            input = Integer.parseInt(lineInput);
+        } else {
+            STDOUT.info("Proszę wpisać odpowiednią cyfrę.");
+        }
         return input;
     }
 
     private static int settingsMenu() {
         menu.showSettingsMenu();
-        int input = Integer.parseInt(scanner.nextLine());
+        String lineInput = scanner.nextLine();
+        int input = 0;
+        if (NumberUtils.isCreatable(lineInput)) {
+            input = Integer.parseInt(lineInput);
+        } else {
+            STDOUT.info("Proszę wpisać odpowiednią cyfrę.");
+        }
         return input;
     }
 }

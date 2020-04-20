@@ -1,4 +1,4 @@
-package com.infoshareacademy;
+package com.infoshareacademy.menu.item;
 
 public enum SettingsMenu {
     CONFIGURATIONS("KONFIGURACJA"),
@@ -7,8 +7,8 @@ public enum SettingsMenu {
 
     String settingsValue;
 
-    SettingsMenu(String sv){
-        settingsValue = sv;
+    SettingsMenu(String settingsValue){
+        this.settingsValue = settingsValue;
     }
 
     public String getSettingsValue(){
