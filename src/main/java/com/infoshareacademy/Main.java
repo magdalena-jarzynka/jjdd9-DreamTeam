@@ -29,15 +29,15 @@ public class Main {
             input = mainMenu();
             STDOUT.info("\n");
             if (input == 1) {
-                choice1();
+                chooseBooksMenu();
             }
 
             if (input == 2) {
-                choice2();
+                chooseReservationMenu();
             }
 
             if (input == 3) {
-                choice3();
+                chooseSettingsMenu();
             }
 
             if (input == 4) {
@@ -49,7 +49,7 @@ public class Main {
 
     }
 
-    private static void choice1() {
+    private static void chooseBooksMenu() {
         int bookChoice = booksMenu();
         switch (bookChoice) {
             case 1:
@@ -67,7 +67,7 @@ public class Main {
         }
     }
 
-    private static void choice2() {
+    private static void chooseReservationMenu() {
         int reservationChoice = reservationMenu();
         switch (reservationChoice) {
             case 1:
@@ -82,7 +82,7 @@ public class Main {
         }
     }
 
-    private static void choice3() {
+    private static void chooseSettingsMenu() {
         int settingsChoice = settingsMenu();
         switch (settingsChoice) {
             case 1:
