@@ -5,8 +5,8 @@ import com.infoshareacademy.menu.item.BookListMenu;
 import com.infoshareacademy.menu.item.MainMenu;
 import com.infoshareacademy.menu.item.ReservationMenu;
 import com.infoshareacademy.menu.item.SettingsMenu;
-import com.infoshareacademy.apublicction.Search;
-import copublicm.infoshareacademy.action.AddReservation;
+import com.infoshareacademy.action.Search;
+import com.infoshareacademy.action.AddReservation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
