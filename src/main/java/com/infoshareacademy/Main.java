@@ -26,7 +26,7 @@ public class Main {
 
     static void run() {
         while (true) {
-            input = mainMenu();
+            input = openMainMenu();
             STDOUT.info("\n");
             if (input == 1) {
                 chooseBooksMenu();
@@ -50,7 +50,7 @@ public class Main {
     }
 
     private static void chooseBooksMenu() {
-        int bookChoice = booksMenu();
+        int bookChoice = openBooksMenu();
         switch (bookChoice) {
             case 1:
                 menu.booksMenu(BookListMenu.BOOK_LIST);
@@ -62,13 +62,13 @@ public class Main {
                 menu.booksMenu(BookListMenu.BOOK_DETAILS);
                 break;
             default:
-                input = mainMenu();
+                input = openMainMenu();
                 break;
         }
     }
 
     private static void chooseReservationMenu() {
-        int reservationChoice = reservationMenu();
+        int reservationChoice = openReservationMenu();
         switch (reservationChoice) {
             case 1:
                 menu.reservationMenu(ReservationMenu.NEW_RESERVATION);
@@ -77,13 +77,13 @@ public class Main {
                 menu.reservationMenu(ReservationMenu.CANCEL_RESERVATION);
                 break;
             default:
-                input = mainMenu();
+                input = openMainMenu();
                 break;
         }
     }
 
     private static void chooseSettingsMenu() {
-        int settingsChoice = settingsMenu();
+        int settingsChoice = openSettingsMenu();
         switch (settingsChoice) {
             case 1:
                 menu.settingsMenu(SettingsMenu.CONFIGURATIONS);
@@ -97,7 +97,7 @@ public class Main {
         }
     }
 
-    private static int mainMenu() {
+    private static int openMainMenu() {
         STDOUT.info("Witaj! Wybierz pozycję z Menu wpisując jej numer lub wciśnij ENTER by wyjść: \n");
         menu.showMenu();
         String lineInput = scanner.nextLine();
@@ -110,7 +110,7 @@ public class Main {
         return input;
     }
 
-    private static int booksMenu() {
+    private static int openBooksMenu() {
         menu.showBooksMenu();
         String lineInput = scanner.nextLine();
         int input = 0;
@@ -122,7 +122,7 @@ public class Main {
         return input;
     }
 
-    private static int reservationMenu() {
+    private static int openReservationMenu() {
         menu.showReservationMenu();
         String lineInput = scanner.nextLine();
         int input = 0;
@@ -134,7 +134,7 @@ public class Main {
         return input;
     }
 
-    private static int settingsMenu() {
+    private static int openSettingsMenu() {
         menu.showSettingsMenu();
         String lineInput = scanner.nextLine();
         int input = 0;
