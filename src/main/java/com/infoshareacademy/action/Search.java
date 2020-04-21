@@ -1,4 +1,4 @@
-package com.infoshareacademy.apublicction;
+package com.infoshareacademy.action;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
