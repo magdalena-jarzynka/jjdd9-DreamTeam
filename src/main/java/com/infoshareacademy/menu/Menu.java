@@ -29,16 +29,16 @@ public class Menu {
 
     public void reservationMenu(ReservationMenu reservationChoice) {
         if(reservationChoice.equals(ReservationMenu.NEW_RESERVATION)) {
-            AddReservation.print();
+            ReservationAddition.print();
         } else{
-                DeleteReservation.print();
+                ReservationDeletion.print();
         }
     }
 
     public void settingsMenu(SettingsMenu settingsChoice) {
         switch (settingsChoice) {
             case CONFIGURATIONS:
-                ChangeConfiguration.print();
+                ConfigurationChange.print();
                 break;
             case SORTING:
                 SortingOptions.print();

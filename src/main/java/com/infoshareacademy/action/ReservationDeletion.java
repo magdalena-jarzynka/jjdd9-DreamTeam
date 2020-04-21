@@ -3,10 +3,10 @@ package com.infoshareacademy.action;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class DeleteReservation {
+public class ReservationDeletion {
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
 
-    private DeleteReservation() {
+    private ReservationDeletion() {
     }
 
 
