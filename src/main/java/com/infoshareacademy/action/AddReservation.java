@@ -5,7 +5,10 @@ import org.slf4j.LoggerFactory;
 
 public class AddReservation {
 
-    private static Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
+    private AddReservation() {
+    }
+
+    private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
 
     public static void print() {
 
