@@ -1,6 +1,5 @@
 package com.infoshareacademy.objects;
 
-public class Author {
+public class Genre {
     String name;
-
 }
