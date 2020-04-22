@@ -4,10 +4,10 @@ import java.util.List;
 
 public class Book {
     String title;
-    List<Author> authorList;
-    List<Author> translatorList;
+    List<Author> authors;
+    List<Author> translators;
     Epoch epoch;
-    List<Genre> genreList;
+    List<Genre> genres;
     Kind kind;
     String fragment;
     Boolean hasAudiobook;
