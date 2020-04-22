@@ -5,7 +5,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class FullList {
-    private static Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
+    private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
+
+    private FullList() {
+    }
+
 
 
     public static void print() {

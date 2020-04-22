@@ -3,9 +3,12 @@ package com.infoshareacademy.action;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class AddReservation {
+public class ReservationAddition {
+    private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
 
-    private static Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
+    private ReservationAddition() {
+    }
+
 
     public static void print() {
 
