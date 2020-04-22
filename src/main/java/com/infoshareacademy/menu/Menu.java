@@ -14,9 +14,10 @@ public class Menu {
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
 
     public void booksMenu(BookListMenu bookChoice) {
+        BookListService bookListService = new BookListService();
         switch (bookChoice) {
             case BOOK_LIST:
-                FullList.print();
+                bookListService.run();
                 break;
             case SEARCH:
                 Search.print();
