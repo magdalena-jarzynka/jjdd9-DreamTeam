@@ -1,6 +1,6 @@
 package com.infoshareacademy.objects;
 
-public class Author {
+public class Media {
     private String name;
 
     public String getName() {
@@ -10,7 +10,4 @@ public class Author {
     public void setName(String name) {
         this.name = name;
     }
-
 }
-
-

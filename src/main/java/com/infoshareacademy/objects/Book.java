@@ -1,17 +1,21 @@
 package com.infoshareacademy.objects;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 public class Book {
     private String title;
     private List<Author> authors;
     private List<Author> translators;
-    private Epoch epoch;
+    private List<Epoch> epochs;
     private List<Genre> genres;
-    private Kind kind;
-    private String fragment;
-    private Boolean hasAudiobook;
+    private List<Kind> kinds;
+    @SerializedName("isbn_pdf")
     private String isbnPdf;
+    @SerializedName("fragment_data")
+    private FragmentData bookFragment;
+    private List<Media> media;
 
     public String getTitle() {
         return title;
@@ -37,12 +41,12 @@ public class Book {
         this.translators = translators;
     }
 
-    public Epoch getEpoch() {
-        return epoch;
+    public List<Epoch> getEpochs() {
+        return epochs;
     }
 
-    public void setEpoch(Epoch epoch) {
-        this.epoch = epoch;
+    public void setEpochs(List<Epoch> epochs) {
+        this.epochs = epochs;
     }
 
     public List<Genre> getGenres() {
@@ -53,28 +57,12 @@ public class Book {
         this.genres = genres;
     }
 
-    public Kind getKind() {
-        return kind;
+    public List<Kind> getKinds() {
+        return kinds;
     }
 
-    public void setKind(Kind kind) {
-        this.kind = kind;
-    }
-
-    public String getFragment() {
-        return fragment;
-    }
-
-    public void setFragment(String fragment) {
-        this.fragment = fragment;
-    }
-
-    public Boolean getHasAudiobook() {
-        return hasAudiobook;
-    }
-
-    public void setHasAudiobook(Boolean hasAudiobook) {
-        this.hasAudiobook = hasAudiobook;
+    public void setKinds(List<Kind> kinds) {
+        this.kinds = kinds;
     }
 
     public String getIsbnPdf() {
@@ -83,5 +71,25 @@ public class Book {
 
     public void setIsbnPdf(String isbnPdf) {
         this.isbnPdf = isbnPdf;
+    }
+
+    public FragmentData getBookFragment() {
+        return bookFragment;
+    }
+
+    public void setBookFragment(FragmentData bookFragment) {
+        this.bookFragment = bookFragment;
+    }
+
+    public List<Media> getMedia() {
+        return media;
+    }
+
+    public void setMedia(List<Media> media) {
+        this.media = media;
+    }
+
+    public boolean hasAudio() {
+        return !media.isEmpty();
     }
 }
