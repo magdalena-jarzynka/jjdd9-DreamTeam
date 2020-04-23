@@ -13,51 +13,60 @@ public class Menu {
     private static final String GO_BACK = "Wybierz 0 aby wrócić do głównego Menu. \n";
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
 
-    public void booksMenu(BookListMenu bookChoice) {
+    public void getBooksMenu(BookListMenu bookChoice) {
         BookListService bookListService = new BookListService();
+        Search search = new Search();
+        Details details = new Details();
         switch (bookChoice) {
             case BOOK_LIST:
                 bookListService.run();
                 break;
             case SEARCH:
-                Search.print();
+                search.print();
                 break;
             default:
-                Details.print();
+                details.print();
                 break;
         }
     }
 
-    public void reservationMenu(ReservationMenu reservationChoice) {
-        if(reservationChoice.equals(ReservationMenu.NEW_RESERVATION)) {
-            ReservationAddition.print();
-        } else{
-                ReservationDeletion.print();
+    public void getReservationMenu(ReservationMenu reservationChoice) {
+        NewReservation newReservation = new NewReservation();
+        ReservationCancellation reservationCancellation = new ReservationCancellation();
+        if (reservationChoice.equals(ReservationMenu.NEW_RESERVATION)) {
+            newReservation.print();
+        } else {
+            reservationCancellation.print();
         }
     }
 
-    public void settingsMenu(SettingsMenu settingsChoice) {
+    public void getSettingsMenu(SettingsMenu settingsChoice) {
+        Configurations configurations = new Configurations();
+        SortingOptions sortingOptions = new SortingOptions();
+        DataFormat dataFormat = new DataFormat();
         switch (settingsChoice) {
             case CONFIGURATIONS:
-                ConfigurationChange.print();
+                configurations.print();
                 break;
             case SORTING:
-                SortingOptions.print();
+                sortingOptions.print();
                 break;
             default:
-                DataFormat.print();
+                dataFormat.print();
                 break;
         }
     }
 
-    public static void showMenu() {
+    public void showMainMenu() {
+        cleanTerminal();
         for (MainMenu mainMenu : MainMenu.values()) {
             int mainMenuPosition = mainMenu.ordinal() + 1;
             STDOUT.info(SHOW_MENU, mainMenuPosition, mainMenu.getMenuDescription());
         }
     }
 
-    public static void showBooksMenu() {
+    public void showBooksMenu() {
+        cleanTerminal();
         STDOUT.info("W tej sekcji możesz przegladać zbiory książek. \n");
         STDOUT.info("Możesz również wyszukać daną pozycję i wyświetlić jej szczegóły. \n");
         STDOUT.info("Wybierz pozycję z menu wprowadzając jej numer. \n");
@@ -68,7 +77,8 @@ public class Menu {
         STDOUT.info(GO_BACK);
     }
 
-    public static void showReservationMenu() {
+    public void showReservationMenu() {
+        cleanTerminal();
         STDOUT.info("W tej sekcji możesz dokonać rezerwacji lub anulować rezerwację.\n");
         STDOUT.info("Wybierz czynność, którą chcesz wykonać wprowadzając jej numer. \n");
         for (ReservationMenu reservationMenu : ReservationMenu.values()) {
@@ -79,7 +89,8 @@ public class Menu {
 
     }
 
-    public static void showSettingsMenu() {
+    public void showSettingsMenu() {
+        cleanTerminal();
         STDOUT.info("W tej sekcji możesz dokonać konfiguracji sortowania i formatu wyświetlania daty. \n");
         STDOUT.info("Wybierz pozycję z menu wprowadzając jej numer. \n");
         for (SettingsMenu settingsMenu : SettingsMenu.values()) {
@@ -87,5 +98,9 @@ public class Menu {
             STDOUT.info(SHOW_MENU, settingsPosition, settingsMenu.getSettingsValue());
         }
         STDOUT.info(GO_BACK);
+    }
+
+    public void cleanTerminal() {
+        STDOUT.info("\033\143");
     }
 }

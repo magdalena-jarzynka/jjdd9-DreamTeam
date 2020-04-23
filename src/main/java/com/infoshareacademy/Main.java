@@ -17,27 +17,32 @@ public class Main {
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
     private static final String WRONG_NUMBER = "Proszę wpisać odpowiednią cyfrę.";
     private static final Scanner scanner = new Scanner(System.in);
-    private static final Menu menu = new Menu();
-    private static int input = 0;
+    private final Menu menu = new Menu();
+    private static final Main main = new Main();
+    private int input;
 
-    public static void main(String[] args) {
-        Main.run();
+    public Main(){
+        this.input = 0;
     }
 
-    static void run() {
+    public static void main(String[] args) {
+        main.run();
+    }
+
+    void run() {
         while (true) {
-            input = openMainMenu();
+            input = main.openMainMenu();
             STDOUT.info("\n");
             if (input == 1) {
-                chooseBooksMenu();
+                main.chooseBooksMenu();
             }
 
             if (input == 2) {
-                chooseReservationMenu();
+                main.chooseReservationMenu();
             }
 
             if (input == 3) {
-                chooseSettingsMenu();
+                main.chooseSettingsMenu();
             }
 
             if (input == 4) {
@@ -49,17 +54,17 @@ public class Main {
 
     }
 
-    private static void chooseBooksMenu() {
+    private void chooseBooksMenu() {
         int bookChoice = openBooksMenu();
         switch (bookChoice) {
             case 1:
-                menu.booksMenu(BookListMenu.BOOK_LIST);
+                menu.getBooksMenu(BookListMenu.BOOK_LIST);
                 break;
             case 2:
-                menu.booksMenu(BookListMenu.SEARCH);
+                menu.getBooksMenu(BookListMenu.SEARCH);
                 break;
             case 3:
-                menu.booksMenu(BookListMenu.BOOK_DETAILS);
+                menu.getBooksMenu(BookListMenu.BOOK_DETAILS);
                 break;
             default:
                 input = openMainMenu();
@@ -67,14 +72,14 @@ public class Main {
         }
     }
 
-    private static void chooseReservationMenu() {
+    private void chooseReservationMenu() {
         int reservationChoice = openReservationMenu();
         switch (reservationChoice) {
             case 1:
-                menu.reservationMenu(ReservationMenu.NEW_RESERVATION);
+                menu.getReservationMenu(ReservationMenu.NEW_RESERVATION);
                 break;
             case 2:
-                menu.reservationMenu(ReservationMenu.CANCEL_RESERVATION);
+                menu.getReservationMenu(ReservationMenu.CANCEL_RESERVATION);
                 break;
             default:
                 input = openMainMenu();
@@ -82,26 +87,25 @@ public class Main {
         }
     }
 
-    private static void chooseSettingsMenu() {
+    private void chooseSettingsMenu() {
         int settingsChoice = openSettingsMenu();
         switch (settingsChoice) {
             case 1:
-                menu.settingsMenu(SettingsMenu.CONFIGURATIONS);
+                menu.getSettingsMenu(SettingsMenu.CONFIGURATIONS);
                 break;
             case 2:
-                menu.settingsMenu(SettingsMenu.SORTING);
+                menu.getSettingsMenu(SettingsMenu.SORTING);
                 break;
             default:
-                menu.settingsMenu(SettingsMenu.FORMAT);
+                menu.getSettingsMenu(SettingsMenu.FORMAT);
                 break;
         }
     }
 
-    private static int openMainMenu() {
+    private int openMainMenu() {
         STDOUT.info("Witaj! Wybierz pozycję z Menu wpisując jej numer lub wciśnij ENTER by wyjść: \n");
-        menu.showMenu();
+        menu.showMainMenu();
         String lineInput = scanner.nextLine();
-        int input = 0;
         if (NumberUtils.isCreatable(lineInput)) {
             input = Integer.parseInt(lineInput);
         } else {
@@ -110,10 +114,9 @@ public class Main {
         return input;
     }
 
-    private static int openBooksMenu() {
+    private int openBooksMenu() {
         menu.showBooksMenu();
         String lineInput = scanner.nextLine();
-        int input = 0;
         if (NumberUtils.isCreatable(lineInput)) {
             input = Integer.parseInt(lineInput);
         } else {
@@ -122,10 +125,9 @@ public class Main {
         return input;
     }
 
-    private static int openReservationMenu() {
+    private int openReservationMenu() {
         menu.showReservationMenu();
         String lineInput = scanner.nextLine();
-        int input = 0;
         if (NumberUtils.isCreatable(lineInput)) {
             input = Integer.parseInt(lineInput);
         } else {
@@ -134,10 +136,9 @@ public class Main {
         return input;
     }
 
-    private static int openSettingsMenu() {
+    private int openSettingsMenu() {
         menu.showSettingsMenu();
         String lineInput = scanner.nextLine();
-        int input = 0;
         if (NumberUtils.isCreatable(lineInput)) {
             input = Integer.parseInt(lineInput);
         } else {
