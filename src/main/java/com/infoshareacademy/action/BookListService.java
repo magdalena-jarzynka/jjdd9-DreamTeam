@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class BookListService {
+public class BookListService implements ConsoleColors{
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
     private static final Scanner scanner = new Scanner(System.in);
     private static final String WRONG_NUMBER = "Proszę wpisać odpowiednią cyfrę.";
