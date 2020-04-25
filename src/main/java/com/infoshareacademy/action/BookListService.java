@@ -1,8 +1,6 @@
 package com.infoshareacademy.action;
 
 import com.infoshareacademy.ConsoleColors;
-import com.infoshareacademy.comparator.compareByAuthor;
-import com.infoshareacademy.comparator.compareByTitle;
 import com.infoshareacademy.menu.Menu;
 import com.infoshareacademy.object.Book;
 import com.infoshareacademy.repository.BookRepository;
@@ -71,20 +69,7 @@ public class BookListService implements ConsoleColors{
             }
         }
 
-
-        if(Configurations.getProperties().getProperty("sortingBy").equals("TITLE")) {
-            if(Configurations.getProperties().getProperty("sortingOrder").equals("ASC")) {
-                bookList.sort(new compareByTitle());
-            } else if (Configurations.getProperties().getProperty("sortingOrder").equals("DESC")) {
-                bookList.sort(Collections.reverseOrder(new compareByTitle()));
-            }
-        } else if(Configurations.getProperties().getProperty("sortingBy").equals("AUTHOR")) {
-            if(Configurations.getProperties().getProperty("sortingOrder").equals("ASC")) {
-                bookList.sort(new compareByAuthor());
-            } else if(Configurations.getProperties().getProperty("sortingOrder").equals("DESC")) {
-                bookList.sort(Collections.reverseOrder(new compareByAuthor()));
-            }
-        }
+        bookList = SortingOptions.sortList(bookList);
 
         for (int i = firstPositionOnPage; i < lastPositionOnPage; i++) {
             int positionNumber = i + 1;
