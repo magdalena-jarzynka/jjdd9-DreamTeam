@@ -176,7 +176,7 @@ public class Menu {
                 configurations.print();
                 break;
             case SORTING:
-                sortingOptions.print();
+                sortingOptions.run();
                 break;
             default:
                 dataFormat.print();
