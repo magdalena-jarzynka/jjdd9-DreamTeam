@@ -94,4 +94,12 @@ public class Book {
     public boolean hasAudio() {
         return !media.isEmpty();
     }
+
+    public int compareByTitle(Book book1, Book book2) {
+        return book1.title.compareTo(book2.title);
+    }
+
+    public int compareByAuthor(Book book1, Book book2) {
+        return (book1.authors.get(0).getName()).compareTo(book2.authors.get(0).getName());
+    }
 }

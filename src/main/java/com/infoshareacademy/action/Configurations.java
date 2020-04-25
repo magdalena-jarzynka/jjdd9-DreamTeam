@@ -8,7 +8,7 @@ import java.util.Properties;
 
 public class Configurations {
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
-    public static Properties appProperties;
+    private static Properties appProperties;
 
     public Configurations() {
     }
@@ -32,6 +32,14 @@ public class Configurations {
         } catch (IOException io) {
             STDOUT.error("Brak dostępu do pliku z konfiguracją! \n", io);
         }
+    }
+
+    public static Properties getProperties() {
+        return appProperties;
+    }
+
+    public static void setDefaultProperties() {
+        appProperties = readProperties("src/main/resources/default.properties");
     }
 
     public void print() {

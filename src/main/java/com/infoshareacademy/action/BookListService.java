@@ -1,6 +1,8 @@
 package com.infoshareacademy.action;
 
 import com.infoshareacademy.ConsoleColors;
+import com.infoshareacademy.comparator.compareByAuthor;
+import com.infoshareacademy.comparator.compareByTitle;
 import com.infoshareacademy.menu.Menu;
 import com.infoshareacademy.object.Book;
 import com.infoshareacademy.repository.BookRepository;
@@ -8,9 +10,7 @@ import org.apache.commons.lang3.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class BookListService implements ConsoleColors{
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
@@ -70,6 +70,22 @@ public class BookListService implements ConsoleColors{
                 lastPositionOnPage = lastPositionOnPage - 1;
             }
         }
+
+
+        if(Configurations.getProperties().getProperty("sortingBy").equals("TITLE")) {
+            if(Configurations.getProperties().getProperty("sortingOrder").equals("ASC")) {
+                bookList.sort(new compareByTitle());
+            } else if (Configurations.getProperties().getProperty("sortingOrder").equals("DESC")) {
+                bookList.sort(Collections.reverseOrder(new compareByTitle()));
+            }
+        } else if(Configurations.getProperties().getProperty("sortingBy").equals("AUTHOR")) {
+            if(Configurations.getProperties().getProperty("sortingOrder").equals("ASC")) {
+                bookList.sort(new compareByAuthor());
+            } else if(Configurations.getProperties().getProperty("sortingOrder").equals("DESC")) {
+                bookList.sort(Collections.reverseOrder(new compareByAuthor()));
+            }
+        }
+
         for (int i = firstPositionOnPage; i < lastPositionOnPage; i++) {
             int positionNumber = i + 1;
             STDOUT.info("{}{}.Tytuł: {}{}{}{} \n", ConsoleColors.BLACK_BOLD, positionNumber, ConsoleColors.RESET, ConsoleColors.RED, bookList.get(i).getTitle(), ConsoleColors.RESET);

@@ -23,6 +23,7 @@ public class Menu {
     }
 
     public void run() {
+        Configurations.setDefaultProperties();
         while (true) {
             input = openMainMenu();
             STDOUT.info("\n");
