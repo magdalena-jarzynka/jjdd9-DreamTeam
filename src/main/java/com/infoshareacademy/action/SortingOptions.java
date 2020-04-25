@@ -6,10 +6,10 @@ import org.slf4j.LoggerFactory;
 public class SortingOptions {
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
 
-    private SortingOptions() {
+    public SortingOptions() {
     }
 
-    public static void print() {
+    public void print() {
         STDOUT.info("\n\n Ta metoda umożliwia ustawienie preferencji sortowania wyników (rosnąco lub malejąco). \n\n");
     }
 }
