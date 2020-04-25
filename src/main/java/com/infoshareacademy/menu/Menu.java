@@ -19,9 +19,6 @@ public class Menu {
     private static final Scanner scanner = new Scanner(System.in);
     private int input;
 
-    public Menu() {
-    }
-
     public void run() {
         while (true) {
             input = openMainMenu();
