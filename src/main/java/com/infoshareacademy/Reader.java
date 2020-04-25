@@ -22,7 +22,7 @@ public class Reader {
             return mapper.readValue(new File("BookList.txt"), new TypeReference<List<Book>>() {
             });
         } catch (IOException e) {
-            STDOUT.error("Nie znaleziono pliku! \n", e);
+            STDOUT.error("Nie udało się odczytać pliku! \n", e);
             return List.of();
         }
 
