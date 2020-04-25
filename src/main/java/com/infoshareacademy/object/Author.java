@@ -1,4 +1,8 @@
-package com.infoshareacademy.objects;
+package com.infoshareacademy.object;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 
 public class Author {
     private String name;
@@ -10,4 +14,7 @@ public class Author {
     public void setName(String name) {
         this.name = name;
     }
+
 }
+
+
