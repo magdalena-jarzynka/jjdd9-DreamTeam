@@ -6,11 +6,11 @@ import org.slf4j.LoggerFactory;
 public class Details {
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
 
-    private Details() {
+    public Details() {
     }
 
 
-    public static void print() {
+    public void print() {
         STDOUT.info("\n\n Ta metoda pozwala na wyświetlenie szczegółowych informacji o książce. \n\n");
     }
 }
