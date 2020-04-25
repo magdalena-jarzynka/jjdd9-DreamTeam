@@ -1,14 +1,13 @@
 package com.infoshareacademy;
 
-
-import com.google.gson.Gson;
-import com.infoshareacademy.objects.Book;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.infoshareacademy.object.Book;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.util.Arrays;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 
@@ -16,21 +15,19 @@ public class Reader {
 
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
 
-    public List<Book> readBookList () {
+    public List<Book> readBookList() {
 
-        Gson gson = new Gson();
-
+        ObjectMapper mapper = new ObjectMapper();
         try {
-            Book[] bookArray = gson.fromJson(new FileReader("src/main/resources/BookList.txt"), Book[].class);
-            return Arrays.asList(bookArray);
-        } catch (FileNotFoundException e) {
-            STDOUT.error("Nie znaleziono pliku! \n");
-            return null;
+            return mapper.readValue(new File("BookList.txt"), new TypeReference<List<Book>>() {
+            });
+        } catch (IOException e) {
+            STDOUT.error("Nie znaleziono pliku! \n", e);
+            return List.of();
         }
 
     }
-
-
-
-
 }
+
+
+

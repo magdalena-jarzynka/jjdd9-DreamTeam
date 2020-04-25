@@ -1,4 +1,8 @@
-package com.infoshareacademy.objects;
+package com.infoshareacademy.object;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 
 public class Media {
     private String name;

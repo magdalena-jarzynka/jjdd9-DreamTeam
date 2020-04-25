@@ -1,9 +1,11 @@
-package com.infoshareacademy.objects;
+package com.infoshareacademy.object;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Book {
     private String title;
     private List<Author> authors;
@@ -11,9 +13,9 @@ public class Book {
     private List<Epoch> epochs;
     private List<Genre> genres;
     private List<Kind> kinds;
-    @SerializedName("isbn_pdf")
+    @JsonProperty("isbn_pdf")
     private String isbnPdf;
-    @SerializedName("fragment_data")
+    @JsonProperty("fragment_data")
     private FragmentData bookFragment;
     private List<Media> media;
 
