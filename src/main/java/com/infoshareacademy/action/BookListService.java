@@ -13,7 +13,7 @@ import java.util.*;
 public class BookListService implements ConsoleColors{
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
     private static final Scanner scanner = new Scanner(System.in);
-    private static final String WRONG_NUMBER = "Proszę wpisać odpowiednią cyfrę.";
+    private static final String WRONG_NUMBER = "Proszę wpisać odpowiednią cyfrę.\n";
     private int input;
     private int positionsPerPage;
     private int currentPageNumber;
