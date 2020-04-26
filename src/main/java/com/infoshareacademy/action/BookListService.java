@@ -26,7 +26,7 @@ public class BookListService {
         this.input = 0;
     }
 
-    public int getUserInput() {
+    public int getNumberOfPages() {
         String lineInput = scanner.nextLine();
         if (NumberUtils.isCreatable(lineInput)) {
             input = Integer.parseInt(lineInput);
@@ -34,10 +34,22 @@ public class BookListService {
         return input;
     }
 
+    public int getUserInput() {
+        String lineInput = scanner.nextLine();
+        if (NumberUtils.isCreatable(lineInput)) {
+            input = Integer.parseInt(lineInput);
+        } else {
+            STDOUT.info(WRONG_NUMBER);
+            input = getUserInput();
+        }
+        return input;
+    }
+
+
     public void run() {
 
         STDOUT.info("\n Ile pozycji wyświetlić na jednej stronie? \n");
-        positionsPerPage = getUserInput();
+        positionsPerPage = getNumberOfPages();
         do {
             Menu menu = new Menu();
             if (positionsPerPage > 0) {
