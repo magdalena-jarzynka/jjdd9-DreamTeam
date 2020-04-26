@@ -7,13 +7,13 @@ import com.infoshareacademy.repository.BookRepository;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
+
 
 public class BookListService {
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
     private static final Scanner scanner = new Scanner(System.in);
-    private static final String WRONG_NUMBER = "Proszę wpisać odpowiednią cyfrę.";
+    private static final String WRONG_NUMBER = "Proszę wpisać odpowiednią cyfrę.\n";
     private int input;
     private int positionsPerPage;
     private int currentPageNumber;
@@ -68,6 +68,9 @@ public class BookListService {
                 lastPositionOnPage = lastPositionOnPage - 1;
             }
         }
+
+        bookList = SortingOptions.sortList(bookList);
+
         for (int i = firstPositionOnPage; i < lastPositionOnPage; i++) {
             int positionNumber = i + 1;
             STDOUT.info("{}{}.Tytuł: {}{}{}{} \n", ConsoleColors.BLACK_BOLD.getColorType(), positionNumber, ConsoleColors.RESET.getColorType(), ConsoleColors.RED.getColorType(), bookList.get(i).getTitle(), ConsoleColors.RESET.getColorType());

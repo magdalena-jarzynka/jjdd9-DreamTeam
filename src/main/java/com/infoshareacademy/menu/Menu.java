@@ -20,6 +20,7 @@ public class Menu {
     private int input;
 
     public void run() {
+        Configurations.setDefaultProperties();
         while (true) {
             input = openMainMenu();
             STDOUT.info("\n");
@@ -173,7 +174,7 @@ public class Menu {
                 configurations.print();
                 break;
             case SORTING:
-                sortingOptions.print();
+                sortingOptions.run();
                 break;
             default:
                 dataFormat.print();
