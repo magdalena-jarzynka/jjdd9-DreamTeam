@@ -1,6 +1,6 @@
 [
   {
-    "title": "[Białe róże krwi - motto]",
+    "title": "Białe róże krwi - motto",
     "url": "https://wolnelektury.pl/katalog/lektura/biale-roze-krwi-motto/",
     "epochs": [
       {
