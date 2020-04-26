@@ -7,10 +7,10 @@ import com.infoshareacademy.repository.BookRepository;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.util.*;
 
-public class BookListService implements ConsoleColors{
+
+public class BookListService {
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
     private static final Scanner scanner = new Scanner(System.in);
     private static final String WRONG_NUMBER = "Proszę wpisać odpowiednią cyfrę.\n";
@@ -73,14 +73,14 @@ public class BookListService implements ConsoleColors{
 
         for (int i = firstPositionOnPage; i < lastPositionOnPage; i++) {
             int positionNumber = i + 1;
-            STDOUT.info("{}{}.Tytuł: {}{}{}{} \n", ConsoleColors.BLACK_BOLD, positionNumber, ConsoleColors.RESET, ConsoleColors.RED, bookList.get(i).getTitle(), ConsoleColors.RESET);
-            STDOUT.info(" {} Autor: {}{}{}{} \n\n", ConsoleColors.BLACK_BOLD, ConsoleColors.RESET, ConsoleColors.BLUE, bookList.get(i).getAuthors(), ConsoleColors.RESET);
+            STDOUT.info("{}{}.Tytuł: {}{}{}{} \n", ConsoleColors.BLACK_BOLD.getColorType(), positionNumber, ConsoleColors.RESET.getColorType(), ConsoleColors.RED.getColorType(), bookList.get(i).getTitle(), ConsoleColors.RESET.getColorType());
+            STDOUT.info(" {} Autor: {}{}{}{} \n\n", ConsoleColors.BLACK_BOLD.getColorType(), ConsoleColors.RESET.getColorType(), ConsoleColors.BLUE.getColorType(), bookList.get(i).getAuthors(), ConsoleColors.RESET.getColorType());
         }
         if (currentPageNumber == numberOfPages) {
             STDOUT.info("\n To ostatnia strona. Wybierz 2 aby zobaczyć poprzednią stronę lub 0 aby wyjść do głównego menu. \n\n");
         } else {
             STDOUT.info("\n Wybierz 1 aby zobaczyć następną stronę, 2 aby zobaczyć poprzednią lub 0 aby wyjść do głównego menu. \n\n");
         }
-        STDOUT.info("\n{}Strona {} z {}.{}\n", ConsoleColors.BLACK_UNDERLINED, currentPageNumber, numberOfPages, ConsoleColors.RESET);
+        STDOUT.info("\n{}Strona {} z {}.{}\n", ConsoleColors.BLACK_UNDERLINED.getColorType(), currentPageNumber, numberOfPages, ConsoleColors.RESET.getColorType());
     }
 }

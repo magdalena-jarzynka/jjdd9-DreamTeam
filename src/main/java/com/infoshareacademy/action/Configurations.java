@@ -10,9 +10,6 @@ public class Configurations {
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
     private static Properties appProperties;
 
-    public Configurations() {
-    }
-
     public static Properties readProperties(String fileName) {
         Properties props = new Properties();
         try (FileInputStream in = new FileInputStream(fileName)) {
