@@ -16,9 +16,6 @@ public class SortingOptions {
     private final Scanner scanner = new Scanner(System.in);
     private int input;
 
-    public SortingOptions() {
-    }
-
     public int getUserInput() {
         String lineInput = scanner.nextLine();
         if (NumberUtils.isCreatable(lineInput)) {

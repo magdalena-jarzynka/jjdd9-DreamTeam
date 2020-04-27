@@ -8,141 +8,82 @@ import com.infoshareacademy.menu.item.SettingsMenu;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.util.Scanner;
 
 public class Menu {
     private static final String SHOW_MENU = "{}. {} \n";
     private static final String GO_BACK = "Wybierz 0 aby wrócić do głównego Menu. \n";
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
-    private static final String WRONG_NUMBER = "Proszę wpisać odpowiednią cyfrę.";
+    private static final String WRONG_NUMBER = "Proszę wpisać odpowiednią cyfrę. \n";
     private static final Scanner scanner = new Scanner(System.in);
-    private int input;
+    private int input = 0;
 
     public void run() {
         Configurations.setDefaultProperties();
-        while (true) {
-            input = openMainMenu();
+        do {
+            input = 0;
+            showMainMenu();
+            input = getUserInput();
             STDOUT.info("\n");
-            if (input == 1) {
-                chooseBooksMenu();
+            switch (input) {
+                case 1:
+                    chooseBooksMenu();
+                    break;
+                case 2:
+                    chooseReservationMenu();
+                    break;
+                case 3:
+                    chooseSettingsMenu();
+                    break;
+                case 4:
+                    return;
+                default:
+                    break;
             }
-
-            if (input == 2) {
-                chooseReservationMenu();
-            }
-
-            if (input == 3) {
-                chooseSettingsMenu();
-            }
-
-            if (input == 4) {
-                STDOUT.info("Program został wyłączony. Miłego dnia!");
-                break;
-            }
-
         }
+        while (true);
+    }
 
+
+    public void showMainMenu() {
+        cleanTerminal();
+        STDOUT.info("Witaj! Wybierz pozycję z Menu wpisując jej numer lub wybierz 4 by wyjść: \n");
+        for (MainMenu mainMenu : MainMenu.values()) {
+            int mainMenuPosition = mainMenu.ordinal() + 1;
+            STDOUT.info(SHOW_MENU, mainMenuPosition, mainMenu.getMenuDescription());
+        }
     }
 
     private void chooseBooksMenu() {
-        int bookChoice = openBooksMenu();
-        switch (bookChoice) {
-            case 1:
-                getBooksMenu(BookListMenu.BOOK_LIST);
-                break;
-            case 2:
-                getBooksMenu(BookListMenu.SEARCH);
-                break;
-            case 3:
-                getBooksMenu(BookListMenu.BOOK_DETAILS);
-                break;
-            default:
-                input = openMainMenu();
-                break;
-        }
+        do {
+            showBooksMenu();
+            input = 0;
+            input = getUserInput();
+            switch (input) {
+                case 1:
+                    getBooksMenu(BookListMenu.BOOK_LIST);
+                    break;
+                case 2:
+                    getBooksMenu(BookListMenu.SEARCH);
+                    break;
+                case 3:
+                    getBooksMenu(BookListMenu.BOOK_DETAILS);
+                    break;
+                case 0:
+                    return;
+                default:
+                    STDOUT.info(WRONG_NUMBER);
+                    break;
+            }
+
+        } while (true);
     }
 
-    private void chooseReservationMenu() {
-        int reservationChoice = openReservationMenu();
-        switch (reservationChoice) {
-            case 1:
-                getReservationMenu(ReservationMenu.NEW_RESERVATION);
-                break;
-            case 2:
-                getReservationMenu(ReservationMenu.CANCEL_RESERVATION);
-                break;
-            default:
-                input = openMainMenu();
-                break;
-        }
-    }
-
-    private void chooseSettingsMenu() {
-        int settingsChoice = openSettingsMenu();
-        switch (settingsChoice) {
-            case 1:
-                getSettingsMenu(SettingsMenu.CONFIGURATIONS);
-                break;
-            case 2:
-                getSettingsMenu(SettingsMenu.SORTING);
-                break;
-            default:
-                getSettingsMenu(SettingsMenu.FORMAT);
-                break;
-        }
-    }
-
-    private int openMainMenu() {
-        STDOUT.info("Witaj! Wybierz pozycję z Menu wpisując jej numer lub wciśnij ENTER by wyjść: \n");
-        showMainMenu();
-        String lineInput = scanner.nextLine();
-        if (NumberUtils.isCreatable(lineInput)) {
-            input = Integer.parseInt(lineInput);
-        } else {
-            STDOUT.info(WRONG_NUMBER);
-        }
-        return input;
-    }
-
-    private int openBooksMenu() {
-        showBooksMenu();
-        String lineInput = scanner.nextLine();
-        if (NumberUtils.isCreatable(lineInput)) {
-            input = Integer.parseInt(lineInput);
-        } else {
-            STDOUT.info(WRONG_NUMBER);
-        }
-        return input;
-    }
-
-    private int openReservationMenu() {
-        showReservationMenu();
-        String lineInput = scanner.nextLine();
-        if (NumberUtils.isCreatable(lineInput)) {
-            input = Integer.parseInt(lineInput);
-        } else {
-            STDOUT.info(WRONG_NUMBER);
-        }
-        return input;
-    }
-
-    private int openSettingsMenu() {
-        showSettingsMenu();
-        String lineInput = scanner.nextLine();
-        if (NumberUtils.isCreatable(lineInput)) {
-            input = Integer.parseInt(lineInput);
-        } else {
-            STDOUT.info(WRONG_NUMBER);
-        }
-        return input;
-    }
-
-    public void getBooksMenu(BookListMenu bookChoice) {
+    public void getBooksMenu(BookListMenu input) {
         BookListService bookListService = new BookListService();
         Search search = new Search();
         Details details = new Details();
-        switch (bookChoice) {
+        switch (input) {
             case BOOK_LIST:
                 bookListService.run();
                 break;
@@ -155,44 +96,9 @@ public class Menu {
         }
     }
 
-    public void getReservationMenu(ReservationMenu reservationChoice) {
-        NewReservation newReservation = new NewReservation();
-        ReservationCancellation reservationCancellation = new ReservationCancellation();
-        if (reservationChoice.equals(ReservationMenu.NEW_RESERVATION)) {
-            newReservation.print();
-        } else {
-            reservationCancellation.print();
-        }
-    }
-
-    public void getSettingsMenu(SettingsMenu settingsChoice) {
-        Configurations configurations = new Configurations();
-        SortingOptions sortingOptions = new SortingOptions();
-        DataFormat dataFormat = new DataFormat();
-        switch (settingsChoice) {
-            case CONFIGURATIONS:
-                configurations.print();
-                break;
-            case SORTING:
-                sortingOptions.run();
-                break;
-            default:
-                dataFormat.print();
-                break;
-        }
-    }
-
-    public void showMainMenu() {
-        cleanTerminal();
-        for (MainMenu mainMenu : MainMenu.values()) {
-            int mainMenuPosition = mainMenu.ordinal() + 1;
-            STDOUT.info(SHOW_MENU, mainMenuPosition, mainMenu.getMenuDescription());
-        }
-    }
-
     public void showBooksMenu() {
         cleanTerminal();
-        STDOUT.info("W tej sekcji możesz przegladać zbiory książek. \n");
+        STDOUT.info("W tej sekcji możesz przeglądać zbiory książek. \n");
         STDOUT.info("Możesz również wyszukać daną pozycję i wyświetlić jej szczegóły. \n");
         STDOUT.info("Wybierz pozycję z menu wprowadzając jej numer. \n");
         for (BookListMenu bookListMenu : BookListMenu.values()) {
@@ -200,6 +106,38 @@ public class Menu {
             STDOUT.info(SHOW_MENU, bookPosition, bookListMenu.getBookDescription());
         }
         STDOUT.info(GO_BACK);
+    }
+
+
+    private void chooseReservationMenu() {
+        do {
+            input = 0;
+            showReservationMenu();
+            input = getUserInput();
+            switch (input) {
+                case 1:
+                    getReservationMenu(ReservationMenu.NEW_RESERVATION);
+                    break;
+                case 2:
+                    getReservationMenu(ReservationMenu.CANCEL_RESERVATION);
+                    break;
+                case 0:
+                    return;
+                default:
+                    STDOUT.info(WRONG_NUMBER);
+                    break;
+            }
+        } while (true);
+    }
+
+    public void getReservationMenu(ReservationMenu input) {
+        NewReservation newReservation = new NewReservation();
+        ReservationCancellation reservationCancellation = new ReservationCancellation();
+        if (input.equals(ReservationMenu.NEW_RESERVATION)) {
+            newReservation.print();
+        } else {
+            reservationCancellation.print();
+        }
     }
 
     public void showReservationMenu() {
@@ -214,6 +152,47 @@ public class Menu {
 
     }
 
+    private void chooseSettingsMenu() {
+        do {
+            input = 0;
+            showSettingsMenu();
+            input = getUserInput();
+            switch (input) {
+                case 1:
+                    getSettingsMenu(SettingsMenu.CONFIGURATIONS);
+                    break;
+                case 2:
+                    getSettingsMenu(SettingsMenu.SORTING);
+                    break;
+                case 3:
+                    getSettingsMenu(SettingsMenu.FORMAT);
+                    break;
+                case 0:
+                    return;
+                default:
+                    STDOUT.info(WRONG_NUMBER);
+                    break;
+            }
+        } while (true);
+    }
+
+    public void getSettingsMenu(SettingsMenu input) {
+        Configurations configurations = new Configurations();
+        SortingOptions sortingOptions = new SortingOptions();
+        DataFormat dataFormat = new DataFormat();
+        switch (input) {
+            case CONFIGURATIONS:
+                configurations.print();
+                break;
+            case SORTING:
+                sortingOptions.run();
+                break;
+            default:
+                dataFormat.print();
+                break;
+        }
+    }
+
     public void showSettingsMenu() {
         cleanTerminal();
         STDOUT.info("W tej sekcji możesz dokonać konfiguracji sortowania i formatu wyświetlania daty. \n");
@@ -225,8 +204,19 @@ public class Menu {
         STDOUT.info(GO_BACK);
     }
 
-
     public void cleanTerminal() {
         STDOUT.info("\033\143");
     }
+
+    private int getUserInput() {
+        String lineInput = scanner.nextLine();
+        if (NumberUtils.isCreatable(lineInput)) {
+            input = Integer.parseInt(lineInput);
+        } else {
+            STDOUT.info(WRONG_NUMBER);
+            input = getUserInput();
+        }
+        return input;
+    }
+
 }
