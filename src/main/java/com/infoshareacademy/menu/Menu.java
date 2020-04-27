@@ -8,7 +8,6 @@ import com.infoshareacademy.menu.item.SettingsMenu;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.util.Scanner;
 
 public class Menu {
