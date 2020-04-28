@@ -8,7 +8,7 @@ import org.apache.commons.lang3.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class BookListService {
@@ -84,25 +84,24 @@ public class BookListService {
     public void getBooksList() {
         Menu menu = new Menu();
         menu.cleanTerminal();
-        List<Book> bookList = BookRepository.getInstance().getBooks();
+        Map<Long, Book> books = BookRepository.getInstance().getBooks();
         if (positionsPerPage > 0) {
-            numberOfPages = (int) Math.ceil((double) bookList.size() / positionsPerPage);
+            numberOfPages = (int) Math.ceil((double) books.size() / positionsPerPage);
         }
         int firstPositionOnPage = (currentPageNumber - 1) * positionsPerPage;
         int lastPositionOnPage = firstPositionOnPage + positionsPerPage;
 
         for (int i = 0; i < positionsPerPage; i++) {
-            if (lastPositionOnPage > bookList.size()) {
+            if (lastPositionOnPage > books.size()) {
                 lastPositionOnPage = lastPositionOnPage - 1;
             }
         }
 
-        bookList = SortingOptions.sortList(bookList);
 
-        for (int i = firstPositionOnPage; i < lastPositionOnPage; i++) {
-            int positionNumber = i + 1;
-            STDOUT.info("{}{}.Tytuł: {}{}{}{} \n", ConsoleColors.BLACK_BOLD.getColorType(), positionNumber, ConsoleColors.RESET.getColorType(), ConsoleColors.RED.getColorType(), bookList.get(i).getTitle(), ConsoleColors.RESET.getColorType());
-            STDOUT.info(" {} Autor: {}{}{}{} \n\n", ConsoleColors.BLACK_BOLD.getColorType(), ConsoleColors.RESET.getColorType(), ConsoleColors.BLUE.getColorType(), bookList.get(i).getAuthors().get(0).getName(), ConsoleColors.RESET.getColorType());
+        for (long i = firstPositionOnPage; i < lastPositionOnPage; i++) {
+            long positionNumber = i + 1;
+            STDOUT.info("{}{}.Tytuł: {}{}{}{} \n", ConsoleColors.BLACK_BOLD.getColorType(), positionNumber, ConsoleColors.RESET.getColorType(), ConsoleColors.RED.getColorType(), books.get(i).getTitle(), ConsoleColors.RESET.getColorType());
+            STDOUT.info(" {} Autor: {}{}{}{} \n\n", ConsoleColors.BLACK_BOLD.getColorType(), ConsoleColors.RESET.getColorType(), ConsoleColors.BLUE.getColorType(), books.get(i).getAuthors().get(0).getName(), ConsoleColors.RESET.getColorType());
         }
         if (currentPageNumber == numberOfPages) {
             STDOUT.info("\n To ostatnia strona. Wybierz 2 aby zobaczyć poprzednią stronę lub 0 aby wyjść do głównego menu. \n\n");
