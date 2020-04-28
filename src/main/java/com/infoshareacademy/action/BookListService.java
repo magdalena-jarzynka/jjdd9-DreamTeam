@@ -34,7 +34,7 @@ public class BookListService {
             STDOUT.info(WRONG_NUMBER);
             input = getNumberOfPages();
         }
-        if(input <0){
+        if (input < 0) {
             STDOUT.info(WRONG_NUMBER);
             input = getNumberOfPages();
         }
