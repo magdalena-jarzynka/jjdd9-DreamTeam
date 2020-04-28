@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class BookListService {
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
     private static final Scanner scanner = new Scanner(System.in);
-    private static final String WRONG_NUMBER = "Proszę wpisać odpowiednią cyfrę.\n";
+    private static final String WRONG_NUMBER = "Proszę wpisać odpowiednią cyfrę.\n\n";
     private int input;
     private int positionsPerPage;
     private int currentPageNumber;
@@ -30,6 +30,13 @@ public class BookListService {
         String lineInput = scanner.nextLine();
         if (NumberUtils.isCreatable(lineInput)) {
             input = Integer.parseInt(lineInput);
+        } else {
+            STDOUT.info(WRONG_NUMBER);
+            input = getNumberOfPages();
+        }
+        if(input <0){
+            STDOUT.info(WRONG_NUMBER);
+            input = getNumberOfPages();
         }
         return input;
     }
@@ -52,31 +59,25 @@ public class BookListService {
         positionsPerPage = getNumberOfPages();
         do {
             Menu menu = new Menu();
-            if (positionsPerPage > 0) {
-                menu.cleanTerminal();
-                getBooksList();
-                input = 0;
-                input = getUserInput();
-                switch (input) {
-                    case 1:
-                        if (currentPageNumber < numberOfPages) {
-                            currentPageNumber = currentPageNumber + 1;
-                        }
-                        break;
-                    case 2:
-                        if (currentPageNumber > 1) {
-                            currentPageNumber = currentPageNumber - 1;
-                        }
-                        break;
-                    case 0:
-                        return;
-                    default:
-                        STDOUT.info(WRONG_NUMBER);
-                        break;
-                }
-            } else {
-                STDOUT.info(WRONG_NUMBER);
-                positionsPerPage = getUserInput();
+            menu.cleanTerminal();
+            getBooksList();
+            input = 0;
+            input = getUserInput();
+            switch (input) {
+                case 1:
+                    if (currentPageNumber < numberOfPages) {
+                        currentPageNumber = currentPageNumber + 1;
+                    }
+                    break;
+                case 2:
+                    if (currentPageNumber > 1) {
+                        currentPageNumber = currentPageNumber - 1;
+                    }
+                    break;
+                case 0:
+                    return;
+                default:
+                    input = getUserInput();
             }
         } while (true);
     }
@@ -98,6 +99,8 @@ public class BookListService {
         }
 
         bookList = SortingOptions.sortList(bookList);
+        STDOUT.info("\n Wybierz 1 aby zobaczyć następną stronę, 2 aby zobaczyć poprzednią lub 0 aby wyjść do poprzedniego menu. \n\n");
+
 
         for (int i = firstPositionOnPage; i < lastPositionOnPage; i++) {
             int positionNumber = i + 1;

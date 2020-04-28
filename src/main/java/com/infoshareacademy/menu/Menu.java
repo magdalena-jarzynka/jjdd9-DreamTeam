@@ -73,9 +73,7 @@ public class Menu {
                     return;
                 default:
                     STDOUT.info(WRONG_NUMBER);
-                    break;
             }
-
         } while (true);
     }
 
@@ -92,12 +90,12 @@ public class Menu {
                 break;
             default:
                 details.print();
-                break;
         }
     }
 
     public void showBooksMenu() {
         cleanTerminal();
+        STDOUT.info("PRZEGLĄDANIE ZBIORÓW \n\n");
         STDOUT.info("W tej sekcji możesz przeglądać zbiory książek. \n");
         STDOUT.info("Możesz również wyszukać daną pozycję i wyświetlić jej szczegóły. \n");
         STDOUT.info("Wybierz pozycję z menu wprowadzając jej numer. \n");
@@ -125,7 +123,6 @@ public class Menu {
                     return;
                 default:
                     STDOUT.info(WRONG_NUMBER);
-                    break;
             }
         } while (true);
     }
@@ -142,6 +139,7 @@ public class Menu {
 
     public void showReservationMenu() {
         cleanTerminal();
+        STDOUT.info("REZERWACJA KSIĄŻKI \n\n");
         STDOUT.info("W tej sekcji możesz dokonać rezerwacji lub anulować rezerwację.\n");
         STDOUT.info("Wybierz czynność, którą chcesz wykonać wprowadzając jej numer. \n");
         for (ReservationMenu reservationMenu : ReservationMenu.values()) {
@@ -171,7 +169,6 @@ public class Menu {
                     return;
                 default:
                     STDOUT.info(WRONG_NUMBER);
-                    break;
             }
         } while (true);
     }
@@ -189,12 +186,12 @@ public class Menu {
                 break;
             default:
                 dataFormat.print();
-                break;
         }
     }
 
     public void showSettingsMenu() {
         cleanTerminal();
+        STDOUT.info("USTAWIENIA \n\n");
         STDOUT.info("W tej sekcji możesz dokonać konfiguracji sortowania i formatu wyświetlania daty. \n");
         STDOUT.info("Wybierz pozycję z menu wprowadzając jej numer. \n");
         for (SettingsMenu settingsMenu : SettingsMenu.values()) {
