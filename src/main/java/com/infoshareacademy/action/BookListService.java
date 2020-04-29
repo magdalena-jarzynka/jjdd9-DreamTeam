@@ -8,8 +8,13 @@ import org.apache.commons.lang3.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class BookListService {
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
@@ -98,17 +103,33 @@ public class BookListService {
             }
         }
 
+        List<Long> keys = new ArrayList<>();
+        for (int i = 0; i <positionsPerPage ; i++) {
+            keys.add((long) (i + 1));
+        }
 
-        for (long i = firstPositionOnPage; i < lastPositionOnPage; i++) {
-            long positionNumber = i + 1;
-            STDOUT.info("{}{}.Tytuł: {}{}{}{} \n", ConsoleColors.BLACK_BOLD.getColorType(), positionNumber, ConsoleColors.RESET.getColorType(), ConsoleColors.RED.getColorType(), books.get(i).getTitle(), ConsoleColors.RESET.getColorType());
-            STDOUT.info(" {} Autor: {}{}{}{} \n\n", ConsoleColors.BLACK_BOLD.getColorType(), ConsoleColors.RESET.getColorType(), ConsoleColors.BLUE.getColorType(), books.get(i).getAuthors().get(0).getName(), ConsoleColors.RESET.getColorType());
-        }
+        Map<Long, Book> booksPerPage = keys.stream()
+                .filter(books :: containsKey)
+                .collect(Collectors.toMap(Function.identity(), books::get));
+
+        AtomicReference<Long> positionNumber = new AtomicReference<>(1L);
+
+        booksPerPage.entrySet().forEach(b -> {
+            STDOUT.info("{}{}.Tytuł: {}{}{}{} \n", ConsoleColors.BLACK_BOLD.getColorType(), positionNumber.get(),
+                    ConsoleColors.RESET.getColorType(), ConsoleColors.RED.getColorType(), b.getValue().getTitle(), ConsoleColors.RESET.getColorType());
+            STDOUT.info(" {} Autor: {}{}{}{} \n\n", ConsoleColors.BLACK_BOLD.getColorType(),
+                    ConsoleColors.RESET.getColorType(), ConsoleColors.BLUE.getColorType(), b.getValue().getAuthors().get(0).getName(), ConsoleColors.RESET.getColorType());
+            positionNumber.getAndSet(positionNumber.get() + 1);
+        });
+
         if (currentPageNumber == numberOfPages) {
-            STDOUT.info("\n To ostatnia strona. Wybierz 2 aby zobaczyć poprzednią stronę lub 0 aby wyjść do głównego menu. \n\n");
+            STDOUT.info("\n To ostatnia strona. " +
+                    "Wybierz 2 aby zobaczyć poprzednią stronę lub 0 aby wyjść do głównego menu. \n\n");
         } else {
-            STDOUT.info("\n Wybierz 1 aby zobaczyć następną stronę, 2 aby zobaczyć poprzednią lub 0 aby wyjść do poprzedniego menu. \n\n");
+            STDOUT.info("\n Wybierz 1 aby zobaczyć następną stronę, 2 aby zobaczyć poprzednią lub 0 aby wyjść do " +
+                    "poprzedniego menu. \n\n");
         }
-        STDOUT.info("\n{}Strona {} z {}.{}\n", ConsoleColors.BLACK_UNDERLINED.getColorType(), currentPageNumber, numberOfPages, ConsoleColors.RESET.getColorType());
+        STDOUT.info("\n{}Strona {} z {}.{}\n", ConsoleColors.BLACK_UNDERLINED.getColorType(), currentPageNumber,
+                numberOfPages, ConsoleColors.RESET.getColorType());
     }
 }
