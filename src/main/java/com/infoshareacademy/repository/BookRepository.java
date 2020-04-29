@@ -3,15 +3,20 @@ package com.infoshareacademy.repository;
 import com.infoshareacademy.Reader;
 import com.infoshareacademy.object.Book;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class BookRepository {
     private static BookRepository bookRepository = null;
-    private List<Book> books;
+    private Map<Long, Book> books = new HashMap<>();
 
     private BookRepository() {
         Reader reader = new Reader();
-        books = reader.readBookList();
+        List<Book> bookList = reader.readBookList();
+        for (int i = 0; i < bookList.size(); i++) {
+            books.put((long) (i + 1), bookList.get(i));
+        }
     }
 
     public static BookRepository getInstance() {
@@ -21,7 +26,7 @@ public class BookRepository {
         return bookRepository;
     }
 
-    public List<Book> getBooks() {
+    public Map<Long, Book> getBooks() {
         return books;
     }
 }
