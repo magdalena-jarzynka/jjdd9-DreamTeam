@@ -1,6 +1,7 @@
 package com.infoshareacademy.menu;
 
 import com.infoshareacademy.action.*;
+import com.infoshareacademy.action.search.Search;
 import com.infoshareacademy.menu.item.BookListMenu;
 import com.infoshareacademy.menu.item.MainMenu;
 import com.infoshareacademy.menu.item.ReservationMenu;
@@ -23,7 +24,7 @@ public class Menu {
         do {
             input = 0;
             showMainMenu();
-            input = getUserInput();
+            getUserInput();
             STDOUT.info("\n");
             switch (input) {
                 case 1:
@@ -86,7 +87,7 @@ public class Menu {
                 bookListService.run();
                 break;
             case SEARCH:
-                search.print();
+                search.run();
                 break;
             default:
                 details.print();
