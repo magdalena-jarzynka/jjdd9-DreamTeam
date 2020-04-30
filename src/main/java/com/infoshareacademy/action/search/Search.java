@@ -5,10 +5,9 @@ import org.slf4j.LoggerFactory;
 
 public class Search {
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
-    private String author = "";
-    private String title = "";
-    private boolean audio = false;
-
+    private static String author = "";
+    private static String title = "";
+    private static boolean audio = false;
 
     public void run() {
         do {
@@ -49,5 +48,17 @@ public class Search {
         if (CriteriaChoice.getUsedCriteria()[2]) {
             STDOUT.info("Wersja audio: {} \n\n", audio ? "tak" : "nie");
         }
+    }
+
+    public static String getAuthor() {
+        return author;
+    }
+
+    public static String getTitle() {
+        return title;
+    }
+
+    public static boolean getAudio()    {
+        return audio;
     }
 }
