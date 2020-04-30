@@ -6,25 +6,26 @@ import org.slf4j.LoggerFactory;
 public class Search {
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
 
+    CriteriaChoice userCriteria = new CriteriaChoice();
 
     public void run() {
         do {
             showSearchPanel();
-            switch (CriteriaChoice.userChoice()) {
+            switch (userCriteria.userChoice()) {
                 case 1: {
-                    CriteriaChoice.setTitle();
+                    userCriteria.setTitle();
                     break;
                 }
                 case 2: {
-                    CriteriaChoice.setAuthor();
+                    userCriteria.setAuthor();
                     break;
                 }
                 case 3: {
-                    CriteriaChoice.setAudio();
+                    userCriteria.setAudio();
                     break;
                 }
                 case 4: {
-                    Filtration.run();
+                    Filtration.run(userCriteria);
                     break;
                 }
                 case 5: {
@@ -37,14 +38,14 @@ public class Search {
     private void showSearchPanel() {
         STDOUT.info("\033\143");
         STDOUT.info("WYSZUKIWANIE KSIĄŻEK \n\n");
-        if(CriteriaChoice.getUsedCriteria()[0]) {
-            STDOUT.info("Tytuł: {} \n", CriteriaChoice.getTitle());
+        if(userCriteria.getUsedCriteria()[0]) {
+            STDOUT.info("Tytuł: {} \n", userCriteria.getTitle());
         }
-        if(CriteriaChoice.getUsedCriteria()[1]) {
-            STDOUT.info("Autor: {} \n", CriteriaChoice.getAuthor());
+        if(userCriteria.getUsedCriteria()[1]) {
+            STDOUT.info("Autor: {} \n", userCriteria.getAuthor());
         }
-        if (CriteriaChoice.getUsedCriteria()[2]) {
-            STDOUT.info("Wersja audio: {} \n\n", CriteriaChoice.getAudio() ? "tak" : "nie");
+        if (userCriteria.getUsedCriteria()[2]) {
+            STDOUT.info("Wersja audio: {} \n\n", userCriteria.getAudio() ? "tak" : "nie");
         }
     }
 

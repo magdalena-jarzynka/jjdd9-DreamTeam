@@ -9,16 +9,16 @@ import java.util.Scanner;
 public class CriteriaChoice {
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
     private static final Scanner scanner = new Scanner(System.in);
-    private static boolean[] usedCriteria = new boolean[3];
-    private static String author = "";
-    private static String title = "";
-    private static boolean audio = false;
+    private boolean[] usedCriteria = new boolean[3];
+    private String author = "";
+    private String title = "";
+    private boolean audio = false;
 
-    public static boolean[] getUsedCriteria() {
+    public boolean[] getUsedCriteria() {
         return usedCriteria;
     }
 
-    protected static int userChoice() {
+    protected int userChoice() {
         STDOUT.info("Proszę wybrać kryterium wyszukiwania lub rozpocząć wyszukiwanie: \n");
         STDOUT.info("1. Tytuł \n");
         STDOUT.info("2. Imię autora \n");
@@ -28,7 +28,7 @@ public class CriteriaChoice {
         return UserInput.getUserInput();
     }
 
-    protected static void setTitle() {
+    protected void setTitle() {
         while (true) {
             STDOUT.info("Proszę podać tytuł: \n");
             String lineInput = scanner.nextLine();
@@ -42,7 +42,7 @@ public class CriteriaChoice {
         }
     }
 
-    protected static void setAuthor() {
+    protected void setAuthor() {
         while (true) {
             STDOUT.info("Proszę podać imię autora: \n");
             String lineInput = scanner.nextLine();
@@ -56,7 +56,7 @@ public class CriteriaChoice {
         }
     }
 
-    protected static void setAudio() {
+    protected void setAudio() {
         while (true) {
             STDOUT.info("Proszę wybrać 1 aby wyszukać tytuły z wersją audio lub 2 dla tytułów bez wersji audio \n");
             switch (UserInput.getUserInput()) {
@@ -76,9 +76,9 @@ public class CriteriaChoice {
         }
     }
 
-    public static String getAuthor() { return author; }
+    public String getAuthor() { return author; }
 
-    public static String getTitle() { return title; }
+    public String getTitle() { return title; }
 
-    public static boolean getAudio()    { return audio; }
+    public boolean getAudio()    { return audio; }
 }

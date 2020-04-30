@@ -12,22 +12,22 @@ import java.util.Map;
 
 public class Filtration {
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
-    public static void run() {
+    public static void run(CriteriaChoice userCriteria) {
         Map<Long, Book> filteredBooks = BookRepository.getInstance().getBooks();
 
-        if(CriteriaChoice.getUsedCriteria()[0])
+        if(userCriteria.getUsedCriteria()[0])
             filteredBooks = filteredBooks.entrySet().stream()
-                    .filter(x -> x.getValue().getTitle().toLowerCase().contains(CriteriaChoice.getTitle()))
+                    .filter(x -> x.getValue().getTitle().toLowerCase().contains(userCriteria.getTitle()))
                     .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
-        if(CriteriaChoice.getUsedCriteria()[1])
+        if(userCriteria.getUsedCriteria()[1])
         filteredBooks = filteredBooks.entrySet().stream()
-                .filter(x -> x.getValue().getAuthors().get(0).getName().toLowerCase().contains(CriteriaChoice.getAuthor()))
+                .filter(x -> x.getValue().getAuthors().get(0).getName().toLowerCase().contains(userCriteria.getAuthor()))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
-        if(CriteriaChoice.getUsedCriteria()[2])
+        if(userCriteria.getUsedCriteria()[2])
             filteredBooks = filteredBooks.entrySet().stream()
-                    .filter(x -> x.getValue().hasAudio() == CriteriaChoice.getAudio())
+                    .filter(x -> x.getValue().hasAudio() == userCriteria.getAudio())
                     .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
         filteredBooks.entrySet().stream()
