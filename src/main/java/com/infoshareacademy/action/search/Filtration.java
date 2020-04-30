@@ -17,12 +17,14 @@ public class Filtration {
 
         if(userCriteria.getUsedCriteria()[0])
             filteredBooks = filteredBooks.entrySet().stream()
-                    .filter(x -> x.getValue().getTitle().toLowerCase().contains(userCriteria.getTitle()))
+                    .filter(x -> x.getValue().getTitle().toLowerCase().
+                            contains(userCriteria.getTitle()))
                     .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
         if(userCriteria.getUsedCriteria()[1])
         filteredBooks = filteredBooks.entrySet().stream()
-                .filter(x -> x.getValue().getAuthors().get(0).getName().toLowerCase().contains(userCriteria.getAuthor()))
+                .filter(x -> x.getValue().getAuthors().get(0).getName().toLowerCase().
+                        contains(userCriteria.getAuthor()))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
         if(userCriteria.getUsedCriteria()[2])
@@ -30,7 +32,7 @@ public class Filtration {
                     .filter(x -> x.getValue().hasAudio() == userCriteria.getAudio())
                     .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
-        filteredBooks.entrySet().stream()
+        filteredBooks.entrySet()
                 .forEach(x->STDOUT.info("Tytuł: {} ||| Autor: {} ||| Wersja audio: {}\n",
                         x.getValue().getTitle(),
                         x.getValue().getAuthors().get(0).getName(),
