@@ -120,7 +120,7 @@ public class BookListService {
                                 ConsoleColors.RED.getColorType(), b.getValue().getTitle(),
                                 ConsoleColors.BLACK_BOLD.getColorType(), ConsoleColors.BLUE.getColorType(),
                                 b.getValue().getAuthors().get(0).getName(), ConsoleColors.BLACK_BOLD.getColorType(),
-                                 ConsoleColors.YELLOW_BOLD.getColorType(), b.getKey(),
+                                ConsoleColors.YELLOW_BOLD.getColorType(), b.getKey(),
                                 ConsoleColors.RESET.getColorType(), b));
 
 
