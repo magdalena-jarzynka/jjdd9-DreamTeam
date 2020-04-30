@@ -4,12 +4,15 @@ import com.infoshareacademy.ConsoleColors;
 import com.infoshareacademy.menu.Menu;
 import com.infoshareacademy.object.Book;
 import com.infoshareacademy.repository.BookRepository;
+import com.infoshareacademy.service.sorting.SortByAuthorStrategy;
+import com.infoshareacademy.service.sorting.SortStrategy;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.*;
-import java.util.concurrent.atomic.AtomicReference;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.SortedSet;
 
 public class BookListService {
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
@@ -19,6 +22,11 @@ public class BookListService {
     private int positionsPerPage;
     private int currentPageNumber;
     private int numberOfPages;
+    private long firstPositionOnPage;
+    private long lastPositionOnPage;
+    private long offset;
+    private long positionNumber;
+
 
     public BookListService() {
         this.currentPageNumber = 1;
@@ -52,7 +60,6 @@ public class BookListService {
         return input;
     }
 
-
     public void run() {
 
         STDOUT.info("\n Ile pozycji wyświetlić na jednej stronie? \n");
@@ -82,7 +89,6 @@ public class BookListService {
         } while (true);
     }
 
-
     public void getBooksList() {
         Menu menu = new Menu();
         menu.cleanTerminal();
@@ -90,37 +96,33 @@ public class BookListService {
         if (positionsPerPage > 0) {
             numberOfPages = (int) Math.ceil((double) books.size() / positionsPerPage);
         }
-        Long firstPositionOnPage = ((long) currentPageNumber - 1) * positionsPerPage;
-        Long lastPositionOnPage = firstPositionOnPage + positionsPerPage;
+        long firstPositionOnPage = ((long) currentPageNumber - 1) * positionsPerPage;
+        long lastPositionOnPage = firstPositionOnPage + positionsPerPage;
+
+        offset = 0;
+
 
         for (int i = 0; i < positionsPerPage; i++) {
             if (lastPositionOnPage > books.size()) {
                 lastPositionOnPage = lastPositionOnPage - 1;
             }
         }
-        Map<Long, Book> smallBooks = new HashMap<>();
-        Iterator booksIterator = books.entrySet().iterator();
+        SortStrategy sortStrategy = new SortByAuthorStrategy();
+        SortedSet<Map.Entry<Long, Book>> booksSet =
+                sortStrategy.getSortedList(BookRepository.getInstance().getBooks());
+        positionNumber = firstPositionOnPage + 1;
+        booksSet.stream()
+                .skip(firstPositionOnPage)
+                .limit(positionsPerPage)
+                .forEach(b ->
+                        STDOUT.info("{}{}.Tytuł: {}{} \n {} Autor: {}{} \n {} ID: {}{}{} \n\n",
+                                ConsoleColors.BLACK_BOLD.getColorType(), positionNumber++,
+                                ConsoleColors.RED.getColorType(), b.getValue().getTitle(),
+                                ConsoleColors.BLACK_BOLD.getColorType(), ConsoleColors.BLUE.getColorType(),
+                                b.getValue().getAuthors().get(0).getName(), ConsoleColors.BLACK_BOLD.getColorType(),
+                                 ConsoleColors.YELLOW_BOLD.getColorType(), b.getKey(),
+                                ConsoleColors.RESET.getColorType(), b));
 
-        for (Long i = firstPositionOnPage; i < lastPositionOnPage; i++) {
-            Set booksListstsss = books.entrySet();
-            Iterator it = booksListstsss.iterator();
-            Map.Entry mapElement = (Map.Entry) it.next();
-            Book value = (Book) mapElement.getValue();
-            Long key = (Long) mapElement.getKey();
-            smallBooks.put(key, value);
-
-        }
-
-
-        AtomicReference<Long> positionNumber = new AtomicReference<>((long) firstPositionOnPage + 1);
-
-        smallBooks.entrySet().forEach(b -> {
-            STDOUT.info("{}{}.Tytuł: {}{}{}{} \n", ConsoleColors.BLACK_BOLD.getColorType(), positionNumber.get(),
-                    ConsoleColors.RESET.getColorType(), ConsoleColors.RED.getColorType(), b.getValue().getTitle(), ConsoleColors.RESET.getColorType());
-            STDOUT.info(" {} Autor: {}{}{}{} \n\n", ConsoleColors.BLACK_BOLD.getColorType(),
-                    ConsoleColors.RESET.getColorType(), ConsoleColors.BLUE.getColorType(), b.getValue().getAuthors().get(0).getName(), ConsoleColors.RESET.getColorType());
-            positionNumber.getAndSet(positionNumber.get() + 1);
-        });
 
         if (currentPageNumber == numberOfPages) {
             STDOUT.info("\n To ostatnia strona. " +
