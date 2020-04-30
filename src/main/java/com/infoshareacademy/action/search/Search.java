@@ -5,24 +5,22 @@ import org.slf4j.LoggerFactory;
 
 public class Search {
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
-    private static String author = "";
-    private static String title = "";
-    private static boolean audio = false;
+
 
     public void run() {
         do {
             showSearchPanel();
             switch (CriteriaChoice.userChoice()) {
                 case 1: {
-                    title = CriteriaChoice.title();
+                    CriteriaChoice.setTitle();
                     break;
                 }
                 case 2: {
-                    author = CriteriaChoice.author();
+                    CriteriaChoice.setAuthor();
                     break;
                 }
                 case 3: {
-                    audio = CriteriaChoice.audio();
+                    CriteriaChoice.setAudio();
                     break;
                 }
                 case 4: {
@@ -40,25 +38,15 @@ public class Search {
         STDOUT.info("\033\143");
         STDOUT.info("WYSZUKIWANIE KSIĄŻEK \n\n");
         if(CriteriaChoice.getUsedCriteria()[0]) {
-            STDOUT.info("Tytuł: {} \n", title);
+            STDOUT.info("Tytuł: {} \n", CriteriaChoice.getTitle());
         }
         if(CriteriaChoice.getUsedCriteria()[1]) {
-            STDOUT.info("Autor: {} \n", author);
+            STDOUT.info("Autor: {} \n", CriteriaChoice.getAuthor());
         }
         if (CriteriaChoice.getUsedCriteria()[2]) {
-            STDOUT.info("Wersja audio: {} \n\n", audio ? "tak" : "nie");
+            STDOUT.info("Wersja audio: {} \n\n", CriteriaChoice.getAudio() ? "tak" : "nie");
         }
     }
 
-    public static String getAuthor() {
-        return author;
-    }
 
-    public static String getTitle() {
-        return title;
-    }
-
-    public static boolean getAudio()    {
-        return audio;
-    }
 }

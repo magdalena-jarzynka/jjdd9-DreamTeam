@@ -10,6 +10,9 @@ public class CriteriaChoice {
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
     private static final Scanner scanner = new Scanner(System.in);
     private static boolean[] usedCriteria = new boolean[3];
+    private static String author = "";
+    private static String title = "";
+    private static boolean audio = false;
 
     public static boolean[] getUsedCriteria() {
         return usedCriteria;
@@ -25,47 +28,57 @@ public class CriteriaChoice {
         return UserInput.getUserInput();
     }
 
-    protected static String title() {
+    protected static void setTitle() {
         while (true) {
             STDOUT.info("Proszę podać tytuł: \n");
             String lineInput = scanner.nextLine();
             if (lineInput.length() > 2) {
                 usedCriteria[0] = true;
-                return lineInput;
+                title = lineInput.toLowerCase();
+                return;
             } else {
                 STDOUT.info("Zapytanie musi zawierać co najmniej dwa znaki. \n");
             }
         }
     }
 
-    protected static String author() {
+    protected static void setAuthor() {
         while (true) {
             STDOUT.info("Proszę podać imię autora: \n");
             String lineInput = scanner.nextLine();
             if (lineInput.length() > 2) {
                 usedCriteria[1] = true;
-                return lineInput;
+                author = lineInput.toLowerCase();
+                return;
             } else {
                 STDOUT.info("Zapytanie musi zawierać co najmniej dwa znaki. \n");
             }
         }
     }
 
-    protected static boolean audio() {
+    protected static void setAudio() {
         while (true) {
             STDOUT.info("Proszę wybrać 1 aby wyszukać tytuły z wersją audio lub 2 dla tytułów bez wersji audio \n");
             switch (UserInput.getUserInput()) {
                 case 1: {
                     usedCriteria[2] = true;
-                    return true;
+                    audio = true;
+                    return;
                 }
                 case 2: {
                     usedCriteria[2] = true;
-                    return false;
+                    audio = false;
+                    return;
                 }
                 default:
                     STDOUT.info("Proszę wpisać odpowiednią cyfrę.");
             }
         }
     }
+
+    public static String getAuthor() { return author; }
+
+    public static String getTitle() { return title; }
+
+    public static boolean getAudio()    { return audio; }
 }
