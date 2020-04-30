@@ -8,13 +8,8 @@ import org.apache.commons.lang3.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 public class BookListService {
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
@@ -31,17 +26,17 @@ public class BookListService {
         this.input = 0;
     }
 
-    public int getNumberOfPages() {
+    public int getNumberOfRecordsPerPage() {
         String lineInput = scanner.nextLine();
         if (NumberUtils.isCreatable(lineInput)) {
             input = Integer.parseInt(lineInput);
         } else {
             STDOUT.info(WRONG_NUMBER);
-            input = getNumberOfPages();
+            input = getNumberOfRecordsPerPage();
         }
         if (input < 0) {
             STDOUT.info(WRONG_NUMBER);
-            input = getNumberOfPages();
+            input = getNumberOfRecordsPerPage();
         }
         return input;
     }
@@ -61,7 +56,7 @@ public class BookListService {
     public void run() {
 
         STDOUT.info("\n Ile pozycji wyświetlić na jednej stronie? \n");
-        positionsPerPage = getNumberOfPages();
+        positionsPerPage = getNumberOfRecordsPerPage();
         do {
             Menu menu = new Menu();
             menu.cleanTerminal();
@@ -87,6 +82,7 @@ public class BookListService {
         } while (true);
     }
 
+
     public void getBooksList() {
         Menu menu = new Menu();
         menu.cleanTerminal();
@@ -94,27 +90,31 @@ public class BookListService {
         if (positionsPerPage > 0) {
             numberOfPages = (int) Math.ceil((double) books.size() / positionsPerPage);
         }
-        int firstPositionOnPage = (currentPageNumber - 1) * positionsPerPage;
-        int lastPositionOnPage = firstPositionOnPage + positionsPerPage;
+        Long firstPositionOnPage = ((long) currentPageNumber - 1) * positionsPerPage;
+        Long lastPositionOnPage = firstPositionOnPage + positionsPerPage;
 
         for (int i = 0; i < positionsPerPage; i++) {
             if (lastPositionOnPage > books.size()) {
                 lastPositionOnPage = lastPositionOnPage - 1;
             }
         }
+        Map<Long, Book> smallBooks = new HashMap<>();
+        Iterator booksIterator = books.entrySet().iterator();
 
-        List<Long> keys = new ArrayList<>();
-        for (int i = 0; i <positionsPerPage ; i++) {
-            keys.add((long) (i + 1));
+        for (Long i = firstPositionOnPage; i < lastPositionOnPage; i++) {
+            Set booksListstsss = books.entrySet();
+            Iterator it = booksListstsss.iterator();
+            Map.Entry mapElement = (Map.Entry) it.next();
+            Book value = (Book) mapElement.getValue();
+            Long key = (Long) mapElement.getKey();
+            smallBooks.put(key, value);
+
         }
 
-        Map<Long, Book> booksPerPage = keys.stream()
-                .filter(books :: containsKey)
-                .collect(Collectors.toMap(Function.identity(), books::get));
 
-        AtomicReference<Long> positionNumber = new AtomicReference<>(1L);
+        AtomicReference<Long> positionNumber = new AtomicReference<>((long) firstPositionOnPage + 1);
 
-        booksPerPage.entrySet().forEach(b -> {
+        smallBooks.entrySet().forEach(b -> {
             STDOUT.info("{}{}.Tytuł: {}{}{}{} \n", ConsoleColors.BLACK_BOLD.getColorType(), positionNumber.get(),
                     ConsoleColors.RESET.getColorType(), ConsoleColors.RED.getColorType(), b.getValue().getTitle(), ConsoleColors.RESET.getColorType());
             STDOUT.info(" {} Autor: {}{}{}{} \n\n", ConsoleColors.BLACK_BOLD.getColorType(),
