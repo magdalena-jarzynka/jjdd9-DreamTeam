@@ -3,6 +3,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import com.infoshareacademy.action.BookListService;
+import com.infoshareacademy.input.UserInput;
 import com.infoshareacademy.object.Book;
 import com.infoshareacademy.repository.BookRepository;
 import org.slf4j.Logger;
@@ -12,6 +13,7 @@ import java.util.Map;
 
 public class Filtration {
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
+
     public static void run(CriteriaChoice userCriteria) {
         Map<Long, Book> filteredBooks = BookRepository.getInstance().getBooks();
 
@@ -37,5 +39,9 @@ public class Filtration {
                         x.getValue().getTitle(),
                         x.getValue().getAuthors().get(0).getName(),
                         x.getValue().hasAudio() ? "tak" : "nie"));
+
+        STDOUT.info("Wprowadź 0 aby wrócić do wyszukiwarki książek \n");
+        while(UserInput.getUserInput()!=0);
+
     }
 }
