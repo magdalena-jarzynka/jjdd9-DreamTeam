@@ -86,18 +86,19 @@ public class BookListService {
         } while (true);
     }
 
-    private void getNumberOfPages() {
+    private int getNumberOfPages() {
         Map<Long, Book> books = BookRepository.getInstance().getBooks();
         if (positionsPerPage > 0) {
             numberOfPages = (int) Math.ceil((double) books.size() / positionsPerPage);
         }
+        return numberOfPages;
     }
 
     public void getBooksList() {
         Menu menu = new Menu();
         menu.cleanTerminal();
         Map<Long, Book> books = BookRepository.getInstance().getBooks();
-        getNumberOfPages();
+        numberOfPages = getNumberOfPages();
         long firstPositionOnPage = ((long) currentPageNumber - 1) * positionsPerPage;
         long lastPositionOnPage = firstPositionOnPage + positionsPerPage;
         for (int i = 0; i < positionsPerPage; i++) {

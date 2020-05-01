@@ -9,12 +9,6 @@ public class AuthorService {
 
     private String getAuthors(Book book) {
         List<Author> authors = book.getAuthors();
-        String authorsList = "";
-        for (Author author : authors) {
-            authorsList = authorsList + author.getName() + " , ";
-        }
-        return authorsList;
+        return String.join(", ", authors.get(0).getName());
     }
-
-
 }
