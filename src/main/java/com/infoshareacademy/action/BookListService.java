@@ -23,6 +23,8 @@ public class BookListService {
     private int currentPageNumber;
     private int numberOfPages;
     private long positionNumber;
+    private long firstPositionOnPage;
+    private long lastPositionOnPage;
 
 
     public BookListService() {
@@ -94,22 +96,35 @@ public class BookListService {
         return numberOfPages;
     }
 
-    public void getBooksList() {
-        Menu menu = new Menu();
-        menu.cleanTerminal();
+    private long findFirstPosition() {
+        return ((long) currentPageNumber - 1) * positionsPerPage;
+    }
+
+    private long findLastPosition(){
         Map<Long, Book> books = BookRepository.getInstance().getBooks();
-        numberOfPages = getNumberOfPages();
-        long firstPositionOnPage = ((long) currentPageNumber - 1) * positionsPerPage;
-        long lastPositionOnPage = firstPositionOnPage + positionsPerPage;
+        lastPositionOnPage =  firstPositionOnPage + positionsPerPage;
         for (int i = 0; i < positionsPerPage; i++) {
             if (lastPositionOnPage > books.size()) {
                 lastPositionOnPage = lastPositionOnPage - 1;
             }
         }
+        return lastPositionOnPage;
+    }
+
+    private long findPositionNumber(){
+        return firstPositionOnPage + 1;
+    }
+
+    public void getBooksList() {
+        Menu menu = new Menu();
+        menu.cleanTerminal();
+        numberOfPages = getNumberOfPages();
+        firstPositionOnPage = findFirstPosition();
+        lastPositionOnPage = findLastPosition();
         SortStrategy sortStrategy = new SortByAuthorStrategy();
         SortedSet<Map.Entry<Long, Book>> booksSet =
                 sortStrategy.getSortedList(BookRepository.getInstance().getBooks());
-        positionNumber = firstPositionOnPage + 1;
+        positionNumber = findPositionNumber();
         booksSet.stream()
                 .skip(firstPositionOnPage)
                 .limit(positionsPerPage)
