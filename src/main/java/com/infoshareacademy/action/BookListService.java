@@ -4,20 +4,16 @@ import com.infoshareacademy.ConsoleColors;
 import com.infoshareacademy.menu.Menu;
 import com.infoshareacademy.object.Book;
 import com.infoshareacademy.repository.BookRepository;
+import com.infoshareacademy.service.ListService;
 import com.infoshareacademy.service.sorting.SortByAuthorStrategy;
 import com.infoshareacademy.service.sorting.SortStrategy;
-import org.apache.commons.lang3.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.util.Map;
-import java.util.Scanner;
 import java.util.SortedSet;
 
 public class BookListService {
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
-    private static final Scanner scanner = new Scanner(System.in);
-    private static final String WRONG_NUMBER = "Proszę wpisać odpowiednią cyfrę.\n\n";
     private int input;
     private int positionsPerPage;
     private int currentPageNumber;
@@ -26,49 +22,21 @@ public class BookListService {
     private long firstPositionOnPage;
     private long lastPositionOnPage;
 
-
     public BookListService() {
         this.currentPageNumber = 1;
         this.numberOfPages = 2;
-        this.input = 0;
-    }
-
-    public int getPageSize() {
-        String lineInput = scanner.nextLine();
-        if (NumberUtils.isCreatable(lineInput)) {
-            input = Integer.parseInt(lineInput);
-        } else {
-            STDOUT.info(WRONG_NUMBER);
-            input = getPageSize();
-        }
-        if (input < 0) {
-            STDOUT.info(WRONG_NUMBER);
-            input = getPageSize();
-        }
-        return input;
-    }
-
-    public int getUserInput() {
-        String lineInput = scanner.nextLine();
-        if (NumberUtils.isCreatable(lineInput)) {
-            input = Integer.parseInt(lineInput);
-        } else {
-            STDOUT.info(WRONG_NUMBER);
-            input = getUserInput();
-        }
-        return input;
     }
 
     public void run() {
-
+        ListService listService = new ListService();
         STDOUT.info("\n Ile pozycji wyświetlić na jednej stronie? \n");
-        positionsPerPage = getPageSize();
+        positionsPerPage = listService.getPositionsPerPage();
         do {
             Menu menu = new Menu();
             menu.cleanTerminal();
             getBooksList();
             input = 0;
-            input = getUserInput();
+            input = listService.getUserInput();
             switch (input) {
                 case 1:
                     if (currentPageNumber < numberOfPages) {
@@ -83,48 +51,22 @@ public class BookListService {
                 case 0:
                     return;
                 default:
-                    input = getUserInput();
+                    input = listService.getUserInput();
             }
         } while (true);
     }
 
-    private int getNumberOfPages() {
-        Map<Long, Book> books = BookRepository.getInstance().getBooks();
-        if (positionsPerPage > 0) {
-            numberOfPages = (int) Math.ceil((double) books.size() / positionsPerPage);
-        }
-        return numberOfPages;
-    }
-
-    private long findFirstPosition() {
-        return ((long) currentPageNumber - 1) * positionsPerPage;
-    }
-
-    private long findLastPosition(){
-        Map<Long, Book> books = BookRepository.getInstance().getBooks();
-        lastPositionOnPage =  firstPositionOnPage + positionsPerPage;
-        for (int i = 0; i < positionsPerPage; i++) {
-            if (lastPositionOnPage > books.size()) {
-                lastPositionOnPage = lastPositionOnPage - 1;
-            }
-        }
-        return lastPositionOnPage;
-    }
-
-    private long findPositionNumber(){
-        return firstPositionOnPage + 1;
-    }
-
     public void getBooksList() {
+        ListService listService = new ListService();
         Menu menu = new Menu();
         menu.cleanTerminal();
-        numberOfPages = getNumberOfPages();
-        firstPositionOnPage = findFirstPosition();
-        lastPositionOnPage = findLastPosition();
+        numberOfPages = listService.getNumberOfPages(positionsPerPage);
+        firstPositionOnPage = listService.findFirstPosition(currentPageNumber, positionsPerPage);
+        lastPositionOnPage = listService.findLastPosition();
         SortStrategy sortStrategy = new SortByAuthorStrategy();
         SortedSet<Map.Entry<Long, Book>> booksSet =
                 sortStrategy.getSortedList(BookRepository.getInstance().getBooks());
-        positionNumber = findPositionNumber();
+        positionNumber = listService.findPositionNumber(firstPositionOnPage);
         booksSet.stream()
                 .skip(firstPositionOnPage)
                 .limit(positionsPerPage)

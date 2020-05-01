@@ -21,24 +21,26 @@ public class ListService {
     private long firstPositionOnPage;
     private long lastPositionOnPage;
 
-
-
-    public int getPageSize() {
+    public int getUserInput() {
         String lineInput = scanner.nextLine();
         if (NumberUtils.isCreatable(lineInput)) {
             input = Integer.parseInt(lineInput);
         } else {
             STDOUT.info(WRONG_NUMBER);
-            input = getPageSize();
+            input = getUserInput();
         }
         if (input < 0) {
             STDOUT.info(WRONG_NUMBER);
-            input = getPageSize();
+            input = getUserInput();
         }
         return input;
     }
 
-    private int getNumberOfPages() {
+    public int getPositionsPerPage() {
+        return getUserInput();
+    }
+
+    public int getNumberOfPages(int positionsPerPage) {
         Map<Long, Book> books = BookRepository.getInstance().getBooks();
         if (positionsPerPage > 0) {
             numberOfPages = (int) Math.ceil((double) books.size() / positionsPerPage);
@@ -46,13 +48,13 @@ public class ListService {
         return numberOfPages;
     }
 
-    private long findFirstPosition() {
+    public long findFirstPosition(int currentPageNumber, int positionsPerPage) {
         return ((long) currentPageNumber - 1) * positionsPerPage;
     }
 
-    private long findLastPosition(){
+    public long findLastPosition() {
         Map<Long, Book> books = BookRepository.getInstance().getBooks();
-        lastPositionOnPage =  firstPositionOnPage + positionsPerPage;
+        lastPositionOnPage = firstPositionOnPage + positionsPerPage;
         for (int i = 0; i < positionsPerPage; i++) {
             if (lastPositionOnPage > books.size()) {
                 lastPositionOnPage = lastPositionOnPage - 1;
@@ -61,7 +63,7 @@ public class ListService {
         return lastPositionOnPage;
     }
 
-    private long findPositionNumber(){
+    public long findPositionNumber(long firstPositionOnPage) {
         return firstPositionOnPage + 1;
     }
 }
