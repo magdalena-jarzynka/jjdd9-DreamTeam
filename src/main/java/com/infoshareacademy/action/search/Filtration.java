@@ -6,6 +6,7 @@ import com.infoshareacademy.action.BookListService;
 import com.infoshareacademy.input.UserInput;
 import com.infoshareacademy.object.Book;
 import com.infoshareacademy.repository.BookRepository;
+import com.infoshareacademy.service.BookService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,7 +16,8 @@ public class Filtration {
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
 
     public static void run(CriteriaChoice userCriteria) {
-        Map<Long, Book> filteredBooks = BookRepository.getInstance().getBooks();
+        BookService bookService = new BookService();
+        Map<Long, Book> filteredBooks = bookService.findAllBooks();
 
         if(userCriteria.getActiveCriteria()[0])
             filteredBooks = filteredBooks.entrySet().stream()
@@ -34,7 +36,8 @@ public class Filtration {
                     .filter(x -> x.getValue().hasAudio() == userCriteria.getAudio())
                     .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
+        bookService.setBooks(filteredBooks);
         BookListService filteredList = new BookListService();
-        filteredList.run(filteredBooks);
+        filteredList.run(bookService);
     }
 }

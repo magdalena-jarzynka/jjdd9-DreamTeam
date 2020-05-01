@@ -29,14 +29,14 @@ public class BookListService {
         this.numberOfPages = 2;
     }
 
-    public void run(Map<Long, Book> books) {
+    public void run(BookService bookService) {
         ListService listService = new ListService();
         STDOUT.info("\n Ile pozycji wyświetlić na jednej stronie? \n");
         positionsPerPage = listService.getPositionsPerPage();
         do {
             Menu menu = new Menu();
             menu.cleanTerminal();
-            getBooksList(books);
+            getBooksList(bookService);
             input = 0;
             input = listService.getUserInput();
             switch (input) {
@@ -58,10 +58,8 @@ public class BookListService {
         } while (true);
     }
 
-    public void getBooksList(Map<Long, Book> books) {
+    public void getBooksList(BookService bookService) {
         ListService listService = new ListService();
-        BookService bookService = new BookService();
-        bookService.setBooks(books);
         Menu menu = new Menu();
         menu.cleanTerminal();
         numberOfPages = listService.getPagesCount(positionsPerPage);
@@ -69,7 +67,7 @@ public class BookListService {
         lastPositionOnPage = listService.findLastPosition();
         SortStrategy sortStrategy = new SortByAuthorStrategy();
         SortedSet<Map.Entry<Long, Book>> booksSet =
-                sortStrategy.getSortedList(books);
+                sortStrategy.getSortedList(bookService.getBooks());
         positionNumber = listService.findPositionNumber(firstPositionOnPage);
         booksSet.stream()
                 .skip(firstPositionOnPage)

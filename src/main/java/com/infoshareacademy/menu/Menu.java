@@ -7,6 +7,7 @@ import com.infoshareacademy.menu.item.MainMenu;
 import com.infoshareacademy.menu.item.ReservationMenu;
 import com.infoshareacademy.menu.item.SettingsMenu;
 import com.infoshareacademy.repository.BookRepository;
+import com.infoshareacademy.service.BookService;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -85,7 +86,9 @@ public class Menu {
         Details details = new Details();
         switch (input) {
             case BOOK_LIST:
-                bookListService.run(BookRepository.getInstance().getBooks());
+                BookService bookService = new BookService();
+                bookService.setBooks(bookService.findAllBooks());
+                bookListService.run(bookService);
                 break;
             case SEARCH:
                 search.run();
