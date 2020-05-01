@@ -1,12 +1,9 @@
 package com.infoshareacademy.service;
 
-import com.infoshareacademy.object.Book;
-import com.infoshareacademy.repository.BookRepository;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Map;
 import java.util.Scanner;
 
 public class ListService {
@@ -40,10 +37,10 @@ public class ListService {
         return getUserInput();
     }
 
-    public int getNumberOfPages(int positionsPerPage) {
-        Map<Long, Book> books = BookRepository.getInstance().getBooks();
+    public int getPagesCount(int positionsPerPage) {
+        BookService bookService = new BookService();
         if (positionsPerPage > 0) {
-            numberOfPages = (int) Math.ceil((double) books.size() / positionsPerPage);
+            numberOfPages = (int) Math.ceil((double) bookService.getBooksSize() / positionsPerPage);
         }
         return numberOfPages;
     }
@@ -53,12 +50,10 @@ public class ListService {
     }
 
     public long findLastPosition() {
-        Map<Long, Book> books = BookRepository.getInstance().getBooks();
+        BookService bookService = new BookService();
         lastPositionOnPage = firstPositionOnPage + positionsPerPage;
-        for (int i = 0; i < positionsPerPage; i++) {
-            if (lastPositionOnPage > books.size()) {
-                lastPositionOnPage = lastPositionOnPage - 1;
-            }
+        if (lastPositionOnPage > bookService.getBooksSize()) {
+            lastPositionOnPage = bookService.getBooksSize() % positionsPerPage;
         }
         return lastPositionOnPage;
     }

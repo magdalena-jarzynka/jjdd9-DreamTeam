@@ -1,10 +1,17 @@
 package com.infoshareacademy.service;
 
+import com.infoshareacademy.object.Book;
+import com.infoshareacademy.repository.BookRepository;
+
+import java.util.Map;
+
 public class BookService {
 
-    public String getBookDetails(long bookId) {
-        String bookDetails = "";
+    public Map<Long, Book> findAllBooks() {
+        return BookRepository.getInstance().getBooks();
+    }
 
-        return bookDetails;
+    public int getBooksSize() {
+        return findAllBooks().size();
     }
 }

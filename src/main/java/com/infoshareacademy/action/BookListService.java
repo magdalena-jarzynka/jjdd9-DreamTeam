@@ -3,12 +3,13 @@ package com.infoshareacademy.action;
 import com.infoshareacademy.ConsoleColors;
 import com.infoshareacademy.menu.Menu;
 import com.infoshareacademy.object.Book;
-import com.infoshareacademy.repository.BookRepository;
+import com.infoshareacademy.service.BookService;
 import com.infoshareacademy.service.ListService;
 import com.infoshareacademy.service.sorting.SortByAuthorStrategy;
 import com.infoshareacademy.service.sorting.SortStrategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.util.Map;
 import java.util.SortedSet;
 
@@ -58,14 +59,15 @@ public class BookListService {
 
     public void getBooksList() {
         ListService listService = new ListService();
+        BookService bookService = new BookService();
         Menu menu = new Menu();
         menu.cleanTerminal();
-        numberOfPages = listService.getNumberOfPages(positionsPerPage);
+        numberOfPages = listService.getPagesCount(positionsPerPage);
         firstPositionOnPage = listService.findFirstPosition(currentPageNumber, positionsPerPage);
         lastPositionOnPage = listService.findLastPosition();
         SortStrategy sortStrategy = new SortByAuthorStrategy();
         SortedSet<Map.Entry<Long, Book>> booksSet =
-                sortStrategy.getSortedList(BookRepository.getInstance().getBooks());
+                sortStrategy.getSortedList(bookService.findAllBooks());
         positionNumber = listService.findPositionNumber(firstPositionOnPage);
         booksSet.stream()
                 .skip(firstPositionOnPage)
