@@ -3,66 +3,41 @@ package com.infoshareacademy.action;
 import com.infoshareacademy.ConsoleColors;
 import com.infoshareacademy.menu.Menu;
 import com.infoshareacademy.object.Book;
-import com.infoshareacademy.repository.BookRepository;
-import org.apache.commons.lang3.math.NumberUtils;
+import com.infoshareacademy.service.BookService;
+import com.infoshareacademy.service.ListService;
+import com.infoshareacademy.service.sorting.SortByAuthorStrategy;
+import com.infoshareacademy.service.sorting.SortStrategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Map;
-import java.util.Scanner;
+import java.util.SortedSet;
 
 public class BookListService {
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
-    private static final Scanner scanner = new Scanner(System.in);
-    private static final String WRONG_NUMBER = "Proszę wpisać odpowiednią cyfrę.\n\n";
     private int input;
     private int positionsPerPage;
     private int currentPageNumber;
     private int numberOfPages;
+    private long positionNumber;
+    private long firstPositionOnPage;
+    private long lastPositionOnPage;
 
     public BookListService() {
         this.currentPageNumber = 1;
         this.numberOfPages = 2;
-        this.input = 0;
     }
-
-    public int getNumberOfPages() {
-        String lineInput = scanner.nextLine();
-        if (NumberUtils.isCreatable(lineInput)) {
-            input = Integer.parseInt(lineInput);
-        } else {
-            STDOUT.info(WRONG_NUMBER);
-            input = getNumberOfPages();
-        }
-        if (input < 0) {
-            STDOUT.info(WRONG_NUMBER);
-            input = getNumberOfPages();
-        }
-        return input;
-    }
-
-    public int getUserInput() {
-        String lineInput = scanner.nextLine();
-        if (NumberUtils.isCreatable(lineInput)) {
-            input = Integer.parseInt(lineInput);
-        } else {
-            STDOUT.info(WRONG_NUMBER);
-            input = getUserInput();
-        }
-        return input;
-    }
-
 
     public void run() {
-
+        ListService listService = new ListService();
         STDOUT.info("\n Ile pozycji wyświetlić na jednej stronie? \n");
-        positionsPerPage = getNumberOfPages();
+        positionsPerPage = listService.getPositionsPerPage();
         do {
             Menu menu = new Menu();
             menu.cleanTerminal();
             getBooksList();
             input = 0;
-            input = getUserInput();
+            input = listService.getUserInput();
             switch (input) {
                 case 1:
                     if (currentPageNumber < numberOfPages) {
@@ -77,38 +52,43 @@ public class BookListService {
                 case 0:
                     return;
                 default:
-                    input = getUserInput();
+                    input = listService.getUserInput();
             }
         } while (true);
     }
 
     public void getBooksList() {
+        ListService listService = new ListService();
+        BookService bookService = new BookService();
         Menu menu = new Menu();
         menu.cleanTerminal();
-        Map<Long, Book> books = BookRepository.getInstance().getBooks();
-        if (positionsPerPage > 0) {
-            numberOfPages = (int) Math.ceil((double) books.size() / positionsPerPage);
-        }
-        int firstPositionOnPage = (currentPageNumber - 1) * positionsPerPage;
-        int lastPositionOnPage = firstPositionOnPage + positionsPerPage;
+        numberOfPages = listService.getPagesCount(positionsPerPage);
+        firstPositionOnPage = listService.findFirstPosition(currentPageNumber, positionsPerPage);
+        lastPositionOnPage = listService.findLastPosition();
+        SortStrategy sortStrategy = new SortByAuthorStrategy();
+        SortedSet<Map.Entry<Long, Book>> booksSet =
+                sortStrategy.getSortedList(bookService.findAllBooks());
+        positionNumber = listService.findPositionNumber(firstPositionOnPage);
+        booksSet.stream()
+                .skip(firstPositionOnPage)
+                .limit(positionsPerPage)
+                .forEach(b ->
+                        STDOUT.info("{}{}.Tytuł: {}{} \n {} Autor: {}{} \n {} ID: {}{}{} \n\n",
+                                ConsoleColors.BLACK_BOLD.getColorType(), positionNumber++,
+                                ConsoleColors.RED.getColorType(), b.getValue().getTitle(),
+                                ConsoleColors.BLACK_BOLD.getColorType(), ConsoleColors.BLUE.getColorType(),
+                                b.getValue().getAuthors().get(0).getName(), ConsoleColors.BLACK_BOLD.getColorType(),
+                                ConsoleColors.YELLOW_BOLD.getColorType(), b.getKey(),
+                                ConsoleColors.RESET.getColorType(), b));
 
-        for (int i = 0; i < positionsPerPage; i++) {
-            if (lastPositionOnPage > books.size()) {
-                lastPositionOnPage = lastPositionOnPage - 1;
-            }
-        }
-
-
-        for (long i = firstPositionOnPage; i < lastPositionOnPage; i++) {
-            long positionNumber = i + 1;
-            STDOUT.info("{}{}.Tytuł: {}{}{}{} \n", ConsoleColors.BLACK_BOLD.getColorType(), positionNumber, ConsoleColors.RESET.getColorType(), ConsoleColors.RED.getColorType(), books.get(i).getTitle(), ConsoleColors.RESET.getColorType());
-            STDOUT.info(" {} Autor: {}{}{}{} \n\n", ConsoleColors.BLACK_BOLD.getColorType(), ConsoleColors.RESET.getColorType(), ConsoleColors.BLUE.getColorType(), books.get(i).getAuthors().get(0).getName(), ConsoleColors.RESET.getColorType());
-        }
         if (currentPageNumber == numberOfPages) {
-            STDOUT.info("\n To ostatnia strona. Wybierz 2 aby zobaczyć poprzednią stronę lub 0 aby wyjść do głównego menu. \n\n");
+            STDOUT.info("\n To ostatnia strona. " +
+                    "Wybierz 2 aby zobaczyć poprzednią stronę lub 0 aby wyjść do głównego menu. \n\n");
         } else {
-            STDOUT.info("\n Wybierz 1 aby zobaczyć następną stronę, 2 aby zobaczyć poprzednią lub 0 aby wyjść do poprzedniego menu. \n\n");
+            STDOUT.info("\n Wybierz 1 aby zobaczyć następną stronę, 2 aby zobaczyć poprzednią lub 0 aby wyjść do " +
+                    "poprzedniego menu. \n\n");
         }
-        STDOUT.info("\n{}Strona {} z {}.{}\n", ConsoleColors.BLACK_UNDERLINED.getColorType(), currentPageNumber, numberOfPages, ConsoleColors.RESET.getColorType());
+        STDOUT.info("\n{}Strona {} z {}.{}\n", ConsoleColors.BLACK_UNDERLINED.getColorType(), currentPageNumber,
+                numberOfPages, ConsoleColors.RESET.getColorType());
     }
 }
