@@ -1,5 +1,6 @@
 package com.infoshareacademy.action.search;
 
+import com.infoshareacademy.input.UserInput;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,7 +12,7 @@ public class Search {
     public void run() {
         do {
             showSearchPanel();
-            switch (userCriteria.getUserChoice()) {
+            switch (getUserChoice()) {
                 case 1: {
                     userCriteria.setTitle();
                     break;
@@ -26,6 +27,10 @@ public class Search {
                 }
                 case 4: {
                     Filtration.run(userCriteria);
+                    break;
+                }
+                case 5: {
+                    userCriteria.resetCriteria();
                     break;
                 }
                 case 0: {
@@ -49,5 +54,14 @@ public class Search {
         }
     }
 
-
+    public int getUserChoice() {
+        STDOUT.info("Proszę wybrać kryterium wyszukiwania lub rozpocząć wyszukiwanie: \n");
+        STDOUT.info("1. Tytuł \n");
+        STDOUT.info("2. Imię autora \n");
+        STDOUT.info("3. Dostępność wersji audio \n");
+        STDOUT.info("4. Rozpoczęcie wyszukiwania \n");
+        STDOUT.info("5. Reset kryteriów wyszukiwania \n");
+        STDOUT.info("Wybierz 0 aby opuścić wyszukiwarkę książek \n");
+        return UserInput.getUserInput();
+    }
 }

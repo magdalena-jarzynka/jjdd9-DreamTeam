@@ -4,6 +4,9 @@ import com.infoshareacademy.input.UserInput;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.awt.*;
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class CriteriaChoice {
@@ -16,16 +19,6 @@ public class CriteriaChoice {
 
     public boolean[] getActiveCriteria() {
         return activeCriteria;
-    }
-
-    public int getUserChoice() {
-        STDOUT.info("Proszę wybrać kryterium wyszukiwania lub rozpocząć wyszukiwanie: \n");
-        STDOUT.info("1. Tytuł \n");
-        STDOUT.info("2. Imię autora \n");
-        STDOUT.info("3. Dostępność wersji audio \n");
-        STDOUT.info("4. Rozpoczęcie wyszukiwania \n");
-        STDOUT.info("Wybierz 0 aby opuścić wyszukiwarkę książek \n");
-        return UserInput.getUserInput();
     }
 
     public void setTitle() {
@@ -73,6 +66,11 @@ public class CriteriaChoice {
                 default:
                     STDOUT.info("Proszę wpisać odpowiednią cyfrę.");
             }
+        }
+    }
+    public void resetCriteria() {
+        for(int i = 0; i < 3; i++) {
+            activeCriteria[i] = false;
         }
     }
 
