@@ -22,9 +22,6 @@ public class BookListService {
     private int positionsPerPage;
     private int currentPageNumber;
     private int numberOfPages;
-    private long firstPositionOnPage;
-    private long lastPositionOnPage;
-    private long offset;
     private long positionNumber;
 
 
@@ -34,17 +31,17 @@ public class BookListService {
         this.input = 0;
     }
 
-    public int getNumberOfRecordsPerPage() {
+    public int getPageSize() {
         String lineInput = scanner.nextLine();
         if (NumberUtils.isCreatable(lineInput)) {
             input = Integer.parseInt(lineInput);
         } else {
             STDOUT.info(WRONG_NUMBER);
-            input = getNumberOfRecordsPerPage();
+            input = getPageSize();
         }
         if (input < 0) {
             STDOUT.info(WRONG_NUMBER);
-            input = getNumberOfRecordsPerPage();
+            input = getPageSize();
         }
         return input;
     }
@@ -63,7 +60,7 @@ public class BookListService {
     public void run() {
 
         STDOUT.info("\n Ile pozycji wyświetlić na jednej stronie? \n");
-        positionsPerPage = getNumberOfRecordsPerPage();
+        positionsPerPage = getPageSize();
         do {
             Menu menu = new Menu();
             menu.cleanTerminal();
@@ -89,19 +86,20 @@ public class BookListService {
         } while (true);
     }
 
-    public void getBooksList() {
-        Menu menu = new Menu();
-        menu.cleanTerminal();
+    private void getNumberOfPages() {
         Map<Long, Book> books = BookRepository.getInstance().getBooks();
         if (positionsPerPage > 0) {
             numberOfPages = (int) Math.ceil((double) books.size() / positionsPerPage);
         }
+    }
+
+    public void getBooksList() {
+        Menu menu = new Menu();
+        menu.cleanTerminal();
+        Map<Long, Book> books = BookRepository.getInstance().getBooks();
+        getNumberOfPages();
         long firstPositionOnPage = ((long) currentPageNumber - 1) * positionsPerPage;
         long lastPositionOnPage = firstPositionOnPage + positionsPerPage;
-
-        offset = 0;
-
-
         for (int i = 0; i < positionsPerPage; i++) {
             if (lastPositionOnPage > books.size()) {
                 lastPositionOnPage = lastPositionOnPage - 1;
@@ -122,7 +120,6 @@ public class BookListService {
                                 b.getValue().getAuthors().get(0).getName(), ConsoleColors.BLACK_BOLD.getColorType(),
                                 ConsoleColors.YELLOW_BOLD.getColorType(), b.getKey(),
                                 ConsoleColors.RESET.getColorType(), b));
-
 
         if (currentPageNumber == numberOfPages) {
             STDOUT.info("\n To ostatnia strona. " +

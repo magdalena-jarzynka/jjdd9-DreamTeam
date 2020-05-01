@@ -1,10 +1,6 @@
 package com.infoshareacademy;
 
 import com.infoshareacademy.menu.Menu;
-import com.infoshareacademy.repository.BookRepository;
-import com.infoshareacademy.service.sorting.SortByAuthorStrategy;
-import com.infoshareacademy.service.sorting.SortByTitleStrategy;
-import com.infoshareacademy.service.sorting.SortStrategy;
 
 /**
  * DreamTeam
