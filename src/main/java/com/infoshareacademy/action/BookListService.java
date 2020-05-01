@@ -3,6 +3,7 @@ package com.infoshareacademy.action;
 import com.infoshareacademy.ConsoleColors;
 import com.infoshareacademy.menu.Menu;
 import com.infoshareacademy.object.Book;
+import com.infoshareacademy.repository.BookRepository;
 import com.infoshareacademy.service.BookService;
 import com.infoshareacademy.service.ListService;
 import com.infoshareacademy.service.sorting.SortByAuthorStrategy;
@@ -28,14 +29,14 @@ public class BookListService {
         this.numberOfPages = 2;
     }
 
-    public void run() {
+    public void run(Map<Long, Book> books) {
         ListService listService = new ListService();
         STDOUT.info("\n Ile pozycji wyświetlić na jednej stronie? \n");
         positionsPerPage = listService.getPositionsPerPage();
         do {
             Menu menu = new Menu();
             menu.cleanTerminal();
-            getBooksList();
+            getBooksList(books);
             input = 0;
             input = listService.getUserInput();
             switch (input) {
@@ -57,9 +58,10 @@ public class BookListService {
         } while (true);
     }
 
-    public void getBooksList() {
+    public void getBooksList(Map<Long, Book> books) {
         ListService listService = new ListService();
         BookService bookService = new BookService();
+        bookService.setBooks(books);
         Menu menu = new Menu();
         menu.cleanTerminal();
         numberOfPages = listService.getPagesCount(positionsPerPage);
@@ -67,7 +69,7 @@ public class BookListService {
         lastPositionOnPage = listService.findLastPosition();
         SortStrategy sortStrategy = new SortByAuthorStrategy();
         SortedSet<Map.Entry<Long, Book>> booksSet =
-                sortStrategy.getSortedList(bookService.findAllBooks());
+                sortStrategy.getSortedList(books);
         positionNumber = listService.findPositionNumber(firstPositionOnPage);
         booksSet.stream()
                 .skip(firstPositionOnPage)

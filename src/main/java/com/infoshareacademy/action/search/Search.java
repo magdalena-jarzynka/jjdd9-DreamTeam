@@ -28,7 +28,7 @@ public class Search {
                     Filtration.run(userCriteria);
                     break;
                 }
-                case 5: {
+                case 0: {
                     return;
                 }
             }

@@ -24,7 +24,7 @@ public class CriteriaChoice {
         STDOUT.info("2. Imię autora \n");
         STDOUT.info("3. Dostępność wersji audio \n");
         STDOUT.info("4. Rozpoczęcie wyszukiwania \n");
-        STDOUT.info("5. Wyjście z wyszukiwarki książek \n");
+        STDOUT.info("Wybierz 0 aby opuścić wyszukiwarkę książek \n");
         return UserInput.getUserInput();
     }
 

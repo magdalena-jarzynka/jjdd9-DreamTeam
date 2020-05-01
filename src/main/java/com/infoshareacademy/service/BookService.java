@@ -7,11 +7,13 @@ import java.util.Map;
 
 public class BookService {
 
-    public Map<Long, Book> findAllBooks() {
-        return BookRepository.getInstance().getBooks();
+    private static Map<Long, Book> books;
+
+    public void setBooks(Map<Long, Book> books) {
+        BookService.books = books;
     }
 
     public int getBooksSize() {
-        return findAllBooks().size();
+        return books.size();
     }
 }
