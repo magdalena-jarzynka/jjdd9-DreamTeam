@@ -9,13 +9,13 @@ import java.util.Scanner;
 public class CriteriaChoice {
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
     private static final Scanner scanner = new Scanner(System.in);
-    private boolean[] usedCriteria = new boolean[3];
+    private boolean[] activeCriteria = new boolean[3];
     private String author = "";
     private String title = "";
     private boolean audio = false;
 
-    public boolean[] getUsedCriteria() {
-        return usedCriteria;
+    public boolean[] getActiveCriteria() {
+        return activeCriteria;
     }
 
     public int getUserChoice() {
@@ -33,7 +33,7 @@ public class CriteriaChoice {
             STDOUT.info("Proszę podać tytuł: \n");
             String lineInput = scanner.nextLine();
             if (lineInput.length() > 2) {
-                usedCriteria[0] = true;
+                activeCriteria[0] = true;
                 title = lineInput.toLowerCase();
                 return;
             } else {
@@ -47,7 +47,7 @@ public class CriteriaChoice {
             STDOUT.info("Proszę podać imię autora: \n");
             String lineInput = scanner.nextLine();
             if (lineInput.length() > 2) {
-                usedCriteria[1] = true;
+                activeCriteria[1] = true;
                 author = lineInput.toLowerCase();
                 return;
             } else {
@@ -61,12 +61,12 @@ public class CriteriaChoice {
             STDOUT.info("Proszę wybrać 1 aby wyszukać tytuły z wersją audio lub 2 dla tytułów bez wersji audio \n");
             switch (UserInput.getUserInput()) {
                 case 1: {
-                    usedCriteria[2] = true;
+                    activeCriteria[2] = true;
                     audio = true;
                     return;
                 }
                 case 2: {
-                    usedCriteria[2] = true;
+                    activeCriteria[2] = true;
                     audio = false;
                     return;
                 }

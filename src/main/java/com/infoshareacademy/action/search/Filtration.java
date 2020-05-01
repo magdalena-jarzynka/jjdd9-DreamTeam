@@ -17,19 +17,19 @@ public class Filtration {
     public static void run(CriteriaChoice userCriteria) {
         Map<Long, Book> filteredBooks = BookRepository.getInstance().getBooks();
 
-        if(userCriteria.getUsedCriteria()[0])
+        if(userCriteria.getActiveCriteria()[0])
             filteredBooks = filteredBooks.entrySet().stream()
                     .filter(x -> x.getValue().getTitle().toLowerCase().
                             contains(userCriteria.getTitle()))
                     .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
-        if(userCriteria.getUsedCriteria()[1])
+        if(userCriteria.getActiveCriteria()[1])
         filteredBooks = filteredBooks.entrySet().stream()
                 .filter(x -> x.getValue().getAuthors().get(0).getName().toLowerCase().
                         contains(userCriteria.getAuthor()))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
-        if(userCriteria.getUsedCriteria()[2])
+        if(userCriteria.getActiveCriteria()[2])
             filteredBooks = filteredBooks.entrySet().stream()
                     .filter(x -> x.getValue().hasAudio() == userCriteria.getAudio())
                     .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));

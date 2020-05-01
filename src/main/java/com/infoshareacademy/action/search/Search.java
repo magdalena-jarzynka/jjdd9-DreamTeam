@@ -38,13 +38,13 @@ public class Search {
     private void showSearchPanel() {
         STDOUT.info("\033\143");
         STDOUT.info("WYSZUKIWANIE KSIĄŻEK \n\n");
-        if(userCriteria.getUsedCriteria()[0]) {
+        if(userCriteria.getActiveCriteria()[0]) {
             STDOUT.info("Tytuł: {} \n", userCriteria.getTitle());
         }
-        if(userCriteria.getUsedCriteria()[1]) {
+        if(userCriteria.getActiveCriteria()[1]) {
             STDOUT.info("Autor: {} \n", userCriteria.getAuthor());
         }
-        if (userCriteria.getUsedCriteria()[2]) {
+        if (userCriteria.getActiveCriteria()[2]) {
             STDOUT.info("Wersja audio: {} \n\n", userCriteria.getAudio() ? "tak" : "nie");
         }
     }
