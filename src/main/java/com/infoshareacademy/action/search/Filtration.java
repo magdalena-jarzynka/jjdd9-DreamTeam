@@ -34,11 +34,11 @@ public class Filtration {
                     .filter(x -> x.getValue().hasAudio() == userCriteria.getAudio())
                     .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
-        filteredBooks.entrySet()
-                .forEach(x->STDOUT.info("Tytuł: {} ||| Autor: {} ||| Wersja audio: {}\n",
-                        x.getValue().getTitle(),
-                        x.getValue().getAuthors().get(0).getName(),
-                        x.getValue().hasAudio() ? "tak" : "nie"));
+        filteredBooks.
+                forEach((key, value) -> STDOUT.info("Tytuł: {} ||| Autor: {} ||| Wersja audio: {}\n",
+                value.getTitle(),
+                value.getAuthors().get(0).getName(),
+                value.hasAudio() ? "tak" : "nie"));
 
         STDOUT.info("Wprowadź 0 aby wrócić do wyszukiwarki książek \n");
         while(UserInput.getUserInput()!=0);

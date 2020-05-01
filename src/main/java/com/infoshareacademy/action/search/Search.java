@@ -11,7 +11,7 @@ public class Search {
     public void run() {
         do {
             showSearchPanel();
-            switch (userCriteria.userChoice()) {
+            switch (userCriteria.getUserChoice()) {
                 case 1: {
                     userCriteria.setTitle();
                     break;

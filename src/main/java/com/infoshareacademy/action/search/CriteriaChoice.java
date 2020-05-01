@@ -18,7 +18,7 @@ public class CriteriaChoice {
         return usedCriteria;
     }
 
-    protected int userChoice() {
+    public int getUserChoice() {
         STDOUT.info("Proszę wybrać kryterium wyszukiwania lub rozpocząć wyszukiwanie: \n");
         STDOUT.info("1. Tytuł \n");
         STDOUT.info("2. Imię autora \n");
@@ -28,7 +28,7 @@ public class CriteriaChoice {
         return UserInput.getUserInput();
     }
 
-    protected void setTitle() {
+    public void setTitle() {
         while (true) {
             STDOUT.info("Proszę podać tytuł: \n");
             String lineInput = scanner.nextLine();
@@ -42,7 +42,7 @@ public class CriteriaChoice {
         }
     }
 
-    protected void setAuthor() {
+    public void setAuthor() {
         while (true) {
             STDOUT.info("Proszę podać imię autora: \n");
             String lineInput = scanner.nextLine();
@@ -56,7 +56,7 @@ public class CriteriaChoice {
         }
     }
 
-    protected void setAudio() {
+    public void setAudio() {
         while (true) {
             STDOUT.info("Proszę wybrać 1 aby wyszukać tytuły z wersją audio lub 2 dla tytułów bez wersji audio \n");
             switch (UserInput.getUserInput()) {
