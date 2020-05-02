@@ -4,11 +4,17 @@ import com.infoshareacademy.object.Book;
 import com.infoshareacademy.object.Kind;
 
 import java.util.List;
+import java.util.Optional;
 
 public class KindService {
 
-    public String getKinds (Book book) {
+    public String getKinds(Book book) {
         List<Kind> kinds = book.getKinds();
-        return String.join(", ", kinds.get(0).getName());
+        return Optional.ofNullable(book)
+                .map(Book::getAuthors)
+                .filter(i -> kinds.size() > 0)
+                .map(i -> kinds.get(0))
+                .map(Kind::getName)
+                .orElse(" - ");
     }
 }

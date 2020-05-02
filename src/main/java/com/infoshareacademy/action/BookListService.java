@@ -30,6 +30,7 @@ public class BookListService {
 
     public void run() {
         ListService listService = new ListService();
+        BookService bookService = new BookService();
         STDOUT.info("\n Ile pozycji wyświetlić na jednej stronie? \n");
         positionsPerPage = listService.getPositionsPerPage();
         do {
@@ -48,6 +49,11 @@ public class BookListService {
                     if (currentPageNumber > 1) {
                         currentPageNumber = currentPageNumber - 1;
                     }
+                    break;
+                case 3:
+                    STDOUT.info("Wybierz numer.");
+                    input = listService.getUserInput();
+                    STDOUT.info(bookService.toString((long) input));
                     break;
                 case 0:
                     return;

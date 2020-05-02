@@ -4,11 +4,17 @@ import com.infoshareacademy.object.Book;
 import com.infoshareacademy.object.Epoch;
 
 import java.util.List;
+import java.util.Optional;
 
 public class EpochService {
 
     public String getEpochs(Book book) {
         List<Epoch> epochs = book.getEpochs();
-        return String.join(", ", epochs.get(0).getName());
+        return Optional.ofNullable(book)
+                .map(Book::getAuthors)
+                .filter(i -> epochs.size() > 0)
+                .map(i -> epochs.get(0))
+                .map(Epoch::getName)
+                .orElse(" - ");
     }
 }
