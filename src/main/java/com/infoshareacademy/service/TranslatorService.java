@@ -7,7 +7,7 @@ import java.util.List;
 
 public class TranslatorService {
 
-    private String getTranslators(Book book) {
+    public String getTranslators(Book book) {
         List<Author> translators = book.getTranslators();
         return String.join(", ", translators.get(0).getName());
     }
