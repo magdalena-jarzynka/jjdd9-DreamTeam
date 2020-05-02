@@ -1,11 +1,9 @@
 package com.infoshareacademy.service;
 
-import com.infoshareacademy.object.Author;
 import com.infoshareacademy.object.Book;
 import com.infoshareacademy.repository.BookRepository;
 
 import java.util.Map;
-import java.util.Optional;
 import java.util.Random;
 
 public class BookService {
