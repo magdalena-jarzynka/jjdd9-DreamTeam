@@ -36,8 +36,7 @@ public class Filtration {
                     .filter(x -> x.getValue().hasAudio() == userCriteria.getAudio())
                     .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
-        bookService.setBooks(filteredBooks);
         BookListService filteredList = new BookListService();
-        filteredList.run(bookService);
+        filteredList.run(filteredBooks);
     }
 }

@@ -87,8 +87,7 @@ public class Menu {
         switch (input) {
             case BOOK_LIST:
                 BookService bookService = new BookService();
-                bookService.setBooks(bookService.findAllBooks());
-                bookListService.run(bookService);
+                bookListService.run(bookService.findAllBooks());
                 break;
             case SEARCH:
                 search.run();

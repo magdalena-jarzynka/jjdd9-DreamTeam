@@ -22,44 +22,44 @@ public class CriteriaChoice {
     }
 
     public void setTitle() {
+        activeCriteria[0] = true;
+        STDOUT.info("Proszę podać tytuł: \n");
         while (true) {
-            STDOUT.info("Proszę podać tytuł: \n");
             String lineInput = scanner.nextLine();
             if (lineInput.length() > 2) {
-                activeCriteria[0] = true;
+
                 title = lineInput.toLowerCase();
                 return;
             } else {
-                STDOUT.info("Zapytanie musi zawierać co najmniej dwa znaki. \n");
+                STDOUT.info("Zapytanie musi zawierać co najmniej trzy znaki. \n");
             }
         }
     }
 
     public void setAuthor() {
+        activeCriteria[1] = true;
+        STDOUT.info("Proszę podać imię autora: \n");
         while (true) {
-            STDOUT.info("Proszę podać imię autora: \n");
             String lineInput = scanner.nextLine();
             if (lineInput.length() > 2) {
-                activeCriteria[1] = true;
                 author = lineInput.toLowerCase();
                 return;
             } else {
-                STDOUT.info("Zapytanie musi zawierać co najmniej dwa znaki. \n");
+                STDOUT.info("Zapytanie musi zawierać co najmniej trzy znaki. \n");
             }
         }
     }
 
     public void setAudio() {
+        activeCriteria[2] = true;
+        STDOUT.info("Proszę wybrać 1 aby wyszukać tytuły z wersją audio lub 2 dla tytułów bez wersji audio \n");
         while (true) {
-            STDOUT.info("Proszę wybrać 1 aby wyszukać tytuły z wersją audio lub 2 dla tytułów bez wersji audio \n");
             switch (UserInput.getUserInput()) {
                 case 1: {
-                    activeCriteria[2] = true;
                     audio = true;
                     return;
                 }
                 case 2: {
-                    activeCriteria[2] = true;
                     audio = false;
                     return;
                 }
