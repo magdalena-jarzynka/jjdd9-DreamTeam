@@ -65,7 +65,7 @@ public class BookListService {
         menu.cleanTerminal();
         numberOfPages = listService.getPagesCount(positionsPerPage, books.size());
         firstPositionOnPage = listService.findFirstPosition(currentPageNumber, positionsPerPage);
-        lastPositionOnPage = listService.findLastPosition();
+        lastPositionOnPage = listService.findLastPosition(books.size());
 
         SortStrategy sortStrategy;
         if(Configurations.getProperties().getProperty("sortingBy").equals("AUTHOR")) {
@@ -87,7 +87,7 @@ public class BookListService {
                                 ConsoleColors.BLACK_BOLD.getColorType(), ConsoleColors.BLUE.getColorType(),
                                 b.getValue().getAuthors().get(0).getName(), ConsoleColors.BLACK_BOLD.getColorType(),
                                 ConsoleColors.YELLOW_BOLD.getColorType(), b.getKey(),
-                                ConsoleColors.RESET.getColorType(), b));
+                                ConsoleColors.RESET.getColorType()));
 
         if (currentPageNumber == numberOfPages) {
             STDOUT.info("\n To ostatnia strona. " +
