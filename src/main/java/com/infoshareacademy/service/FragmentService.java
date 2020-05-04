@@ -7,11 +7,13 @@ import java.util.Optional;
 
 public class FragmentService {
 
+    public static final String NONE = " - ";
+
     public String getFragment(Book book) {
         return Optional.ofNullable(book)
                 .map(Book::getBookFragment)
                 .map(FragmentData::getFragment)
                 .filter(fragment -> ((String) fragment).length() > 0)
-                .orElse(" - ");
+                .orElse(NONE);
     }
 }

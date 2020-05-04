@@ -8,6 +8,8 @@ import java.util.Optional;
 
 public class GenreService {
 
+    public static final String NONE = " - ";
+
     public String getGenres(Book book) {
         List<Genre> genres = book.getGenres();
         return Optional.ofNullable(book)
@@ -15,6 +17,6 @@ public class GenreService {
                 .filter(i -> genres.size() > 0)
                 .map(i -> genres.get(0))
                 .map(Genre::getName)
-                .orElse(" - ");
+                .orElse(NONE);
     }
 }

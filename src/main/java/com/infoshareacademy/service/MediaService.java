@@ -8,6 +8,8 @@ import java.util.Optional;
 
 public class MediaService {
 
+    public static final String NONE = " - ";
+
     public String getMedia(Book book) {
         List<Media> media = book.getMedia();
         return Optional.ofNullable(book)
@@ -15,6 +17,6 @@ public class MediaService {
                 .filter(i -> media.size() > 0)
                 .map(i -> media.get(0))
                 .map(Media::getName)
-                .orElse(" - ");
+                .orElse(NONE);
     }
 }

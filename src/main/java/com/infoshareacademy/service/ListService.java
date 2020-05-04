@@ -1,5 +1,6 @@
 package com.infoshareacademy.service;
 
+import com.infoshareacademy.menu.Menu;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,6 +57,24 @@ public class ListService {
             lastPositionOnPage = bookService.getBooksSize() % positionsPerPage;
         }
         return lastPositionOnPage;
+    }
+
+    public void showBookDetails() {
+        Menu menu = new Menu();
+        BookService bookService = new BookService();
+        STDOUT.info("Wybierz ID książki, by zobaczyć jej szczegóły.");
+        input = getUserInput();
+        menu.cleanTerminal();
+        STDOUT.info(bookService.getBookDetails((long) input));
+        do {
+            STDOUT.info("Wybierz 0, aby powrócić do przeglądania pozycji.");
+            input = getUserInput();
+            if (input == 0) {
+                break;
+            } else{
+                STDOUT.info(WRONG_NUMBER);
+            }
+        } while (true);
     }
 
     public long findPositionNumber(long firstPositionOnPage) {

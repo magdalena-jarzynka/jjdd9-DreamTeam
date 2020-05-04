@@ -8,6 +8,8 @@ import java.util.Optional;
 
 public class KindService {
 
+    public static final String NONE = " - ";
+
     public String getKinds(Book book) {
         List<Kind> kinds = book.getKinds();
         return Optional.ofNullable(book)
@@ -15,6 +17,6 @@ public class KindService {
                 .filter(i -> kinds.size() > 0)
                 .map(i -> kinds.get(0))
                 .map(Kind::getName)
-                .orElse(" - ");
+                .orElse(NONE);
     }
 }

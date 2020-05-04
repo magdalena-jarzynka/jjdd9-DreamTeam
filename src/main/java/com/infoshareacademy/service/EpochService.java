@@ -8,6 +8,8 @@ import java.util.Optional;
 
 public class EpochService {
 
+    public static final String NONE = " - ";
+
     public String getEpochs(Book book) {
         List<Epoch> epochs = book.getEpochs();
         return Optional.ofNullable(book)
@@ -15,6 +17,6 @@ public class EpochService {
                 .filter(i -> epochs.size() > 0)
                 .map(i -> epochs.get(0))
                 .map(Epoch::getName)
-                .orElse(" - ");
+                .orElse(NONE);
     }
 }

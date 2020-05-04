@@ -17,7 +17,7 @@ public class BookService {
         return findAllBooks().size();
     }
 
-    public String toString(Long bookChoice) {
+    public String getBookDetails(Long bookChoice) {
         Map<Long, Book> books = findAllBooks();
         AuthorService authors = new AuthorService();
         TranslatorService translators = new TranslatorService();
@@ -40,13 +40,13 @@ public class BookService {
 
         return "1. Tytuł: " + title + "\n" +
                 "2. Autorzy: " + author + "\n" +
-               "3. Tłumacze: " + translator + "\n" +
+                "3. Tłumacze: " + translator + "\n" +
                 "4. Epoka: " + epoch + "\n" +
-                "5. Gatunek: " + genre+ "\n" +
-                "6. Gatunek literacki: " + kind+ "\n" +
-                "7. ISBN " + bookIsbn+ "\n" +
-                "8. Fragment książki: " + bookFragment+ "\n"+
-                "9. Media: " + bookMedia+ "\n\n\n";
+                "5. Gatunek: " + genre + "\n" +
+                "6. Gatunek literacki: " + kind + "\n" +
+                "7. ISBN: " + bookIsbn + "\n" +
+                "8. Fragment książki: " + bookFragment + "\n" +
+                "9. Media: " + bookMedia + "\n\n\n";
 
     }
 }

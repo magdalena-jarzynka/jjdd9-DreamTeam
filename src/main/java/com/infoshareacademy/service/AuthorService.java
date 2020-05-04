@@ -8,6 +8,8 @@ import java.util.Optional;
 
 public class AuthorService {
 
+    public static final String NONE = " - ";
+
     public String getAuthors(Book book) {
         List<Author> authors = book.getAuthors();
         return Optional.ofNullable(book)
@@ -15,6 +17,6 @@ public class AuthorService {
                 .filter(i -> authors.size() > 0)
                 .map(i -> authors.get(0))
                 .map(Author::getName)
-                .orElse(" - ");
+                .orElse(NONE);
     }
 }
