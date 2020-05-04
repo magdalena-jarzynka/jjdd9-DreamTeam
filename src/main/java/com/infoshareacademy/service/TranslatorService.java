@@ -4,11 +4,19 @@ import com.infoshareacademy.object.Author;
 import com.infoshareacademy.object.Book;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.Properties;
 
 public class TranslatorService {
+    Properties properties = ConstantService.readProperties("constants.properties");
 
-    private String getTranslators(Book book) {
+    public String getTranslators(Book book) {
         List<Author> translators = book.getTranslators();
-        return String.join(", ", translators.get(0).getName());
+        return Optional.ofNullable(book)
+                .map(Book::getAuthors)
+                .filter(i -> translators.size() > 0)
+                .map(i -> translators.get(0))
+                .map(Author::getName)
+                .orElse(properties.getProperty("NONE"));
     }
 }

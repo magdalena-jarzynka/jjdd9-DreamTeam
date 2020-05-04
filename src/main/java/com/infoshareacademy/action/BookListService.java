@@ -17,6 +17,7 @@ import java.util.SortedSet;
 
 public class BookListService {
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
+    public static final String SEE_DETAILS = "Wybierz 4 aby zobaczyć szczegóły wybranej pozycji.";
     private int input;
     private int positionsPerPage;
     private int currentPageNumber;
@@ -51,6 +52,9 @@ public class BookListService {
                         currentPageNumber = currentPageNumber - 1;
                     }
                     break;
+                case 4:
+                    listService.showBookDetails();
+                    break;
                 case 0:
                     return;
                 default:
@@ -80,21 +84,24 @@ public class BookListService {
         booksSet.stream()
                 .skip(firstPositionOnPage)
                 .limit(positionsPerPage)
-                .forEach(b ->
+                .forEach(book ->
                         STDOUT.info("{}{}.Tytuł: {}{} \n {} Autor: {}{} \n {} ID: {}{}{} \n\n",
                                 ConsoleColors.BLACK_BOLD.getColorType(), positionNumber++,
-                                ConsoleColors.RED.getColorType(), b.getValue().getTitle(),
+                                ConsoleColors.RED.getColorType(), book.getValue().getTitle(),
                                 ConsoleColors.BLACK_BOLD.getColorType(), ConsoleColors.BLUE.getColorType(),
-                                b.getValue().getAuthors().get(0).getName(), ConsoleColors.BLACK_BOLD.getColorType(),
-                                ConsoleColors.YELLOW_BOLD.getColorType(), b.getKey(),
+                                book.getValue().getAuthors().get(0).getName(), ConsoleColors.BLACK_BOLD.getColorType(),
+                                ConsoleColors.YELLOW_BOLD.getColorType(), book.getKey(),
                                 ConsoleColors.RESET.getColorType()));
 
         if (currentPageNumber == numberOfPages) {
             STDOUT.info("\n To ostatnia strona. " +
-                    "Wybierz 2 aby zobaczyć poprzednią stronę lub 0 aby wyjść do głównego menu. \n\n");
+                    "Wybierz 2 aby zobaczyć poprzednią stronę lub 0 aby wyjść do głównego menu. \n");
+            STDOUT.info(SEE_DETAILS);
+
         } else {
             STDOUT.info("\n Wybierz 1 aby zobaczyć następną stronę, 2 aby zobaczyć poprzednią lub 0 aby wyjść do " +
-                    "poprzedniego menu. \n\n");
+                    "poprzedniego menu. \n");
+            STDOUT.info(SEE_DETAILS);
         }
         STDOUT.info("\n{}Strona {} z {}.{}\n", ConsoleColors.BLACK_UNDERLINED.getColorType(), currentPageNumber,
                 numberOfPages, ConsoleColors.RESET.getColorType());

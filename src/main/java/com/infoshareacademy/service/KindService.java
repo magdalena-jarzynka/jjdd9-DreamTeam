@@ -1,22 +1,22 @@
 package com.infoshareacademy.service;
 
-import com.infoshareacademy.object.Author;
 import com.infoshareacademy.object.Book;
+import com.infoshareacademy.object.Kind;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.Properties;
 
-public class AuthorService {
+public class KindService {
     Properties properties = ConstantService.readProperties("constants.properties");
 
-    public String getAuthors(Book book) {
-        List<Author> authors = book.getAuthors();
+    public String getKinds(Book book) {
+        List<Kind> kinds = book.getKinds();
         return Optional.ofNullable(book)
                 .map(Book::getAuthors)
-                .filter(i -> authors.size() > 0)
-                .map(i -> authors.get(0))
-                .map(Author::getName)
+                .filter(i -> kinds.size() > 0)
+                .map(i -> kinds.get(0))
+                .map(Kind::getName)
                 .orElse(properties.getProperty("NONE"));
     }
 }
