@@ -6,6 +6,7 @@ import com.infoshareacademy.object.Book;
 import com.infoshareacademy.service.BookService;
 import com.infoshareacademy.service.ListService;
 import com.infoshareacademy.service.sorting.SortByAuthorStrategy;
+import com.infoshareacademy.service.sorting.SortByTitleStrategy;
 import com.infoshareacademy.service.sorting.SortStrategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -65,7 +66,14 @@ public class BookListService {
         numberOfPages = listService.getPagesCount(positionsPerPage);
         firstPositionOnPage = listService.findFirstPosition(currentPageNumber, positionsPerPage);
         lastPositionOnPage = listService.findLastPosition();
-        SortStrategy sortStrategy = new SortByAuthorStrategy();
+
+        SortStrategy sortStrategy;
+        if(Configurations.getProperties().getProperty("sortingBy").equals("AUTHOR")) {
+            sortStrategy = new SortByAuthorStrategy();
+        } else {
+            sortStrategy = new SortByTitleStrategy();
+        }
+
         SortedSet<Map.Entry<Long, Book>> booksSet =
                 sortStrategy.getSortedList(bookService.findAllBooks());
         positionNumber = listService.findPositionNumber(firstPositionOnPage);
