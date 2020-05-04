@@ -39,10 +39,10 @@ public class ListService {
         return getUserInput();
     }
 
-    public int getPagesCount(int positionsPerPage, Map<Long, Book> books) {
+    public int getPagesCount(int positionsPerPage, int numberOfBooks) {
         BookService bookService = new BookService();
         if (positionsPerPage > 0) {
-            numberOfPages = (int) Math.ceil((double) books.size() / positionsPerPage);
+            numberOfPages = (int) Math.ceil((double) numberOfBooks / positionsPerPage);
         }
         return numberOfPages;
     }
@@ -51,11 +51,11 @@ public class ListService {
         return ((long) currentPageNumber - 1) * positionsPerPage;
     }
 
-    public long findLastPosition(Map<Long, Book> books) {
+    public long findLastPosition(int numberOfBooks) {
         BookService bookService = new BookService();
         lastPositionOnPage = firstPositionOnPage + positionsPerPage;
-        if (lastPositionOnPage > books.size()) {
-            lastPositionOnPage = books.size() % positionsPerPage;
+        if (lastPositionOnPage > numberOfBooks) {
+            lastPositionOnPage = numberOfBooks % positionsPerPage;
         }
         return lastPositionOnPage;
     }

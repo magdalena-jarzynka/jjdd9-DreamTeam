@@ -62,9 +62,9 @@ public class BookListService {
         ListService listService = new ListService();
         Menu menu = new Menu();
         menu.cleanTerminal();
-        numberOfPages = listService.getPagesCount(positionsPerPage, books);
+        numberOfPages = listService.getPagesCount(positionsPerPage, books.size());
         firstPositionOnPage = listService.findFirstPosition(currentPageNumber, positionsPerPage);
-        lastPositionOnPage = listService.findLastPosition(books);
+        lastPositionOnPage = listService.findLastPosition(books.size());
         SortStrategy sortStrategy = new SortByAuthorStrategy();
         SortedSet<Map.Entry<Long, Book>> booksSet =
                 sortStrategy.getSortedList(books);

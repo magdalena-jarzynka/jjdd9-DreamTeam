@@ -10,7 +10,7 @@ public class BookService {
         return BookRepository.getInstance().getBooks();
     }
 
-    public int geBooksSize() {
+    public int getBooksSize() {
         return findAllBooks().size();
     }
 }

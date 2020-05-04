@@ -20,6 +20,7 @@ public class Menu {
     private static final String WRONG_NUMBER = "Proszę wpisać odpowiednią cyfrę. \n";
     private static final Scanner scanner = new Scanner(System.in);
     private int input = 0;
+    private BookService bookService = new BookService();
 
     public void run() {
         Configurations.setDefaultProperties();
@@ -86,7 +87,6 @@ public class Menu {
         Details details = new Details();
         switch (input) {
             case BOOK_LIST:
-                BookService bookService = new BookService();
                 bookListService.run(bookService.findAllBooks());
                 break;
             case SEARCH:
