@@ -1,18 +1,13 @@
 package com.infoshareacademy.action;
 
-import com.infoshareacademy.comparator.SortingByAuthor;
-import com.infoshareacademy.comparator.SortingByTitle;
 import org.apache.commons.lang3.math.NumberUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.Scanner;
 
+import static com.infoshareacademy.menu.MenuUtils.STDOUT;
+import static com.infoshareacademy.menu.MenuUtils.WRONG_NUMBER;
+
 public class SortingOptions {
-    private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
-    private static final String WRONG_NUMBER = "Proszę wpisać odpowiednią cyfrę.\n";
     private static final String SORTING_BY = "sortingBy";
     private static final String SORTING_ORDER = "sortingOrder";
     private final Scanner scanner = new Scanner(System.in);

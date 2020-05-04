@@ -1,16 +1,14 @@
 package com.infoshareacademy.service;
 
-import com.infoshareacademy.menu.Menu;
+import com.infoshareacademy.menu.item.FavouritesMenu;
 import org.apache.commons.lang3.math.NumberUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.Scanner;
 
+import static com.infoshareacademy.menu.MenuUtils.*;
+
 public class ListService {
-    private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
     private static final Scanner scanner = new Scanner(System.in);
-    private static final String WRONG_NUMBER = "Proszę wpisać odpowiednią cyfrę.\n\n";
     private int input;
     private int positionsPerPage;
     private int currentPageNumber;
@@ -60,19 +58,24 @@ public class ListService {
     }
 
     public void showBookDetails() {
-        Menu menu = new Menu();
         BookService bookService = new BookService();
         STDOUT.info("Wybierz ID książki, by zobaczyć jej szczegóły.");
-        input = getUserInput();
-        menu.cleanTerminal();
-        STDOUT.info(bookService.getBookDetails((long) input));
+        int id = getUserInput();
+        cleanTerminal();
+        STDOUT.info(bookService.getBookDetails((long) id));
         do {
             STDOUT.info("Wybierz 0, aby powrócić do przeglądania pozycji.");
+            FavouritesMenu favouritesMenu = new FavouritesMenu();
+            favouritesMenu.printAction(id);
             input = getUserInput();
-            if (input == 0) {
-                break;
-            } else{
-                STDOUT.info(WRONG_NUMBER);
+            switch (input) {
+                case 0:
+                    return;
+                case 1:
+                    favouritesMenu.performAction(id);
+                    break;
+                default:
+                    STDOUT.info(WRONG_NUMBER);
             }
         } while (true);
     }

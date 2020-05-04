@@ -3,17 +3,15 @@ package com.infoshareacademy;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.infoshareacademy.object.Book;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import static com.infoshareacademy.menu.MenuUtils.STDOUT;
+
 
 public class Reader {
-
-    private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
 
     public List<Book> readBookList() {
 
@@ -22,7 +20,7 @@ public class Reader {
             return mapper.readValue(new File("BookList.txt"), new TypeReference<List<Book>>() {
             });
         } catch (IOException e) {
-            STDOUT.error("Nie udało się odczytać pliku! \n", e);
+            STDOUT.error("Nie udało się odczytać pliku! \n");
             return List.of();
         }
 

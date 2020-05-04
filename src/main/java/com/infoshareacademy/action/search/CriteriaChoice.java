@@ -1,12 +1,12 @@
 package com.infoshareacademy.action.search;
 
 import com.infoshareacademy.input.UserInputService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import java.util.Scanner;
 
+import static com.infoshareacademy.menu.MenuUtils.STDOUT;
+
 public class CriteriaChoice {
-    private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
     private static final Scanner scanner = new Scanner(System.in);
     private final boolean[] activeCriteria = new boolean[3];
     private String author = "";
@@ -66,15 +66,22 @@ public class CriteriaChoice {
             }
         }
     }
+
     public void resetCriteria() {
-        for(int i = 0; i < 3; i++) {
+        for (int i = 0; i < 3; i++) {
             activeCriteria[i] = false;
         }
     }
 
-    public String getAuthor() { return author; }
+    public String getAuthor() {
+        return author;
+    }
 
-    public String getTitle() { return title; }
+    public String getTitle() {
+        return title;
+    }
 
-    public boolean getAudio()    { return audio; }
+    public boolean getAudio() {
+        return audio;
+    }
 }

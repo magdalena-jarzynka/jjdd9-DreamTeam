@@ -1,22 +1,20 @@
 package com.infoshareacademy.action;
 
 import com.infoshareacademy.ConsoleColors;
-import com.infoshareacademy.menu.Menu;
+import com.infoshareacademy.menu.item.FavouritesMenu;
 import com.infoshareacademy.object.Book;
-import com.infoshareacademy.repository.BookRepository;
-import com.infoshareacademy.service.BookService;
 import com.infoshareacademy.service.ListService;
 import com.infoshareacademy.service.sorting.SortByAuthorStrategy;
 import com.infoshareacademy.service.sorting.SortByTitleStrategy;
 import com.infoshareacademy.service.sorting.SortStrategy;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 import java.util.SortedSet;
 
+import static com.infoshareacademy.menu.MenuUtils.STDOUT;
+import static com.infoshareacademy.menu.MenuUtils.cleanTerminal;
+
 public class BookListService {
-    private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
     public static final String SEE_DETAILS = "Wybierz 4 aby zobaczyć szczegóły wybranej pozycji.";
     private int input;
     private int positionsPerPage;
@@ -36,8 +34,7 @@ public class BookListService {
         STDOUT.info("\n Ile pozycji wyświetlić na jednej stronie? \n");
         positionsPerPage = listService.getPositionsPerPage();
         do {
-            Menu menu = new Menu();
-            menu.cleanTerminal();
+            cleanTerminal();
             getBooksList(books);
             input = 0;
             input = listService.getUserInput();
@@ -52,6 +49,11 @@ public class BookListService {
                         currentPageNumber = currentPageNumber - 1;
                     }
                     break;
+                case 3:
+                    input = listService.getUserInput();
+                    FavouritesMenu favouritesMenu = new FavouritesMenu();
+                    favouritesMenu.add(input);
+                    break;
                 case 4:
                     listService.showBookDetails();
                     break;
@@ -65,14 +67,13 @@ public class BookListService {
 
     public void getBooksList(Map<Long, Book> books) {
         ListService listService = new ListService();
-        Menu menu = new Menu();
-        menu.cleanTerminal();
+        cleanTerminal();
         numberOfPages = listService.getPagesCount(positionsPerPage, books.size());
         firstPositionOnPage = listService.findFirstPosition(currentPageNumber, positionsPerPage);
         lastPositionOnPage = listService.findLastPosition(books.size());
 
         SortStrategy sortStrategy;
-        if(Configurations.getProperties().getProperty("sortingBy").equals("AUTHOR")) {
+        if (Configurations.getProperties().getProperty("sortingBy").equals("AUTHOR")) {
             sortStrategy = new SortByAuthorStrategy();
         } else {
             sortStrategy = new SortByTitleStrategy();
@@ -97,12 +98,18 @@ public class BookListService {
             STDOUT.info("\n To ostatnia strona. " +
                     "Wybierz 2 aby zobaczyć poprzednią stronę lub 0 aby wyjść do głównego menu. \n");
             STDOUT.info(SEE_DETAILS);
+            STDOUT.info("\n Wybierz 3 i numer ID, aby dodać pozycję do ulubionych.");
+
 
         } else {
             STDOUT.info("\n Wybierz 1 aby zobaczyć następną stronę, 2 aby zobaczyć poprzednią lub 0 aby wyjść do " +
                     "poprzedniego menu. \n");
             STDOUT.info(SEE_DETAILS);
         }
+
+        STDOUT.info("\n Wybierz 3 i numer ID, aby dodać pozycję do ulubionych.");
+
+
         STDOUT.info("\n{}Strona {} z {}.{}\n", ConsoleColors.BLACK_UNDERLINED.getColorType(), currentPageNumber,
                 numberOfPages, ConsoleColors.RESET.getColorType());
     }

@@ -2,22 +2,17 @@ package com.infoshareacademy.menu;
 
 import com.infoshareacademy.action.*;
 import com.infoshareacademy.action.search.Search;
-import com.infoshareacademy.menu.item.BookListMenu;
-import com.infoshareacademy.menu.item.MainMenu;
-import com.infoshareacademy.menu.item.ReservationMenu;
-import com.infoshareacademy.menu.item.SettingsMenu;
-import com.infoshareacademy.repository.BookRepository;
+import com.infoshareacademy.menu.item.*;
 import com.infoshareacademy.service.BookService;
 import org.apache.commons.lang3.math.NumberUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import java.util.Scanner;
+
+import static com.infoshareacademy.menu.MenuUtils.*;
 
 public class Menu {
     private static final String SHOW_MENU = "{}. {} \n";
     private static final String GO_BACK = "Wybierz 0 aby wrócić do głównego Menu. \n";
-    private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
-    private static final String WRONG_NUMBER = "Proszę wpisać odpowiednią cyfrę. \n";
     private static final Scanner scanner = new Scanner(System.in);
     private int input = 0;
     private BookService bookService = new BookService();
@@ -37,9 +32,13 @@ public class Menu {
                     chooseReservationMenu();
                     break;
                 case 3:
-                    chooseSettingsMenu();
+                    FavouritesMenu favouritesMenu = new FavouritesMenu();
+                    favouritesMenu.chooseFavouritesMenu();
                     break;
                 case 4:
+                    chooseSettingsMenu();
+                    break;
+                case 5:
                     return;
                 default:
                     break;
@@ -51,7 +50,7 @@ public class Menu {
 
     public void showMainMenu() {
         cleanTerminal();
-        STDOUT.info("Witaj! Wybierz pozycję z Menu wpisując jej numer lub wybierz 4 by wyjść: \n");
+        STDOUT.info("Witaj! Wybierz pozycję z Menu wpisując jej numer lub wybierz 5 by wyjść: \n");
         for (MainMenu mainMenu : MainMenu.values()) {
             int mainMenuPosition = mainMenu.ordinal() + 1;
             STDOUT.info(SHOW_MENU, mainMenuPosition, mainMenu.getMenuDescription());
@@ -203,10 +202,6 @@ public class Menu {
             STDOUT.info(SHOW_MENU, settingsPosition, settingsMenu.getSettingsValue());
         }
         STDOUT.info(GO_BACK);
-    }
-
-    public void cleanTerminal() {
-        STDOUT.info("\033\143");
     }
 
     private int getUserInput() {
