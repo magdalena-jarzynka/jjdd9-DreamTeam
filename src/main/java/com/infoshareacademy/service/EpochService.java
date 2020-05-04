@@ -5,10 +5,10 @@ import com.infoshareacademy.object.Epoch;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Properties;
 
 public class EpochService {
-
-    public static final String NONE = " - ";
+    Properties properties = ConstantService.readProperties("constants.properties");
 
     public String getEpochs(Book book) {
         List<Epoch> epochs = book.getEpochs();
@@ -17,6 +17,6 @@ public class EpochService {
                 .filter(i -> epochs.size() > 0)
                 .map(i -> epochs.get(0))
                 .map(Epoch::getName)
-                .orElse(NONE);
+                .orElse(properties.getProperty("NONE"));
     }
 }

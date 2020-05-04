@@ -5,10 +5,10 @@ import com.infoshareacademy.object.Media;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Properties;
 
 public class MediaService {
-
-    public static final String NONE = " - ";
+    Properties properties = ConstantService.readProperties("constants.properties");
 
     public String getMedia(Book book) {
         List<Media> media = book.getMedia();
@@ -17,6 +17,6 @@ public class MediaService {
                 .filter(i -> media.size() > 0)
                 .map(i -> media.get(0))
                 .map(Media::getName)
-                .orElse(NONE);
+                .orElse(properties.getProperty("NONE"));
     }
 }

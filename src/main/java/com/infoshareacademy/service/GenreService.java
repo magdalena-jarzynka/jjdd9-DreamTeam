@@ -5,10 +5,10 @@ import com.infoshareacademy.object.Genre;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Properties;
 
 public class GenreService {
-
-    public static final String NONE = " - ";
+    Properties properties = ConstantService.readProperties("constants.properties");
 
     public String getGenres(Book book) {
         List<Genre> genres = book.getGenres();
@@ -17,6 +17,6 @@ public class GenreService {
                 .filter(i -> genres.size() > 0)
                 .map(i -> genres.get(0))
                 .map(Genre::getName)
-                .orElse(NONE);
+                .orElse(properties.getProperty("NONE"));
     }
 }

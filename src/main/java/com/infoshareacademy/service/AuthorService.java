@@ -5,10 +5,10 @@ import com.infoshareacademy.object.Book;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Properties;
 
 public class AuthorService {
-
-    public static final String NONE = " - ";
+    Properties properties = ConstantService.readProperties("constants.properties");
 
     public String getAuthors(Book book) {
         List<Author> authors = book.getAuthors();
@@ -17,6 +17,6 @@ public class AuthorService {
                 .filter(i -> authors.size() > 0)
                 .map(i -> authors.get(0))
                 .map(Author::getName)
-                .orElse(NONE);
+                .orElse(properties.getProperty("NONE"));
     }
 }
