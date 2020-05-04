@@ -14,7 +14,7 @@ public class TranslatorService {
         List<Author> translators = book.getTranslators();
         return Optional.ofNullable(book)
                 .map(Book::getAuthors)
-                .filter(i -> translators.size() > 0)
+                .filter(i -> !translators.isEmpty())
                 .map(i -> translators.get(0))
                 .map(Author::getName)
                 .orElse(properties.getProperty("NONE"));

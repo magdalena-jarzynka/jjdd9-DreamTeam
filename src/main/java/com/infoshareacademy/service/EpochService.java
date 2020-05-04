@@ -14,7 +14,7 @@ public class EpochService {
         List<Epoch> epochs = book.getEpochs();
         return Optional.ofNullable(book)
                 .map(Book::getAuthors)
-                .filter(i -> epochs.size() > 0)
+                .filter(i -> !epochs.isEmpty())
                 .map(i -> epochs.get(0))
                 .map(Epoch::getName)
                 .orElse(properties.getProperty("NONE"));

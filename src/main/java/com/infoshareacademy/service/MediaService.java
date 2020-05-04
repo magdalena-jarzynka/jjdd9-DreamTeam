@@ -14,7 +14,7 @@ public class MediaService {
         List<Media> media = book.getMedia();
         return Optional.ofNullable(book)
                 .map(Book::getAuthors)
-                .filter(i -> media.size() > 0)
+                .filter(i -> !media.isEmpty())
                 .map(i -> media.get(0))
                 .map(Media::getName)
                 .orElse(properties.getProperty("NONE"));

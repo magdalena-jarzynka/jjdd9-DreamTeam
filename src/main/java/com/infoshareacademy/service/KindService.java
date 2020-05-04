@@ -14,7 +14,7 @@ public class KindService {
         List<Kind> kinds = book.getKinds();
         return Optional.ofNullable(book)
                 .map(Book::getAuthors)
-                .filter(i -> kinds.size() > 0)
+                .filter(i -> !kinds.isEmpty())
                 .map(i -> kinds.get(0))
                 .map(Kind::getName)
                 .orElse(properties.getProperty("NONE"));
