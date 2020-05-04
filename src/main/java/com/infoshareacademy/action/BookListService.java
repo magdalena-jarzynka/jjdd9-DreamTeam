@@ -3,21 +3,19 @@ package com.infoshareacademy.action;
 import com.infoshareacademy.ConsoleColors;
 import com.infoshareacademy.menu.Menu;
 import com.infoshareacademy.object.Book;
-import com.infoshareacademy.repository.BookRepository;
-import com.infoshareacademy.service.BookService;
 import com.infoshareacademy.service.ListService;
-import com.infoshareacademy.service.sorting.SortByAuthorStrategy;
-import com.infoshareacademy.service.sorting.SortByTitleStrategy;
-import com.infoshareacademy.service.sorting.SortStrategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Map;
-import java.util.SortedSet;
 
 public class BookListService {
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
     public static final String SEE_DETAILS = "Wybierz 4 aby zobaczyć szczegóły wybranej pozycji.";
+    public static final String LAST_PAGE = "\n To ostatnia strona. " +
+            "Wybierz 2 aby zobaczyć poprzednią stronę lub 0 aby wyjść do głównego menu. \n";
+    public static final String NEXT_PAGE = "\n Wybierz 1 aby zobaczyć następną stronę, 2 aby zobaczyć poprzednią lub 0 aby wyjść do " +
+            "poprzedniego menu. \n";
     private int input;
     private int positionsPerPage;
     private int currentPageNumber;
@@ -25,6 +23,8 @@ public class BookListService {
     private long positionNumber;
     private long firstPositionOnPage;
     private long lastPositionOnPage;
+    ListService listService = new ListService();
+    Menu menu = new Menu();
 
     public BookListService() {
         this.currentPageNumber = 1;
@@ -64,24 +64,13 @@ public class BookListService {
     }
 
     public void getBooksList(Map<Long, Book> books) {
-        ListService listService = new ListService();
-        Menu menu = new Menu();
+
         menu.cleanTerminal();
         numberOfPages = listService.getPagesCount(positionsPerPage, books.size());
         firstPositionOnPage = listService.findFirstPosition(currentPageNumber, positionsPerPage);
         lastPositionOnPage = listService.findLastPosition(books.size());
-
-        SortStrategy sortStrategy;
-        if(Configurations.getProperties().getProperty("sortingBy").equals("AUTHOR")) {
-            sortStrategy = new SortByAuthorStrategy();
-        } else {
-            sortStrategy = new SortByTitleStrategy();
-        }
-
-        SortedSet<Map.Entry<Long, Book>> booksSet =
-                sortStrategy.getSortedList(books);
         positionNumber = listService.findPositionNumber(firstPositionOnPage);
-        booksSet.stream()
+        listService.getBookSet(books).stream()
                 .skip(firstPositionOnPage)
                 .limit(positionsPerPage)
                 .forEach(book ->
@@ -94,13 +83,11 @@ public class BookListService {
                                 ConsoleColors.RESET.getColorType()));
 
         if (currentPageNumber == numberOfPages) {
-            STDOUT.info("\n To ostatnia strona. " +
-                    "Wybierz 2 aby zobaczyć poprzednią stronę lub 0 aby wyjść do głównego menu. \n");
+            STDOUT.info(LAST_PAGE);
             STDOUT.info(SEE_DETAILS);
 
         } else {
-            STDOUT.info("\n Wybierz 1 aby zobaczyć następną stronę, 2 aby zobaczyć poprzednią lub 0 aby wyjść do " +
-                    "poprzedniego menu. \n");
+            STDOUT.info(NEXT_PAGE);
             STDOUT.info(SEE_DETAILS);
         }
         STDOUT.info("\n{}Strona {} z {}.{}\n", ConsoleColors.BLACK_UNDERLINED.getColorType(), currentPageNumber,

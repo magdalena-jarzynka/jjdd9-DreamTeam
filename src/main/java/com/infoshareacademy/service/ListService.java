@@ -1,11 +1,18 @@
 package com.infoshareacademy.service;
 
+import com.infoshareacademy.action.Configurations;
 import com.infoshareacademy.menu.Menu;
+import com.infoshareacademy.object.Book;
+import com.infoshareacademy.service.sorting.SortByAuthorStrategy;
+import com.infoshareacademy.service.sorting.SortByTitleStrategy;
+import com.infoshareacademy.service.sorting.SortStrategy;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Map;
 import java.util.Scanner;
+import java.util.SortedSet;
 
 public class ListService {
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
@@ -59,6 +66,8 @@ public class ListService {
         return lastPositionOnPage;
     }
 
+
+
     public void showBookDetails() {
         Menu menu = new Menu();
         BookService bookService = new BookService();
@@ -79,5 +88,16 @@ public class ListService {
 
     public long findPositionNumber(long firstPositionOnPage) {
         return firstPositionOnPage + 1;
+    }
+
+    public  SortedSet<Map.Entry<Long, Book>> getBookSet(Map<Long, Book> books) {
+        SortStrategy sortStrategy;
+        if(Configurations.getProperties().getProperty("sortingBy").equals("AUTHOR")) {
+            sortStrategy = new SortByAuthorStrategy();
+        } else {
+            sortStrategy = new SortByTitleStrategy();
+        }
+
+        return sortStrategy.getSortedList(books);
     }
 }
