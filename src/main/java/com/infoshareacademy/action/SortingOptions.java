@@ -31,7 +31,7 @@ public class SortingOptions {
         return input;
     }
 
-    public String getSortingBy() {
+    public void getSortingBy() {
         sortingBy = "";
         STDOUT.info("\n\n Wprowadź 1 aby sortować książki po tytule lub 2 aby sortować je po autorze. \n\n");
         while (true) {
@@ -47,10 +47,9 @@ public class SortingOptions {
                 break;
             }
         }
-        return sortingBy;
     }
 
-    public String getSortingOrder() {
+    public void getSortingOrder() {
         sortingOrder = "";
         STDOUT.info("\n\n Wprowadź 1 aby wybrać porządek rosnący lub 2 aby wybrać porządek malejący dla sortowania wyników. \n\n");
         while (true) {
@@ -66,7 +65,6 @@ public class SortingOptions {
                 break;
             }
         }
-        return sortingOrder;
     }
 
     public void run() {
@@ -74,24 +72,6 @@ public class SortingOptions {
         getSortingOrder();
         Configurations.writeToProperties(SORTING_BY, sortingBy);
         Configurations.writeToProperties(SORTING_ORDER, sortingOrder);
-    }
-
-
-    public static List sortList(List list) {
-        if (Configurations.getProperties().getProperty(SORTING_BY).equals("TITLE")) {
-            if (Configurations.getProperties().getProperty(SORTING_ORDER).equals("ASC")) {
-                list.sort(new SortingByTitle());
-            } else if (Configurations.getProperties().getProperty(SORTING_ORDER).equals("DESC")) {
-                list.sort(Collections.reverseOrder(new SortingByTitle()));
-            }
-        } else if (Configurations.getProperties().getProperty(SORTING_BY).equals("AUTHOR")) {
-            if (Configurations.getProperties().getProperty(SORTING_ORDER).equals("ASC")) {
-                list.sort(new SortingByAuthor());
-            } else if (Configurations.getProperties().getProperty(SORTING_ORDER).equals("DESC")) {
-                list.sort(Collections.reverseOrder(new SortingByAuthor()));
-            }
-        }
-        return list;
     }
 
 }

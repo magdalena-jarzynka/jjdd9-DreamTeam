@@ -7,6 +7,7 @@ import com.infoshareacademy.repository.BookRepository;
 import com.infoshareacademy.service.BookService;
 import com.infoshareacademy.service.ListService;
 import com.infoshareacademy.service.sorting.SortByAuthorStrategy;
+import com.infoshareacademy.service.sorting.SortByTitleStrategy;
 import com.infoshareacademy.service.sorting.SortStrategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -65,7 +66,14 @@ public class BookListService {
         numberOfPages = listService.getPagesCount(positionsPerPage, books.size());
         firstPositionOnPage = listService.findFirstPosition(currentPageNumber, positionsPerPage);
         lastPositionOnPage = listService.findLastPosition(books.size());
-        SortStrategy sortStrategy = new SortByAuthorStrategy();
+
+        SortStrategy sortStrategy;
+        if(Configurations.getProperties().getProperty("sortingBy").equals("AUTHOR")) {
+            sortStrategy = new SortByAuthorStrategy();
+        } else {
+            sortStrategy = new SortByTitleStrategy();
+        }
+
         SortedSet<Map.Entry<Long, Book>> booksSet =
                 sortStrategy.getSortedList(books);
         positionNumber = listService.findPositionNumber(firstPositionOnPage);
@@ -79,7 +87,7 @@ public class BookListService {
                                 ConsoleColors.BLACK_BOLD.getColorType(), ConsoleColors.BLUE.getColorType(),
                                 b.getValue().getAuthors().get(0).getName(), ConsoleColors.BLACK_BOLD.getColorType(),
                                 ConsoleColors.YELLOW_BOLD.getColorType(), b.getKey(),
-                                ConsoleColors.RESET.getColorType(), b));
+                                ConsoleColors.RESET.getColorType()));
 
         if (currentPageNumber == numberOfPages) {
             STDOUT.info("\n To ostatnia strona. " +
