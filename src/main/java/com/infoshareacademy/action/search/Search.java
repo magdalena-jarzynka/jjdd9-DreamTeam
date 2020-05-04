@@ -1,11 +1,12 @@
 package com.infoshareacademy.action.search;
 
-import com.infoshareacademy.input.UserInput;
+import com.infoshareacademy.input.UserInputService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class Search {
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
+    private UserInputService userInputService = new UserInputService();
 
     CriteriaChoice userCriteria = new CriteriaChoice();
 
@@ -62,6 +63,6 @@ public class Search {
         STDOUT.info("4. Rozpoczęcie wyszukiwania \n");
         STDOUT.info("5. Reset kryteriów wyszukiwania \n");
         STDOUT.info("Wybierz 0 aby opuścić wyszukiwarkę książek \n");
-        return UserInput.getUserInput();
+        return userInputService.getUserInput();
     }
 }
