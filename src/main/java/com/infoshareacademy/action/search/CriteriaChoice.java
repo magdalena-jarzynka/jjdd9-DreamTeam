@@ -1,6 +1,6 @@
 package com.infoshareacademy.action.search;
 
-import com.infoshareacademy.input.UserInput;
+import com.infoshareacademy.input.UserInputService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.Scanner;
@@ -12,6 +12,7 @@ public class CriteriaChoice {
     private String author = "";
     private String title = "";
     private boolean audio = false;
+    private UserInputService userInputService = new UserInputService();
 
     public boolean[] getActiveCriteria() {
         return activeCriteria;
@@ -49,8 +50,9 @@ public class CriteriaChoice {
     public void setAudio() {
         activeCriteria[2] = true;
         STDOUT.info("Proszę wybrać 1 aby wyszukać tytuły z wersją audio lub 2 dla tytułów bez wersji audio \n");
+
         while (true) {
-            switch (UserInput.getUserInput()) {
+            switch (userInputService.getUserInput()) {
                 case 1: {
                     audio = true;
                     return;
