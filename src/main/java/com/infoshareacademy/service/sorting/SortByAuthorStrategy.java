@@ -14,7 +14,6 @@ public class SortByAuthorStrategy implements SortStrategy {
     public SortedSet<Map.Entry<Long, Book>> getSortedList(Map<Long, Book> repositoryBooks) {
         SortedSet<Map.Entry<Long, Book>> books;
         switch (Configurations.getProperties().getProperty("sortingOrder")) {
-
             case "DESC":
                 books = new TreeSet<>
                         (new SortingByAuthor().reversed());
