@@ -1,10 +1,13 @@
 package com.infoshareacademy.menu;
 
 import com.infoshareacademy.action.*;
+import com.infoshareacademy.action.search.Search;
 import com.infoshareacademy.menu.item.BookListMenu;
 import com.infoshareacademy.menu.item.MainMenu;
 import com.infoshareacademy.menu.item.ReservationMenu;
 import com.infoshareacademy.menu.item.SettingsMenu;
+import com.infoshareacademy.repository.BookRepository;
+import com.infoshareacademy.service.BookService;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,13 +20,14 @@ public class Menu {
     private static final String WRONG_NUMBER = "Proszę wpisać odpowiednią cyfrę. \n";
     private static final Scanner scanner = new Scanner(System.in);
     private int input = 0;
+    private BookService bookService = new BookService();
 
     public void run() {
         Configurations.setDefaultProperties();
         do {
             input = 0;
             showMainMenu();
-            input = getUserInput();
+            getUserInput();
             STDOUT.info("\n");
             switch (input) {
                 case 1:
@@ -83,10 +87,10 @@ public class Menu {
         Details details = new Details();
         switch (input) {
             case BOOK_LIST:
-                bookListService.run();
+                bookListService.run(bookService.findAllBooks());
                 break;
             case SEARCH:
-                search.print();
+                search.run();
                 break;
             default:
                 details.print();

@@ -6,7 +6,6 @@ import com.infoshareacademy.repository.BookRepository;
 import java.util.Map;
 
 public class BookService {
-
     public Map<Long, Book> findAllBooks() {
         return BookRepository.getInstance().getBooks();
     }
