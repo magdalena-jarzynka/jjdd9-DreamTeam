@@ -4,11 +4,8 @@ import com.infoshareacademy.object.Book;
 import com.infoshareacademy.repository.BookRepository;
 
 import java.util.Map;
-import java.util.Random;
 
 public class BookService {
-    Random rnd = new Random();
-
     public Map<Long, Book> findAllBooks() {
         return BookRepository.getInstance().getBooks();
     }
