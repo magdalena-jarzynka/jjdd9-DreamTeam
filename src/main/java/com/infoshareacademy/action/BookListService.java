@@ -17,6 +17,7 @@ public class BookListService {
             "poprzedniego menu. \n";
     private int positionsPerPage;
     private int currentPageNumber;
+    private FavouritesMenu favouritesMenu = new FavouritesMenu();
     ListService listService = new ListService();
 
     public BookListService() {
@@ -45,7 +46,6 @@ public class BookListService {
                     break;
                 case 3:
                     input = listService.getUserInput();
-                    FavouritesMenu favouritesMenu = new FavouritesMenu();
                     favouritesMenu.add(input);
                     break;
                 case 4:
@@ -68,7 +68,6 @@ public class BookListService {
             STDOUT.info(LAST_PAGE);
             STDOUT.info(SEE_DETAILS);
             STDOUT.info("\n Wybierz 3 i numer ID, aby dodać pozycję do ulubionych.");
-
 
         } else {
             STDOUT.info(NEXT_PAGE);

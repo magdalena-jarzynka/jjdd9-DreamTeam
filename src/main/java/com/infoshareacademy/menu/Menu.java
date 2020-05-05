@@ -16,6 +16,7 @@ public class Menu {
     private static final Scanner scanner = new Scanner(System.in);
     private int input = 0;
     private BookService bookService = new BookService();
+    private FavouritesMenu favouritesMenu = new FavouritesMenu();
 
     public void run() {
         Configurations.setDefaultProperties();
@@ -32,7 +33,6 @@ public class Menu {
                     chooseReservationMenu();
                     break;
                 case 3:
-                    FavouritesMenu favouritesMenu = new FavouritesMenu();
                     favouritesMenu.chooseFavouritesMenu();
                     break;
                 case 4:

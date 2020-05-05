@@ -20,6 +20,8 @@ public class ListService {
     private int input;
     private int numberOfPages;
     private long positionNumber;
+    private FavouritesMenu favouritesMenu = new FavouritesMenu();
+
 
     public int getUserInput() {
         String lineInput = scanner.nextLine();
@@ -59,7 +61,6 @@ public class ListService {
         STDOUT.info(bookService.getBookDetails((long) id));
         do {
             STDOUT.info("Wybierz 0, aby powrócić do przeglądania pozycji.");
-            FavouritesMenu favouritesMenu = new FavouritesMenu();
             favouritesMenu.printAction(id);
             input = getUserInput();
             switch (input) {
