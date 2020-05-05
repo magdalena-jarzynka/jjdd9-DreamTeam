@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Collections;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class BookManagement {
@@ -20,7 +21,6 @@ public class BookManagement {
     public static final String ENTER_ISBN = "Proszę wpisać numer ISBN książki.";
     public static final String ENTER_FRAGMENT = "Proszę wpisać fragment książki.";
     public static final String ENTER_MEDIA = "Proszę wpisać nazwę audiobooka jeżeli posiada.";
-    private final Book book = new Book();
     private final Scanner scanner = new Scanner(System.in);
     private final Author author = new Author();
     private final Author translator = new Author();
@@ -29,12 +29,16 @@ public class BookManagement {
     private final Kind kind = new Kind();
     private final FragmentData fragmentData = new FragmentData();
     private final Media media = new Media();
+    private Book book = new Book();
     BookService bookService = new BookService();
     FileWriter fileWriter = new FileWriter();
 
-    public void run() {
 
+    public void run(){
+        book = setBookDetails();
+        add(book);
     }
+
 
     private void add(Book book) {
         bookService.findAllBooks().put(getNewKey(bookService.findAllBooks()), book);
@@ -43,7 +47,7 @@ public class BookManagement {
     }
 
 
-    public long getNewKey(Map<Long, Book> map) {
+    private long getNewKey(Map<Long, Book> map) {
         return map.entrySet()
                 .stream()
                 .max(Map.Entry.comparingByKey())

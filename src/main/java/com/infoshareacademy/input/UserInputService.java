@@ -10,7 +10,7 @@ import static com.infoshareacademy.menu.MenuUtils.WRONG_NUMBER;
 public class UserInputService {
     private static final Scanner scanner = new Scanner(System.in);
 
-    public int getUserInput() {
+    public static int getUserInput() {
         int input;
         String lineInput = scanner.nextLine();
         if (NumberUtils.isCreatable(lineInput)) {
