@@ -1,11 +1,10 @@
 package com.infoshareacademy.action.search;
 
 import com.infoshareacademy.input.UserInputService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import static com.infoshareacademy.menu.MenuUtils.STDOUT;
 
 public class Search {
-    private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
     private UserInputService userInputService = new UserInputService();
 
     CriteriaChoice userCriteria = new CriteriaChoice();
