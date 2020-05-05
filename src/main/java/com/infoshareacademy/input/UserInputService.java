@@ -1,14 +1,13 @@
 package com.infoshareacademy.input;
 
 import org.apache.commons.lang3.math.NumberUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.Scanner;
 
+import static com.infoshareacademy.menu.MenuUtils.STDOUT;
+import static com.infoshareacademy.menu.MenuUtils.WRONG_NUMBER;
+
 public class UserInputService {
-    private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
-    private static final String WRONG_NUMBER = "Proszę wpisać odpowiednią cyfrę. \n";
     private static final Scanner scanner = new Scanner(System.in);
 
     public int getUserInput() {

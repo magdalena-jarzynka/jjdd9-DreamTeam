@@ -1,13 +1,11 @@
 package com.infoshareacademy.action;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.*;
 import java.util.Properties;
 
+import static com.infoshareacademy.menu.MenuUtils.STDOUT;
+
 public class Configurations {
-    private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
     private static Properties appProperties;
 
     public static Properties readProperties(String fileName) {
@@ -15,9 +13,9 @@ public class Configurations {
         try (FileInputStream in = new FileInputStream(fileName)) {
             props.load(in);
         } catch (FileNotFoundException e) {
-            STDOUT.error("Brak pliku z ustawieniami", e);
+            STDOUT.error("Brak pliku z ustawieniami");
         } catch (IOException e) {
-            STDOUT.error("Błąd podczas odczytu ustawień", e);
+            STDOUT.error("Błąd podczas odczytu ustawień");
         }
         return props;
     }
@@ -27,7 +25,7 @@ public class Configurations {
         try (OutputStream output = new FileOutputStream("config.properties")) {
             appProperties.store(output, null);
         } catch (IOException io) {
-            STDOUT.error("Brak dostępu do pliku z konfiguracją! \n", io);
+            STDOUT.error("Brak dostępu do pliku z konfiguracją! \n");
         }
     }
 

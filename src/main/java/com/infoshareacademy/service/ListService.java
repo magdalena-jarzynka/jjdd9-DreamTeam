@@ -2,26 +2,26 @@ package com.infoshareacademy.service;
 
 import com.infoshareacademy.ConsoleColors;
 import com.infoshareacademy.action.Configurations;
-import com.infoshareacademy.menu.Menu;
+import com.infoshareacademy.menu.item.FavouritesMenu;
 import com.infoshareacademy.object.Book;
 import com.infoshareacademy.service.sorting.SortByAuthorStrategy;
 import com.infoshareacademy.service.sorting.SortByTitleStrategy;
 import org.apache.commons.lang3.math.NumberUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 import java.util.Scanner;
 import java.util.SortedSet;
 
+import static com.infoshareacademy.menu.MenuUtils.*;
+
 public class ListService {
-    private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
     private static final Scanner scanner = new Scanner(System.in);
-    private static final String WRONG_NUMBER = "Proszę wpisać odpowiednią cyfrę.\n\n";
     public static final String AUTHOR = "AUTHOR";
     private int input;
     private int numberOfPages;
     private long positionNumber;
+    private FavouritesMenu favouritesMenu = new FavouritesMenu();
+
 
     public int getUserInput() {
         String lineInput = scanner.nextLine();
@@ -53,25 +53,29 @@ public class ListService {
         return ((long) currentPageNumber - 1) * positionsPerPage;
     }
 
-      public void showBookDetails() {
-        Menu menu = new Menu();
+    public void showBookDetails() {
         BookService bookService = new BookService();
         STDOUT.info("Wybierz ID książki, by zobaczyć jej szczegóły.");
-        input = getIdChoice();
-        menu.cleanTerminal();
-        STDOUT.info(bookService.getBookDetails((long) input));
+        int id = getIdChoice();
+        cleanTerminal();
+        STDOUT.info(bookService.getBookDetails((long) id));
         do {
             STDOUT.info("Wybierz 0, aby powrócić do przeglądania pozycji.");
+            favouritesMenu.printAction(id);
             input = getUserInput();
-            if (input == 0) {
-                break;
-            } else {
-                STDOUT.info(WRONG_NUMBER);
+            switch (input) {
+                case 0:
+                    return;
+                case 1:
+                    favouritesMenu.performAction(id);
+                    break;
+                default:
+                    STDOUT.info(WRONG_NUMBER);
             }
         } while (true);
     }
 
-    public void showBookList(Map<Long, Book> books, long firstPositionOnPage, int positionsPerPage){
+    public void showBookList(Map<Long, Book> books, long firstPositionOnPage, int positionsPerPage) {
         positionNumber = findPositionNumber(firstPositionOnPage);
         getBookSet(books).stream()
                 .skip(firstPositionOnPage)
