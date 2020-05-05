@@ -14,7 +14,7 @@ public class AuthorService {
         List<Author> authors = book.getAuthors();
         return Optional.ofNullable(book)
                 .map(Book::getAuthors)
-                .filter(i -> authors.size() > 0)
+                .filter(i -> !authors.isEmpty())
                 .map(i -> authors.get(0))
                 .map(Author::getName)
                 .orElse(properties.getProperty("NONE"));

@@ -11,7 +11,7 @@ public class IsbnService {
     public String getIsbn(Book book) {
         return Optional.ofNullable(book)
                 .map(Book::getIsbnPdf)
-                .filter(fragment -> ((String) fragment).length() > 0)
+                .filter(fragment -> !((String) fragment).isEmpty())
                 .orElse(properties.getProperty("NONE"));
     }
 }
