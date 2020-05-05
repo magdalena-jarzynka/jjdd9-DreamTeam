@@ -8,7 +8,6 @@ import java.util.Properties;
 import static com.infoshareacademy.menu.MenuUtils.STDOUT;
 
 public class ConstantService {
-    private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
     public static final String NO_FILE = "Brak pliku";
     public static final String ERROR = "Błąd podczas odczytu pliku";
 
@@ -17,9 +16,9 @@ public class ConstantService {
         try (FileInputStream in = new FileInputStream(fileName)) {
             props.load(in);
         } catch (FileNotFoundException e) {
-            STDOUT.error(NO_FILE);
+            STDOUT.info(NO_FILE);
         } catch (IOException e) {
-            STDOUT.error(ERROR);
+            STDOUT.info(ERROR);
         }
         return props;
     }

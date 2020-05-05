@@ -4,14 +4,10 @@ import com.infoshareacademy.ConsoleColors;
 import com.infoshareacademy.menu.item.FavouritesMenu;
 import com.infoshareacademy.object.Book;
 import com.infoshareacademy.service.ListService;
-import com.infoshareacademy.service.sorting.SortByAuthorStrategy;
-import com.infoshareacademy.service.sorting.SortByTitleStrategy;
-import com.infoshareacademy.service.sorting.SortStrategy;
 
 import java.util.Map;
 
-import static com.infoshareacademy.menu.MenuUtils.STDOUT;
-import static com.infoshareacademy.menu.MenuUtils.cleanTerminal;
+import static com.infoshareacademy.menu.MenuUtils.*;
 
 public class BookListService {
     public static final String SEE_DETAILS = "Wybierz 4 aby zobaczyć szczegóły wybranej pozycji.";
@@ -19,11 +15,9 @@ public class BookListService {
             "Wybierz 2 aby zobaczyć poprzednią stronę lub 0 aby wyjść do głównego menu. \n";
     public static final String NEXT_PAGE = "\n Wybierz 1 aby zobaczyć następną stronę, 2 aby zobaczyć poprzednią lub 0 aby wyjść do " +
             "poprzedniego menu. \n";
-    private static final String WRONG_NUMBER = "Proszę wpisać odpowiednią cyfrę.\n\n";
     private int positionsPerPage;
     private int currentPageNumber;
     ListService listService = new ListService();
-    Menu menu = new Menu();
 
     public BookListService() {
         this.currentPageNumber = 1;
@@ -36,7 +30,7 @@ public class BookListService {
         do {
             cleanTerminal();
             getBooksList(books);
-            int input = 0;
+            int input;
             input = listService.getUserInput();
             switch (input) {
                 case 1:
@@ -66,7 +60,7 @@ public class BookListService {
     }
 
     public void getBooksList(Map<Long, Book> books) {
-        menu.cleanTerminal();
+        cleanTerminal();
         int numberOfPages = listService.getPagesCount(positionsPerPage, books.size());
         long firstPositionOnPage = listService.findFirstPosition(currentPageNumber, positionsPerPage);
         listService.showBookList(books, firstPositionOnPage, positionsPerPage);

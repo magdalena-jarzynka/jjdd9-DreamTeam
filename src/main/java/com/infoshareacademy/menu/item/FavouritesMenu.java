@@ -60,7 +60,7 @@ public class FavouritesMenu {
     public void remove(long id) {
         if (FavouritesRepository.getInstance().getFavourites().contains(id)) {
             FavouritesRepository.getInstance().remove(id);
-            STDOUT.info("\nPozycja o podanym ID została usunięta z Ulubionych\n");
+            STDOUT.info("\n \"{}\" usunięto z Ulubionych\n", BookRepository.getInstance().getBooks().get(id).getTitle());
         } else {
             STDOUT.info("\nPozycja o podanym ID nie znajduje się w Ulubionych\n");
         }

@@ -1,9 +1,8 @@
 package com.infoshareacademy.service;
 
-import com.infoshareacademy.menu.item.FavouritesMenu;
 import com.infoshareacademy.ConsoleColors;
 import com.infoshareacademy.action.Configurations;
-import com.infoshareacademy.menu.Menu;
+import com.infoshareacademy.menu.item.FavouritesMenu;
 import com.infoshareacademy.object.Book;
 import com.infoshareacademy.service.sorting.SortByAuthorStrategy;
 import com.infoshareacademy.service.sorting.SortByTitleStrategy;
@@ -17,7 +16,6 @@ import static com.infoshareacademy.menu.MenuUtils.*;
 
 public class ListService {
     private static final Scanner scanner = new Scanner(System.in);
-    private static final String WRONG_NUMBER = "Proszę wpisać odpowiednią cyfrę.\n\n";
     public static final String AUTHOR = "AUTHOR";
     private int input;
     private int numberOfPages;
@@ -53,11 +51,10 @@ public class ListService {
         return ((long) currentPageNumber - 1) * positionsPerPage;
     }
 
-      public void showBookDetails() {
-        Menu menu = new Menu();
+    public void showBookDetails() {
         BookService bookService = new BookService();
         STDOUT.info("Wybierz ID książki, by zobaczyć jej szczegóły.");
-        int id = getUserInput();
+        int id = getIdChoice();
         cleanTerminal();
         STDOUT.info(bookService.getBookDetails((long) id));
         do {
@@ -77,7 +74,7 @@ public class ListService {
         } while (true);
     }
 
-    public void showBookList(Map<Long, Book> books, long firstPositionOnPage, int positionsPerPage){
+    public void showBookList(Map<Long, Book> books, long firstPositionOnPage, int positionsPerPage) {
         positionNumber = findPositionNumber(firstPositionOnPage);
         getBookSet(books).stream()
                 .skip(firstPositionOnPage)
