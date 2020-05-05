@@ -14,7 +14,7 @@ public class GenreService {
         List<Genre> genres = book.getGenres();
         return Optional.ofNullable(book)
                 .map(Book::getAuthors)
-                .filter(i -> genres.size() > 0)
+                .filter(i -> !genres.isEmpty())
                 .map(i -> genres.get(0))
                 .map(Genre::getName)
                 .orElse(properties.getProperty("NONE"));
