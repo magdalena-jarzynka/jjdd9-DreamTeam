@@ -15,7 +15,6 @@ public class FavouritesRepository {
         favouriteBooks = favouritesFileManager.readFavourites();
     }
 
-
     public static FavouritesRepository getInstance() {
         if (favouritesRepository == null) {
             favouritesRepository = new FavouritesRepository();
@@ -29,20 +28,6 @@ public class FavouritesRepository {
 
     public void updateFavourites() {
         favouritesFileManager.writeFavourites(favouriteBooks);
-    }
-
-    public boolean add(Long bookId) {
-        if (favouriteBooks.size() < 3) {
-            favouriteBooks.add(bookId);
-            updateFavourites();
-            return true;
-        }
-        return false;
-    }
-
-    public void remove(Long bookId) {
-        favouriteBooks.remove(bookId);
-        updateFavourites();
     }
 
 }
