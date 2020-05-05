@@ -33,7 +33,7 @@ public class BookListService {
         do {
             menu.cleanTerminal();
             getBooksList(books);
-            int input = 0;
+            int input;
             input = listService.getUserInput();
             switch (input) {
                 case 1:
