@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.*;
 
-import static com.infoshareacademy.menu.MenuUtils.STDOUT;
+import static com.infoshareacademy.input.UserInputService.getUserInput;
 import static com.infoshareacademy.menu.MenuUtils.cleanTerminal;
 
 public class BookManagement {
@@ -34,7 +34,7 @@ public class BookManagement {
     private BookService bookService = new BookService();
     private FileWriter fileWriter = new FileWriter();
 
-    public void run() {
+    public void addBookToRepository() {
         book = setBookDetails();
         add(book);
     }
@@ -45,7 +45,7 @@ public class BookManagement {
         List<Book> bookList = new ArrayList<>(books.values());
         fileWriter.writeToFile(bookList);
     }
-    
+
     private long getNewKey(Map<Long, Book> map) {
         return map.entrySet()
                 .stream()
@@ -53,6 +53,33 @@ public class BookManagement {
                 .get()
                 .getKey() + 1;
     }
+
+    public void removeBookFromRepository() {
+        long id = getUserInput();
+        STDOUT.info("Czy na pewno chcesz usunąć książkę: {}?\n", bookService.findAllBooks().get(id));
+        STDOUT.info("Jeżeli tak: wprowadź 1, jeżeli nie: wprowadź 0.\n");
+        do {
+            int userDecision = getUserInput();
+            if (userDecision == 1) {
+                remove(id);
+                break;
+            } else if (userDecision == 0) {
+                break;
+            }
+        } while (true);
+
+    }
+
+    private void remove(long id) {
+        bookService.findAllBooks().remove(id);
+        Map<Long, Book> books = bookService.findAllBooks();
+        List<Book> bookList = new ArrayList<>(books.values());
+        fileWriter.writeToFile(bookList);
+        STDOUT.info("Książka {} została usunięta z biblioteki.", bookService.findAllBooks().get(id));
+        STDOUT.info("Naciśnij ENTER, aby powrócić do poprzedniego menu.");
+        scanner.nextLine();
+    }
+
 
     private Book setBookDetails() {
         cleanTerminal();

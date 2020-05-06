@@ -10,15 +10,19 @@ public class BooksManager {
     private BookManagement bookManagement = new BookManagement();
 
     public void run() {
-        STDOUT.info("Wprowadź 1, aby dodać książkę.");
-        STDOUT.info("Wprowadź 0, aby powrócić do poprzedniego menu.");
+        STDOUT.info("Wprowadź 1, aby dodać książkę.\n");
+        STDOUT.info("Wprowadź 2, aby usunąć książkę.\n");
+        STDOUT.info("Wprowadź 0, aby powrócić do poprzedniego menu.\n");
         do {
             int input = getUserInput();
             switch (input) {
                 case 1:
                     cleanTerminal();
-                    bookManagement.run();
+                    bookManagement.addBookToRepository();
                     return;
+                case 2:
+                    cleanTerminal();
+                    bookManagement.removeBookFromRepository();
                 case 0:
                     return;
                 default:
