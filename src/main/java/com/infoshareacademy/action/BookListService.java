@@ -1,6 +1,7 @@
 package com.infoshareacademy.action;
 
 import com.infoshareacademy.ConsoleColors;
+import com.infoshareacademy.input.UserInputService;
 import com.infoshareacademy.menu.item.FavouritesMenu;
 import com.infoshareacademy.object.Book;
 import com.infoshareacademy.service.ListService;
@@ -18,7 +19,8 @@ public class BookListService {
     private int positionsPerPage;
     private int currentPageNumber;
     private FavouritesMenu favouritesMenu = new FavouritesMenu();
-    ListService listService = new ListService();
+    private ListService listService = new ListService();
+    private UserInputService userInputService = new UserInputService();
 
     public BookListService() {
         this.currentPageNumber = 1;
@@ -32,7 +34,7 @@ public class BookListService {
             cleanTerminal();
             getBooksList(books);
             int input;
-            input = listService.getUserInput();
+            input = userInputService.getUserInput();
             switch (input) {
                 case 1:
                     if (currentPageNumber < numberOfPages) {
@@ -45,7 +47,7 @@ public class BookListService {
                     }
                     break;
                 case 3:
-                    input = listService.getUserInput();
+                    input = userInputService.getUserInput();
                     favouritesMenu.add(input);
                     break;
                 case 4:

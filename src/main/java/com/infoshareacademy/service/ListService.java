@@ -2,6 +2,7 @@ package com.infoshareacademy.service;
 
 import com.infoshareacademy.ConsoleColors;
 import com.infoshareacademy.action.Configurations;
+import com.infoshareacademy.input.UserInputService;
 import com.infoshareacademy.menu.item.FavouritesMenu;
 import com.infoshareacademy.object.Book;
 import com.infoshareacademy.service.sorting.SortByAuthorStrategy;
@@ -23,24 +24,11 @@ public class ListService {
     private long positionNumber;
     private FavouritesMenu favouritesMenu = new FavouritesMenu();
     private BookService bookService = new BookService();
+    private UserInputService userInputService = new UserInputService();
 
-    public int getUserInput() {
-        String lineInput = scanner.nextLine();
-        if (NumberUtils.isCreatable(lineInput)) {
-            input = Integer.parseInt(lineInput);
-        } else {
-            STDOUT.info(WRONG_NUMBER);
-            input = getUserInput();
-        }
-        if (input < 0) {
-            STDOUT.info(WRONG_NUMBER);
-            input = getUserInput();
-        }
-        return input;
-    }
 
     public int getPositionsPerPage() {
-        return getUserInput();
+        return userInputService.getUserInput();
     }
 
     public int getPagesCount(int positionsPerPage, int numberOfBooks) {
@@ -69,7 +57,7 @@ public class ListService {
         do {
             STDOUT.info("Wybierz 0, aby powrócić do przeglądania pozycji.");
             favouritesMenu.printAction(id);
-            input = getUserInput();
+            input = userInputService.getUserInput();
             switch (input) {
                 case 0:
                     return;

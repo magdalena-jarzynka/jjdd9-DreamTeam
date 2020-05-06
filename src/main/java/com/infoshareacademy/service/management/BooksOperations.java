@@ -1,20 +1,17 @@
 package com.infoshareacademy.service.management;
 
+import com.infoshareacademy.input.UserInputService;
 import com.infoshareacademy.object.Book;
 import com.infoshareacademy.service.BookService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-import static com.infoshareacademy.input.UserInputService.getUserInput;
-import static com.infoshareacademy.menu.MenuUtils.WRONG_NUMBER;
-import static com.infoshareacademy.menu.MenuUtils.cleanTerminal;
+import static com.infoshareacademy.menu.MenuUtils.*;
 
-public class BookManagement {
+public class BooksOperations {
     private static final String ENTER_TITLE = "Proszę wpisać tytuł: ";
     private static final String ENTER_AUTHOR = "Proszę wpisać autora: ";
     private static final String ENTER_TRANSLATORS = "Proszę wpisać tłumacza/y: ";
@@ -26,12 +23,12 @@ public class BookManagement {
     private static final String ENTER_MEDIA = "Proszę wpisać nazwę audiobooka jeżeli posiada: ";
     private static final String BOOK_ADDED = "\n\nZakończono dodawanie pozycji, wciśnij ENTER aby wrócić " +
             "do poprzedniego widoku.\n\n";
-    private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
     private final Scanner scanner = new Scanner(System.in);
     private Book book = new Book();
     private BookService bookService = new BookService();
     private FileWriter fileWriter = new FileWriter();
     private BookDefinitionService bookDefinitionService = new BookDefinitionService();
+    private UserInputService userInputService = new UserInputService();
 
     public void addBookToRepository() {
         book = setBookDetails();
@@ -82,7 +79,7 @@ public class BookManagement {
         STDOUT.info("Wprowadź ID książki, którą chcesz usunąć z biblioteki\n");
         long id;
         do {
-            id = getUserInput();
+            id = userInputService.getUserInput();
             if (bookService.findAllBooks().containsKey(id)) {
                 break;
             } else {
@@ -93,7 +90,7 @@ public class BookManagement {
         STDOUT.info("Czy na pewno chcesz usunąć książkę: {}?\n", bookToBeDeleted);
         STDOUT.info("Jeżeli tak: wprowadź 1, jeżeli nie: wprowadź 0.\n");
         do {
-            int userDecision = getUserInput();
+            int userDecision = userInputService.getUserInput();
             if (userDecision == 1) {
                 remove(id);
                 STDOUT.info("Książka {} została usunięta z biblioteki.\n", bookToBeDeleted);
@@ -114,12 +111,11 @@ public class BookManagement {
         fileWriter.writeToFile(bookList);
     }
 
-
     public void modifyBook() {
         STDOUT.info("Wprowadź ID książki, którą chcesz zmodyfikować\n\n");
         long id;
         do {
-            id = getUserInput();
+            id = userInputService.getUserInput();
             if (bookService.findAllBooks().containsKey(id)) {
                 break;
             } else {
@@ -128,19 +124,20 @@ public class BookManagement {
         } while (true);
         STDOUT.info("Poniżej znajdują się informacje o wybranej książce.\n\n");
         STDOUT.info(bookService.getBookDetails(id));
-        STDOUT.info("Wybierz numer pozycji, którą chcesz zmodyfikować.\n");
-        STDOUT.info("Wybierz 0, aby zakończyć edycję książki.\n");
-        int userChoice = getUserInput();
-        getBookModifications(id, userChoice);
+        getBookModifications(id);
         STDOUT.info("Zakończono edycję książki.\n");
         saveModifiedBook();
         STDOUT.info("Wciśnij enter, aby powrócić do poprzedniego widoku.\n");
         scanner.nextLine();
     }
 
-    private Book getBookModifications(long id, int userChoice) {
+    private void getBookModifications(long id) {
         book = bookService.findAllBooks().get(id);
         do {
+            STDOUT.info("\nWybierz numer pozycji, którą chcesz zmodyfikować.\n");
+            STDOUT.info("Twoje zmiany będą widoczne bo zakończeniu edycji.\n");
+            STDOUT.info("Wybierz 0, aby zakończyć edycję książki.\n");
+            int userChoice = userInputService.getUserInput();
             switch (userChoice) {
                 case 1:
                     STDOUT.info(ENTER_TITLE);
@@ -179,7 +176,7 @@ public class BookManagement {
                     bookDefinitionService.defineMedia(book, scanner.nextLine());
                     break;
                 case 0:
-                    return book;
+                    return;
                 default:
                     STDOUT.info(WRONG_NUMBER);
             }

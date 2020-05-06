@@ -1,6 +1,5 @@
 package com.infoshareacademy.menu;
 
-import com.infoshareacademy.input.UserInputService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
