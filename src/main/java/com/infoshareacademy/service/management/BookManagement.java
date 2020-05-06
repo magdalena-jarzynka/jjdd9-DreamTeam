@@ -55,13 +55,24 @@ public class BookManagement {
     }
 
     public void removeBookFromRepository() {
-        long id = getUserInput();
-        STDOUT.info("Czy na pewno chcesz usunąć książkę: {}?\n", bookService.findAllBooks().get(id));
+        STDOUT.info("Wprowadź ID książki, którą chcesz usunąć z biblioteki\n");
+        long id;
+        do {
+            id = getUserInput();
+            if ((bookService.bookExistsById(id))) {
+                break;
+            }
+        } while (true);
+        String bookToBeDeleted = bookService.findAllBooks().get(id).getTitle();
+        STDOUT.info("Czy na pewno chcesz usunąć książkę: {}?\n", bookToBeDeleted);
         STDOUT.info("Jeżeli tak: wprowadź 1, jeżeli nie: wprowadź 0.\n");
         do {
             int userDecision = getUserInput();
             if (userDecision == 1) {
                 remove(id);
+                STDOUT.info("Książka {} została usunięta z biblioteki.\n", bookToBeDeleted);
+                STDOUT.info("Naciśnij ENTER, aby powrócić do poprzedniego menu.\n");
+                scanner.nextLine();
                 break;
             } else if (userDecision == 0) {
                 break;
@@ -75,9 +86,6 @@ public class BookManagement {
         Map<Long, Book> books = bookService.findAllBooks();
         List<Book> bookList = new ArrayList<>(books.values());
         fileWriter.writeToFile(bookList);
-        STDOUT.info("Książka {} została usunięta z biblioteki.", bookService.findAllBooks().get(id));
-        STDOUT.info("Naciśnij ENTER, aby powrócić do poprzedniego menu.");
-        scanner.nextLine();
     }
 
 

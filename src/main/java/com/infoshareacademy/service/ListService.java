@@ -61,7 +61,7 @@ public class ListService {
         long id;
         do {
             id = getIdChoice();
-            if (bookExistsById(id)) {
+            if (bookService.bookExistsById(id)) {
                 break;
             }
         } while (true);
@@ -81,18 +81,6 @@ public class ListService {
             }
         } while (true);
     }
-
-    private boolean bookExistsById(long id) {
-        try {
-            Optional.ofNullable(bookService.findAllBooks().get(id))
-                    .orElseThrow(BookNotFoundException::new);
-            return true;
-        } catch (BookNotFoundException e) {
-            STDOUT.info("Wprowadzono niepoprawne ID książki.");
-        }
-        return false;
-    }
-
 
     public void showBookList(Map<Long, Book> books, long firstPositionOnPage, int positionsPerPage) {
         positionNumber = findPositionNumber(firstPositionOnPage);

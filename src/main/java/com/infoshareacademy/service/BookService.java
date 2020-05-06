@@ -1,9 +1,13 @@
 package com.infoshareacademy.service;
 
+import com.infoshareacademy.exception.BookNotFoundException;
 import com.infoshareacademy.object.Book;
 import com.infoshareacademy.repository.BookRepository;
 
 import java.util.Map;
+import java.util.Optional;
+
+import static com.infoshareacademy.menu.MenuUtils.STDOUT;
 
 public class BookService {
     public Map<Long, Book> findAllBooks() {
@@ -45,5 +49,16 @@ public class BookService {
                 "8. Fragment książki: " + bookFragment + "\n" +
                 "9. Media: " + bookMedia + "\n\n\n";
 
+    }
+
+    public boolean bookExistsById(long id) {
+        try {
+            Optional.ofNullable(findAllBooks().get(id))
+                    .orElseThrow(BookNotFoundException::new);
+            return true;
+        } catch (BookNotFoundException e) {
+            STDOUT.info("Wprowadzono niepoprawne ID książki.");
+        }
+        return false;
     }
 }
