@@ -2,17 +2,17 @@ package com.infoshareacademy.service;
 
 import com.infoshareacademy.ConsoleColors;
 import com.infoshareacademy.action.Configurations;
+import com.infoshareacademy.exception.BookNotFoundException;
 import com.infoshareacademy.menu.item.FavouritesMenu;
 import com.infoshareacademy.object.Book;
 import com.infoshareacademy.service.sorting.SortByAuthorStrategy;
 import com.infoshareacademy.service.sorting.SortByTitleStrategy;
 import org.apache.commons.lang3.math.NumberUtils;
 
-import java.util.Map;
-import java.util.Scanner;
-import java.util.SortedSet;
+import java.util.*;
 
-import static com.infoshareacademy.menu.MenuUtils.*;
+import static com.infoshareacademy.menu.MenuUtils.STDOUT;
+import static com.infoshareacademy.menu.MenuUtils.WRONG_NUMBER;
 
 public class ListService {
     private static final Scanner scanner = new Scanner(System.in);
@@ -21,6 +21,9 @@ public class ListService {
     private int numberOfPages;
     private long positionNumber;
     private FavouritesMenu favouritesMenu = new FavouritesMenu();
+    BookService bookService = new BookService();
+
+    Properties properties = ConstantService.readProperties("constants.properties");
 
 
     public int getUserInput() {
@@ -54,11 +57,15 @@ public class ListService {
     }
 
     public void showBookDetails() {
-        BookService bookService = new BookService();
         STDOUT.info("Wybierz ID książki, by zobaczyć jej szczegóły.");
-        int id = getIdChoice();
-        cleanTerminal();
-        STDOUT.info(bookService.getBookDetails((long) id));
+        long id;
+        do {
+            id = getIdChoice();
+            if (isNotNull(id)){
+                break;
+            }
+        }while(true);
+        STDOUT.info(bookService.getBookDetails(id));
         do {
             STDOUT.info("Wybierz 0, aby powrócić do przeglądania pozycji.");
             favouritesMenu.printAction(id);
@@ -74,6 +81,18 @@ public class ListService {
             }
         } while (true);
     }
+
+    private boolean isNotNull(long id){
+            try {
+                Optional.ofNullable(bookService.findAllBooks().get(id))
+                        .orElseThrow(BookNotFoundException::new);
+                return true;
+            } catch (BookNotFoundException e) {
+                STDOUT.info("Wprowadzono niepoprawne ID książki.");
+            }
+            return false;
+    }
+
 
     public void showBookList(Map<Long, Book> books, long firstPositionOnPage, int positionsPerPage) {
         positionNumber = findPositionNumber(firstPositionOnPage);
