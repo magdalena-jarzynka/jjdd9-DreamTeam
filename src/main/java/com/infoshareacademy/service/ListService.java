@@ -4,12 +4,14 @@ import com.infoshareacademy.ConsoleColors;
 import com.infoshareacademy.action.Configurations;
 import com.infoshareacademy.menu.Menu;
 import com.infoshareacademy.object.Book;
+import com.infoshareacademy.object.Genre;
 import com.infoshareacademy.service.sorting.SortByAuthorStrategy;
 import com.infoshareacademy.service.sorting.SortByTitleStrategy;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.SortedSet;
@@ -22,6 +24,7 @@ public class ListService {
     private int input;
     private int numberOfPages;
     private long positionNumber;
+    private int genrePosition;
 
     public int getUserInput() {
         String lineInput = scanner.nextLine();
@@ -53,7 +56,7 @@ public class ListService {
         return ((long) currentPageNumber - 1) * positionsPerPage;
     }
 
-      public void showBookDetails() {
+    public void showBookDetails() {
         Menu menu = new Menu();
         BookService bookService = new BookService();
         STDOUT.info("Wybierz ID książki, by zobaczyć jej szczegóły.");
@@ -71,7 +74,17 @@ public class ListService {
         } while (true);
     }
 
-    public void showBookList(Map<Long, Book> books, long firstPositionOnPage, int positionsPerPage){
+    public void showGenresMenu() {
+        GenreService genreService = new GenreService();
+        List<Genre> genresList = genreService.findAllGenres();
+        genrePosition = 1;
+
+        genresList.stream()
+                .forEach(genre ->
+                        STDOUT.info("{}. {}\n", genrePosition++, genre.getName()));
+    }
+
+    public void showBookList(Map<Long, Book> books, long firstPositionOnPage, int positionsPerPage) {
         positionNumber = findPositionNumber(firstPositionOnPage);
         getBookSet(books).stream()
                 .skip(firstPositionOnPage)

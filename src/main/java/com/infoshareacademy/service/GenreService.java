@@ -2,6 +2,7 @@ package com.infoshareacademy.service;
 
 import com.infoshareacademy.object.Book;
 import com.infoshareacademy.object.Genre;
+import com.infoshareacademy.repository.GenreRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,5 +19,10 @@ public class GenreService {
                 .map(i -> genres.get(0))
                 .map(Genre::getName)
                 .orElse(properties.getProperty("NONE"));
+    }
+
+    public List<Genre> findAllGenres() {
+
+        return GenreRepository.getInstance().getGenres();
     }
 }

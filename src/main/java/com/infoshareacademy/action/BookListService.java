@@ -11,10 +11,11 @@ import java.util.Map;
 
 public class BookListService {
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
-    public static final String SEE_DETAILS = "Wybierz 4 aby zobaczyć szczegóły wybranej pozycji.";
+    public static final String SEE_DETAILS = "Wybierz 4 aby zobaczyć szczegóły wybranej pozycji.\n";
+    private static final String GROUP_BY_CATEGORY = "Wybierz 5 aby pogrupować wyniki według gatunku.\n\n";
     public static final String LAST_PAGE = "\n To ostatnia strona. " +
             "Wybierz 2 aby zobaczyć poprzednią stronę lub 0 aby wyjść do głównego menu. \n";
-    public static final String NEXT_PAGE = "\n Wybierz 1 aby zobaczyć następną stronę, 2 aby zobaczyć poprzednią lub 0 aby wyjść do " +
+    public static final String NEXT_PAGE = "\nWybierz 1 aby zobaczyć następną stronę, 2 aby zobaczyć poprzednią lub 0 aby wyjść do " +
             "poprzedniego menu. \n";
     private static final String WRONG_NUMBER = "Proszę wpisać odpowiednią cyfrę.\n\n";
     private int positionsPerPage;
@@ -49,6 +50,9 @@ public class BookListService {
                 case 4:
                     listService.showBookDetails();
                     break;
+                case 5:
+                    listService.showGenresMenu();
+                    break;
                 case 0:
                     return;
                 default:
@@ -64,12 +68,11 @@ public class BookListService {
         listService.showBookList(books, firstPositionOnPage, positionsPerPage);
         if (currentPageNumber == numberOfPages) {
             STDOUT.info(LAST_PAGE);
-            STDOUT.info(SEE_DETAILS);
-
         } else {
             STDOUT.info(NEXT_PAGE);
-            STDOUT.info(SEE_DETAILS);
         }
+        STDOUT.info(SEE_DETAILS);
+        STDOUT.info(GROUP_BY_CATEGORY);
         STDOUT.info("\n{}Strona {} z {}.{}\n", ConsoleColors.BLACK_UNDERLINED.getColorType(), currentPageNumber,
                 numberOfPages, ConsoleColors.RESET.getColorType());
     }
