@@ -1,17 +1,20 @@
 package com.infoshareacademy.service.management;
 
-import com.infoshareacademy.object.*;
+import com.infoshareacademy.object.Book;
 import com.infoshareacademy.service.BookService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
 
 import static com.infoshareacademy.input.UserInputService.getUserInput;
+import static com.infoshareacademy.menu.MenuUtils.WRONG_NUMBER;
 import static com.infoshareacademy.menu.MenuUtils.cleanTerminal;
 
 public class BookManagement {
-    private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
     private static final String ENTER_TITLE = "Proszę wpisać tytuł: ";
     private static final String ENTER_AUTHOR = "Proszę wpisać autora: ";
     private static final String ENTER_TRANSLATORS = "Proszę wpisać tłumacza/y: ";
@@ -21,22 +24,43 @@ public class BookManagement {
     private static final String ENTER_ISBN = "Proszę wpisać numer ISBN książki: ";
     private static final String ENTER_FRAGMENT = "Proszę wpisać fragment książki: ";
     private static final String ENTER_MEDIA = "Proszę wpisać nazwę audiobooka jeżeli posiada: ";
-    private static final String BOOK_ADDED = "\n\nZakończono dodawanie pozycji, wciśnij ENTER aby wrócić do poprzedniego widoku.\n\n";
+    private static final String BOOK_ADDED = "\n\nZakończono dodawanie pozycji, wciśnij ENTER aby wrócić " +
+            "do poprzedniego widoku.\n\n";
+    private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
     private final Scanner scanner = new Scanner(System.in);
-    private final Author author = new Author();
-    private final Author translator = new Author();
-    private final Epoch epoch = new Epoch();
-    private final Genre genre = new Genre();
-    private final Kind kind = new Kind();
-    private final FragmentData fragmentData = new FragmentData();
-    private final Media media = new Media();
     private Book book = new Book();
     private BookService bookService = new BookService();
     private FileWriter fileWriter = new FileWriter();
+    private BookDefinitionService bookDefinitionService = new BookDefinitionService();
 
     public void addBookToRepository() {
         book = setBookDetails();
         add(book);
+    }
+
+    private Book setBookDetails() {
+        cleanTerminal();
+        STDOUT.info(ENTER_TITLE);
+        bookDefinitionService.defineTitle(book, scanner.nextLine());
+        STDOUT.info(ENTER_AUTHOR);
+        bookDefinitionService.defineAuthor(book, scanner.nextLine());
+        STDOUT.info(ENTER_TRANSLATORS);
+        bookDefinitionService.defineTranslator(book, scanner.nextLine());
+        STDOUT.info(ENTER_EPOCH);
+        bookDefinitionService.defineEpoch(book, scanner.nextLine());
+        STDOUT.info(ENTER_GENRE);
+        bookDefinitionService.defineGenre(book, scanner.nextLine());
+        STDOUT.info(ENTER_KIND);
+        bookDefinitionService.defineKind(book, scanner.nextLine());
+        STDOUT.info(ENTER_ISBN);
+        bookDefinitionService.defineIsbn(book, scanner.nextLine());
+        STDOUT.info(ENTER_FRAGMENT);
+        bookDefinitionService.defineFragment(book, scanner.nextLine());
+        STDOUT.info(ENTER_MEDIA);
+        bookDefinitionService.defineMedia(book, scanner.nextLine());
+        STDOUT.info(BOOK_ADDED);
+        scanner.nextLine();
+        return book;
     }
 
     private void add(Book book) {
@@ -59,8 +83,10 @@ public class BookManagement {
         long id;
         do {
             id = getUserInput();
-            if ((bookService.bookExistsById(id))) {
+            if (bookService.findAllBooks().containsKey(id)) {
                 break;
+            } else {
+                STDOUT.info("\nPozycja o podanym ID nie istnieje\n");
             }
         } while (true);
         String bookToBeDeleted = bookService.findAllBooks().get(id).getTitle();
@@ -89,36 +115,81 @@ public class BookManagement {
     }
 
 
-    private Book setBookDetails() {
-        cleanTerminal();
-        STDOUT.info(ENTER_TITLE);
-        book.setTitle(scanner.nextLine());
-        STDOUT.info(ENTER_AUTHOR);
-        author.setName(scanner.nextLine());
-        book.setAuthors(Collections.singletonList(author));
-        STDOUT.info(ENTER_TRANSLATORS);
-        translator.setName(scanner.nextLine());
-        book.setTranslators(Collections.singletonList(translator));
-        STDOUT.info(ENTER_EPOCH);
-        epoch.setName(scanner.nextLine());
-        book.setEpochs(Collections.singletonList(epoch));
-        STDOUT.info(ENTER_GENRE);
-        genre.setName(scanner.nextLine());
-        book.setGenres(Collections.singletonList(genre));
-        STDOUT.info(ENTER_KIND);
-        kind.setName(scanner.nextLine());
-        book.setKinds(Collections.singletonList(kind));
-        STDOUT.info(ENTER_ISBN);
-        book.setIsbnPdf(scanner.nextLine());
-        STDOUT.info(ENTER_FRAGMENT);
-        fragmentData.setHtml(scanner.nextLine());
-        book.setBookFragment(fragmentData);
-        STDOUT.info(ENTER_MEDIA);
-        media.setName(scanner.nextLine());
-        book.setMedia(Collections.singletonList(media));
-        STDOUT.info(BOOK_ADDED);
+    public void modifyBook() {
+        STDOUT.info("Wprowadź ID książki, którą chcesz zmodyfikować\n\n");
+        long id;
+        do {
+            id = getUserInput();
+            if (bookService.findAllBooks().containsKey(id)) {
+                break;
+            } else {
+                STDOUT.info("\nPozycja o podanym ID nie istnieje\n");
+            }
+        } while (true);
+        STDOUT.info("Poniżej znajdują się informacje o wybranej książce.\n\n");
+        STDOUT.info(bookService.getBookDetails(id));
+        STDOUT.info("Wybierz numer pozycji, którą chcesz zmodyfikować.\n");
+        STDOUT.info("Wybierz 0, aby zakończyć edycję książki.\n");
+        int userChoice = getUserInput();
+        getBookModifications(id, userChoice);
+        STDOUT.info("Zakończono edycję książki.\n");
+        saveModifiedBook();
+        STDOUT.info("Wciśnij enter, aby powrócić do poprzedniego widoku.\n");
         scanner.nextLine();
-        return book;
+    }
+
+    private Book getBookModifications(long id, int userChoice) {
+        book = bookService.findAllBooks().get(id);
+        do {
+            switch (userChoice) {
+                case 1:
+                    STDOUT.info(ENTER_TITLE);
+                    bookDefinitionService.defineTitle(book, scanner.nextLine());
+                    break;
+                case 2:
+                    STDOUT.info(ENTER_AUTHOR);
+                    bookDefinitionService.defineAuthor(book, scanner.nextLine());
+                    break;
+                case 3:
+                    STDOUT.info(ENTER_TRANSLATORS);
+                    bookDefinitionService.defineTranslator(book, scanner.nextLine());
+                    break;
+                case 4:
+                    STDOUT.info(ENTER_EPOCH);
+                    bookDefinitionService.defineEpoch(book, scanner.nextLine());
+                    break;
+                case 5:
+                    STDOUT.info(ENTER_GENRE);
+                    bookDefinitionService.defineGenre(book, scanner.nextLine());
+                    break;
+                case 6:
+                    STDOUT.info(ENTER_KIND);
+                    bookDefinitionService.defineKind(book, scanner.nextLine());
+                    break;
+                case 7:
+                    STDOUT.info(ENTER_ISBN);
+                    bookDefinitionService.defineIsbn(book, scanner.nextLine());
+                    break;
+                case 8:
+                    STDOUT.info(ENTER_FRAGMENT);
+                    bookDefinitionService.defineTitle(book, scanner.nextLine());
+                    break;
+                case 9:
+                    STDOUT.info(ENTER_MEDIA);
+                    bookDefinitionService.defineMedia(book, scanner.nextLine());
+                    break;
+                case 0:
+                    return book;
+                default:
+                    STDOUT.info(WRONG_NUMBER);
+            }
+        } while (true);
+    }
+
+    public void saveModifiedBook() {
+        Map<Long, Book> books = bookService.findAllBooks();
+        List<Book> bookList = new ArrayList<>(books.values());
+        fileWriter.writeToFile(bookList);
     }
 
 }

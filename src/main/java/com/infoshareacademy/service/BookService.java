@@ -51,14 +51,4 @@ public class BookService {
 
     }
 
-    public boolean bookExistsById(long id) {
-        try {
-            Optional.ofNullable(findAllBooks().get(id))
-                    .orElseThrow(BookNotFoundException::new);
-            return true;
-        } catch (BookNotFoundException e) {
-            STDOUT.info("Wprowadzono niepoprawne ID książki.");
-        }
-        return false;
-    }
 }

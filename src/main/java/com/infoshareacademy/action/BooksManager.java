@@ -12,6 +12,7 @@ public class BooksManager {
     public void run() {
         STDOUT.info("Wprowadź 1, aby dodać książkę.\n");
         STDOUT.info("Wprowadź 2, aby usunąć książkę.\n");
+        STDOUT.info("Wprowadź 3, aby zmodyfikować istniejącą książkę.\n");
         STDOUT.info("Wprowadź 0, aby powrócić do poprzedniego menu.\n");
         do {
             int input = getUserInput();
@@ -23,6 +24,9 @@ public class BooksManager {
                 case 2:
                     cleanTerminal();
                     bookManagement.removeBookFromRepository();
+                case 3:
+                    cleanTerminal();
+                    bookManagement.modifyBook();
                 case 0:
                     return;
                 default:

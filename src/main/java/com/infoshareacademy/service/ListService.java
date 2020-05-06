@@ -2,7 +2,6 @@ package com.infoshareacademy.service;
 
 import com.infoshareacademy.ConsoleColors;
 import com.infoshareacademy.action.Configurations;
-import com.infoshareacademy.exception.BookNotFoundException;
 import com.infoshareacademy.menu.item.FavouritesMenu;
 import com.infoshareacademy.object.Book;
 import com.infoshareacademy.service.sorting.SortByAuthorStrategy;
@@ -10,7 +9,6 @@ import com.infoshareacademy.service.sorting.SortByTitleStrategy;
 import org.apache.commons.lang3.math.NumberUtils;
 
 import java.util.Map;
-import java.util.Optional;
 import java.util.Scanner;
 import java.util.SortedSet;
 
@@ -61,8 +59,10 @@ public class ListService {
         long id;
         do {
             id = getIdChoice();
-            if (bookService.bookExistsById(id)) {
+            if (bookService.findAllBooks().containsKey(id)) {
                 break;
+            } else {
+                STDOUT.info("\nPozycja o podanym ID nie istnieje\n");
             }
         } while (true);
         STDOUT.info(bookService.getBookDetails(id));
