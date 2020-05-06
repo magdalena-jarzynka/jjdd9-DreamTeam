@@ -61,7 +61,12 @@ public class BookListService {
 
     public void getBooksList(Map<Long, Book> books) {
         cleanTerminal();
-        int numberOfPages = listService.getPagesCount(positionsPerPage, books.size());
+        int numberOfPages;
+        if (positionsPerPage == 0) {
+            numberOfPages = 1;
+        } else {
+            numberOfPages = listService.getPagesCount(positionsPerPage, books.size());
+        }
         long firstPositionOnPage = listService.findFirstPosition(currentPageNumber, positionsPerPage);
         listService.showBookList(books, firstPositionOnPage, positionsPerPage);
         if (currentPageNumber == numberOfPages) {

@@ -9,7 +9,10 @@ import com.infoshareacademy.service.sorting.SortByAuthorStrategy;
 import com.infoshareacademy.service.sorting.SortByTitleStrategy;
 import org.apache.commons.lang3.math.NumberUtils;
 
-import java.util.*;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Scanner;
+import java.util.SortedSet;
 
 import static com.infoshareacademy.menu.MenuUtils.STDOUT;
 import static com.infoshareacademy.menu.MenuUtils.WRONG_NUMBER;
@@ -58,10 +61,10 @@ public class ListService {
         long id;
         do {
             id = getIdChoice();
-            if (isNotNull(id)){
+            if (isNotNull(id)) {
                 break;
             }
-        }while(true);
+        } while (true);
         STDOUT.info(bookService.getBookDetails(id));
         do {
             STDOUT.info("Wybierz 0, aby powrócić do przeglądania pozycji.");
@@ -79,15 +82,15 @@ public class ListService {
         } while (true);
     }
 
-    private boolean isNotNull(long id){
-            try {
-                Optional.ofNullable(bookService.findAllBooks().get(id))
-                        .orElseThrow(BookNotFoundException::new);
-                return true;
-            } catch (BookNotFoundException e) {
-                STDOUT.info("Wprowadzono niepoprawne ID książki.");
-            }
-            return false;
+    private boolean isNotNull(long id) {
+        try {
+            Optional.ofNullable(bookService.findAllBooks().get(id))
+                    .orElseThrow(BookNotFoundException::new);
+            return true;
+        } catch (BookNotFoundException e) {
+            STDOUT.info("Wprowadzono niepoprawne ID książki.");
+        }
+        return false;
     }
 
 

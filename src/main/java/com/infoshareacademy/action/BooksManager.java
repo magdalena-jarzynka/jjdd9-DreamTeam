@@ -10,15 +10,16 @@ public class BooksManager {
     BookManagement bookManagement = new BookManagement();
 
     public void run() {
-        STDOUT.info("Naciśnij 1, aby dodać książkę");
+        STDOUT.info("Wprowadź 1, aby dodać książkę.");
+        STDOUT.info("Wprowadź 0, aby powrócić do poprzedniego menu.");
         do {
-            cleanTerminal();
             int a = 0;
             int input = getUserInput();
             switch (input) {
                 case 1:
+                    cleanTerminal();
                     bookManagement.run();
-                    break;
+                    return;
                 case 0:
                     return;
                 default:

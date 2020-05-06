@@ -7,17 +7,21 @@ import org.slf4j.LoggerFactory;
 
 import java.util.*;
 
+import static com.infoshareacademy.menu.MenuUtils.STDOUT;
+import static com.infoshareacademy.menu.MenuUtils.cleanTerminal;
+
 public class BookManagement {
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
-    public static final String ENTER_TITLE = "Proszę wpisać tytuł.";
-    public static final String ENTER_AUTHOR = "Proszę wpisać autora.";
-    public static final String ENTER_TRANSLATORS = "Proszę wpisać tłumacza/y.";
-    public static final String ENTER_EPOCH = "Proszę wpisać epokę literacką.";
-    public static final String ENTER_GENRE = "Proszę wpisać gatunek książki.";
-    public static final String ENTER_KIND = "Proszę wpisać gatunek literacki.";
-    public static final String ENTER_ISBN = "Proszę wpisać numer ISBN książki.";
-    public static final String ENTER_FRAGMENT = "Proszę wpisać fragment książki.";
-    public static final String ENTER_MEDIA = "Proszę wpisać nazwę audiobooka jeżeli posiada.";
+    public static final String ENTER_TITLE = "Proszę wpisać tytuł: ";
+    public static final String ENTER_AUTHOR = "Proszę wpisać autora: ";
+    public static final String ENTER_TRANSLATORS = "Proszę wpisać tłumacza/y: ";
+    public static final String ENTER_EPOCH = "Proszę wpisać epokę literacką: ";
+    public static final String ENTER_GENRE = "Proszę wpisać gatunek książki: ";
+    public static final String ENTER_KIND = "Proszę wpisać gatunek literacki: ";
+    public static final String ENTER_ISBN = "Proszę wpisać numer ISBN książki: ";
+    public static final String ENTER_FRAGMENT = "Proszę wpisać fragment książki: ";
+    public static final String ENTER_MEDIA = "Proszę wpisać nazwę audiobooka jeżeli posiada: ";
+    public static final String BOOK_ADDED = "\n\nZakończono dodawanie pozycji, wciśnij ENTER aby wrócić do poprzedniego widoku.\n\n";
     private final Scanner scanner = new Scanner(System.in);
     private final Author author = new Author();
     private final Author translator = new Author();
@@ -31,7 +35,7 @@ public class BookManagement {
     FileWriter fileWriter = new FileWriter();
 
 
-    public void run(){
+    public void run() {
         book = setBookDetails();
         add(book);
     }
@@ -43,13 +47,6 @@ public class BookManagement {
         fileWriter.writeToFile(bookList);
     }
 
-   // private void add(Book book) {
-    //        bookService.findAllBooks().put(getNewKey(bookService.findAllBooks()), book);
-    //        Map<Long, Book> books = bookService.findAllBooks();
-    //        fileWriter.writeToFile(books);
-    //    }
-
-
     private long getNewKey(Map<Long, Book> map) {
         return map.entrySet()
                 .stream()
@@ -58,8 +55,8 @@ public class BookManagement {
                 .getKey() + 1;
     }
 
-
     private Book setBookDetails() {
+        cleanTerminal();
         STDOUT.info(ENTER_TITLE);
         book.setTitle(scanner.nextLine());
         STDOUT.info(ENTER_AUTHOR);
@@ -85,27 +82,11 @@ public class BookManagement {
         STDOUT.info(ENTER_MEDIA);
         media.setName(scanner.nextLine());
         book.setMedia(Collections.singletonList(media));
+        STDOUT.info(BOOK_ADDED);
+        scanner.nextLine();
         return book;
     }
 
 }
-
-
-//STDOUT.info("1.Autor: {}\n2.Tytuł:  {}\n3.Tłumacze: {}\n 4.Epoka:" +
-//                      "  {}\n5.Gatunek: {}\n6.Gatunek literacki:  {}\n7.ISBN:" +
-//                        "  {}\n8.Fragment ksiązki:   {}\n9.Media: {}",
-//                book.getTitle(), book.getAuthors().get(0).getName(), book.getTranslators()
-//                        .get(0).getName(), book.getEpochs().get(0).getName(), book.getGenres().get(0).getName(),
-//                book.getKinds().get(0).getName(), book.getIsbnPdf(),
-//                book.getBookFragment().getFragment(), book.getMedia().get(0).getName());
-
-//private long getNewKey() {
-//        return bookService.findAllBooks().entrySet()
-//                .stream()
-//                .max(Map.Entry.comparingByKey())
-//                .get()
-//                .getKey() + 1;
-//
-//    }
 
 
