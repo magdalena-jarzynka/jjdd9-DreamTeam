@@ -5,10 +5,7 @@ import com.infoshareacademy.service.BookService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Collections;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 
 public class BookManagement {
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
@@ -39,12 +36,18 @@ public class BookManagement {
         add(book);
     }
 
-
     private void add(Book book) {
         bookService.findAllBooks().put(getNewKey(bookService.findAllBooks()), book);
         Map<Long, Book> books = bookService.findAllBooks();
-        fileWriter.writeToFile(books);
+        List<Book> bookList = new ArrayList<Book>(books.values());
+        fileWriter.writeToFile(bookList);
     }
+
+   // private void add(Book book) {
+    //        bookService.findAllBooks().put(getNewKey(bookService.findAllBooks()), book);
+    //        Map<Long, Book> books = bookService.findAllBooks();
+    //        fileWriter.writeToFile(books);
+    //    }
 
 
     private long getNewKey(Map<Long, Book> map) {

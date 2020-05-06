@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 public class FileWriter {
@@ -14,12 +15,23 @@ public class FileWriter {
 
     ObjectMapper mapper = new ObjectMapper();
 
-
-    public void writeToFile(Map<Long, Book> books) {
+    public void writeToFile(List<Book> books) {
         try {
             mapper.writeValue(new File("BookList.txt"), books);
         } catch (IOException e) {
             STDOUT.error("Nie udało się zapisać pliku! \n");
         }
     }
+
+    //public void writeToFile(Map<Long, Book> books) {
+    //        try {
+    //            mapper.writeValue(new File("BookList.txt"), books);
+    //        } catch (IOException e) {
+    //            STDOUT.error("Nie udało się zapisać pliku! \n");
+    //        }
+    //    }
+
+
+
+
 }
