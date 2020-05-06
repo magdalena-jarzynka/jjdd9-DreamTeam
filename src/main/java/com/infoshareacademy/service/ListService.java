@@ -19,12 +19,12 @@ import static com.infoshareacademy.menu.MenuUtils.WRONG_NUMBER;
 
 public class ListService {
     private static final Scanner scanner = new Scanner(System.in);
-    public static final String AUTHOR = "AUTHOR";
+    private static final String AUTHOR = "AUTHOR";
     private int input;
     private int numberOfPages;
     private long positionNumber;
     private FavouritesMenu favouritesMenu = new FavouritesMenu();
-    BookService bookService = new BookService();
+    private BookService bookService = new BookService();
 
     public int getUserInput() {
         String lineInput = scanner.nextLine();
@@ -61,7 +61,7 @@ public class ListService {
         long id;
         do {
             id = getIdChoice();
-            if (isNotNull(id)) {
+            if (bookExistsById(id)) {
                 break;
             }
         } while (true);
@@ -82,7 +82,7 @@ public class ListService {
         } while (true);
     }
 
-    private boolean isNotNull(long id) {
+    private boolean bookExistsById(long id) {
         try {
             Optional.ofNullable(bookService.findAllBooks().get(id))
                     .orElseThrow(BookNotFoundException::new);

@@ -12,16 +12,16 @@ import static com.infoshareacademy.menu.MenuUtils.cleanTerminal;
 
 public class BookManagement {
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
-    public static final String ENTER_TITLE = "Proszę wpisać tytuł: ";
-    public static final String ENTER_AUTHOR = "Proszę wpisać autora: ";
-    public static final String ENTER_TRANSLATORS = "Proszę wpisać tłumacza/y: ";
-    public static final String ENTER_EPOCH = "Proszę wpisać epokę literacką: ";
-    public static final String ENTER_GENRE = "Proszę wpisać gatunek książki: ";
-    public static final String ENTER_KIND = "Proszę wpisać gatunek literacki: ";
-    public static final String ENTER_ISBN = "Proszę wpisać numer ISBN książki: ";
-    public static final String ENTER_FRAGMENT = "Proszę wpisać fragment książki: ";
-    public static final String ENTER_MEDIA = "Proszę wpisać nazwę audiobooka jeżeli posiada: ";
-    public static final String BOOK_ADDED = "\n\nZakończono dodawanie pozycji, wciśnij ENTER aby wrócić do poprzedniego widoku.\n\n";
+    private static final String ENTER_TITLE = "Proszę wpisać tytuł: ";
+    private static final String ENTER_AUTHOR = "Proszę wpisać autora: ";
+    private static final String ENTER_TRANSLATORS = "Proszę wpisać tłumacza/y: ";
+    private static final String ENTER_EPOCH = "Proszę wpisać epokę literacką: ";
+    private static final String ENTER_GENRE = "Proszę wpisać gatunek książki: ";
+    private static final String ENTER_KIND = "Proszę wpisać gatunek literacki: ";
+    private static final String ENTER_ISBN = "Proszę wpisać numer ISBN książki: ";
+    private static final String ENTER_FRAGMENT = "Proszę wpisać fragment książki: ";
+    private static final String ENTER_MEDIA = "Proszę wpisać nazwę audiobooka jeżeli posiada: ";
+    private static final String BOOK_ADDED = "\n\nZakończono dodawanie pozycji, wciśnij ENTER aby wrócić do poprzedniego widoku.\n\n";
     private final Scanner scanner = new Scanner(System.in);
     private final Author author = new Author();
     private final Author translator = new Author();
@@ -31,9 +31,8 @@ public class BookManagement {
     private final FragmentData fragmentData = new FragmentData();
     private final Media media = new Media();
     private Book book = new Book();
-    BookService bookService = new BookService();
-    FileWriter fileWriter = new FileWriter();
-
+    private BookService bookService = new BookService();
+    private FileWriter fileWriter = new FileWriter();
 
     public void run() {
         book = setBookDetails();
@@ -43,10 +42,10 @@ public class BookManagement {
     private void add(Book book) {
         bookService.findAllBooks().put(getNewKey(bookService.findAllBooks()), book);
         Map<Long, Book> books = bookService.findAllBooks();
-        List<Book> bookList = new ArrayList<Book>(books.values());
+        List<Book> bookList = new ArrayList<>(books.values());
         fileWriter.writeToFile(bookList);
     }
-
+    
     private long getNewKey(Map<Long, Book> map) {
         return map.entrySet()
                 .stream()

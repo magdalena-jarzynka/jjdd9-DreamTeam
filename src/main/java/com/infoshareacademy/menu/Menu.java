@@ -17,6 +17,8 @@ public class Menu {
     private int input = 0;
     private BookService bookService = new BookService();
     private FavouritesMenu favouritesMenu = new FavouritesMenu();
+    private BookListService bookListService = new BookListService();
+    private BooksManager booksManager = new BooksManager();
 
     public void run() {
         Configurations.setDefaultProperties();
@@ -81,9 +83,7 @@ public class Menu {
     }
 
     public void getBooksMenu(BookListMenu input) {
-        BookListService bookListService = new BookListService();
         Search search = new Search();
-        BooksManager booksManager = new BooksManager();
         switch (input) {
             case BOOK_LIST:
                 bookListService.run(bookService.findAllBooks());

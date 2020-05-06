@@ -7,13 +7,12 @@ import static com.infoshareacademy.menu.MenuUtils.*;
 
 public class BooksManager {
 
-    BookManagement bookManagement = new BookManagement();
+    private BookManagement bookManagement = new BookManagement();
 
     public void run() {
         STDOUT.info("Wprowadź 1, aby dodać książkę.");
         STDOUT.info("Wprowadź 0, aby powrócić do poprzedniego menu.");
         do {
-            int a = 0;
             int input = getUserInput();
             switch (input) {
                 case 1:
