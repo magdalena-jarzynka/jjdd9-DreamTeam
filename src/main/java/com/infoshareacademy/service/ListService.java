@@ -23,9 +23,6 @@ public class ListService {
     private FavouritesMenu favouritesMenu = new FavouritesMenu();
     BookService bookService = new BookService();
 
-    Properties properties = ConstantService.readProperties("constants.properties");
-
-
     public int getUserInput() {
         String lineInput = scanner.nextLine();
         if (NumberUtils.isCreatable(lineInput)) {
