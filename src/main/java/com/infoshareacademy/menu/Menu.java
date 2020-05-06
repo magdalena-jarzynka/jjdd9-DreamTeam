@@ -2,6 +2,7 @@ package com.infoshareacademy.menu;
 
 import com.infoshareacademy.action.*;
 import com.infoshareacademy.action.search.Search;
+import com.infoshareacademy.input.UserInputService;
 import com.infoshareacademy.menu.item.*;
 import com.infoshareacademy.service.BookService;
 import org.apache.commons.lang3.math.NumberUtils;
@@ -19,13 +20,13 @@ public class Menu {
     private FavouritesMenu favouritesMenu = new FavouritesMenu();
     private BookListService bookListService = new BookListService();
     private BooksManager booksManager = new BooksManager();
+    UserInputService userInputService = new UserInputService();
 
     public void run() {
         Configurations.setDefaultProperties();
         do {
-            input = 0;
             showMainMenu();
-            getUserInput();
+            input = userInputService.getUserInput();
             STDOUT.info("\n");
             switch (input) {
                 case 1:
@@ -63,7 +64,7 @@ public class Menu {
         do {
             showBooksMenu();
             input = 0;
-            input = getUserInput();
+            input = userInputService.getUserInput();
             switch (input) {
                 case 1:
                     getBooksMenu(BookListMenu.BOOK_LIST);
@@ -114,7 +115,7 @@ public class Menu {
         do {
             input = 0;
             showReservationMenu();
-            input = getUserInput();
+            input = userInputService.getUserInput();
             switch (input) {
                 case 1:
                     getReservationMenu(ReservationMenu.NEW_RESERVATION);
@@ -157,7 +158,7 @@ public class Menu {
         do {
             input = 0;
             showSettingsMenu();
-            input = getUserInput();
+            input = userInputService.getUserInput();
             switch (input) {
                 case 1:
                     getSettingsMenu(SettingsMenu.CONFIGURATIONS);
@@ -202,17 +203,6 @@ public class Menu {
             STDOUT.info(SHOW_MENU, settingsPosition, settingsMenu.getSettingsValue());
         }
         STDOUT.info(GO_BACK);
-    }
-
-    private int getUserInput() {
-        String lineInput = scanner.nextLine();
-        if (NumberUtils.isCreatable(lineInput)) {
-            input = Integer.parseInt(lineInput);
-        } else {
-            STDOUT.info(WRONG_NUMBER);
-            input = getUserInput();
-        }
-        return input;
     }
 
 }
