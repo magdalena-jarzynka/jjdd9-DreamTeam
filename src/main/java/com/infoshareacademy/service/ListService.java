@@ -20,9 +20,8 @@ public class ListService {
     private static final Scanner scanner = new Scanner(System.in);
     public static final String AUTHOR = "AUTHOR";
     private int input;
-    private int numberOfPages;
     private long positionNumber;
-    private int genrePosition;
+    private int genreNumber;
     private FavouritesMenu favouritesMenu = new FavouritesMenu();
 
     public int getUserInput() {
@@ -38,21 +37,6 @@ public class ListService {
             input = getUserInput();
         }
         return input;
-    }
-
-    public int getPositionsPerPage() {
-        return getUserInput();
-    }
-
-    public int getPagesCount(int positionsPerPage, int numberOfBooks) {
-        if (positionsPerPage > 0) {
-            numberOfPages = (int) Math.ceil((double) numberOfBooks / positionsPerPage);
-        }
-        return numberOfPages;
-    }
-
-    public long findFirstPosition(int currentPageNumber, int positionsPerPage) {
-        return ((long) currentPageNumber - 1) * positionsPerPage;
     }
 
     public void showBookDetails() {
@@ -80,21 +64,21 @@ public class ListService {
     public void showGenresMenu() {
         GenreService genreService = new GenreService();
         List<Genre> genresList = genreService.findAllGenres();
-        genrePosition = 1;
+        genreNumber = 1;
 
-        genresList.stream()
+        genresList
                 .forEach(genre ->
-                        STDOUT.info("{}. {}\n", genrePosition++, genre.getName()));
+                        STDOUT.info("{}. {}\n", genreNumber++, genre.getName()));
     }
 
-    public void showBookList(Map<Long, Book> books, long firstPositionOnPage, int positionsPerPage) {
-        positionNumber = findPositionNumber(firstPositionOnPage);
+    public void showBookList(Map<Long, Book> books, long firstPositionOnPage, long positionNumber, int positionsPerPage) {
+        this.positionNumber = positionNumber;
         getBookSet(books).stream()
                 .skip(firstPositionOnPage)
                 .limit(positionsPerPage)
                 .forEach(book ->
                         STDOUT.info("{}{}.Tytuł: {}{} \n {} Autor: {}{} \n {} ID: {}{}{} \n\n",
-                                ConsoleColors.BLACK_BOLD.getColorType(), positionNumber++,
+                                ConsoleColors.BLACK_BOLD.getColorType(), this.positionNumber++,
                                 ConsoleColors.RED.getColorType(), book.getValue().getTitle(),
                                 ConsoleColors.BLACK_BOLD.getColorType(), ConsoleColors.BLUE.getColorType(),
                                 book.getValue().getAuthors().get(0).getName(), ConsoleColors.BLACK_BOLD.getColorType(),
@@ -115,10 +99,6 @@ public class ListService {
             input = getIdChoice();
         }
         return input;
-    }
-
-    public long findPositionNumber(long firstPositionOnPage) {
-        return firstPositionOnPage + 1;
     }
 
     public SortedSet<Map.Entry<Long, Book>> getBookSet(Map<Long, Book> books) {

@@ -1,9 +1,11 @@
 package com.infoshareacademy.action;
 
 import com.infoshareacademy.ConsoleColors;
+import com.infoshareacademy.input.UserInputService;
 import com.infoshareacademy.menu.item.FavouritesMenu;
 import com.infoshareacademy.object.Book;
 import com.infoshareacademy.service.ListService;
+import com.infoshareacademy.service.PageService;
 
 import java.util.Map;
 
@@ -21,34 +23,34 @@ public class BookListService {
     private int positionsPerPage;
     private int currentPageNumber;
     private FavouritesMenu favouritesMenu = new FavouritesMenu();
+    UserInputService userInputService = new UserInputService();
     ListService listService = new ListService();
+    private PageService pageService = new PageService();
 
     public BookListService() {
         this.currentPageNumber = 1;
     }
 
     public void run(Map<Long, Book> books) {
-        STDOUT.info("\n Ile pozycji wyświetlić na jednej stronie? \n");
-        positionsPerPage = listService.getPositionsPerPage();
-        int numberOfPages = listService.getPagesCount(positionsPerPage, books.size());
+        pageService.choosePagesCount(books.size());
         do {
             cleanTerminal();
             getBooksList(books);
             int input;
-            input = listService.getUserInput();
+            input = userInputService.getUserInput();
             switch (input) {
                 case 1:
-                    if (currentPageNumber < numberOfPages) {
-                        currentPageNumber = currentPageNumber + 1;
+                    if (!pageService.isLastPage()) {
+                        pageService.increasePagesCount();
                     }
                     break;
                 case 2:
-                    if (currentPageNumber > 1) {
-                        currentPageNumber = currentPageNumber - 1;
+                    if (!pageService.isFirstPage()) {
+                        pageService.decreasePagesCount();
                     }
                     break;
                 case 3:
-                    input = listService.getUserInput();
+                    input = userInputService.getUserInput();
                     favouritesMenu.add(input);
                     break;
                 case 4:
@@ -67,10 +69,10 @@ public class BookListService {
 
     public void getBooksList(Map<Long, Book> books) {
         cleanTerminal();
-        int numberOfPages = listService.getPagesCount(positionsPerPage, books.size());
-        long firstPositionOnPage = listService.findFirstPosition(currentPageNumber, positionsPerPage);
-        listService.showBookList(books, firstPositionOnPage, positionsPerPage);
-        if (currentPageNumber == numberOfPages) {
+        //int numberOfPages = listService.getPagesCount(positionsPerPage, books.size());
+        listService.showBookList(books, pageService.findFirstPosition(),
+                pageService.findFirstPosition(), pageService.getPositionsPerPage());
+        if (pageService.isLastPage()) {
             STDOUT.info(LAST_PAGE);
         } else {
             STDOUT.info(NEXT_PAGE);
@@ -79,7 +81,8 @@ public class BookListService {
         STDOUT.info(SEE_DETAILS);
         STDOUT.info(GROUP_BY_CATEGORY);
 
-        STDOUT.info("\n{}Strona {} z {}.{}\n", ConsoleColors.BLACK_UNDERLINED.getColorType(), currentPageNumber,
-                numberOfPages, ConsoleColors.RESET.getColorType());
+        STDOUT.info("\n{}Strona {} z {}.{}\n",
+                ConsoleColors.BLACK_UNDERLINED.getColorType(), pageService.getCurrentPageNumber(),
+                pageService.getNumberOfPages(), ConsoleColors.RESET.getColorType());
     }
 }
