@@ -2,28 +2,27 @@ package com.infoshareacademy.menu;
 
 import com.infoshareacademy.action.*;
 import com.infoshareacademy.action.search.Search;
+import com.infoshareacademy.input.UserInputService;
 import com.infoshareacademy.menu.item.*;
 import com.infoshareacademy.service.BookService;
-import org.apache.commons.lang3.math.NumberUtils;
-
-import java.util.Scanner;
 
 import static com.infoshareacademy.menu.MenuUtils.*;
 
 public class Menu {
     private static final String SHOW_MENU = "{}. {} \n";
     private static final String GO_BACK = "Wybierz 0 aby wrócić do głównego Menu. \n";
-    private static final Scanner scanner = new Scanner(System.in);
     private int input = 0;
     private BookService bookService = new BookService();
     private FavouritesMenu favouritesMenu = new FavouritesMenu();
+    private BookListService bookListService = new BookListService();
+    private BooksManager booksManager = new BooksManager();
+    UserInputService userInputService = new UserInputService();
 
-    public void run() {
+    public void openMainMenu() {
         Configurations.setDefaultProperties();
         do {
-            input = 0;
             showMainMenu();
-            getUserInput();
+            input = userInputService.getUserInput();
             STDOUT.info("\n");
             switch (input) {
                 case 1:
@@ -61,7 +60,7 @@ public class Menu {
         do {
             showBooksMenu();
             input = 0;
-            input = getUserInput();
+            input = userInputService.getUserInput();
             switch (input) {
                 case 1:
                     getBooksMenu(BookListMenu.BOOK_LIST);
@@ -70,7 +69,7 @@ public class Menu {
                     getBooksMenu(BookListMenu.SEARCH);
                     break;
                 case 3:
-                    getBooksMenu(BookListMenu.BOOK_DETAILS);
+                    getBooksMenu(BookListMenu.BOOKS_MANAGEMENT);
                     break;
                 case 0:
                     return;
@@ -81,18 +80,16 @@ public class Menu {
     }
 
     public void getBooksMenu(BookListMenu input) {
-        BookListService bookListService = new BookListService();
         Search search = new Search();
-        Details details = new Details();
         switch (input) {
             case BOOK_LIST:
                 bookListService.run(bookService.findAllBooks());
                 break;
             case SEARCH:
-                search.run();
+                search.getSearchingCriteria();
                 break;
             default:
-                details.print();
+                booksManager.openBooksManager();
         }
     }
 
@@ -114,7 +111,7 @@ public class Menu {
         do {
             input = 0;
             showReservationMenu();
-            input = getUserInput();
+            input = userInputService.getUserInput();
             switch (input) {
                 case 1:
                     getReservationMenu(ReservationMenu.NEW_RESERVATION);
@@ -150,14 +147,13 @@ public class Menu {
             STDOUT.info(SHOW_MENU, reservationPosition, reservationMenu.getReservationValue());
         }
         STDOUT.info(GO_BACK);
-
     }
 
     private void chooseSettingsMenu() {
         do {
             input = 0;
             showSettingsMenu();
-            input = getUserInput();
+            input = userInputService.getUserInput();
             switch (input) {
                 case 1:
                     getSettingsMenu(SettingsMenu.CONFIGURATIONS);
@@ -185,7 +181,7 @@ public class Menu {
                 configurations.print();
                 break;
             case SORTING:
-                sortingOptions.run();
+                sortingOptions.getSortingOptions();
                 break;
             default:
                 dataFormat.print();
@@ -202,17 +198,6 @@ public class Menu {
             STDOUT.info(SHOW_MENU, settingsPosition, settingsMenu.getSettingsValue());
         }
         STDOUT.info(GO_BACK);
-    }
-
-    private int getUserInput() {
-        String lineInput = scanner.nextLine();
-        if (NumberUtils.isCreatable(lineInput)) {
-            input = Integer.parseInt(lineInput);
-        } else {
-            STDOUT.info(WRONG_NUMBER);
-            input = getUserInput();
-        }
-        return input;
     }
 
 }

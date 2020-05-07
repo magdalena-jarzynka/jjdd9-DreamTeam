@@ -12,7 +12,7 @@ public class FragmentService {
     public String getFragment(Book book) {
         return Optional.ofNullable(book)
                 .map(Book::getBookFragment)
-                .map(FragmentData::getFragment)
+                .map(FragmentData::getHtml)
                 .filter(fragment -> !((String) fragment).isEmpty())
                 .orElse(properties.getProperty("NONE"));
     }

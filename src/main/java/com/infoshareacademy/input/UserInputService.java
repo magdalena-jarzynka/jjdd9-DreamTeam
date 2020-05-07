@@ -26,3 +26,4 @@ public class UserInputService {
         return input;
     }
 }
+

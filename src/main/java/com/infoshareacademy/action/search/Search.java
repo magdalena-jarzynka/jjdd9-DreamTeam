@@ -9,7 +9,7 @@ public class Search {
 
     CriteriaChoice userCriteria = new CriteriaChoice();
 
-    public void run() {
+    public void getSearchingCriteria() {
         do {
             showSearchPanel();
             switch (getUserChoice()) {
@@ -43,10 +43,10 @@ public class Search {
     private void showSearchPanel() {
         STDOUT.info("\033\143");
         STDOUT.info("WYSZUKIWANIE KSIĄŻEK \n\n");
-        if(userCriteria.getActiveCriteria()[0]) {
+        if (userCriteria.getActiveCriteria()[0]) {
             STDOUT.info("Tytuł: {} \n", userCriteria.getTitle());
         }
-        if(userCriteria.getActiveCriteria()[1]) {
+        if (userCriteria.getActiveCriteria()[1]) {
             STDOUT.info("Autor: {} \n", userCriteria.getAuthor());
         }
         if (userCriteria.getActiveCriteria()[2]) {

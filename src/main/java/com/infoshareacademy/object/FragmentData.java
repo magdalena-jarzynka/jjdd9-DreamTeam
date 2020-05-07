@@ -11,7 +11,7 @@ public class FragmentData {
         this.html = html;
     }
 
-    public String getFragment() {
+    public String getHtml() {
         return Jsoup.parse(html).text();
     }
 }
