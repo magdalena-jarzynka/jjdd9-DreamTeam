@@ -52,7 +52,7 @@ public class ListService {
         do {
             id = getIdChoice();
             if (bookService.findAllBooks().containsKey(id)) {
-                Breadcrumbs.getInstance().addBreadcrumb(BookListMenu.BOOK_DETAILS.getBookDescription());
+                Breadcrumbs.getInstance().addBreadcrumb(BookListMenu.BOOKS_MANAGEMENT.getBookDescription());
                 STDOUT.info(Breadcrumbs.getInstance().displayBreadcrumb());
                 break;
             } else {

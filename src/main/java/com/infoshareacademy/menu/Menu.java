@@ -76,6 +76,7 @@ public class Menu {
                     getBooksMenu(BookListMenu.SEARCH);
                     break;
                 case 3:
+                    Breadcrumbs.getInstance().addBreadcrumb(BookListMenu.BOOKS_MANAGEMENT.getBookDescription());
                     getBooksMenu(BookListMenu.BOOKS_MANAGEMENT);
                     break;
                 case 0:
