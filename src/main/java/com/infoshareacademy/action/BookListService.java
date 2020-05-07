@@ -1,6 +1,7 @@
 package com.infoshareacademy.action;
 
 import com.infoshareacademy.ConsoleColors;
+import com.infoshareacademy.menu.Breadcrumbs;
 import com.infoshareacademy.input.UserInputService;
 import com.infoshareacademy.menu.item.FavouritesMenu;
 import com.infoshareacademy.object.Book;
@@ -32,6 +33,7 @@ public class BookListService {
         int numberOfPages = listService.getPagesCount(positionsPerPage, books.size());
         do {
             cleanTerminal();
+            STDOUT.info(Breadcrumbs.getInstance().displayBreadcrumb());
             getBooksList(books);
             int input;
             input = userInputService.getUserInput();
@@ -54,6 +56,7 @@ public class BookListService {
                     listService.showBookDetails();
                     break;
                 case 0:
+                    Breadcrumbs.getInstance().removeBreadcrumb();
                     return;
                 default:
                     STDOUT.info(WRONG_NUMBER);
@@ -72,15 +75,12 @@ public class BookListService {
         if (currentPageNumber == numberOfPages) {
             STDOUT.info(LAST_PAGE);
             STDOUT.info(SEE_DETAILS);
-            STDOUT.info("\n Wybierz 3 i numer ID, aby dodać pozycję do ulubionych.");
-
         } else {
             STDOUT.info(NEXT_PAGE);
             STDOUT.info(SEE_DETAILS);
         }
 
         STDOUT.info("\n Wybierz 3 i numer ID, aby dodać pozycję do ulubionych.");
-
 
         STDOUT.info("\n{}Strona {} z {}.{}\n", ConsoleColors.BLACK_UNDERLINED.getColorType(), currentPageNumber,
                 numberOfPages, ConsoleColors.RESET.getColorType());

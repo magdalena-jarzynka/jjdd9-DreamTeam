@@ -1,5 +1,7 @@
 package com.infoshareacademy.action;
 
+import com.infoshareacademy.menu.Breadcrumbs;
+import org.apache.commons.lang3.math.NumberUtils;
 import com.infoshareacademy.input.UserInputService;
 
 import java.util.Scanner;
@@ -54,6 +56,7 @@ public class SortingOptions {
     }
 
     public void getSortingOptions() {
+        STDOUT.info(Breadcrumbs.getInstance().displayBreadcrumb());
         getSortingBy();
         getSortingOrder();
         Configurations.writeToProperties(SORTING_BY, sortingBy);

@@ -1,8 +1,11 @@
 package com.infoshareacademy.action.search;
 
 import com.infoshareacademy.input.UserInputService;
+import com.infoshareacademy.menu.Breadcrumbs;
+import com.infoshareacademy.menu.item.BookListMenu;
 
 import static com.infoshareacademy.menu.MenuUtils.STDOUT;
+import static com.infoshareacademy.menu.MenuUtils.cleanTerminal;
 
 public class Search {
     private UserInputService userInputService = new UserInputService();
@@ -27,6 +30,7 @@ public class Search {
                 }
                 case 4: {
                     Filtration.run(userCriteria);
+                    Breadcrumbs.getInstance().addBreadcrumb(BookListMenu.SEARCH.getBookDescription());
                     break;
                 }
                 case 5: {
@@ -34,6 +38,7 @@ public class Search {
                     break;
                 }
                 case 0: {
+                    Breadcrumbs.getInstance().removeBreadcrumb();
                     return;
                 }
             }
@@ -41,7 +46,8 @@ public class Search {
     }
 
     private void showSearchPanel() {
-        STDOUT.info("\033\143");
+        cleanTerminal();
+        STDOUT.info(Breadcrumbs.getInstance().displayBreadcrumb());
         STDOUT.info("WYSZUKIWANIE KSIĄŻEK \n\n");
         if (userCriteria.getActiveCriteria()[0]) {
             STDOUT.info("Tytuł: {} \n", userCriteria.getTitle());

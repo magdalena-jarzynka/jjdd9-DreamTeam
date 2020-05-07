@@ -2,6 +2,7 @@ package com.infoshareacademy.menu.item;
 
 import com.infoshareacademy.ConsoleColors;
 import com.infoshareacademy.input.UserInputService;
+import com.infoshareacademy.menu.Breadcrumbs;
 import com.infoshareacademy.object.Book;
 import com.infoshareacademy.service.BookService;
 import com.infoshareacademy.service.FavouritesService;
@@ -18,6 +19,7 @@ public class FavouritesMenu {
     public void chooseFavouritesMenu() {
         do {
             cleanTerminal();
+            STDOUT.info(Breadcrumbs.getInstance().displayBreadcrumb());
             STDOUT.info("ULUBIONE \n\n");
             STDOUT.info("W tej sekcji widoczne są pozycje dodane do Ulubionych. \n\n");
 
@@ -38,6 +40,7 @@ public class FavouritesMenu {
                     remove(userInputService.getUserInput());
                     break;
                 case 0:
+                    Breadcrumbs.getInstance().removeBreadcrumb();
                     return;
                 default:
                     STDOUT.info("Podaj odpowiednią cyfrę");
