@@ -3,6 +3,8 @@ package com.infoshareacademy.service;
 import com.infoshareacademy.ConsoleColors;
 import com.infoshareacademy.action.Configurations;
 import com.infoshareacademy.input.UserInputService;
+import com.infoshareacademy.menu.Breadcrumbs;
+import com.infoshareacademy.menu.item.BookListMenu;
 import com.infoshareacademy.menu.item.FavouritesMenu;
 import com.infoshareacademy.object.Author;
 import com.infoshareacademy.object.Book;
@@ -50,6 +52,8 @@ public class ListService {
         do {
             id = getIdChoice();
             if (bookService.findAllBooks().containsKey(id)) {
+                Breadcrumbs.getInstance().addBreadcrumb(BookListMenu.BOOK_DETAILS.getBookDescription());
+                STDOUT.info(Breadcrumbs.getInstance().displayBreadcrumb());
                 break;
             } else {
                 STDOUT.info("\nPozycja o podanym ID nie istnieje\n");
@@ -62,6 +66,7 @@ public class ListService {
             input = userInputService.getUserInput();
             switch (input) {
                 case 0:
+                    Breadcrumbs.getInstance().removeBreadcrumb();
                     return;
                 case 1:
                     favouritesMenu.performAction(id);

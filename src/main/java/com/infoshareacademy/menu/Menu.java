@@ -26,15 +26,19 @@ public class Menu {
             STDOUT.info("\n");
             switch (input) {
                 case 1:
+                    Breadcrumbs.getInstance().addBreadcrumb(MainMenu.BROWSE.getMenuDescription());
                     chooseBooksMenu();
                     break;
                 case 2:
+                    Breadcrumbs.getInstance().addBreadcrumb(MainMenu.BOOK_RESERVATION.getMenuDescription());
                     chooseReservationMenu();
                     break;
                 case 3:
+                    Breadcrumbs.getInstance().addBreadcrumb(MainMenu.FAVOURITES.getMenuDescription());
                     favouritesMenu.chooseFavouritesMenu();
                     break;
                 case 4:
+                    Breadcrumbs.getInstance().addBreadcrumb(MainMenu.SETTINGS.getMenuDescription());
                     chooseSettingsMenu();
                     break;
                 case 5:
@@ -58,20 +62,24 @@ public class Menu {
 
     private void chooseBooksMenu() {
         do {
+            STDOUT.info(Breadcrumbs.getInstance().displayBreadcrumb());
             showBooksMenu();
             input = 0;
             input = userInputService.getUserInput();
             switch (input) {
                 case 1:
+                    Breadcrumbs.getInstance().addBreadcrumb(BookListMenu.BOOK_LIST.getBookDescription());
                     getBooksMenu(BookListMenu.BOOK_LIST);
                     break;
                 case 2:
+                    Breadcrumbs.getInstance().addBreadcrumb(BookListMenu.SEARCH.getBookDescription());
                     getBooksMenu(BookListMenu.SEARCH);
                     break;
                 case 3:
                     getBooksMenu(BookListMenu.BOOKS_MANAGEMENT);
                     break;
                 case 0:
+                    Breadcrumbs.getInstance().removeBreadcrumb();
                     return;
                 default:
                     STDOUT.info(WRONG_NUMBER);
@@ -83,6 +91,7 @@ public class Menu {
         Search search = new Search();
         switch (input) {
             case BOOK_LIST:
+                STDOUT.info(Breadcrumbs.getInstance().displayBreadcrumb());
                 bookListService.run(bookService.findAllBooks());
                 break;
             case SEARCH:
@@ -109,6 +118,7 @@ public class Menu {
 
     private void chooseReservationMenu() {
         do {
+            STDOUT.info(Breadcrumbs.getInstance().displayBreadcrumb());
             input = 0;
             showReservationMenu();
             input = userInputService.getUserInput();
@@ -120,6 +130,7 @@ public class Menu {
                     getReservationMenu(ReservationMenu.CANCEL_RESERVATION);
                     break;
                 case 0:
+                    Breadcrumbs.getInstance().removeBreadcrumb();
                     return;
                 default:
                     STDOUT.info(WRONG_NUMBER);
@@ -151,6 +162,7 @@ public class Menu {
 
     private void chooseSettingsMenu() {
         do {
+            STDOUT.info(Breadcrumbs.getInstance().displayBreadcrumb());
             input = 0;
             showSettingsMenu();
             input = userInputService.getUserInput();
@@ -159,12 +171,15 @@ public class Menu {
                     getSettingsMenu(SettingsMenu.CONFIGURATIONS);
                     break;
                 case 2:
+                    Breadcrumbs.getInstance().addBreadcrumb(SettingsMenu.SORTING.getSettingsValue());
                     getSettingsMenu(SettingsMenu.SORTING);
+                    Breadcrumbs.getInstance().removeBreadcrumb();
                     break;
                 case 3:
                     getSettingsMenu(SettingsMenu.FORMAT);
                     break;
                 case 0:
+                    Breadcrumbs.getInstance().removeBreadcrumb();
                     return;
                 default:
                     STDOUT.info(WRONG_NUMBER);
