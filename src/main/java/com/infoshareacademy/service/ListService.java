@@ -4,6 +4,7 @@ import com.infoshareacademy.ConsoleColors;
 import com.infoshareacademy.action.Configurations;
 import com.infoshareacademy.input.UserInputService;
 import com.infoshareacademy.menu.item.FavouritesMenu;
+import com.infoshareacademy.object.Author;
 import com.infoshareacademy.object.Book;
 import com.infoshareacademy.service.sorting.SortByAuthorStrategy;
 import com.infoshareacademy.service.sorting.SortByTitleStrategy;
@@ -12,6 +13,7 @@ import org.apache.commons.lang3.math.NumberUtils;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.SortedSet;
+import java.util.stream.Collectors;
 
 import static com.infoshareacademy.menu.MenuUtils.STDOUT;
 import static com.infoshareacademy.menu.MenuUtils.WRONG_NUMBER;
@@ -80,9 +82,12 @@ public class ListService {
                                 ConsoleColors.BLACK_BOLD.getColorType(), positionNumber++,
                                 ConsoleColors.RED.getColorType(), book.getValue().getTitle(),
                                 ConsoleColors.BLACK_BOLD.getColorType(), ConsoleColors.BLUE.getColorType(),
-                                book.getValue().getAuthors().get(0).getName(), ConsoleColors.BLACK_BOLD.getColorType(),
-                                ConsoleColors.YELLOW_BOLD.getColorType(), book.getKey(),
-                                ConsoleColors.RESET.getColorType()));
+                                book.getValue().getAuthors().stream()
+                                        .filter(__ -> !(book.getValue().getAuthors()).isEmpty())
+                                        .map(Author::getName)
+                                        .collect(Collectors.joining(", ")),
+                                ConsoleColors.BLACK_BOLD.getColorType(), ConsoleColors.YELLOW_BOLD.getColorType(),
+                                book.getKey(), ConsoleColors.RESET.getColorType()));
     }
 
     public int getIdChoice() {

@@ -5,16 +5,12 @@ import com.infoshareacademy.action.search.Search;
 import com.infoshareacademy.input.UserInputService;
 import com.infoshareacademy.menu.item.*;
 import com.infoshareacademy.service.BookService;
-import org.apache.commons.lang3.math.NumberUtils;
-
-import java.util.Scanner;
 
 import static com.infoshareacademy.menu.MenuUtils.*;
 
 public class Menu {
     private static final String SHOW_MENU = "{}. {} \n";
     private static final String GO_BACK = "Wybierz 0 aby wrócić do głównego Menu. \n";
-    private static final Scanner scanner = new Scanner(System.in);
     private int input = 0;
     private BookService bookService = new BookService();
     private FavouritesMenu favouritesMenu = new FavouritesMenu();
@@ -22,7 +18,7 @@ public class Menu {
     private BooksManager booksManager = new BooksManager();
     UserInputService userInputService = new UserInputService();
 
-    public void run() {
+    public void openMainMenu() {
         Configurations.setDefaultProperties();
         do {
             showMainMenu();
@@ -90,10 +86,10 @@ public class Menu {
                 bookListService.run(bookService.findAllBooks());
                 break;
             case SEARCH:
-                search.run();
+                search.getSearchingCriteria();
                 break;
             default:
-                booksManager.run();
+                booksManager.openBooksManager();
         }
     }
 
@@ -151,7 +147,6 @@ public class Menu {
             STDOUT.info(SHOW_MENU, reservationPosition, reservationMenu.getReservationValue());
         }
         STDOUT.info(GO_BACK);
-
     }
 
     private void chooseSettingsMenu() {
@@ -186,7 +181,7 @@ public class Menu {
                 configurations.print();
                 break;
             case SORTING:
-                sortingOptions.run();
+                sortingOptions.getSortingOptions();
                 break;
             default:
                 dataFormat.print();

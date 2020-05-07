@@ -1,7 +1,6 @@
 package com.infoshareacademy.action;
 
 import com.infoshareacademy.input.UserInputService;
-import org.apache.commons.lang3.math.NumberUtils;
 
 import java.util.Scanner;
 
@@ -16,7 +15,6 @@ public class SortingOptions {
     private String sortingBy;
     private String sortingOrder;
     private UserInputService userInputService = new UserInputService();
-
 
 
     public void getSortingBy() {
@@ -55,7 +53,7 @@ public class SortingOptions {
         }
     }
 
-    public void run() {
+    public void getSortingOptions() {
         getSortingBy();
         getSortingOrder();
         Configurations.writeToProperties(SORTING_BY, sortingBy);

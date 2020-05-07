@@ -10,7 +10,7 @@ public class BooksManager {
     private BooksOperations booksOperations = new BooksOperations();
     private UserInputService userInputService = new UserInputService();
 
-    public void run() {
+    public void openBooksManager() {
         STDOUT.info("Wprowadź 1, aby dodać książkę.\n");
         STDOUT.info("Wprowadź 2, aby usunąć książkę.\n");
         STDOUT.info("Wprowadź 3, aby zmodyfikować istniejącą książkę.\n");

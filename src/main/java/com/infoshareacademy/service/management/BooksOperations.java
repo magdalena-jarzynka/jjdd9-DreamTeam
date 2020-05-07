@@ -12,17 +12,21 @@ import java.util.Scanner;
 import static com.infoshareacademy.menu.MenuUtils.*;
 
 public class BooksOperations {
-    private static final String ENTER_TITLE = "Proszę wpisać tytuł: ";
-    private static final String ENTER_AUTHOR = "Proszę wpisać autora: ";
+    private static final String ENTER_TITLE = "Wpisz tytuł: ";
     private static final String ENTER_TRANSLATORS = "Proszę wpisać tłumacza/y: ";
-    private static final String ENTER_EPOCH = "Proszę wpisać epokę literacką: ";
-    private static final String ENTER_GENRE = "Proszę wpisać gatunek książki: ";
-    private static final String ENTER_KIND = "Proszę wpisać gatunek literacki: ";
     private static final String ENTER_ISBN = "Proszę wpisać numer ISBN książki: ";
     private static final String ENTER_FRAGMENT = "Proszę wpisać fragment książki: ";
-    private static final String ENTER_MEDIA = "Proszę wpisać nazwę audiobooka jeżeli posiada: ";
     private static final String BOOK_ADDED = "\n\nZakończono dodawanie pozycji, wciśnij ENTER aby wrócić " +
             "do poprzedniego widoku.\n\n";
+    private static final int NEW_TITLE = 1;
+    private static final int NEW_AUTHORS = 2;
+    private static final int NEW_TRANSLATORS = 3;
+    private static final int NEW_EPOCHS = 4;
+    private static final int NEW_GENRES = 5;
+    private static final int NEW_KINDS = 6;
+    private static final int NEW_ISBN = 7;
+    private static final int NEW_FRAGMENT = 8;
+    private static final int NEW_MEDIA = 9;
     private final Scanner scanner = new Scanner(System.in);
     private Book book = new Book();
     private BookService bookService = new BookService();
@@ -39,22 +43,17 @@ public class BooksOperations {
         cleanTerminal();
         STDOUT.info(ENTER_TITLE);
         bookDefinitionService.defineTitle(book, scanner.nextLine());
-        STDOUT.info(ENTER_AUTHOR);
-        bookDefinitionService.defineAuthor(book, scanner.nextLine());
+        bookDefinitionService.defineAuthor(book);
         STDOUT.info(ENTER_TRANSLATORS);
-        bookDefinitionService.defineTranslator(book, scanner.nextLine());
-        STDOUT.info(ENTER_EPOCH);
-        bookDefinitionService.defineEpoch(book, scanner.nextLine());
-        STDOUT.info(ENTER_GENRE);
-        bookDefinitionService.defineGenre(book, scanner.nextLine());
-        STDOUT.info(ENTER_KIND);
-        bookDefinitionService.defineKind(book, scanner.nextLine());
+        bookDefinitionService.defineTranslator(book);
+        bookDefinitionService.defineEpoch(book);
+        bookDefinitionService.defineGenre(book);
+        bookDefinitionService.defineKind(book);
         STDOUT.info(ENTER_ISBN);
         bookDefinitionService.defineIsbn(book, scanner.nextLine());
         STDOUT.info(ENTER_FRAGMENT);
         bookDefinitionService.defineFragment(book, scanner.nextLine());
-        STDOUT.info(ENTER_MEDIA);
-        bookDefinitionService.defineMedia(book, scanner.nextLine());
+        bookDefinitionService.defineMedia(book);
         STDOUT.info(BOOK_ADDED);
         scanner.nextLine();
         return book;
@@ -139,41 +138,35 @@ public class BooksOperations {
             STDOUT.info("Wybierz 0, aby zakończyć edycję książki.\n");
             int userChoice = userInputService.getUserInput();
             switch (userChoice) {
-                case 1:
+                case NEW_TITLE:
                     STDOUT.info(ENTER_TITLE);
                     bookDefinitionService.defineTitle(book, scanner.nextLine());
                     break;
-                case 2:
-                    STDOUT.info(ENTER_AUTHOR);
-                    bookDefinitionService.defineAuthor(book, scanner.nextLine());
+                case NEW_AUTHORS:
+                    bookDefinitionService.defineAuthor(book);
                     break;
-                case 3:
-                    STDOUT.info(ENTER_TRANSLATORS);
-                    bookDefinitionService.defineTranslator(book, scanner.nextLine());
+                case NEW_TRANSLATORS:
+                    bookDefinitionService.defineTranslator(book);
                     break;
-                case 4:
-                    STDOUT.info(ENTER_EPOCH);
-                    bookDefinitionService.defineEpoch(book, scanner.nextLine());
+                case NEW_EPOCHS:
+                    bookDefinitionService.defineEpoch(book);
                     break;
-                case 5:
-                    STDOUT.info(ENTER_GENRE);
-                    bookDefinitionService.defineGenre(book, scanner.nextLine());
+                case NEW_GENRES:
+                    bookDefinitionService.defineGenre(book);
                     break;
-                case 6:
-                    STDOUT.info(ENTER_KIND);
-                    bookDefinitionService.defineKind(book, scanner.nextLine());
+                case NEW_KINDS:
+                    bookDefinitionService.defineKind(book);
                     break;
-                case 7:
+                case NEW_ISBN:
                     STDOUT.info(ENTER_ISBN);
                     bookDefinitionService.defineIsbn(book, scanner.nextLine());
                     break;
-                case 8:
+                case NEW_FRAGMENT:
                     STDOUT.info(ENTER_FRAGMENT);
                     bookDefinitionService.defineTitle(book, scanner.nextLine());
                     break;
-                case 9:
-                    STDOUT.info(ENTER_MEDIA);
-                    bookDefinitionService.defineMedia(book, scanner.nextLine());
+                case NEW_MEDIA:
+                    bookDefinitionService.defineMedia(book);
                     break;
                 case 0:
                     return;
