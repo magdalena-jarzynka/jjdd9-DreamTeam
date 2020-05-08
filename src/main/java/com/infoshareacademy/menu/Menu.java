@@ -1,9 +1,14 @@
 package com.infoshareacademy.menu;
 
-import com.infoshareacademy.action.*;
+import com.infoshareacademy.action.BookListService;
+import com.infoshareacademy.action.BooksManager;
+import com.infoshareacademy.action.Configurations;
+import com.infoshareacademy.action.SortingOptions;
 import com.infoshareacademy.action.search.Search;
 import com.infoshareacademy.input.UserInputService;
-import com.infoshareacademy.menu.item.*;
+import com.infoshareacademy.menu.item.BookListMenu;
+import com.infoshareacademy.menu.item.FavouritesMenu;
+import com.infoshareacademy.menu.item.MainMenu;
 import com.infoshareacademy.service.BookService;
 
 import static com.infoshareacademy.menu.MenuUtils.*;
@@ -16,7 +21,8 @@ public class Menu {
     private FavouritesMenu favouritesMenu = new FavouritesMenu();
     private BookListService bookListService = new BookListService();
     private BooksManager booksManager = new BooksManager();
-    UserInputService userInputService = new UserInputService();
+    private UserInputService userInputService = new UserInputService();
+    private SortingOptions sortingOptions = new SortingOptions();
 
     public void openMainMenu() {
         Configurations.setDefaultProperties();
@@ -30,18 +36,13 @@ public class Menu {
                     chooseBooksMenu();
                     break;
                 case 2:
-                    Breadcrumbs.getInstance().addBreadcrumb(MainMenu.BOOK_RESERVATION.getMenuDescription());
-                    chooseReservationMenu();
-                    break;
-                case 3:
                     Breadcrumbs.getInstance().addBreadcrumb(MainMenu.FAVOURITES.getMenuDescription());
                     favouritesMenu.chooseFavouritesMenu();
                     break;
-                case 4:
-                    Breadcrumbs.getInstance().addBreadcrumb(MainMenu.SETTINGS.getMenuDescription());
-                    chooseSettingsMenu();
+                case 3:
+                    sortingOptions.getSortingOptions();
                     break;
-                case 5:
+                case 4:
                     return;
                 default:
                     break;
@@ -49,7 +50,6 @@ public class Menu {
         }
         while (true);
     }
-
 
     public void showMainMenu() {
         cleanTerminal();
@@ -112,106 +112,6 @@ public class Menu {
         for (BookListMenu bookListMenu : BookListMenu.values()) {
             int bookPosition = bookListMenu.ordinal() + 1;
             STDOUT.info(SHOW_MENU, bookPosition, bookListMenu.getBookDescription());
-        }
-        STDOUT.info(GO_BACK);
-    }
-
-
-    private void chooseReservationMenu() {
-        do {
-            STDOUT.info(Breadcrumbs.getInstance().displayBreadcrumb());
-            input = 0;
-            showReservationMenu();
-            input = userInputService.getUserInput();
-            switch (input) {
-                case 1:
-                    getReservationMenu(ReservationMenu.NEW_RESERVATION);
-                    break;
-                case 2:
-                    getReservationMenu(ReservationMenu.CANCEL_RESERVATION);
-                    break;
-                case 0:
-                    Breadcrumbs.getInstance().removeBreadcrumb();
-                    return;
-                default:
-                    STDOUT.info(WRONG_NUMBER);
-            }
-        } while (true);
-    }
-
-    public void getReservationMenu(ReservationMenu input) {
-        NewReservation newReservation = new NewReservation();
-        ReservationCancellation reservationCancellation = new ReservationCancellation();
-        if (input.equals(ReservationMenu.NEW_RESERVATION)) {
-            newReservation.print();
-        } else {
-            reservationCancellation.print();
-        }
-    }
-
-    public void showReservationMenu() {
-        cleanTerminal();
-        STDOUT.info("REZERWACJA KSIĄŻKI \n\n");
-        STDOUT.info("W tej sekcji możesz dokonać rezerwacji lub anulować rezerwację.\n");
-        STDOUT.info("Wybierz czynność, którą chcesz wykonać wprowadzając jej numer. \n");
-        for (ReservationMenu reservationMenu : ReservationMenu.values()) {
-            int reservationPosition = reservationMenu.ordinal() + 1;
-            STDOUT.info(SHOW_MENU, reservationPosition, reservationMenu.getReservationValue());
-        }
-        STDOUT.info(GO_BACK);
-    }
-
-    private void chooseSettingsMenu() {
-        do {
-            STDOUT.info(Breadcrumbs.getInstance().displayBreadcrumb());
-            input = 0;
-            showSettingsMenu();
-            input = userInputService.getUserInput();
-            switch (input) {
-                case 1:
-                    getSettingsMenu(SettingsMenu.CONFIGURATIONS);
-                    break;
-                case 2:
-                    Breadcrumbs.getInstance().addBreadcrumb(SettingsMenu.SORTING.getSettingsValue());
-                    getSettingsMenu(SettingsMenu.SORTING);
-                    Breadcrumbs.getInstance().removeBreadcrumb();
-                    break;
-                case 3:
-                    getSettingsMenu(SettingsMenu.FORMAT);
-                    break;
-                case 0:
-                    Breadcrumbs.getInstance().removeBreadcrumb();
-                    return;
-                default:
-                    STDOUT.info(WRONG_NUMBER);
-            }
-        } while (true);
-    }
-
-    public void getSettingsMenu(SettingsMenu input) {
-        Configurations configurations = new Configurations();
-        SortingOptions sortingOptions = new SortingOptions();
-        DataFormat dataFormat = new DataFormat();
-        switch (input) {
-            case CONFIGURATIONS:
-                configurations.print();
-                break;
-            case SORTING:
-                sortingOptions.getSortingOptions();
-                break;
-            default:
-                dataFormat.print();
-        }
-    }
-
-    public void showSettingsMenu() {
-        cleanTerminal();
-        STDOUT.info("USTAWIENIA \n\n");
-        STDOUT.info("W tej sekcji możesz dokonać konfiguracji sortowania i formatu wyświetlania daty. \n");
-        STDOUT.info("Wybierz pozycję z menu wprowadzając jej numer. \n");
-        for (SettingsMenu settingsMenu : SettingsMenu.values()) {
-            int settingsPosition = settingsMenu.ordinal() + 1;
-            STDOUT.info(SHOW_MENU, settingsPosition, settingsMenu.getSettingsValue());
         }
         STDOUT.info(GO_BACK);
     }
