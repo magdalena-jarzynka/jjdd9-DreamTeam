@@ -60,7 +60,9 @@ public class BooksOperations {
     }
 
     private void add(Book book) {
-        bookService.findAllBooks().put(getNewKey(bookService.findAllBooks()), book);
+        long newKey = getNewKey(bookService.findAllBooks());
+        book.setId(newKey);
+        bookService.findAllBooks().put(newKey, book);
         Map<Long, Book> books = bookService.findAllBooks();
         List<Book> bookList = new ArrayList<>(books.values());
         fileWriter.writeToFile(bookList);

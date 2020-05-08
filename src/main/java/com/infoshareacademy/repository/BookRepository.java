@@ -14,8 +14,8 @@ public class BookRepository {
     private BookRepository() {
         Reader reader = new Reader();
         List<Book> bookList = reader.readBookList();
-        for (int i = 0; i < bookList.size(); i++) {
-            books.put((long) (i + 1), bookList.get(i));
+        for (Book book: bookList) {
+            books.put(book.getId(), book);
         }
     }
 
