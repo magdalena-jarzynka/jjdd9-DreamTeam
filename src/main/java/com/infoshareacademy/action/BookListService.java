@@ -4,6 +4,7 @@ import com.infoshareacademy.ConsoleColors;
 import com.infoshareacademy.input.UserInputService;
 import com.infoshareacademy.menu.item.FavouritesMenu;
 import com.infoshareacademy.object.Book;
+import com.infoshareacademy.service.GroupingService;
 import com.infoshareacademy.service.ListService;
 import com.infoshareacademy.service.PageService;
 
@@ -15,16 +16,13 @@ public class BookListService {
 
     public static final String SEE_DETAILS = "Wybierz 4 aby zobaczyć szczegóły wybranej pozycji.\n";
     private static final String GROUP_BY_CATEGORY = "Wybierz 5 aby pogrupować wyniki według gatunku.\n";
-
-    public static final String LAST_PAGE = "\nTo ostatnia strona. " +
-            "Wybierz 2 aby zobaczyć poprzednią stronę lub 0 aby wyjść do głównego menu. \n";
-    public static final String NEXT_PAGE = "\nWybierz 1 aby zobaczyć następną stronę, 2 aby zobaczyć poprzednią lub 0 aby wyjść do " +
-            "poprzedniego menu. \n";
-    private int positionsPerPage;
+    private static final int INCREASE_PAGE_COUNT = 1;
+    private static final int DECREASE_PAGE_COUNT = 2;
     private int currentPageNumber;
     private FavouritesMenu favouritesMenu = new FavouritesMenu();
     UserInputService userInputService = new UserInputService();
     ListService listService = new ListService();
+    GroupingService groupingService = new GroupingService();
     private PageService pageService = new PageService();
 
     public BookListService() {
@@ -39,12 +37,12 @@ public class BookListService {
             int input;
             input = userInputService.getUserInput();
             switch (input) {
-                case 1:
+                case INCREASE_PAGE_COUNT:
                     if (!pageService.isLastPage()) {
                         pageService.increasePagesCount();
                     }
                     break;
-                case 2:
+                case DECREASE_PAGE_COUNT:
                     if (!pageService.isFirstPage()) {
                         pageService.decreasePagesCount();
                     }
@@ -57,7 +55,7 @@ public class BookListService {
                     listService.showBookDetails();
                     break;
                 case 5:
-                    listService.showGenresMenu();
+                    groupingService.filterByCategory(books);
                     break;
                 case 0:
                     return;
@@ -69,13 +67,12 @@ public class BookListService {
 
     public void getBooksList(Map<Long, Book> books) {
         cleanTerminal();
-        //int numberOfPages = listService.getPagesCount(positionsPerPage, books.size());
         listService.showBookList(books, pageService.findFirstPosition(),
                 pageService.findFirstPosition(), pageService.getPositionsPerPage());
         if (pageService.isLastPage()) {
-            STDOUT.info(LAST_PAGE);
+            STDOUT.info(PageService.LAST_PAGE);
         } else {
-            STDOUT.info(NEXT_PAGE);
+            STDOUT.info(PageService.NEXT_PAGE);
         }
         STDOUT.info("\nWybierz 3 i numer ID, aby dodać pozycję do ulubionych.");
         STDOUT.info(SEE_DETAILS);

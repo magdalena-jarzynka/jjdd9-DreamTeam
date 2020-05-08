@@ -4,12 +4,10 @@ import com.infoshareacademy.ConsoleColors;
 import com.infoshareacademy.action.Configurations;
 import com.infoshareacademy.menu.item.FavouritesMenu;
 import com.infoshareacademy.object.Book;
-import com.infoshareacademy.object.Genre;
 import com.infoshareacademy.service.sorting.SortByAuthorStrategy;
 import com.infoshareacademy.service.sorting.SortByTitleStrategy;
 import org.apache.commons.lang3.math.NumberUtils;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.SortedSet;
@@ -21,7 +19,6 @@ public class ListService {
     public static final String AUTHOR = "AUTHOR";
     private int input;
     private long positionNumber;
-    private int genreNumber;
     private FavouritesMenu favouritesMenu = new FavouritesMenu();
 
     public int getUserInput() {
@@ -59,16 +56,6 @@ public class ListService {
                     STDOUT.info(WRONG_NUMBER);
             }
         } while (true);
-    }
-
-    public void showGenresMenu() {
-        GenreService genreService = new GenreService();
-        List<Genre> genresList = genreService.findAllGenres();
-        genreNumber = 1;
-
-        genresList
-                .forEach(genre ->
-                        STDOUT.info("{}. {}\n", genreNumber++, genre.getName()));
     }
 
     public void showBookList(Map<Long, Book> books, long firstPositionOnPage, long positionNumber, int positionsPerPage) {
