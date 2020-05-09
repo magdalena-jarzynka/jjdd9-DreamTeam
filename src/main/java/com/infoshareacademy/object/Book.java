@@ -7,6 +7,7 @@ import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Book {
+    private Long id;
     private String title;
     private List<Author> authors;
     private List<Author> translators;
@@ -18,6 +19,14 @@ public class Book {
     @JsonProperty("fragment_data")
     private FragmentData bookFragment;
     private List<Media> media;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return title;
