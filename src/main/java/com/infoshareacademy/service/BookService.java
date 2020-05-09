@@ -11,18 +11,8 @@ public class BookService {
         return BookRepository.getInstance().getBooks();
     }
 
-    public int getBooksSize() {
-        return findAllBooks().size();
-    }
-
     public String getBookDetails(Long bookChoice) {
         Map<Long, Book> books = findAllBooks();
-        AuthorService authors = new AuthorService();
-        TranslatorService translators = new TranslatorService();
-        EpochService epochs = new EpochService();
-        GenreService genres = new GenreService();
-        KindService kinds = new KindService();
-        MediaService media = new MediaService();
         FragmentService fragment = new FragmentService();
         IsbnService isbn = new IsbnService();
 

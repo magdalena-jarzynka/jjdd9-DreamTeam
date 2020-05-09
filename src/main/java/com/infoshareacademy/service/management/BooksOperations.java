@@ -4,10 +4,7 @@ import com.infoshareacademy.input.UserInputService;
 import com.infoshareacademy.object.Book;
 import com.infoshareacademy.service.BookService;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 import static com.infoshareacademy.menu.MenuUtils.*;
 
@@ -67,11 +64,15 @@ public class BooksOperations {
     }
 
     private long getNewKey(Map<Long, Book> map) {
-        return map.entrySet()
-                .stream()
-                .max(Map.Entry.comparingByKey())
-                .get()
-                .getKey() + 1;
+        if(map != null || map.isEmpty()){
+            return map.entrySet()
+                    .stream()
+                    .max(Map.Entry.comparingByKey())
+                    .get()
+                    .getKey() + 1;
+        } else {
+            return 1;
+        }
     }
 
     public void removeBookFromRepository() {

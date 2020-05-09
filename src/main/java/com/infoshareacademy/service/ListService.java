@@ -88,7 +88,7 @@ public class ListService {
                                 ConsoleColors.RED.getColorType(), book.getValue().getTitle(),
                                 ConsoleColors.BLACK_BOLD.getColorType(), ConsoleColors.BLUE.getColorType(),
                                 book.getValue().getAuthors().stream()
-                                        .filter(__ -> !(book.getValue().getAuthors()).isEmpty())
+                                        .filter(authors -> !(book.getValue().getAuthors()).isEmpty())
                                         .map(Author::getName)
                                         .collect(Collectors.joining(", ")),
                                 ConsoleColors.BLACK_BOLD.getColorType(), ConsoleColors.YELLOW_BOLD.getColorType(),

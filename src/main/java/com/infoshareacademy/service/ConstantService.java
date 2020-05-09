@@ -11,6 +11,10 @@ public class ConstantService {
     public static final String NO_FILE = "Brak pliku";
     public static final String ERROR = "Błąd podczas odczytu pliku";
 
+    private ConstantService() {
+        // Utility class
+    }
+
     public static Properties readProperties(String fileName) {
         Properties props = new Properties();
         try (FileInputStream in = new FileInputStream(fileName)) {
