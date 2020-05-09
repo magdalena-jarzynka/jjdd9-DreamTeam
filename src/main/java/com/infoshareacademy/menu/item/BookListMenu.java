@@ -3,7 +3,7 @@ package com.infoshareacademy.menu.item;
 public enum BookListMenu {
     BOOK_LIST("PEŁNA LISTA POZYCJI"),
     SEARCH("WYSZUKIWANIE POZYCJI"),
-    BOOK_DETAILS("SZCZEGÓŁOWE INFORMACJE");
+    BOOKS_MANAGEMENT("ZARZĄDZANIE KSIĄŻKAMI");
 
     String bookDescription;
 

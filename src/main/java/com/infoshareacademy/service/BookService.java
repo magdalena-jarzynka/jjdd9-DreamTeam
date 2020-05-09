@@ -1,9 +1,10 @@
 package com.infoshareacademy.service;
 
-import com.infoshareacademy.object.Book;
+import com.infoshareacademy.object.*;
 import com.infoshareacademy.repository.BookRepository;
 
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class BookService {
     public Map<Long, Book> findAllBooks() {
@@ -26,14 +27,26 @@ public class BookService {
         IsbnService isbn = new IsbnService();
 
         String title = books.get(bookChoice).getTitle();
-        String author = authors.getAuthors(books.get(bookChoice));
-        String translator = translators.getTranslators(books.get(bookChoice));
-        String epoch = epochs.getEpochs(books.get(bookChoice));
-        String genre = genres.getGenres(books.get(bookChoice));
-        String kind = kinds.getKinds(books.get(bookChoice));
+        String author = books.get(bookChoice).getAuthors().stream()
+                .map(Author::getName)
+                .collect(Collectors.joining(", "));
+        String translator = books.get(bookChoice).getTranslators().stream()
+                .map(Author::getName)
+                .collect(Collectors.joining(", "));
+        String epoch = books.get(bookChoice).getEpochs().stream()
+                .map(Epoch::getName)
+                .collect(Collectors.joining(", "));
+        String genre = books.get(bookChoice).getGenres().stream()
+                .map(Genre::getName)
+                .collect(Collectors.joining(", "));
+        String kind = books.get(bookChoice).getKinds().stream()
+                .map(Kind::getName)
+                .collect(Collectors.joining(", "));
         String bookIsbn = isbn.getIsbn(books.get(bookChoice));
         String bookFragment = fragment.getFragment(books.get(bookChoice));
-        String bookMedia = media.getMedia(books.get(bookChoice));
+        String bookMedia = books.get(bookChoice).getMedia().stream()
+                .map(Media::getName)
+                .collect(Collectors.joining(", "));
 
         return "1. Tytuł: " + title + "\n" +
                 "2. Autorzy: " + author + "\n" +
@@ -46,4 +59,5 @@ public class BookService {
                 "9. Media: " + bookMedia + "\n\n\n";
 
     }
+
 }

@@ -1,6 +1,8 @@
 package com.infoshareacademy.action;
 
+import com.infoshareacademy.menu.Breadcrumbs;
 import org.apache.commons.lang3.math.NumberUtils;
+import com.infoshareacademy.input.UserInputService;
 
 import java.util.Scanner;
 
@@ -14,23 +16,14 @@ public class SortingOptions {
     private int input;
     private String sortingBy;
     private String sortingOrder;
+    private UserInputService userInputService = new UserInputService();
 
-    public int getUserInput() {
-        String lineInput = scanner.nextLine();
-        if (NumberUtils.isCreatable(lineInput)) {
-            input = Integer.parseInt(lineInput);
-        } else {
-            STDOUT.info(WRONG_NUMBER);
-            input = getUserInput();
-        }
-        return input;
-    }
 
     public void getSortingBy() {
         sortingBy = "";
         STDOUT.info("\n\n Wprowadź 1 aby sortować książki po tytule lub 2 aby sortować je po autorze. \n\n");
         while (true) {
-            input = getUserInput();
+            input = userInputService.getUserInput();
             if (input == 1) {
                 sortingBy = "TITLE";
             } else if (input == 2) {
@@ -48,7 +41,7 @@ public class SortingOptions {
         sortingOrder = "";
         STDOUT.info("\n\n Wprowadź 1 aby wybrać porządek rosnący lub 2 aby wybrać porządek malejący dla sortowania wyników. \n\n");
         while (true) {
-            input = getUserInput();
+            input = userInputService.getUserInput();
             if (input == 1) {
                 sortingOrder = "ASC";
             } else if (input == 2) {
@@ -62,7 +55,8 @@ public class SortingOptions {
         }
     }
 
-    public void run() {
+    public void getSortingOptions() {
+        STDOUT.info(Breadcrumbs.getInstance().displayBreadcrumb());
         getSortingBy();
         getSortingOrder();
         Configurations.writeToProperties(SORTING_BY, sortingBy);

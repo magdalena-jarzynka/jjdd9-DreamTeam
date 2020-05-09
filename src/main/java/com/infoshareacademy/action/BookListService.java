@@ -1,6 +1,7 @@
 package com.infoshareacademy.action;
 
 import com.infoshareacademy.ConsoleColors;
+import com.infoshareacademy.menu.Breadcrumbs;
 import com.infoshareacademy.input.UserInputService;
 import com.infoshareacademy.menu.item.FavouritesMenu;
 import com.infoshareacademy.object.Book;
@@ -19,15 +20,17 @@ public class BookListService {
     private static final int INCREASE_PAGE_COUNT = 1;
     private static final int DECREASE_PAGE_COUNT = 2;
     private FavouritesMenu favouritesMenu = new FavouritesMenu();
-    UserInputService userInputService = new UserInputService();
-    ListService listService = new ListService();
+
     private PageService pageService = new PageService();
+    private ListService listService = new ListService();
+    private UserInputService userInputService = new UserInputService();
 
     public void run(Map<Long, Book> books) {
         pageService.choosePagesCount();
         pageService.addChapter(books.size());
         do {
             cleanTerminal();
+            STDOUT.info(Breadcrumbs.getInstance().displayBreadcrumb());
             getBooksList(books);
             int input;
             input = userInputService.getUserInput();
@@ -54,6 +57,7 @@ public class BookListService {
                     groupingService.filterByCategory(books);
                     break;
                 case 0:
+                    Breadcrumbs.getInstance().removeBreadcrumb();
                     return;
                 default:
                     STDOUT.info(WRONG_NUMBER);
@@ -72,6 +76,7 @@ public class BookListService {
         STDOUT.info("\nWybierz 3 i numer ID, aby dodać pozycję do ulubionych.\n");
         STDOUT.info(SEE_DETAILS);
         STDOUT.info(GROUP_BY_CATEGORY);
+
 
         STDOUT.info("\n{}Strona {} z {}.{}\n",
                 ConsoleColors.BLACK_UNDERLINED.getColorType(), pageService.getCurrentPageNumber(),

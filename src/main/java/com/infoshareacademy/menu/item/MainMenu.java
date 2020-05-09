@@ -2,9 +2,8 @@ package com.infoshareacademy.menu.item;
 
 public enum MainMenu {
     BROWSE("PRZEGLĄDANIE ZBIORÓW"),
-    BOOK_RESERVATION("REZERWACJA KSIĄŻKI"),
     FAVOURITES("ULUBIONE"),
-    SETTINGS("USTAWIENIA"),
+    SORTING("SORTOWANIE"),
     EXIT("WYJŚCIE");
 
     String menuDescription;
