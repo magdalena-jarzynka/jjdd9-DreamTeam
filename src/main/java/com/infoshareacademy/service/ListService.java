@@ -58,8 +58,8 @@ public class ListService {
         } while (true);
     }
 
-    public void showBookList(Map<Long, Book> books, long firstPositionOnPage, long positionNumber, int positionsPerPage) {
-        this.positionNumber = positionNumber + 1;
+    public void showBookList(Map<Long, Book> books, long firstPositionOnPage, int positionsPerPage) {
+        this.positionNumber = firstPositionOnPage + 1;
         getBookSet(books).stream()
                 .skip(firstPositionOnPage)
                 .limit(positionsPerPage)

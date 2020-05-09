@@ -2,19 +2,23 @@ package com.infoshareacademy.service;
 
 import com.infoshareacademy.input.UserInputService;
 
-import static com.infoshareacademy.menu.MenuUtils.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.infoshareacademy.menu.MenuUtils.STDOUT;
+import static com.infoshareacademy.menu.MenuUtils.cleanTerminal;
 
 public class PageService {
     private int positionsPerPage;
     private int currentPageNumber;
     private int currentChapterNumber;
-    private int numberOfPages;
-    private int numberOfChapters;
-    private int[] pagesPerChapter;
+    private final List<Integer> pagesPerChapter = new ArrayList<>();
     public static final String LAST_PAGE = "\nTo ostatnia strona. " +
             "Wybierz 2 aby zobaczyć poprzednią stronę lub 0 aby wyjść do poprzedniego menu. \n";
     public static final String NEXT_PAGE = "\nWybierz 1 aby zobaczyć następną stronę, 2 aby zobaczyć poprzednią lub 0 aby wyjść do " +
             "poprzedniego menu. \n";
+    public static final String LAST_PAGE_NEXT_CHAPTER = "\nTo ostatnia strona rozdziału. " +
+            "Wybierz 1 aby zobaczyć następny rozdział, 2 aby zobaczyć poprzednią stronę lub 0 aby wyjść do poprzedniego menu. \n";
     UserInputService userInputS = new UserInputService();
 
     public PageService() {
@@ -22,12 +26,9 @@ public class PageService {
         currentChapterNumber = 1;
     }
 
-    public void choosePagesCount(int listSize) {
+    public void choosePagesCount() {
         STDOUT.info("\n Ile pozycji wyświetlić na jednej stronie? \n");
         positionsPerPage = userInputS.getUserInput();
-        if (positionsPerPage > 0) {
-            numberOfPages = (int) Math.ceil((double) listSize / positionsPerPage);
-        }
         cleanTerminal();
     }
 
@@ -36,16 +37,30 @@ public class PageService {
     }
 
     public void increasePagesCount() {
-        currentPageNumber++;
+        if (isLastPage() && !isLastChapter()) {
+            increaseChaptersCount();
+        } else if (!isLastPage()) {
+            currentPageNumber++;
+        }
     }
 
     public void decreasePagesCount() {
-        currentPageNumber--;
+        if (isFirstPage() && !isFirstChapter()) {
+            decreaseChaptersCount();
+        } else if (!isFirstPage()) {
+            currentPageNumber--;
+        }
     }
 
-    public void initChapters(int numberOfChapters) {
-        this.numberOfChapters = numberOfChapters;
-
+    public void addChapter(int numberOfPositions) {
+        if (positionsPerPage > 0) {
+            int numberOfPages = (int) Math.ceil((double) numberOfPositions / positionsPerPage);
+            if (numberOfPages != 0) {
+                pagesPerChapter.add(numberOfPages);
+            } else {
+                pagesPerChapter.add(1);
+            }
+        }
     }
 
     public void increaseChaptersCount() {
@@ -59,15 +74,25 @@ public class PageService {
     }
 
     public boolean isLastPage() {
-        return currentPageNumber == numberOfPages;
+        return currentPageNumber == pagesPerChapter.get(currentChapterNumber - 1);
     }
 
     public boolean isFirstPage() {
         return currentPageNumber == 1;
     }
 
+    public boolean isLastChapter() {
+        return currentChapterNumber == pagesPerChapter.size();
+    }
+
+    public boolean isFirstChapter() {
+        return currentChapterNumber == 1;
+    }
+
     public int getNumberOfPages() {
-        return numberOfPages;
+        return pagesPerChapter.stream()
+                .reduce((sum, i) -> sum += i)
+                .orElse(0);
     }
 
     public int getPositionsPerPage() {
@@ -82,7 +107,7 @@ public class PageService {
         return currentChapterNumber;
     }
 
-    public void setNumberOfChapters(int numberOfChapters) {
-        this.numberOfChapters = numberOfChapters;
+    public void setCurrentChapterNumber(int currentChapterNumber) {
+        this.currentChapterNumber = currentChapterNumber;
     }
 }

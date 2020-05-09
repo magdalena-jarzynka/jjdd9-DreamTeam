@@ -6,19 +6,23 @@ import com.infoshareacademy.object.Book;
 import com.infoshareacademy.object.Genre;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static com.infoshareacademy.menu.MenuUtils.STDOUT;
 import static com.infoshareacademy.menu.MenuUtils.cleanTerminal;
 
 public class GroupingService {
 
-    private final PageService pageService = new PageService();
+    private final PageService genrePageService = new PageService();
+    private final PageService booksPageService = new PageService();
     ListService listService = new ListService();
     private final GenreService genreService = new GenreService();
     private final UserInputService userInputService = new UserInputService();
     private final List<Genre> selectedGenres = new ArrayList<>();
+    private Map<Long, Book> filteredBooks = new HashMap<>();
     private int input;
     private long genreNumber;
     private long positionNumber;
@@ -27,19 +31,20 @@ public class GroupingService {
         List<Genre> genresList = genreService.findAllGenres();
 
         cleanTerminal();
-        pageService.choosePagesCount(genresList.size());
+        genrePageService.choosePagesCount();
+        genrePageService.addChapter(genresList.size());
         do {
-            showGenreMenu(genresList, pageService);
+            showGenreMenu(genresList);
             input = userInputService.getUserInput();
             switch (input) {
                 case 1:
-                    if (!pageService.isLastPage()) {
-                        pageService.increasePagesCount();
+                    if (!genrePageService.isLastPage()) {
+                        genrePageService.increasePagesCount();
                     }
                     break;
                 case 2:
-                    if (!pageService.isFirstPage()) {
-                        pageService.decreasePagesCount();
+                    if (!genrePageService.isFirstPage()) {
+                        genrePageService.decreasePagesCount();
                     }
                     break;
                 case 3:
@@ -55,21 +60,21 @@ public class GroupingService {
         } while (true);
     }
 
-    private void showGenreMenu(List<Genre> genresList, PageService pageService) {
-        genreNumber = pageService.findFirstPosition() + 1;
+    private void showGenreMenu(List<Genre> genresList) {
+        genreNumber = genrePageService.findFirstPosition() + 1;
         genresList.stream()
-                .skip(pageService.findFirstPosition())
-                .limit(pageService.getPositionsPerPage())
+                .skip(genrePageService.findFirstPosition())
+                .limit(genrePageService.getPositionsPerPage())
                 .forEach(genre ->
                         STDOUT.info("{}. {}\n", genreNumber++, genre.getName()));
-        if(!selectedGenres.isEmpty()) {
+        if (!selectedGenres.isEmpty()) {
             STDOUT.info("\nWybrane gatunki: \n");
-            for (Genre genre: selectedGenres) {
+            for (Genre genre : selectedGenres) {
                 STDOUT.info("{}{}{}, ", ConsoleColors.YELLOW_BOLD.getColorType(),
                         genre.getName(), ConsoleColors.RESET.getColorType());
             }
         }
-        if (pageService.isLastPage()) {
+        if (genrePageService.isLastPage()) {
             STDOUT.info(PageService.LAST_PAGE);
         } else {
             STDOUT.info(PageService.NEXT_PAGE);
@@ -84,27 +89,32 @@ public class GroupingService {
             input = userInputService.getUserInput();
             if (input == 0) {
                 return;
-            } else if (input < genresList.size()) {
-                selectedGenres.add(genresList.get(input));
+            } else if (input < genresList.size() && !selectedGenres.contains(genresList.get(input - 1))) {
+                selectedGenres.add(genresList.get(input - 1));
                 return;
             } else {
                 STDOUT.info("Nieprawidłowy numer \n");
             }
-        } while(true);
+        } while (true);
     }
 
     private void showGroupedList(Map<Long, Book> books) {
-        PageService booksPageService = new PageService();
-        booksPageService.setNumberOfChapters(selectedGenres.size());
-        booksPageService.choosePagesCount(books.size());
+        booksPageService.choosePagesCount();
+        selectedGenres
+                .forEach(genre -> {
+                    filterBooks(books);
+                    booksPageService.addChapter(filteredBooks.size());
+                    booksPageService.increaseChaptersCount();
+                });
+        booksPageService.setCurrentChapterNumber(1);
+        filterBooks(books);
         cleanTerminal();
-        listService.showBookList(books, booksPageService.findFirstPosition(),
-                booksPageService.findFirstPosition(), booksPageService.getPositionsPerPage());
-
         do {
-            showGroupedBookList(books, booksPageService.findFirstPosition(),
+            showGroupedBookList(booksPageService.findFirstPosition(),
                     booksPageService.getCurrentPageNumber(), booksPageService.getPositionsPerPage());
-            if (booksPageService.isLastPage()) {
+            if (booksPageService.isLastPage() && !booksPageService.isLastChapter()) {
+                STDOUT.info(PageService.LAST_PAGE_NEXT_CHAPTER);
+            } else if (booksPageService.isLastPage()) {
                 STDOUT.info(PageService.LAST_PAGE);
             } else {
                 STDOUT.info(PageService.NEXT_PAGE);
@@ -112,13 +122,13 @@ public class GroupingService {
             input = userInputService.getUserInput();
             switch (input) {
                 case 1:
-                    if (!booksPageService.isLastPage()) {
-                        booksPageService.increasePagesCount();
-                    }
+                    booksPageService.increasePagesCount();
+                    filterBooks(books);
                     break;
                 case 2:
-                    if (!booksPageService.isFirstPage()) {
-                        booksPageService.decreasePagesCount();
+                    booksPageService.decreasePagesCount();
+                    if (booksPageService.isFirstPage()) {
+                        filterBooks(books);
                     }
                     break;
                 case 0:
@@ -128,9 +138,18 @@ public class GroupingService {
         } while (true);
     }
 
-    private void showGroupedBookList(Map<Long, Book> books, long firstPositionOnPage, long positionNumber, int positionsPerPage) {
-        this.positionNumber = positionNumber + 1;
-        listService.getBookSet(books).stream()
+    private void showGroupedBookList(long firstPositionOnPage, long pageNumber, int positionsPerPage) {
+        this.positionNumber = firstPositionOnPage + 1;
+        if (booksPageService.isFirstPage()) {
+            STDOUT.info("{}**** {} **** {}\n\n", ConsoleColors.YELLOW_BOLD.getColorType(),
+                    selectedGenres.get(booksPageService.getCurrentChapterNumber() - 1).getName(),
+                    ConsoleColors.RESET.getColorType());
+        }
+        if (filteredBooks.isEmpty()) {
+            STDOUT.info("Brak książek z tego gatunku \n\n");
+            return;
+        }
+        listService.getBookSet(filteredBooks).stream()
                 .skip(firstPositionOnPage)
                 .limit(positionsPerPage)
                 .forEach(book ->
@@ -141,5 +160,13 @@ public class GroupingService {
                                 book.getValue().getAuthors().get(0).getName(), ConsoleColors.BLACK_BOLD.getColorType(),
                                 ConsoleColors.YELLOW_BOLD.getColorType(), book.getKey(),
                                 ConsoleColors.RESET.getColorType()));
+    }
+
+    public void filterBooks(Map<Long, Book> books) {
+        filteredBooks = listService.getBookSet(books).stream()
+                .filter(book ->
+                        book.getValue().getGenres().get(0).getName()
+                                .equals(selectedGenres.get(booksPageService.getCurrentChapterNumber() - 1).getName()))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 }

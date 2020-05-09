@@ -18,19 +18,14 @@ public class BookListService {
     private static final String GROUP_BY_CATEGORY = "Wybierz 5 aby pogrupować wyniki według gatunku.\n";
     private static final int INCREASE_PAGE_COUNT = 1;
     private static final int DECREASE_PAGE_COUNT = 2;
-    private int currentPageNumber;
     private FavouritesMenu favouritesMenu = new FavouritesMenu();
     UserInputService userInputService = new UserInputService();
     ListService listService = new ListService();
-    GroupingService groupingService = new GroupingService();
     private PageService pageService = new PageService();
 
-    public BookListService() {
-        this.currentPageNumber = 1;
-    }
-
     public void run(Map<Long, Book> books) {
-        pageService.choosePagesCount(books.size());
+        pageService.choosePagesCount();
+        pageService.addChapter(books.size());
         do {
             cleanTerminal();
             getBooksList(books);
@@ -55,6 +50,7 @@ public class BookListService {
                     listService.showBookDetails();
                     break;
                 case 5:
+                    GroupingService groupingService = new GroupingService();
                     groupingService.filterByCategory(books);
                     break;
                 case 0:
@@ -67,14 +63,13 @@ public class BookListService {
 
     public void getBooksList(Map<Long, Book> books) {
         cleanTerminal();
-        listService.showBookList(books, pageService.findFirstPosition(),
-                pageService.findFirstPosition(), pageService.getPositionsPerPage());
+        listService.showBookList(books, pageService.findFirstPosition(), pageService.getPositionsPerPage());
         if (pageService.isLastPage()) {
             STDOUT.info(PageService.LAST_PAGE);
         } else {
             STDOUT.info(PageService.NEXT_PAGE);
         }
-        STDOUT.info("\nWybierz 3 i numer ID, aby dodać pozycję do ulubionych.");
+        STDOUT.info("\nWybierz 3 i numer ID, aby dodać pozycję do ulubionych.\n");
         STDOUT.info(SEE_DETAILS);
         STDOUT.info(GROUP_BY_CATEGORY);
 
