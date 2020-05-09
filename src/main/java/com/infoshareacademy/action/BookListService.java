@@ -1,8 +1,8 @@
 package com.infoshareacademy.action;
 
 import com.infoshareacademy.ConsoleColors;
-import com.infoshareacademy.menu.Breadcrumbs;
 import com.infoshareacademy.input.UserInputService;
+import com.infoshareacademy.menu.Breadcrumbs;
 import com.infoshareacademy.menu.item.FavouritesMenu;
 import com.infoshareacademy.object.Book;
 import com.infoshareacademy.service.ListService;
@@ -12,8 +12,8 @@ import java.util.Map;
 import static com.infoshareacademy.menu.MenuUtils.*;
 
 public class BookListService {
-    public static final String SEE_DETAILS = "Wybierz 4 aby zobaczyć szczegóły wybranej pozycji.";
-    public static final String LAST_PAGE = "\n To ostatnia strona. " +
+    public static final String SEE_DETAILS = "Wybierz 4 aby zobaczyć szczegóły wybranej pozycji.\n";
+    public static final String LAST_PAGE = "\nTo ostatnia strona. " +
             "Wybierz 2 aby zobaczyć poprzednią stronę lub 0 aby wyjść do głównego menu. \n";
     public static final String NEXT_PAGE = "\n Wybierz 1 aby zobaczyć następną stronę, 2 aby zobaczyć poprzednią lub 0 aby wyjść do " +
             "poprzedniego menu. \n";
@@ -80,7 +80,7 @@ public class BookListService {
             STDOUT.info(SEE_DETAILS);
         }
 
-        STDOUT.info("\n Wybierz 3 i numer ID, aby dodać pozycję do ulubionych.");
+        STDOUT.info("Wybierz 3 i numer ID, aby dodać pozycję do ulubionych.\n");
 
         STDOUT.info("\n{}Strona {} z {}.{}\n", ConsoleColors.BLACK_UNDERLINED.getColorType(), currentPageNumber,
                 numberOfPages, ConsoleColors.RESET.getColorType());
