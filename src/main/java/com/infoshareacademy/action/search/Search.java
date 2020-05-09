@@ -41,6 +41,8 @@ public class Search {
                     Breadcrumbs.getInstance().removeBreadcrumb();
                     return;
                 }
+                default:
+                    STDOUT.info("Proszę wpisać odpowiednią cyfrę.");
             }
         } while (true);
     }

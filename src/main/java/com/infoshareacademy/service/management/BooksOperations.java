@@ -64,26 +64,26 @@ public class BooksOperations {
     }
 
     private long getNewKey(Map<Long, Book> map) {
-        if(map != null || map.isEmpty()){
-            return map.entrySet()
-                    .stream()
-                    .max(Map.Entry.comparingByKey())
-                    .get()
-                    .getKey() + 1;
-        } else {
+        if (map.isEmpty()) {
             return 1;
         }
+        return map.entrySet()
+                .stream()
+                .max(Map.Entry.comparingByKey())
+                .filter(Objects::nonNull)
+                .get()
+                .getKey() + 1;
     }
 
     public void removeBookFromRepository() {
-        STDOUT.info("Wprowadź ID książki, którą chcesz usunąć z biblioteki\n");
+        STDOUT.info("Wprowadź ID książki, którą chcesz usunąć z biblioteki.\n");
         long id;
         do {
             id = userInputService.getUserInput();
             if (bookService.findAllBooks().containsKey(id)) {
                 break;
             } else {
-                STDOUT.info("\nPozycja o podanym ID nie istnieje\n");
+                STDOUT.info("\nPozycja o podanym ID nie istnieje.\n");
             }
         } while (true);
         String bookToBeDeleted = bookService.findAllBooks().get(id).getTitle();
@@ -98,7 +98,7 @@ public class BooksOperations {
                 scanner.nextLine();
                 break;
             } else if (userDecision == 0) {
-                break;
+                return;
             }
         } while (true);
 

@@ -1,10 +1,7 @@
 package com.infoshareacademy.action;
 
-import com.infoshareacademy.menu.Breadcrumbs;
-import org.apache.commons.lang3.math.NumberUtils;
 import com.infoshareacademy.input.UserInputService;
-
-import java.util.Scanner;
+import com.infoshareacademy.menu.Breadcrumbs;
 
 import static com.infoshareacademy.menu.MenuUtils.STDOUT;
 import static com.infoshareacademy.menu.MenuUtils.WRONG_NUMBER;
@@ -12,12 +9,10 @@ import static com.infoshareacademy.menu.MenuUtils.WRONG_NUMBER;
 public class SortingOptions {
     private static final String SORTING_BY = "sortingBy";
     private static final String SORTING_ORDER = "sortingOrder";
-    private final Scanner scanner = new Scanner(System.in);
     private int input;
     private String sortingBy;
     private String sortingOrder;
     private UserInputService userInputService = new UserInputService();
-
 
     public void getSortingBy() {
         sortingBy = "";

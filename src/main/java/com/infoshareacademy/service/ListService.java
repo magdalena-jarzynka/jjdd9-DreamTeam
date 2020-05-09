@@ -10,7 +10,6 @@ import com.infoshareacademy.object.Author;
 import com.infoshareacademy.object.Book;
 import com.infoshareacademy.service.sorting.SortByAuthorStrategy;
 import com.infoshareacademy.service.sorting.SortByTitleStrategy;
-import org.apache.commons.lang3.math.NumberUtils;
 
 import java.util.Map;
 import java.util.Scanner;
@@ -47,11 +46,13 @@ public class ListService {
     }
 
     public void showBookDetails() {
-        STDOUT.info("Wybierz ID książki, by zobaczyć jej szczegóły.");
+        STDOUT.info("Wybierz ID książki, by zobaczyć jej szczegóły lub naciśnij 0, aby wrócić do poprzedniego widoku.");
         long id;
         do {
-            id = getIdChoice();
-            if (bookService.findAllBooks().containsKey(id)) {
+            id = userInputService.getUserInput();
+            if (id == 0) {
+                return;
+            } else if (bookService.findAllBooks().containsKey(id)) {
                 Breadcrumbs.getInstance().addBreadcrumb(BookListMenu.BOOKS_MANAGEMENT.getBookDescription());
                 STDOUT.info(Breadcrumbs.getInstance().displayBreadcrumb());
                 break;
@@ -93,21 +94,6 @@ public class ListService {
                                         .collect(Collectors.joining(", ")),
                                 ConsoleColors.BLACK_BOLD.getColorType(), ConsoleColors.YELLOW_BOLD.getColorType(),
                                 book.getKey(), ConsoleColors.RESET.getColorType()));
-    }
-
-    public int getIdChoice() {
-        String lineInput = scanner.nextLine();
-        if (NumberUtils.isCreatable(lineInput)) {
-            input = Integer.parseInt(lineInput);
-        } else {
-            STDOUT.info(WRONG_NUMBER);
-            input = getIdChoice();
-        }
-        if (input <= 0) {
-            STDOUT.info(WRONG_NUMBER);
-            input = getIdChoice();
-        }
-        return input;
     }
 
     public long findPositionNumber(long firstPositionOnPage) {
