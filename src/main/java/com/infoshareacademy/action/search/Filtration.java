@@ -35,6 +35,6 @@ public class Filtration {
                     .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
         }
         BookListService filteredList = new BookListService();
-        filteredList.run(filteredBooks);
+        filteredList.displayBookList(filteredBooks);
     }
 }

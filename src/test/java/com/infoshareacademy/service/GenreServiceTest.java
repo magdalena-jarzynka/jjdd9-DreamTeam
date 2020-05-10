@@ -50,4 +50,19 @@ class GenreServiceTest {
         org.assertj.core.api.Assertions.assertThat(result).isEmpty();
     }
 
+    @Test
+    void checkIfContainsNullOrEmpty() {
+        //GIVEN
+        GenreService genreService = new GenreService();
+        List<Genre> result;
+
+        //WHEN
+        result = genreService.findAllGenres();
+
+        //THEN
+        org.assertj.core.api.Assertions.assertThat(result).isNotEmpty()
+                .doesNotContainNull();
+
+    }
+
 }
