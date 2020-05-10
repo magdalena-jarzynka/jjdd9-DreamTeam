@@ -4,10 +4,7 @@ import com.infoshareacademy.input.UserInputService;
 import com.infoshareacademy.object.Book;
 import com.infoshareacademy.service.BookService;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 import static com.infoshareacademy.menu.MenuUtils.*;
 
@@ -28,18 +25,18 @@ public class BooksOperations {
     private static final int NEW_FRAGMENT = 8;
     private static final int NEW_MEDIA = 9;
     private final Scanner scanner = new Scanner(System.in);
-    private Book book = new Book();
     private BookService bookService = new BookService();
     private FileWriter fileWriter = new FileWriter();
     private BookDefinitionService bookDefinitionService = new BookDefinitionService();
     private UserInputService userInputService = new UserInputService();
 
     public void addBookToRepository() {
-        book = setBookDetails();
+        Book book = new Book();
+        setBookDetails(book);
         add(book);
     }
 
-    private Book setBookDetails() {
+    private Book setBookDetails(Book book) {
         cleanTerminal();
         STDOUT.info(ENTER_TITLE);
         bookDefinitionService.defineTitle(book, scanner.nextLine());
@@ -69,22 +66,26 @@ public class BooksOperations {
     }
 
     private long getNewKey(Map<Long, Book> map) {
+        if (map.isEmpty()) {
+            return 1;
+        }
         return map.entrySet()
                 .stream()
                 .max(Map.Entry.comparingByKey())
+                .filter(Objects::nonNull)
                 .get()
                 .getKey() + 1;
     }
 
     public void removeBookFromRepository() {
-        STDOUT.info("Wprowadź ID książki, którą chcesz usunąć z biblioteki\n");
+        STDOUT.info("Wprowadź ID książki, którą chcesz usunąć z biblioteki.\n");
         long id;
         do {
             id = userInputService.getUserInput();
             if (bookService.findAllBooks().containsKey(id)) {
                 break;
             } else {
-                STDOUT.info("\nPozycja o podanym ID nie istnieje\n");
+                STDOUT.info("\nPozycja o podanym ID nie istnieje.\n");
             }
         } while (true);
         String bookToBeDeleted = bookService.findAllBooks().get(id).getTitle();
@@ -99,7 +100,7 @@ public class BooksOperations {
                 scanner.nextLine();
                 break;
             } else if (userDecision == 0) {
-                break;
+                return;
             }
         } while (true);
 
@@ -133,7 +134,7 @@ public class BooksOperations {
     }
 
     private void getBookModifications(long id) {
-        book = bookService.findAllBooks().get(id);
+        Book book = bookService.findAllBooks().get(id);
         do {
             STDOUT.info("\nWybierz numer pozycji, którą chcesz zmodyfikować.\n");
             STDOUT.info("Twoje zmiany będą widoczne bo zakończeniu edycji.\n");

@@ -25,5 +25,10 @@ public class UserInputService {
         }
         return input;
     }
+
+    public void confirmation() {
+        STDOUT.info("\nWciśnij ENTER, aby przejść dalej.");
+        scanner.nextLine();
+    }
 }
 
