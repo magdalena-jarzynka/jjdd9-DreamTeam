@@ -25,18 +25,18 @@ public class BooksOperations {
     private static final int NEW_FRAGMENT = 8;
     private static final int NEW_MEDIA = 9;
     private final Scanner scanner = new Scanner(System.in);
-    private Book book = new Book();
     private BookService bookService = new BookService();
     private FileWriter fileWriter = new FileWriter();
     private BookDefinitionService bookDefinitionService = new BookDefinitionService();
     private UserInputService userInputService = new UserInputService();
 
     public void addBookToRepository() {
-        book = setBookDetails();
+        Book book = new Book();
+        setBookDetails(book);
         add(book);
     }
 
-    private Book setBookDetails() {
+    private Book setBookDetails(Book book) {
         cleanTerminal();
         STDOUT.info(ENTER_TITLE);
         bookDefinitionService.defineTitle(book, scanner.nextLine());
@@ -134,7 +134,7 @@ public class BooksOperations {
     }
 
     private void getBookModifications(long id) {
-        book = bookService.findAllBooks().get(id);
+        Book book = bookService.findAllBooks().get(id);
         do {
             STDOUT.info("\nWybierz numer pozycji, którą chcesz zmodyfikować.\n");
             STDOUT.info("Twoje zmiany będą widoczne bo zakończeniu edycji.\n");

@@ -23,27 +23,10 @@ public class ListService {
     private static final Scanner scanner = new Scanner(System.in);
     private static final String AUTHOR = "AUTHOR";
     private int input;
-    private int numberOfPages;
     private long positionNumber;
     private FavouritesMenu favouritesMenu = new FavouritesMenu();
     private BookService bookService = new BookService();
     private UserInputService userInputService = new UserInputService();
-
-
-    public int getPositionsPerPage() {
-        return userInputService.getUserInput();
-    }
-
-    public int getPagesCount(int positionsPerPage, int numberOfBooks) {
-        if (positionsPerPage > 0) {
-            numberOfPages = (int) Math.ceil((double) numberOfBooks / positionsPerPage);
-        }
-        return numberOfPages;
-    }
-
-    public long findFirstPosition(int currentPageNumber, int positionsPerPage) {
-        return ((long) currentPageNumber - 1) * positionsPerPage;
-    }
 
     public void showBookDetails() {
         STDOUT.info("Wybierz ID książki, by zobaczyć jej szczegóły lub naciśnij 0, aby wrócić do poprzedniego widoku.");
@@ -79,13 +62,13 @@ public class ListService {
     }
 
     public void showBookList(Map<Long, Book> books, long firstPositionOnPage, int positionsPerPage) {
-        positionNumber = findPositionNumber(firstPositionOnPage);
+        this.positionNumber = firstPositionOnPage + 1;
         getBookSet(books).stream()
                 .skip(firstPositionOnPage)
                 .limit(positionsPerPage)
                 .forEach(book ->
                         STDOUT.info("{}{}.Tytuł: {}{} \n {} Autor: {}{} \n {} ID: {}{}{} \n\n",
-                                ConsoleColors.BLACK_BOLD.getColorType(), positionNumber++,
+                                ConsoleColors.BLACK_BOLD.getColorType(), this.positionNumber++,
                                 ConsoleColors.RED.getColorType(), book.getValue().getTitle(),
                                 ConsoleColors.BLACK_BOLD.getColorType(), ConsoleColors.BLUE.getColorType(),
                                 book.getValue().getAuthors().stream()
