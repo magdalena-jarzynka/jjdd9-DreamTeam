@@ -25,7 +25,7 @@ public class SortByTitleStrategy implements SortStrategy {
                 break;
         }
         books.addAll(repositoryBooks.entrySet());
-
+  
         return books;
     }
 }

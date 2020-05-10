@@ -10,7 +10,6 @@ import com.infoshareacademy.object.Author;
 import com.infoshareacademy.object.Book;
 import com.infoshareacademy.service.sorting.SortByAuthorStrategy;
 import com.infoshareacademy.service.sorting.SortByTitleStrategy;
-import org.apache.commons.lang3.math.NumberUtils;
 
 import java.util.Map;
 import java.util.Scanner;
@@ -28,13 +27,15 @@ public class ListService {
     private FavouritesMenu favouritesMenu = new FavouritesMenu();
     private BookService bookService = new BookService();
     private UserInputService userInputService = new UserInputService();
-  
+
     public void showBookDetails() {
-        STDOUT.info("Wybierz ID książki, by zobaczyć jej szczegóły.");
+        STDOUT.info("Wybierz ID książki, by zobaczyć jej szczegóły lub naciśnij 0, aby wrócić do poprzedniego widoku.");
         long id;
         do {
-            id = getIdChoice();
-            if (bookService.findAllBooks().containsKey(id)) {
+            id = userInputService.getUserInput();
+            if (id == 0) {
+                return;
+            } else if (bookService.findAllBooks().containsKey(id)) {
                 Breadcrumbs.getInstance().addBreadcrumb(BookListMenu.BOOKS_MANAGEMENT.getBookDescription());
                 STDOUT.info(Breadcrumbs.getInstance().displayBreadcrumb());
                 break;
@@ -71,26 +72,15 @@ public class ListService {
                                 ConsoleColors.RED.getColorType(), book.getValue().getTitle(),
                                 ConsoleColors.BLACK_BOLD.getColorType(), ConsoleColors.BLUE.getColorType(),
                                 book.getValue().getAuthors().stream()
-                                        .filter(__ -> !(book.getValue().getAuthors()).isEmpty())
+                                        .filter(authors -> !(book.getValue().getAuthors()).isEmpty())
                                         .map(Author::getName)
                                         .collect(Collectors.joining(", ")),
-                                ConsoleColors.BLACK_BOLD.getColorType(), ConsoleColors.YELLOW_BOLD.getColorType(),
+                                ConsoleColors.BLACK_BOLD.getColorType(), ConsoleColors.RED.getColorType(),
                                 book.getKey(), ConsoleColors.RESET.getColorType()));
     }
 
-    public int getIdChoice() {
-        String lineInput = scanner.nextLine();
-        if (NumberUtils.isCreatable(lineInput)) {
-            input = Integer.parseInt(lineInput);
-        } else {
-            STDOUT.info(WRONG_NUMBER);
-            input = getIdChoice();
-        }
-        if (input <= 0) {
-            STDOUT.info(WRONG_NUMBER);
-            input = getIdChoice();
-        }
-        return input;
+    public long findPositionNumber(long firstPositionOnPage) {
+        return firstPositionOnPage + 1;
     }
 
     public SortedSet<Map.Entry<Long, Book>> getBookSet(Map<Long, Book> books) {

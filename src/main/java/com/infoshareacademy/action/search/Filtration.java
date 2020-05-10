@@ -3,13 +3,15 @@ package com.infoshareacademy.action.search;
 import com.infoshareacademy.action.BookListService;
 import com.infoshareacademy.object.Book;
 import com.infoshareacademy.service.BookService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Filtration {
+
+    private Filtration(){
+        //Utility class
+    }
 
     public static void run(CriteriaChoice userCriteria) {
         BookService bookService = new BookService();

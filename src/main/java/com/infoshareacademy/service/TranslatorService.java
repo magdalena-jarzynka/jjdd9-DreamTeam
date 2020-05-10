@@ -3,20 +3,18 @@ package com.infoshareacademy.service;
 import com.infoshareacademy.object.Author;
 import com.infoshareacademy.object.Book;
 
-import java.util.List;
+import java.util.Collection;
 import java.util.Optional;
-import java.util.Properties;
+import java.util.stream.Collectors;
 
 public class TranslatorService {
-    Properties properties = ConstantService.readProperties("constants.properties");
 
     public String getTranslators(Book book) {
-        List<Author> translators = book.getTranslators();
         return Optional.ofNullable(book)
-                .map(Book::getAuthors)
-                .filter(i -> !translators.isEmpty())
-                .map(i -> translators.get(0))
+                .stream()
+                .map(Book::getTranslators)
+                .flatMap(Collection::stream)
                 .map(Author::getName)
-                .orElse(properties.getProperty("NONE"));
+                .collect(Collectors.joining(", "));
     }
 }

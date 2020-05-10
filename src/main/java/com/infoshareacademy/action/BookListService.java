@@ -1,8 +1,8 @@
 package com.infoshareacademy.action;
 
 import com.infoshareacademy.ConsoleColors;
-import com.infoshareacademy.menu.Breadcrumbs;
 import com.infoshareacademy.input.UserInputService;
+import com.infoshareacademy.menu.Breadcrumbs;
 import com.infoshareacademy.menu.item.FavouritesMenu;
 import com.infoshareacademy.object.Book;
 import com.infoshareacademy.service.GroupingService;
@@ -15,23 +15,23 @@ import static com.infoshareacademy.menu.MenuUtils.*;
 
 public class BookListService {
 
-    public static final String SEE_DETAILS = "Wybierz 4 aby zobaczyć szczegóły wybranej pozycji.\n";
+    private static final String SEE_DETAILS = "Wybierz 4 aby zobaczyć szczegóły wybranej pozycji.\n";
     private static final String GROUP_BY_CATEGORY = "Wybierz 5 aby pogrupować wyniki według gatunku.\n";
     private static final int INCREASE_PAGE_COUNT = 1;
     private static final int DECREASE_PAGE_COUNT = 2;
     private FavouritesMenu favouritesMenu = new FavouritesMenu();
 
-    private PageService pageService = new PageService();
     private ListService listService = new ListService();
     private UserInputService userInputService = new UserInputService();
 
     public void run(Map<Long, Book> books) {
+        PageService pageService = new PageService();
         pageService.choosePagesCount();
         pageService.addChapter(books.size());
         do {
             cleanTerminal();
             STDOUT.info(Breadcrumbs.getInstance().displayBreadcrumb());
-            getBooksList(books);
+            getBooksList(books, pageService);
             int input;
             input = userInputService.getUserInput();
             switch (input) {
@@ -65,7 +65,7 @@ public class BookListService {
         } while (true);
     }
 
-    public void getBooksList(Map<Long, Book> books) {
+    public void getBooksList(Map<Long, Book> books, PageService pageService) {
         cleanTerminal();
         listService.showBookList(books, pageService.findFirstPosition(), pageService.getPositionsPerPage());
         if (pageService.isLastPage()) {
