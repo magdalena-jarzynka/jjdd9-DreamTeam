@@ -22,7 +22,6 @@ public class GenreService {
     }
 
     public List<Genre> findAllGenres() {
-
         return GenreRepository.getInstance().getGenres();
     }
 }

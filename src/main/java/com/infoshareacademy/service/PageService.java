@@ -28,7 +28,14 @@ public class PageService {
 
     public void choosePagesCount() {
         STDOUT.info("\n Ile pozycji wyświetlić na jednej stronie? \n");
-        positionsPerPage = userInputS.getUserInput();
+        while(true) {
+            positionsPerPage = userInputS.getUserInput();
+            if(positionsPerPage > 0) {
+                break;
+            } else {
+                STDOUT.info("Liczba pozycji na stronie musi być większa niż 0\n");
+            }
+        }
         cleanTerminal();
     }
 
