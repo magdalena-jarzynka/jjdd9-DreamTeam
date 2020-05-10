@@ -1,14 +1,9 @@
 package com.infoshareacademy.comparator;
 
-import com.infoshareacademy.object.Author;
 import com.infoshareacademy.object.Book;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class SortingByTitleTest {
     @Test

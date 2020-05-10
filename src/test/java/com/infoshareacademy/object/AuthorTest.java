@@ -17,4 +17,6 @@ class AuthorTest {
         org.assertj.core.api.Assertions.assertThat(result).isEqualTo("Franek");
 
     }
+
+
 }

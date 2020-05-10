@@ -11,24 +11,6 @@ import java.util.Map;
 class SortingByAuthorTest {
 
     @Test
-    public void getAuthorSecondName() {
-        //GIVEN
-        Author author = new Author();
-        author.setName("Michal Aniol");
-        String[] partsOfName = author.getName().split(" ");
-        String result;
-
-        //WHEN
-        result = partsOfName[partsOfName.length - 1];
-
-        //THEN
-        org.assertj.core.api.Assertions.assertThat(result).isEqualTo("Aniol")
-                .isNotEqualTo("Michal")
-                .isNotBlank();
-    }
-
-
-    @Test
     void compareTwoBooksWithDifferentAuthors() {
         //GIVEN
         SortingByAuthor sortingByAuthor = new SortingByAuthor();
