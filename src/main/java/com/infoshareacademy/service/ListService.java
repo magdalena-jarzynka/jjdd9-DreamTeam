@@ -92,7 +92,7 @@ public class ListService {
                                         .filter(authors -> !(book.getValue().getAuthors()).isEmpty())
                                         .map(Author::getName)
                                         .collect(Collectors.joining(", ")),
-                                ConsoleColors.BLACK_BOLD.getColorType(), ConsoleColors.YELLOW_BOLD.getColorType(),
+                                ConsoleColors.BLACK_BOLD.getColorType(), ConsoleColors.RED.getColorType(),
                                 book.getKey(), ConsoleColors.RESET.getColorType()));
     }
 
