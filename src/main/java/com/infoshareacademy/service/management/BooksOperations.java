@@ -4,7 +4,10 @@ import com.infoshareacademy.input.UserInputService;
 import com.infoshareacademy.object.Book;
 import com.infoshareacademy.service.BookService;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
 
 import static com.infoshareacademy.menu.MenuUtils.*;
 
@@ -69,12 +72,13 @@ public class BooksOperations {
         if (map.isEmpty()) {
             return 1;
         }
+
         return map.entrySet()
                 .stream()
                 .max(Map.Entry.comparingByKey())
-                .filter(Objects::nonNull)
-                .get()
-                .getKey() + 1;
+                .map(Map.Entry::getKey)
+                .map(i -> i + 1)
+                .get();
     }
 
     public void removeBookFromRepository() {
