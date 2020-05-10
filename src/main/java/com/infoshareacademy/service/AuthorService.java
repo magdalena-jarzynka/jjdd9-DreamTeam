@@ -3,20 +3,18 @@ package com.infoshareacademy.service;
 import com.infoshareacademy.object.Author;
 import com.infoshareacademy.object.Book;
 
-import java.util.List;
+import java.util.Collection;
 import java.util.Optional;
-import java.util.Properties;
+import java.util.stream.Collectors;
 
 public class AuthorService {
-    Properties properties = ConstantService.readProperties("constants.properties");
 
     public String getAuthors(Book book) {
-        List<Author> authors = book.getAuthors();
         return Optional.ofNullable(book)
+                .stream()
                 .map(Book::getAuthors)
-                .filter(i -> !authors.isEmpty())
-                .map(i -> authors.get(0))
+                .flatMap(Collection::stream)
                 .map(Author::getName)
-                .orElse(properties.getProperty("NONE"));
+                .collect(Collectors.joining(", "));
     }
 }

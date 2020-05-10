@@ -4,10 +4,7 @@ import com.infoshareacademy.input.UserInputService;
 import com.infoshareacademy.object.Book;
 import com.infoshareacademy.service.BookService;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 import static com.infoshareacademy.menu.MenuUtils.*;
 
@@ -69,22 +66,26 @@ public class BooksOperations {
     }
 
     private long getNewKey(Map<Long, Book> map) {
+        if (map.isEmpty()) {
+            return 1;
+        }
         return map.entrySet()
                 .stream()
                 .max(Map.Entry.comparingByKey())
+                .filter(Objects::nonNull)
                 .get()
                 .getKey() + 1;
     }
 
     public void removeBookFromRepository() {
-        STDOUT.info("Wprowadź ID książki, którą chcesz usunąć z biblioteki\n");
+        STDOUT.info("Wprowadź ID książki, którą chcesz usunąć z biblioteki.\n");
         long id;
         do {
             id = userInputService.getUserInput();
             if (bookService.findAllBooks().containsKey(id)) {
                 break;
             } else {
-                STDOUT.info("\nPozycja o podanym ID nie istnieje\n");
+                STDOUT.info("\nPozycja o podanym ID nie istnieje.\n");
             }
         } while (true);
         String bookToBeDeleted = bookService.findAllBooks().get(id).getTitle();
@@ -99,7 +100,7 @@ public class BooksOperations {
                 scanner.nextLine();
                 break;
             } else if (userDecision == 0) {
-                break;
+                return;
             }
         } while (true);
 

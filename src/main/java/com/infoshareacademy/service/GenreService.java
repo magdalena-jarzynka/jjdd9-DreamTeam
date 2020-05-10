@@ -4,21 +4,22 @@ import com.infoshareacademy.object.Book;
 import com.infoshareacademy.object.Genre;
 import com.infoshareacademy.repository.GenreRepository;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.Properties;
+import java.util.stream.Collectors;
 
 public class GenreService {
     Properties properties = ConstantService.readProperties("constants.properties");
 
     public String getGenres(Book book) {
-        List<Genre> genres = book.getGenres();
         return Optional.ofNullable(book)
-                .map(Book::getAuthors)
-                .filter(i -> !genres.isEmpty())
-                .map(i -> genres.get(0))
+                .stream()
+                .map(Book::getGenres)
+                .flatMap(Collection::stream)
                 .map(Genre::getName)
-                .orElse(properties.getProperty("NONE"));
+                .collect(Collectors.joining(", "));
     }
 
     public List<Genre> findAllGenres() {

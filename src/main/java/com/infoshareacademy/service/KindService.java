@@ -3,20 +3,18 @@ package com.infoshareacademy.service;
 import com.infoshareacademy.object.Book;
 import com.infoshareacademy.object.Kind;
 
-import java.util.List;
+import java.util.Collection;
 import java.util.Optional;
-import java.util.Properties;
+import java.util.stream.Collectors;
 
 public class KindService {
-    Properties properties = ConstantService.readProperties("constants.properties");
 
     public String getKinds(Book book) {
-        List<Kind> kinds = book.getKinds();
         return Optional.ofNullable(book)
-                .map(Book::getAuthors)
-                .filter(i -> !kinds.isEmpty())
-                .map(i -> kinds.get(0))
+                .stream()
+                .map(Book::getKinds)
+                .flatMap(Collection::stream)
                 .map(Kind::getName)
-                .orElse(properties.getProperty("NONE"));
+                .collect(Collectors.joining(", "));
     }
 }
