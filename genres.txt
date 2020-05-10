@@ -1,0 +1,723 @@
+
+[
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/aforyzm/",
+        "href": "https://wolnelektury.pl/api/genres/aforyzm/",
+        "name": "Aforyzm",
+        "slug": "aforyzm"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/akt/",
+        "href": "https://wolnelektury.pl/api/genres/akt/",
+        "name": "Akt",
+        "slug": "akt"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/akt-prawny/",
+        "href": "https://wolnelektury.pl/api/genres/akt-prawny/",
+        "name": "Akt prawny",
+        "slug": "akt-prawny"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/alegoria/",
+        "href": "https://wolnelektury.pl/api/genres/alegoria/",
+        "name": "Alegoria",
+        "slug": "alegoria"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/anakreontyk/",
+        "href": "https://wolnelektury.pl/api/genres/anakreontyk/",
+        "name": "Anakreontyk",
+        "slug": "anakreontyk"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/artykul/",
+        "href": "https://wolnelektury.pl/api/genres/artykul/",
+        "name": "Artykuł",
+        "slug": "artykul"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/autoportret/",
+        "href": "https://wolnelektury.pl/api/genres/autoportret/",
+        "name": "Autoportret",
+        "slug": "autoportret"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/bajka/",
+        "href": "https://wolnelektury.pl/api/genres/bajka/",
+        "name": "Bajka",
+        "slug": "bajka"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/bajka-ludowa/",
+        "href": "https://wolnelektury.pl/api/genres/bajka-ludowa/",
+        "name": "Bajka ludowa",
+        "slug": "bajka-ludowa"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/ballada/",
+        "href": "https://wolnelektury.pl/api/genres/ballada/",
+        "name": "Ballada",
+        "slug": "ballada"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/basn/",
+        "href": "https://wolnelektury.pl/api/genres/basn/",
+        "name": "Baśń",
+        "slug": "basn"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/dedykacja/",
+        "href": "https://wolnelektury.pl/api/genres/dedykacja/",
+        "name": "Dedykacja",
+        "slug": "dedykacja"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/dialog/",
+        "href": "https://wolnelektury.pl/api/genres/dialog/",
+        "name": "Dialog",
+        "slug": "dialog"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/dramat/",
+        "href": "https://wolnelektury.pl/api/genres/dramat/",
+        "name": "Dramat",
+        "slug": "dramat"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/dramat-antyczny/",
+        "href": "https://wolnelektury.pl/api/genres/dramat-antyczny/",
+        "name": "Dramat antyczny",
+        "slug": "dramat-antyczny"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/dramat-historyczny/",
+        "href": "https://wolnelektury.pl/api/genres/dramat-historyczny/",
+        "name": "Dramat historyczny",
+        "slug": "dramat-historyczny"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/dramat-niesceniczny/",
+        "href": "https://wolnelektury.pl/api/genres/dramat-niesceniczny/",
+        "name": "Dramat niesceniczny",
+        "slug": "dramat-niesceniczny"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/dramat-poetycki/",
+        "href": "https://wolnelektury.pl/api/genres/dramat-poetycki/",
+        "name": "Dramat poetycki",
+        "slug": "dramat-poetycki"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/dramat-romantyczny/",
+        "href": "https://wolnelektury.pl/api/genres/dramat-romantyczny/",
+        "name": "Dramat romantyczny",
+        "slug": "dramat-romantyczny"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/dramat-szekspirowski/",
+        "href": "https://wolnelektury.pl/api/genres/dramat-szekspirowski/",
+        "name": "Dramat szekspirowski",
+        "slug": "dramat-szekspirowski"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/dramat-wierszowany/",
+        "href": "https://wolnelektury.pl/api/genres/dramat-wierszowany/",
+        "name": "Dramat wierszowany",
+        "slug": "dramat-wierszowany"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/dramat-wspolczesny/",
+        "href": "https://wolnelektury.pl/api/genres/dramat-wspolczesny/",
+        "name": "Dramat współczesny",
+        "slug": "dramat-wspolczesny"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/dziennik/",
+        "href": "https://wolnelektury.pl/api/genres/dziennik/",
+        "name": "Dziennik",
+        "slug": "dziennik"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/epigramat/",
+        "href": "https://wolnelektury.pl/api/genres/epigramat/",
+        "name": "Epigramat",
+        "slug": "epigramat"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/epitafium/",
+        "href": "https://wolnelektury.pl/api/genres/epitafium/",
+        "name": "Epitafium",
+        "slug": "epitafium"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/epopeja/",
+        "href": "https://wolnelektury.pl/api/genres/epopeja/",
+        "name": "Epopeja",
+        "slug": "epopeja"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/epos/",
+        "href": "https://wolnelektury.pl/api/genres/epos/",
+        "name": "Epos",
+        "slug": "epos"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/epos-rycerski/",
+        "href": "https://wolnelektury.pl/api/genres/epos-rycerski/",
+        "name": "Epos rycerski",
+        "slug": "epos-rycerski"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/epos-satyryczny/",
+        "href": "https://wolnelektury.pl/api/genres/epos-satyryczny/",
+        "name": "Epos satyryczny",
+        "slug": "epos-satyryczny"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/erotyk/",
+        "href": "https://wolnelektury.pl/api/genres/erotyk/",
+        "name": "Erotyk",
+        "slug": "erotyk"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/esej/",
+        "href": "https://wolnelektury.pl/api/genres/esej/",
+        "name": "Esej",
+        "slug": "esej"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/farsa/",
+        "href": "https://wolnelektury.pl/api/genres/farsa/",
+        "name": "Farsa",
+        "slug": "farsa"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/felieton/",
+        "href": "https://wolnelektury.pl/api/genres/felieton/",
+        "name": "Felieton",
+        "slug": "felieton"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/fraszka/",
+        "href": "https://wolnelektury.pl/api/genres/fraszka/",
+        "name": "Fraszka",
+        "slug": "fraszka"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/gaweda/",
+        "href": "https://wolnelektury.pl/api/genres/gaweda/",
+        "name": "Gawęda",
+        "slug": "gaweda"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/gaweda-szlachecka/",
+        "href": "https://wolnelektury.pl/api/genres/gaweda-szlachecka/",
+        "name": "Gawęda szlachecka",
+        "slug": "gaweda-szlachecka"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/humoreska/",
+        "href": "https://wolnelektury.pl/api/genres/humoreska/",
+        "name": "Humoreska",
+        "slug": "humoreska"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/hymn/",
+        "href": "https://wolnelektury.pl/api/genres/hymn/",
+        "name": "Hymn",
+        "slug": "hymn"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/idylla/",
+        "href": "https://wolnelektury.pl/api/genres/idylla/",
+        "name": "Idylla",
+        "slug": "idylla"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/ikona/",
+        "href": "https://wolnelektury.pl/api/genres/ikona/",
+        "name": "Ikona",
+        "slug": "ikona"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/komedia/",
+        "href": "https://wolnelektury.pl/api/genres/komedia/",
+        "name": "Komedia",
+        "slug": "komedia"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/kronika/",
+        "href": "https://wolnelektury.pl/api/genres/kronika/",
+        "name": "Kronika",
+        "slug": "kronika"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/krucyfiks/",
+        "href": "https://wolnelektury.pl/api/genres/krucyfiks/",
+        "name": "Krucyfiks",
+        "slug": "krucyfiks"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/lament/",
+        "href": "https://wolnelektury.pl/api/genres/lament/",
+        "name": "Lament",
+        "slug": "lament"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/legenda/",
+        "href": "https://wolnelektury.pl/api/genres/legenda/",
+        "name": "Legenda",
+        "slug": "legenda"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/list/",
+        "href": "https://wolnelektury.pl/api/genres/list/",
+        "name": "List",
+        "slug": "list"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/madonna-z-dzieciatkiem/",
+        "href": "https://wolnelektury.pl/api/genres/madonna-z-dzieciatkiem/",
+        "name": "Madonna z dzieciątkiem",
+        "slug": "madonna-z-dzieciatkiem"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/malarstwo-historyczne/",
+        "href": "https://wolnelektury.pl/api/genres/malarstwo-historyczne/",
+        "name": "Malarstwo historyczne",
+        "slug": "malarstwo-historyczne"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/malarstwo-religijne/",
+        "href": "https://wolnelektury.pl/api/genres/malarstwo-religijne/",
+        "name": "Malarstwo religijne",
+        "slug": "malarstwo-religijne"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/manifest/",
+        "href": "https://wolnelektury.pl/api/genres/manifest/",
+        "name": "Manifest",
+        "slug": "manifest"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/marina/",
+        "href": "https://wolnelektury.pl/api/genres/marina/",
+        "name": "Marina",
+        "slug": "marina"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/martwa-natura/",
+        "href": "https://wolnelektury.pl/api/genres/martwa-natura/",
+        "name": "Martwa natura",
+        "slug": "martwa-natura"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/matka-boska-z-dzieciatkiem/",
+        "href": "https://wolnelektury.pl/api/genres/matka-boska-z-dzieciatkiem/",
+        "name": "Matka Boska z Dzieciątkiem",
+        "slug": "matka-boska-z-dzieciatkiem"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/melodramat/",
+        "href": "https://wolnelektury.pl/api/genres/melodramat/",
+        "name": "Melodramat",
+        "slug": "melodramat"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/motto/",
+        "href": "https://wolnelektury.pl/api/genres/motto/",
+        "name": "Motto",
+        "slug": "motto"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/nokturn/",
+        "href": "https://wolnelektury.pl/api/genres/nokturn/",
+        "name": "Nokturn",
+        "slug": "nokturn"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/nowela/",
+        "href": "https://wolnelektury.pl/api/genres/nowela/",
+        "name": "Nowela",
+        "slug": "nowela"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/obraz/",
+        "href": "https://wolnelektury.pl/api/genres/obraz/",
+        "name": "Obraz",
+        "slug": "obraz"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/oda/",
+        "href": "https://wolnelektury.pl/api/genres/oda/",
+        "name": "Oda",
+        "slug": "oda"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/odczyt/",
+        "href": "https://wolnelektury.pl/api/genres/odczyt/",
+        "name": "Odczyt",
+        "slug": "odczyt"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/odezwa/",
+        "href": "https://wolnelektury.pl/api/genres/odezwa/",
+        "name": "Odezwa",
+        "slug": "odezwa"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/odznaczenie/",
+        "href": "https://wolnelektury.pl/api/genres/odznaczenie/",
+        "name": "Odznaczenie",
+        "slug": "odznaczenie"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/oltarz/",
+        "href": "https://wolnelektury.pl/api/genres/oltarz/",
+        "name": "Ołtarz",
+        "slug": "oltarz"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/oltarz-skrzydlowy/",
+        "href": "https://wolnelektury.pl/api/genres/oltarz-skrzydlowy/",
+        "name": "Ołtarz skrzydłowy",
+        "slug": "oltarz-skrzydlowy"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/opowiadanie/",
+        "href": "https://wolnelektury.pl/api/genres/opowiadanie/",
+        "name": "Opowiadanie",
+        "slug": "opowiadanie"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/pamietnik/",
+        "href": "https://wolnelektury.pl/api/genres/pamietnik/",
+        "name": "Pamiętnik",
+        "slug": "pamietnik"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/panorama/",
+        "href": "https://wolnelektury.pl/api/genres/panorama/",
+        "name": "Panorama",
+        "slug": "panorama"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/pejzaz/",
+        "href": "https://wolnelektury.pl/api/genres/pejzaz/",
+        "name": "Pejzaż",
+        "slug": "pejzaz"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/pejzaz-miejski/",
+        "href": "https://wolnelektury.pl/api/genres/pejzaz-miejski/",
+        "name": "Pejzaż miejski",
+        "slug": "pejzaz-miejski"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/personifikacja/",
+        "href": "https://wolnelektury.pl/api/genres/personifikacja/",
+        "name": "Personifikacja",
+        "slug": "personifikacja"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/piesn/",
+        "href": "https://wolnelektury.pl/api/genres/piesn/",
+        "name": "Pieśń",
+        "slug": "piesn"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/pieta/",
+        "href": "https://wolnelektury.pl/api/genres/pieta/",
+        "name": "Pieta",
+        "slug": "pieta"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/poemat/",
+        "href": "https://wolnelektury.pl/api/genres/poemat/",
+        "name": "Poemat",
+        "slug": "poemat"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/poemat-alegoryczny/",
+        "href": "https://wolnelektury.pl/api/genres/poemat-alegoryczny/",
+        "name": "Poemat alegoryczny",
+        "slug": "poemat-alegoryczny"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/poemat-dygresyjny/",
+        "href": "https://wolnelektury.pl/api/genres/poemat-dygresyjny/",
+        "name": "Poemat dygresyjny",
+        "slug": "poemat-dygresyjny"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/poemat-heroikomiczny/",
+        "href": "https://wolnelektury.pl/api/genres/poemat-heroikomiczny/",
+        "name": "Poemat heroikomiczny",
+        "slug": "poemat-heroikomiczny"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/poemat-proza/",
+        "href": "https://wolnelektury.pl/api/genres/poemat-proza/",
+        "name": "Poemat prozą",
+        "slug": "poemat-proza"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/pogadanka/",
+        "href": "https://wolnelektury.pl/api/genres/pogadanka/",
+        "name": "Pogadanka",
+        "slug": "pogadanka"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/pomnik/",
+        "href": "https://wolnelektury.pl/api/genres/pomnik/",
+        "name": "Pomnik",
+        "slug": "pomnik"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/poradnik/",
+        "href": "https://wolnelektury.pl/api/genres/poradnik/",
+        "name": "Poradnik",
+        "slug": "poradnik"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/portret/",
+        "href": "https://wolnelektury.pl/api/genres/portret/",
+        "name": "Portret",
+        "slug": "portret"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/portret-alegoryczny/",
+        "href": "https://wolnelektury.pl/api/genres/portret-alegoryczny/",
+        "name": "Portret alegoryczny",
+        "slug": "portret-alegoryczny"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/portret-konny/",
+        "href": "https://wolnelektury.pl/api/genres/portret-konny/",
+        "name": "Portret konny",
+        "slug": "portret-konny"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/portret-reprezentacyjny/",
+        "href": "https://wolnelektury.pl/api/genres/portret-reprezentacyjny/",
+        "name": "Portret reprezentacyjny",
+        "slug": "portret-reprezentacyjny"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/portret-trumienny/",
+        "href": "https://wolnelektury.pl/api/genres/portret-trumienny/",
+        "name": "Portret trumienny",
+        "slug": "portret-trumienny"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/portret-zbiorowy/",
+        "href": "https://wolnelektury.pl/api/genres/portret-zbiorowy/",
+        "name": "Portret zbiorowy",
+        "slug": "portret-zbiorowy"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/powiastka-filozoficzna/",
+        "href": "https://wolnelektury.pl/api/genres/powiastka-filozoficzna/",
+        "name": "Powiastka filozoficzna",
+        "slug": "powiastka-filozoficzna"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/powiesc/",
+        "href": "https://wolnelektury.pl/api/genres/powiesc/",
+        "name": "Powieść",
+        "slug": "powiesc"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/powiesc-epistolarna/",
+        "href": "https://wolnelektury.pl/api/genres/powiesc-epistolarna/",
+        "name": "Powieść epistolarna",
+        "slug": "powiesc-epistolarna"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/powiesc-poetycka/",
+        "href": "https://wolnelektury.pl/api/genres/powiesc-poetycka/",
+        "name": "Powieść poetycka",
+        "slug": "powiesc-poetycka"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/praca-naukowa/",
+        "href": "https://wolnelektury.pl/api/genres/praca-naukowa/",
+        "name": "Praca naukowa",
+        "slug": "praca-naukowa"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/proza-poetycka/",
+        "href": "https://wolnelektury.pl/api/genres/proza-poetycka/",
+        "name": "Proza poetycka",
+        "slug": "proza-poetycka"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/przedstawienie-swietych/",
+        "href": "https://wolnelektury.pl/api/genres/przedstawienie-swietych/",
+        "name": "Przedstawienie świętych",
+        "slug": "przedstawienie-swietych"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/przypowiesc/",
+        "href": "https://wolnelektury.pl/api/genres/przypowiesc/",
+        "name": "Przypowieść",
+        "slug": "przypowiesc"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/psalm/",
+        "href": "https://wolnelektury.pl/api/genres/psalm/",
+        "name": "Psalm",
+        "slug": "psalm"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/publicystyka/",
+        "href": "https://wolnelektury.pl/api/genres/publicystyka/",
+        "name": "Publicystyka",
+        "slug": "publicystyka"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/realizm/",
+        "href": "https://wolnelektury.pl/api/genres/realizm/",
+        "name": "Realizm",
+        "slug": "realizm"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/reportaz-podrozniczy/",
+        "href": "https://wolnelektury.pl/api/genres/reportaz-podrozniczy/",
+        "name": "Reportaż podróżniczy",
+        "slug": "reportaz-podrozniczy"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/rozprawa/",
+        "href": "https://wolnelektury.pl/api/genres/rozprawa/",
+        "name": "Rozprawa",
+        "slug": "rozprawa"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/rozprawa-polityczna/",
+        "href": "https://wolnelektury.pl/api/genres/rozprawa-polityczna/",
+        "name": "Rozprawa polityczna",
+        "slug": "rozprawa-polityczna"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/satyra/",
+        "href": "https://wolnelektury.pl/api/genres/satyra/",
+        "name": "Satyra",
+        "slug": "satyra"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/scena-alegoryczna/",
+        "href": "https://wolnelektury.pl/api/genres/scena-alegoryczna/",
+        "name": "Scena alegoryczna",
+        "slug": "scena-alegoryczna"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/scena-batalistyczna/",
+        "href": "https://wolnelektury.pl/api/genres/scena-batalistyczna/",
+        "name": "Scena batalistyczna",
+        "slug": "scena-batalistyczna"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/scena-batalistyczne/",
+        "href": "https://wolnelektury.pl/api/genres/scena-batalistyczne/",
+        "name": "Scena batalistyczne",
+        "slug": "scena-batalistyczne"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/scena-historyczna/",
+        "href": "https://wolnelektury.pl/api/genres/scena-historyczna/",
+        "name": "Scena historyczna",
+        "slug": "scena-historyczna"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/scena-mitologiczna/",
+        "href": "https://wolnelektury.pl/api/genres/scena-mitologiczna/",
+        "name": "Scena mitologiczna",
+        "slug": "scena-mitologiczna"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/scena-religijna/",
+        "href": "https://wolnelektury.pl/api/genres/scena-religijna/",
+        "name": "Scena religijna",
+        "slug": "scena-religijna"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/scena-rodzajowa/",
+        "href": "https://wolnelektury.pl/api/genres/scena-rodzajowa/",
+        "name": "Scena rodzajowa",
+        "slug": "scena-rodzajowa"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/scena-symboliczna/",
+        "href": "https://wolnelektury.pl/api/genres/scena-symboliczna/",
+        "name": "Scena symboliczna",
+        "slug": "scena-symboliczna"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/sielanka/",
+        "href": "https://wolnelektury.pl/api/genres/sielanka/",
+        "name": "Sielanka",
+        "slug": "sielanka"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/sonet/",
+        "href": "https://wolnelektury.pl/api/genres/sonet/",
+        "name": "Sonet",
+        "slug": "sonet"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/sztafaz/",
+        "href": "https://wolnelektury.pl/api/genres/sztafaz/",
+        "name": "Sztafaż",
+        "slug": "sztafaz"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/tragedia/",
+        "href": "https://wolnelektury.pl/api/genres/tragedia/",
+        "name": "Tragedia",
+        "slug": "tragedia"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/tragifarsa/",
+        "href": "https://wolnelektury.pl/api/genres/tragifarsa/",
+        "name": "Tragifarsa",
+        "slug": "tragifarsa"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/traktat/",
+        "href": "https://wolnelektury.pl/api/genres/traktat/",
+        "name": "Traktat",
+        "slug": "traktat"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/tren/",
+        "href": "https://wolnelektury.pl/api/genres/tren/",
+        "name": "Tren",
+        "slug": "tren"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/weduta/",
+        "href": "https://wolnelektury.pl/api/genres/weduta/",
+        "name": "Weduta",
+        "slug": "weduta"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/wiersz/",
+        "href": "https://wolnelektury.pl/api/genres/wiersz/",
+        "name": "Wiersz",
+        "slug": "wiersz"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/wiersz-sylabotoniczny/",
+        "href": "https://wolnelektury.pl/api/genres/wiersz-sylabotoniczny/",
+        "name": "Wiersz sylabotoniczny",
+        "slug": "wiersz-sylabotoniczny"
+    },
+    {
+        "url": "https://wolnelektury.pl/katalog/gatunek/wnetrze/",
+        "href": "https://wolnelektury.pl/api/genres/wnetrze/",
+        "name": "Wnętrze",
+        "slug": "wnetrze"
+    }
+]
