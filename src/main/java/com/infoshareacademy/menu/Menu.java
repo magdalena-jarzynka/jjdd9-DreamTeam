@@ -62,7 +62,6 @@ public class Menu {
 
     private void chooseBooksMenu() {
         do {
-            STDOUT.info(Breadcrumbs.getInstance().displayBreadcrumb());
             showBooksMenu();
             input = 0;
             input = userInputService.getUserInput();
@@ -92,7 +91,6 @@ public class Menu {
         Search search = new Search();
         switch (input) {
             case BOOK_LIST:
-                STDOUT.info(Breadcrumbs.getInstance().displayBreadcrumb());
                 bookListService.run(bookService.findAllBooks());
                 break;
             case SEARCH:
@@ -105,6 +103,7 @@ public class Menu {
 
     public void showBooksMenu() {
         cleanTerminal();
+        STDOUT.info(Breadcrumbs.getInstance().displayBreadcrumb());
         STDOUT.info("PRZEGLĄDANIE ZBIORÓW \n\n");
         STDOUT.info("W tej sekcji możesz przeglądać zbiory książek. \n");
         STDOUT.info("Możesz również wyszukać daną pozycję i wyświetlić jej szczegóły. \n");

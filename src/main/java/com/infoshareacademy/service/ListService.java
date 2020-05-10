@@ -37,7 +37,6 @@ public class ListService {
                 return;
             } else if (bookService.findAllBooks().containsKey(id)) {
                 Breadcrumbs.getInstance().addBreadcrumb(BookListMenu.BOOKS_MANAGEMENT.getBookDescription());
-                STDOUT.info(Breadcrumbs.getInstance().displayBreadcrumb());
                 break;
             } else {
                 STDOUT.info("\nPozycja o podanym ID nie istnieje\n");
@@ -62,6 +61,7 @@ public class ListService {
     }
 
     public void showBookList(Map<Long, Book> books, long firstPositionOnPage, int positionsPerPage) {
+        STDOUT.info(Breadcrumbs.getInstance().displayBreadcrumb());
         this.positionNumber = firstPositionOnPage + 1;
         getBookSet(books).stream()
                 .skip(firstPositionOnPage)

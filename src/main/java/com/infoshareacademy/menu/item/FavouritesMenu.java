@@ -58,6 +58,7 @@ public class FavouritesMenu {
         } else {
             STDOUT.info("\nPozycja o podanym ID nie istnieje\n");
         }
+        userInputService.confirmation();
     }
 
     public void remove(long id) {
@@ -67,13 +68,14 @@ public class FavouritesMenu {
         } else {
             STDOUT.info("\nPozycja o podanym ID nie znajduje się w Ulubionych\n");
         }
+        userInputService.confirmation();
     }
 
     public void printAction(long id) {
         if (favouritesService.getFavourites().contains(id)) {
-            STDOUT.info("\n Wybierz 1, aby usunąć pozycję z ulubionych.");
+            STDOUT.info("\nWybierz 1, aby usunąć pozycję z ulubionych.");
         } else {
-            STDOUT.info("\n Wybierz 1, aby dodać pozycję do ulubionych.");
+            STDOUT.info("\nWybierz 1, aby dodać pozycję do ulubionych.");
         }
     }
 
@@ -84,5 +86,4 @@ public class FavouritesMenu {
             add(id);
         }
     }
-
 }
