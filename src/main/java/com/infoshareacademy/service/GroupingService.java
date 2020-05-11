@@ -11,14 +11,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static com.infoshareacademy.menu.MenuUtils.STDOUT;
-import static com.infoshareacademy.menu.MenuUtils.cleanTerminal;
+import static com.infoshareacademy.menu.MenuUtils.*;
 
 public class GroupingService {
 
     private final PageService genrePageService = new PageService();
     private final PageService booksPageService = new PageService();
-    ListService listService = new ListService();
+    private ListService listService = new ListService();
     private final GenreService genreService = new GenreService();
     private final UserInputService userInputService = new UserInputService();
     private final List<Genre> selectedGenres = new ArrayList<>();
@@ -55,6 +54,8 @@ public class GroupingService {
                     return;
                 case 0:
                     return;
+                default:
+                    STDOUT.info(WRONG_NUMBER);
             }
             cleanTerminal();
         } while (true);
@@ -111,7 +112,7 @@ public class GroupingService {
         cleanTerminal();
         do {
             showGroupedBookList(booksPageService.findFirstPosition(),
-                    booksPageService.getCurrentPageNumber(), booksPageService.getPositionsPerPage());
+                    booksPageService.getPositionsPerPage());
             if (booksPageService.isLastPage() && !booksPageService.isLastChapter()) {
                 STDOUT.info(PageService.LAST_PAGE_NEXT_CHAPTER);
             } else if (booksPageService.isLastPage()) {
@@ -133,12 +134,14 @@ public class GroupingService {
                     break;
                 case 0:
                     return;
+                default:
+                    STDOUT.info(WRONG_NUMBER);
             }
             cleanTerminal();
         } while (true);
     }
 
-    private void showGroupedBookList(long firstPositionOnPage, long pageNumber, int positionsPerPage) {
+    private void showGroupedBookList(long firstPositionOnPage, int positionsPerPage) {
         this.positionNumber = firstPositionOnPage + 1;
         if (booksPageService.isFirstPage()) {
             STDOUT.info("{}**** {} **** {}\n\n", ConsoleColors.YELLOW_BOLD.getColorType(),
@@ -169,4 +172,5 @@ public class GroupingService {
                                 .equals(selectedGenres.get(booksPageService.getCurrentChapterNumber() - 1).getName()))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
+
 }

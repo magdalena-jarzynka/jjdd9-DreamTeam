@@ -12,7 +12,6 @@ import com.infoshareacademy.service.sorting.SortByAuthorStrategy;
 import com.infoshareacademy.service.sorting.SortByTitleStrategy;
 
 import java.util.Map;
-import java.util.Scanner;
 import java.util.SortedSet;
 import java.util.stream.Collectors;
 
@@ -20,9 +19,7 @@ import static com.infoshareacademy.menu.MenuUtils.STDOUT;
 import static com.infoshareacademy.menu.MenuUtils.WRONG_NUMBER;
 
 public class ListService {
-    private static final Scanner scanner = new Scanner(System.in);
     private static final String AUTHOR = "AUTHOR";
-    private int input;
     private long positionNumber;
     private FavouritesMenu favouritesMenu = new FavouritesMenu();
     private BookService bookService = new BookService();
@@ -46,7 +43,7 @@ public class ListService {
         do {
             STDOUT.info("Wybierz 0, aby powrócić do przeglądania pozycji.");
             favouritesMenu.printAction(id);
-            input = userInputService.getUserInput();
+            int input = userInputService.getUserInput();
             switch (input) {
                 case 0:
                     Breadcrumbs.getInstance().removeBreadcrumb();
@@ -84,7 +81,8 @@ public class ListService {
     }
 
     public SortedSet<Map.Entry<Long, Book>> getBookSet(Map<Long, Book> books) {
-        return isSortByAuthor() ? new SortByAuthorStrategy().getSortedList(books) : new SortByTitleStrategy().getSortedList(books);
+        return isSortByAuthor() ? new SortByAuthorStrategy().getSortedList(books) :
+                new SortByTitleStrategy().getSortedList(books);
     }
 
     private boolean isSortByAuthor() {

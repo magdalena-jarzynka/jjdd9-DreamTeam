@@ -7,25 +7,25 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-class AuthorServiceTest {
+class TranslatorServiceTest {
 
     @Test
     void addTwoAutorsToListOfAuthors() {
         //GIVEN
-        AuthorService authorService = new AuthorService();
+        TranslatorService translatorService = new TranslatorService();
         Book book = new Book();
-        List<Author> authors = new ArrayList<>();
-        Author author1 = new Author();
-        Author author2 = new Author();
-        author1.setName("Ireneusz Malutki");
-        author2.setName("Ireneusz Wielki");
-        authors.add(author1);
-        authors.add(author2);
-        book.setAuthors(authors);
+        List<Author> translators = new ArrayList<>();
+        Author translator1 = new Author();
+        Author translator2 = new Author();
+        translator1.setName("Ireneusz Malutki");
+        translator2.setName("Ireneusz Wielki");
+        translators.add(translator1);
+        translators.add(translator2);
+        book.setTranslators(translators);
         String result;
 
         //WHEN
-        result = authorService.getAuthors(book);
+        result = translatorService.getTranslators(book);
 
         //THEN
         org.assertj.core.api.Assertions.assertThat(result).isEqualTo("Ireneusz Malutki, Ireneusz Wielki")
@@ -36,17 +36,18 @@ class AuthorServiceTest {
     @Test
     void checkIfEmptyWithNoAuthorsInAuthorsList() {
         //GIVEN
-        AuthorService authorService = new AuthorService();
+        TranslatorService translatorService = new TranslatorService();
         Book book = new Book();
-        List<Author> authors = new ArrayList<>();
-        book.setAuthors(authors);
+        List<Author> translators = new ArrayList<>();
+        book.setTranslators(translators);
         String result;
 
         //WHEN
-        result = authorService.getAuthors(book);
+        result = translatorService.getTranslators(book);
 
         //THEN
         org.assertj.core.api.Assertions.assertThat(result).isEmpty();
 
     }
+
 }

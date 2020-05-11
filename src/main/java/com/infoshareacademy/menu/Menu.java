@@ -91,7 +91,7 @@ public class Menu {
         Search search = new Search();
         switch (input) {
             case BOOK_LIST:
-                bookListService.run(bookService.findAllBooks());
+                bookListService.displayBookList(bookService.findAllBooks());
                 break;
             case SEARCH:
                 search.getSearchingCriteria();

@@ -24,7 +24,7 @@ public class BookListService {
     private ListService listService = new ListService();
     private UserInputService userInputService = new UserInputService();
 
-    public void run(Map<Long, Book> books) {
+    public void displayBookList(Map<Long, Book> books) {
         PageService pageService = new PageService();
         pageService.choosePagesCount();
         pageService.addChapter(books.size());
