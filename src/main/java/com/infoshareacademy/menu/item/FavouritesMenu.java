@@ -7,6 +7,8 @@ import com.infoshareacademy.object.Book;
 import com.infoshareacademy.service.BookService;
 import com.infoshareacademy.service.FavouritesService;
 
+import java.util.Map;
+
 import static com.infoshareacademy.menu.MenuUtils.STDOUT;
 import static com.infoshareacademy.menu.MenuUtils.cleanTerminal;
 
@@ -24,13 +26,19 @@ public class FavouritesMenu {
             STDOUT.info("W tej sekcji widoczne są pozycje dodane do Ulubionych. \n\n");
 
             for (Long id : favouritesService.getFavourites()) {
-                Book book = bookService.findAllBooks().get(id);
-                STDOUT.info("{}Tytuł: {}{} \n {} Autor: {}{} \n {} ID: {}{}{} \n\n",
-                        ConsoleColors.BLACK_BOLD.getColorType(),
-                        ConsoleColors.RED.getColorType(), book.getTitle(),
-                        ConsoleColors.BLACK_BOLD.getColorType(), ConsoleColors.BLUE.getColorType(), book.getAuthors().get(0).getName(),
-                        ConsoleColors.BLACK_BOLD.getColorType(), ConsoleColors.YELLOW_BOLD.getColorType(), id,
-                        ConsoleColors.RESET.getColorType());
+                if (bookService.findAllBooks().containsKey(id)) {
+                    Book book = bookService.findAllBooks().get(id);
+                    STDOUT.info("{}Tytuł: {}{} \n {} Autor: {}{} \n {} ID: {}{}{} \n\n",
+                            ConsoleColors.BLACK_BOLD.getColorType(),
+                            ConsoleColors.RED.getColorType(), book.getTitle(),
+                            ConsoleColors.BLACK_BOLD.getColorType(), ConsoleColors.BLUE.getColorType(), book.getAuthors().get(0).getName(),
+                            ConsoleColors.BLACK_BOLD.getColorType(), ConsoleColors.YELLOW_BOLD.getColorType(), id,
+                            ConsoleColors.RESET.getColorType());
+                } else {
+                    STDOUT.info("Książka o ID: {}{}{} została usunięta z biblioteki. " +
+                            "Zalecane jest jej usunięcie z ulubionych.\n\n", ConsoleColors.YELLOW_BOLD.getColorType(),
+                            id, ConsoleColors.RESET.getColorType());
+                }
             }
             STDOUT.info("Wybierz 1 i numer ID, aby usunąć pozycję z ulubionych.\n\n");
             STDOUT.info("Wybierz 0 aby wrócić do głównego Menu. \n");
@@ -64,7 +72,8 @@ public class FavouritesMenu {
     public void remove(long id) {
         if (favouritesService.getFavourites().contains(id)) {
             favouritesService.remove(id);
-            STDOUT.info("\n \"{}\" usunięto z Ulubionych\n", bookService.findAllBooks().get(id).getTitle());
+            Map<Long, Book> bookMap = bookService.findAllBooks();
+            STDOUT.info("\n \"{}\" usunięto z Ulubionych\n", bookMap.containsKey(id) ? bookMap.get(id).getTitle() : id);
         } else {
             STDOUT.info("\nPozycja o podanym ID nie znajduje się w Ulubionych\n");
         }
