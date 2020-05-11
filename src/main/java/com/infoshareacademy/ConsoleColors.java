@@ -5,8 +5,7 @@ public enum ConsoleColors {
     RED  ("\033[0;31m"),
     BLUE ("\033[0;34m"),
     BLACK_BOLD ("\033[1;30m"),
-    BLACK_UNDERLINED ("\033[4;30m"),
-    YELLOW_BOLD("\033[1;33m");
+    BLACK_UNDERLINED ("\033[4;30m");
 
     String colorType;
     ConsoleColors(String colorType) {
