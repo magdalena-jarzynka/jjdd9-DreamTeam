@@ -53,7 +53,7 @@ public class Menu {
 
     public void showMainMenu() {
         cleanTerminal();
-        STDOUT.info("Witaj! Wybierz pozycję z Menu wpisując jej numer lub wybierz 5 by wyjść: \n");
+        STDOUT.info("Witaj! Wybierz pozycję z Menu wpisując jej numer lub wybierz 4 by wyjść: \n");
         for (MainMenu mainMenu : MainMenu.values()) {
             int mainMenuPosition = mainMenu.ordinal() + 1;
             STDOUT.info(SHOW_MENU, mainMenuPosition, mainMenu.getMenuDescription());
