@@ -81,7 +81,8 @@ public class ListService {
     }
 
     public SortedSet<Map.Entry<Long, Book>> getBookSet(Map<Long, Book> books) {
-        return isSortByAuthor() ? new SortByAuthorStrategy().getSortedList(books) : new SortByTitleStrategy().getSortedList(books);
+        return isSortByAuthor() ? new SortByAuthorStrategy().getSortedList(books) :
+                new SortByTitleStrategy().getSortedList(books);
     }
 
     private boolean isSortByAuthor() {

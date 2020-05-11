@@ -8,7 +8,7 @@ import java.util.Map;
 class BookServiceTest {
 
     @Test
-    void name() {
+    void checkIfGetsDetailsOfBookWithProperId() {
         //GIVEN
         BookService bookService = new BookService();
         Book book = new Book();
