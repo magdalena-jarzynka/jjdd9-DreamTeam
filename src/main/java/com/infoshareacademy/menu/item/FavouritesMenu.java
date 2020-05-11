@@ -32,11 +32,11 @@ public class FavouritesMenu {
                             ConsoleColors.BLACK_BOLD.getColorType(),
                             ConsoleColors.RED.getColorType(), book.getTitle(),
                             ConsoleColors.BLACK_BOLD.getColorType(), ConsoleColors.BLUE.getColorType(), book.getAuthors().get(0).getName(),
-                            ConsoleColors.BLACK_BOLD.getColorType(), ConsoleColors.YELLOW_BOLD.getColorType(), id,
+                            ConsoleColors.BLACK_BOLD.getColorType(), ConsoleColors.RED.getColorType(), id,
                             ConsoleColors.RESET.getColorType());
                 } else {
                     STDOUT.info("Książka o ID: {}{}{} została usunięta z biblioteki. " +
-                            "Zalecane jest jej usunięcie z ulubionych.\n\n", ConsoleColors.YELLOW_BOLD.getColorType(),
+                            "Zalecane jest jej usunięcie z ulubionych.\n\n", ConsoleColors.RED.getColorType(),
                             id, ConsoleColors.RESET.getColorType());
                 }
             }

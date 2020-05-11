@@ -71,7 +71,7 @@ public class GroupingService {
         if (!selectedGenres.isEmpty()) {
             STDOUT.info("\nWybrane gatunki: \n");
             for (Genre genre : selectedGenres) {
-                STDOUT.info("{}{}{}, ", ConsoleColors.YELLOW_BOLD.getColorType(),
+                STDOUT.info("{}{}{}, ", ConsoleColors.BLUE.getColorType(),
                         genre.getName(), ConsoleColors.RESET.getColorType());
             }
         }
@@ -144,7 +144,7 @@ public class GroupingService {
     private void showGroupedBookList(long firstPositionOnPage, int positionsPerPage) {
         this.positionNumber = firstPositionOnPage + 1;
         if (booksPageService.isFirstPage()) {
-            STDOUT.info("{}**** {} **** {}\n\n", ConsoleColors.YELLOW_BOLD.getColorType(),
+            STDOUT.info("{}**** {} **** {}\n\n", ConsoleColors.BLUE.getColorType(),
                     selectedGenres.get(booksPageService.getCurrentChapterNumber() - 1).getName(),
                     ConsoleColors.RESET.getColorType());
         }
@@ -161,7 +161,7 @@ public class GroupingService {
                                 ConsoleColors.RED.getColorType(), book.getValue().getTitle(),
                                 ConsoleColors.BLACK_BOLD.getColorType(), ConsoleColors.BLUE.getColorType(),
                                 book.getValue().getAuthors().get(0).getName(), ConsoleColors.BLACK_BOLD.getColorType(),
-                                ConsoleColors.YELLOW_BOLD.getColorType(), book.getKey(),
+                                ConsoleColors.RED.getColorType(), book.getKey(),
                                 ConsoleColors.RESET.getColorType()));
     }
 
