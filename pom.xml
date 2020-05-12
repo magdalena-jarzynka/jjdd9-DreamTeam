@@ -14,7 +14,5 @@
         <module>./app</module>
         <module>./web</module>
     </modules>
-
-
+    
 </project>
-git
