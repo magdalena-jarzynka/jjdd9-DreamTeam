@@ -1,4 +1,5 @@
-.idea
-target
-dreamteam.iml 
-config.properties
+.idea/
+web/.idea/
+web/target/
+web/web.iml
+
