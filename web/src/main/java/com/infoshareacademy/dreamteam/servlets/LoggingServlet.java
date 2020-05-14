@@ -1,4 +1,4 @@
-package servlets;
+package com.infoshareacademy.dreamteam.servlets;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,17 +13,16 @@ import java.io.PrintWriter;
 
 @WebServlet("/logging-servlet")
 public class LoggingServlet extends HttpServlet {
-    private static final Logger loggerServer = LoggerFactory.getLogger("com.infoshareacademy");
-    private static final Logger loggerApp = LoggerFactory.getLogger("application");
+    private static final Logger loggerApp = LoggerFactory.getLogger(LoggingServlet.class.getName());
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
 
-        loggerServer.debug("Server debug \n");
-        loggerServer.info("Server info \n");
-        loggerServer.warn("Server warn \n");
-        loggerServer.error("Server error \n");
+        loggerApp.debug("Server debug \n");
+        loggerApp.info("Server info \n");
+        loggerApp.warn("Server warn \n");
+        loggerApp.error("Server error \n");
 
         loggerApp.debug("Application file debug \n");
         loggerApp.info("Application file info \n");
