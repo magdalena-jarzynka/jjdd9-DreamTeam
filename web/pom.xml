@@ -7,8 +7,32 @@
     <groupId>com.infoshareacademy</groupId>
     <artifactId>dreamteam-web</artifactId>
     <version>1.0</version>
-    <packaging>war</packaging>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.13.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.13.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.25</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>8.0.1</version>
+        </dependency>
+    </dependencies>
+
+    <packaging>war</packaging>
     <name>dreamteam-web</name>
     <url>http://dreamteam.jjdd9.is-academy.pl</url>
 
@@ -20,5 +44,12 @@
 
     <build>
         <finalName>web</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.2.3</version>
+            </plugin>
+        </plugins>
     </build>
 </project>

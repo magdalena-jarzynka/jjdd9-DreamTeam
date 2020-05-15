@@ -1,3 +1,5 @@
+*.iml
+web/dreamteam-web.iml
 .idea/
 web/.idea/
 web/target/
