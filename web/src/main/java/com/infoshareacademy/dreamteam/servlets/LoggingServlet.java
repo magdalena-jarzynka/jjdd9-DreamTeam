@@ -13,21 +13,16 @@ import java.io.PrintWriter;
 
 @WebServlet("/logging-servlet")
 public class LoggingServlet extends HttpServlet {
-    private static final Logger loggerApp = LoggerFactory.getLogger(LoggingServlet.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger(LoggingServlet.class.getName());
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
 
-        loggerApp.debug("Server debug \n");
-        loggerApp.info("Server info \n");
-        loggerApp.warn("Server warn \n");
-        loggerApp.error("Server error \n");
-
-        loggerApp.debug("Application file debug \n");
-        loggerApp.info("Application file info \n");
-        loggerApp.warn("Application file warn \n");
-        loggerApp.error("Application file error \n");
+        logger.debug("Server debug \n");
+        logger.info("Server info \n");
+        logger.warn("Server warn \n");
+        logger.error("Server error \n");
 
         PrintWriter writer = resp.getWriter();
         writer.println("test");
