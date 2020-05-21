@@ -28,7 +28,7 @@ public class TemplatePrinter {
             Template template = templateProvider.getTemplate(servletContext, templateName);
             template.process(map, writer);
         } catch (TemplateException | IOException e) {
-            logger.error("Problem with printing the template \n", e);
+            logger.error("Problem with printing the template {}\n", templateName, e);
         }
     }
 }
