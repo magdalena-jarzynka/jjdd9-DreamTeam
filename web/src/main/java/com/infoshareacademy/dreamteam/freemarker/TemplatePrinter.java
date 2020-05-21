@@ -1,6 +1,5 @@
 package com.infoshareacademy.dreamteam.freemarker;
 
-import com.infoshareacademy.dreamteam.servlets.LoggingServlet;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
@@ -17,7 +16,7 @@ import java.util.Map;
 @RequestScoped
 public class TemplatePrinter {
 
-    private static final Logger loggerApp = LoggerFactory.getLogger(LoggingServlet.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger(TemplatePrinter.class);
 
     @Inject
     private TemplateProvider templateProvider;
@@ -29,7 +28,7 @@ public class TemplatePrinter {
             Template template = templateProvider.getTemplate(servletContext, templateName);
             template.process(map, writer);
         } catch (TemplateException | IOException e) {
-            loggerApp.error("Problem with printing the template \n", e);
+            logger.error("Problem with printing the template \n", e);
         }
     }
 }
