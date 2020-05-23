@@ -15,11 +15,13 @@ import org.slf4j.LoggerFactory;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.UUID;
 
+@WebServlet("/oauth2callback")
 public class CallbackServlet extends AbstractAuthorizationCodeCallbackServlet {
     private static final Logger logger = LoggerFactory.getLogger(CallbackServlet.class.getName());
 
