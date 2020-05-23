@@ -23,7 +23,7 @@ public final class OAuthManager {
         return new GoogleAuthorizationCodeFlow.Builder(
                 new NetHttpTransport(),
                 JacksonFactory.getDefaultInstance(), getProperty("client.id"),
-                getProperty("secret"), SCOPE)
+                getProperty("client.secret"), SCOPE)
                 .setAccessType("online")
                 .build();
     }
