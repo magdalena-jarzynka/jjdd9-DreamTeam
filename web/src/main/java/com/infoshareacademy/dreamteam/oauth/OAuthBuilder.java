@@ -20,7 +20,7 @@ public class OAuthBuilder {
                 new NetHttpTransport(),
                 JacksonFactory.getDefaultInstance(),
                 credential1)
-                .setApplicationName("3cityevent")
+                .setApplicationName("DreamTeam Library")
                 .build();
     }
 
