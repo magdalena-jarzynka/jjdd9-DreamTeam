@@ -25,7 +25,7 @@ public class LoggingServlet extends HttpServlet {
         logger.error("Server error \n");
 
         PrintWriter writer = resp.getWriter();
-        writer.println("test");
+        writer.println(req.getSession().getAttribute("name"));
 
     }
 }
