@@ -61,15 +61,7 @@
     <div class="templatemo-content col-1 light-gray-bg">
         <div class="templatemo-top-nav-container">
             <div class="row">
-                <nav class="templatemo-top-nav col-lg-12 col-md-12">
-                    <ul class="text-uppercase">
-                        <#if user.isLoggedIn()>
-                        <li><a href="" class="active">WYLOGUJ</a></li>
-                            <#else>
-                                <li><a href="" class="active">ZALOGUJ</a></li>
-                        </#if>
-                    </ul>
-                </nav>
+<#include "navigation.ftlh">
             </div>
         </div>
         <div class="templatemo-content-container">

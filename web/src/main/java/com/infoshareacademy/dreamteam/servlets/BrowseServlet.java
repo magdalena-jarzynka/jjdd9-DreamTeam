@@ -1,14 +1,18 @@
 package com.infoshareacademy.dreamteam.servlets;
 
 import com.infoshareacademy.dreamteam.bean.LeftColumnBean;
+import com.infoshareacademy.dreamteam.bean.NavigationBean;
+import com.infoshareacademy.dreamteam.cdi.Role;
 import com.infoshareacademy.dreamteam.cdi.User;
 import com.infoshareacademy.dreamteam.freemarker.TemplatePrinter;
 
 import javax.inject.Inject;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,13 +28,24 @@ public class BrowseServlet extends HttpServlet {
     @Inject
     private LeftColumnBean leftColumnBean;
 
+    @Inject
+    private NavigationBean navigationBean;
+
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html; charset=UTF-8");
+
+        if (req.getSession().getAttribute("role") == null) {
+            user.setRole(Role.GUEST);
+        } else {
+            user.setRole((Role) req.getSession().getAttribute("role"));
+            user.setLoggedIn(true);
+        }
 
         Map<String, Object> browse = new HashMap<>();
         browse.put("user", user);
         browse.putAll(leftColumnBean.getLeftColumn());
+        browse.putAll(navigationBean.getNavigation());
         templatePrinter.printTemplate(resp, browse, getServletContext(), "browse.ftlh");
     }
 }
