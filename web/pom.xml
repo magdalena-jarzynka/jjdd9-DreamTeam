@@ -50,6 +50,11 @@
             <artifactId>google-api-services-oauth2</artifactId>
             <version>v2-rev150-1.25.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+            <version>2.3.30</version>
+        </dependency>
     </dependencies>
 
     <packaging>war</packaging>
