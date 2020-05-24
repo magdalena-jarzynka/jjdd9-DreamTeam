@@ -37,6 +37,7 @@ public class FavouritesServlet extends HttpServlet {
             user.setRole(Role.GUEST);
         } else {
             user.setRole((Role) req.getSession().getAttribute("role"));
+            user.setName((String) req.getSession().getAttribute("name"));
             user.setLoggedIn(true);
         }
 

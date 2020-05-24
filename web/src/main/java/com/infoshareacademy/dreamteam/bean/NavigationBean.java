@@ -18,12 +18,13 @@ public class NavigationBean {
 
     @PostConstruct
     public void init() {
-        if (user.isLoggedIn()) {
+        if (!user.isLoggedIn()) {
             navigation.put("logIn", NavigationTag.LOG_IN.getTagDescription());
-        } else{
+        } else {
             navigation.put("logOut", NavigationTag.LOG_OUT.getTagDescription());
         }
     }
+
     public Map<String, Object> getNavigation() {
         return navigation;
     }
