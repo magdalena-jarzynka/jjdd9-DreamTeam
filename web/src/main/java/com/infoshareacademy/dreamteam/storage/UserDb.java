@@ -1,6 +1,7 @@
 package com.infoshareacademy.dreamteam.storage;
 
-import com.infoshareacademy.dreamteam.domain.User;
+import com.infoshareacademy.dreamteam.cdi.Role;
+import com.infoshareacademy.dreamteam.cdi.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,22 +24,16 @@ public class UserDb {
         user1.setId(1L);
         user1.setName("Adrian Wilk");
         user1.setEmail("awilk2@gmail.com");
-        user1.setRole("ADMIN");
+        user1.setRole(Role.USER);
         userRepository.add(user1);
 
         User user2 = new User();
         user2.setId(2L);
         user2.setName("Dream Team");
         user2.setEmail("jjdd9dreamteam@gmail.com");
-        user2.setRole("ADMIN");
+        user2.setRole(Role.ADMIN);
         userRepository.add(user2);
 
-        User user3 = new User();
-        user3.setId(3L);
-        user3.setName("Anna");
-        user3.setEmail("Anna@gmail.com");
-        user3.setRole("USER");
-        userRepository.add(user3);
     }
 
     public static boolean contains(User user) {

@@ -1,6 +1,6 @@
 package com.infoshareacademy.dreamteam.dao;
 
-import com.infoshareacademy.dreamteam.domain.User;
+import com.infoshareacademy.dreamteam.cdi.User;
 import com.infoshareacademy.dreamteam.storage.UserDb;
 
 import javax.ejb.Stateless;

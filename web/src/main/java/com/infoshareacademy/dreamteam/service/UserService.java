@@ -1,7 +1,7 @@
 package com.infoshareacademy.dreamteam.service;
 
 import com.infoshareacademy.dreamteam.dao.UserDao;
-import com.infoshareacademy.dreamteam.domain.User;
+import com.infoshareacademy.dreamteam.cdi.User;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -28,5 +28,7 @@ public class UserService {
     public List<User> findAll() {
         return userDao.findAll();
     }
+
+
 
 }

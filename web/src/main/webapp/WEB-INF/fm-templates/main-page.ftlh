@@ -47,8 +47,8 @@
                 <li><a href="search">${search}</a></li>
                 <li><a href="genres">${genres}</a></li>
                 <#if user.isUserOrHigher()>
-                <li><a href="favourites">${favourites}</a></li>
-                <li><a href="reservations">${reservations}</a></li>
+                    <li><a href="favourites">${favourites}</a></li>
+                    <li><a href="reservations">${reservations}</a></li>
                 </#if>
                 <#if user.isAdminOrHigher()>
                     <li><a href="stats">${stats}</a></li>
@@ -61,15 +61,7 @@
     <div class="templatemo-content col-1 light-gray-bg">
         <div class="templatemo-top-nav-container">
             <div class="row">
-                <nav class="templatemo-top-nav col-lg-12 col-md-12">
-                    <ul class="text-uppercase">
-                        <#if user.isLoggedIn()>
-                        <li><a href="" class="active">WYLOGUJ</a></li>
-                            <#else>
-                                <li><a href="" class="active">ZALOGUJ</a></li>
-                        </#if>
-                    </ul>
-                </nav>
+                <#include "navigation.ftlh">
             </div>
         </div>
         <div class="templatemo-content-container">
@@ -78,8 +70,10 @@
                     <div class=""></div>
                     <h2 class="">Witaj w Bibliotece DT</h2>
                     <hr>
-                    <p>Nasza biblioteka posiada rozbudowaną bazę pozycji, m.in. książek, wierszy i audiobooków. Zapoznaj się z nimi w zakładce ${browse}.</p>
-                    <p>Jeżeli szukasz konkretnej pozycji skorzystaj z naszej wyszukiwarki dostępnej w zakładce ${search}.</p>
+                    <p>Nasza biblioteka posiada rozbudowaną bazę pozycji, m.in. książek, wierszy i audiobooków. Zapoznaj
+                        się z nimi w zakładce ${browse}.</p>
+                    <p>Jeżeli szukasz konkretnej pozycji skorzystaj z naszej wyszukiwarki dostępnej w zakładce ${search}
+                        .</p>
                     <p>Jeżeli jesteś zainteresowany pozycjami z konkretnego gatunku skorzystaj z zakładki ${genres}.</p>
                     <p>ZALOGUJ SIĘ, aby zarezerwować pozycję lub dodać pozycję do ulubionych.</p>
                 </div>

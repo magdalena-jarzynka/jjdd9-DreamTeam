@@ -26,6 +26,8 @@ public class LoggingServlet extends HttpServlet {
 
         PrintWriter writer = resp.getWriter();
         writer.println(req.getSession().getAttribute("name"));
+        writer.println(req.getSession().getAttribute("email"));
+        writer.println(req.getSession().getAttribute("role"));
 
     }
 }
