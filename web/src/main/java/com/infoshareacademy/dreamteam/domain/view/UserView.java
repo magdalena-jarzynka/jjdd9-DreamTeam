@@ -1,21 +1,10 @@
-package com.infoshareacademy.dreamteam.cdi;
+package com.infoshareacademy.dreamteam.domain.view;
 
-import javax.enterprise.inject.Model;
-
-@Model
-public class User {
+public class UserView {
     private Long id;
     private String name;
     private String email;
-    private Role role = Role.GUEST;
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
+    private String role;
 
     public Long getId() {
         return id;
@@ -39,6 +28,14 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
 }

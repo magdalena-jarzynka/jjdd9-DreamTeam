@@ -15,4 +15,5 @@ public enum Role {
     public int getLevel() {
         return level;
     }
+
 }

@@ -2,8 +2,7 @@ package com.infoshareacademy.dreamteam.servlets;
 
 import com.infoshareacademy.dreamteam.bean.LeftColumnBean;
 import com.infoshareacademy.dreamteam.bean.NavigationBean;
-import com.infoshareacademy.dreamteam.cdi.Role;
-import com.infoshareacademy.dreamteam.cdi.User;
+import com.infoshareacademy.dreamteam.context.UserContextHolder;
 import com.infoshareacademy.dreamteam.freemarker.TemplatePrinter;
 
 import javax.inject.Inject;
@@ -21,9 +20,6 @@ public class GenresServlet extends HttpServlet {
     private TemplatePrinter templatePrinter;
 
     @Inject
-    private User user;
-
-    @Inject
     private LeftColumnBean leftColumnBean;
 
     @Inject
@@ -32,21 +28,13 @@ public class GenresServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         resp.setContentType("text/html; charset=UTF-8");
-
-        if (req.getSession().getAttribute("role") == null) {
-            user.setRole(Role.GUEST);
-        } else {
-            user.setRole((Role) req.getSession().getAttribute("role"));
-            user.setName((String) req.getSession().getAttribute("name"));
-            user.setLoggedIn(true);
-        }
-
+        UserContextHolder userContextHolder = new UserContextHolder(req.getSession());
         Map<String, Object> genres = new HashMap<>();
-        genres.put("user", user);
+        genres.put("name", userContextHolder.getName());
+        genres.put("role", userContextHolder.getRole());
         genres.putAll(leftColumnBean.getLeftColumn());
         genres.putAll(navigationBean.getNavigation());
         templatePrinter.printTemplate(resp, genres, getServletContext(), "genres.ftlh");
     }
+
 }
-
-

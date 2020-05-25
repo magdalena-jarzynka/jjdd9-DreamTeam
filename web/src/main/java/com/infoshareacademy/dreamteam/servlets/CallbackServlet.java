@@ -6,8 +6,10 @@ import com.google.api.client.extensions.servlet.auth.oauth2.AbstractAuthorizatio
 import com.google.api.client.http.GenericUrl;
 import com.google.api.services.oauth2.Oauth2;
 import com.google.api.services.oauth2.model.Userinfoplus;
-import com.infoshareacademy.dreamteam.cdi.Role;
-import com.infoshareacademy.dreamteam.cdi.User;
+import com.infoshareacademy.dreamteam.context.UserContextHolder;
+import com.infoshareacademy.dreamteam.domain.request.UserRequest;
+import com.infoshareacademy.dreamteam.domain.view.UserView;
+import com.infoshareacademy.dreamteam.mapper.GoogleUserMapper;
 import com.infoshareacademy.dreamteam.oauth.OAuthBuilder;
 import com.infoshareacademy.dreamteam.oauth.OAuthManager;
 import com.infoshareacademy.dreamteam.service.UserService;
@@ -34,7 +36,7 @@ public class CallbackServlet extends AbstractAuthorizationCodeCallbackServlet {
     private OAuthBuilder oAuthBuilder;
 
     @Inject
-    private User user;
+    private GoogleUserMapper googleUserMapper;
 
     @Override
     protected void onSuccess(HttpServletRequest req, HttpServletResponse resp, Credential credential)
@@ -42,26 +44,11 @@ public class CallbackServlet extends AbstractAuthorizationCodeCallbackServlet {
 
         Oauth2 oauth2 = oAuthBuilder.buildOauth(credential);
         Userinfoplus info = oauth2.userinfo().get().execute();
-        String name = info.getName();
-        String email = info.getEmail();
-        req.getSession().setAttribute("name", name);
-        req.getSession().setAttribute("email", email);
+        UserRequest userRequest = googleUserMapper.mapGoogleResponseToUserRequest(info);
+        UserView userView = userService.login(userRequest);
+        UserContextHolder userContextHolder = new UserContextHolder(req.getSession());
+        userContextHolder.setContext(userView);
 
-        User foundUser = userService.findByEmail(email);
-        if (foundUser != null) {
-            req.getSession().setAttribute("role", foundUser.getRole());
-            user.setName(name);
-            user.setEmail(email);
-            user.setRole(foundUser.getRole());
-        } else {
-            User newUser = new User();
-            newUser.setName(name);
-            newUser.setEmail(email);
-            newUser.setRole(Role.USER);
-            req.getSession().setAttribute("role", Role.USER);
-            userService.save(newUser);
-            logger.info("New user has been successfully created. Name = {} Email = {}", name, email);
-        }
         resp.sendRedirect("/");
     }
 

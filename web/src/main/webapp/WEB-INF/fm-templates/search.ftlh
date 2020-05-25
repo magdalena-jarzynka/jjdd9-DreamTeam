@@ -40,22 +40,7 @@
         <div class="mobile-menu-icon">
             <i class="fa fa-bars"></i>
         </div>
-        <nav class="templatemo-left-nav">
-            <ul>
-                <li><a href="/">${main_page}</a></li>
-                <li><a href="browse">${browse}</a></li>
-                <li><a href="search" class="active">${search}</a></li>
-                <li><a href="genres">${genres}</a></li>
-                <#if user.isUserOrHigher()>
-                <li><a href="favourites">${favourites}</a></li>
-                <li><a href="reservations">${reservations}</a></li>
-                </#if>
-                <#if user.isAdminOrHigher()>
-                    <li><a href="stats">${stats}</a></li>
-                    <li><a href="manage">${manage}</a></li>
-                </#if>
-            </ul>
-        </nav>
+        <#include "left_column.ftlh">
     </div>
     <!-- Main content -->
     <div class="templatemo-content col-1 light-gray-bg">
