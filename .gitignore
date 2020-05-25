@@ -2,4 +2,6 @@
 web/.idea/
 web/target/
 web/web.iml
-
+dreamteam.iml
+web/dreamteam-web.iml
+app/dreamteam-app.iml
