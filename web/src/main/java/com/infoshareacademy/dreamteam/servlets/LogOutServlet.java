@@ -1,6 +1,7 @@
 package com.infoshareacademy.dreamteam.servlets;
 
 
+import com.infoshareacademy.dreamteam.context.UserContextHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,15 +14,11 @@ import java.io.IOException;
 
 @WebServlet("/logout")
 public class LogOutServlet extends HttpServlet {
-    private static final Logger logger = LoggerFactory.getLogger(LogOutServlet.class.getName());
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String email = (String) req.getSession().getAttribute("email");
-        logger.info("User with email: {} logged out", email);
-        req.getSession().removeAttribute("email");
-        req.getSession().removeAttribute("name");
-        req.getSession().removeAttribute("role");
+        UserContextHolder userContextHolder = new UserContextHolder(req.getSession());
+        userContextHolder.invalidate();
         resp.sendRedirect("/");
     }
 

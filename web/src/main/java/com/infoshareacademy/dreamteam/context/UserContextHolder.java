@@ -9,10 +9,17 @@ import java.util.Optional;
 public class UserContextHolder {
     private static final String NAME = "name";
     private static final String ROLE = "role";
-    private HttpSession httpSession;
+    public static final String EMAIL = "email";
+    public static final String ID = "id";
+    private final HttpSession httpSession;
 
     public UserContextHolder(HttpSession httpSession) {
         this.httpSession = httpSession;
+    }
+
+    public UserContextHolder(HttpSession httpSession, UserView userView){
+        this.httpSession = httpSession;
+        setContext(userView);
     }
 
     public String getName() {
@@ -23,11 +30,17 @@ public class UserContextHolder {
         return Optional.ofNullable((String) httpSession.getAttribute(ROLE)).orElse(String.valueOf(Role.GUEST));
     }
 
-    public void setContext(UserView userView) {
-        httpSession.setAttribute("name", userView.getName());
-        httpSession.setAttribute("email", userView.getEmail());
-        httpSession.setAttribute("id", userView.getId());
-        httpSession.setAttribute("role", userView.getRole());
+    private void setContext(UserView userView) {
+        httpSession.setAttribute(NAME, userView.getName());
+        httpSession.setAttribute(EMAIL, userView.getEmail());
+        httpSession.setAttribute(ID, userView.getId());
+        httpSession.setAttribute(ROLE, userView.getRole());
+    }
+
+    public void invalidate(){
+        httpSession.removeAttribute(EMAIL);
+        httpSession.removeAttribute(NAME);
+        httpSession.removeAttribute(ROLE);
     }
 
 }

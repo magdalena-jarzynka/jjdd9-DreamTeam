@@ -35,6 +35,9 @@ public class CallbackServlet extends AbstractAuthorizationCodeCallbackServlet {
     @EJB
     private OAuthBuilder oAuthBuilder;
 
+    @EJB
+    private OAuthManager oAuthManager;
+
     @Inject
     private GoogleUserMapper googleUserMapper;
 
@@ -46,15 +49,13 @@ public class CallbackServlet extends AbstractAuthorizationCodeCallbackServlet {
         Userinfoplus info = oauth2.userinfo().get().execute();
         UserRequest userRequest = googleUserMapper.mapGoogleResponseToUserRequest(info);
         UserView userView = userService.login(userRequest);
-        UserContextHolder userContextHolder = new UserContextHolder(req.getSession());
-        userContextHolder.setContext(userView);
-
+        new UserContextHolder(req.getSession(), userView);
         resp.sendRedirect("/");
     }
 
     @Override
     protected AuthorizationCodeFlow initializeFlow() throws ServletException, IOException {
-        return OAuthManager.buildFlow();
+        return oAuthManager.buildFlow();
     }
 
     @Override

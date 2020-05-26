@@ -8,6 +8,7 @@ import com.infoshareacademy.dreamteam.oauth.OAuthManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,9 +18,12 @@ import java.util.UUID;
 @WebServlet("/login")
 public class LogInServlet extends AbstractAuthorizationCodeServlet {
 
+    @EJB
+    private OAuthManager oAuthManager;
+
     @Override
     protected AuthorizationCodeFlow initializeFlow() throws ServletException, IOException {
-        return OAuthManager.buildFlow();
+        return oAuthManager.buildFlow();
     }
 
     @Override

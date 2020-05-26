@@ -40,7 +40,7 @@
         <div class="mobile-menu-icon">
             <i class="fa fa-bars"></i>
         </div>
-        <#include "left_column.ftlh">
+        <#include "left-column.ftlh">
     </div>
     <!-- Main content -->
     <div class="templatemo-content col-1 light-gray-bg">

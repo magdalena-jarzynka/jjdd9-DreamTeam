@@ -6,20 +6,18 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.ejb.Stateless;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Properties;
 
-public final class OAuthManager {
+@Stateless
+public  class OAuthManager {
     private static final List<String> SCOPE = List.of("profile", "openid", "email");
     private static final Logger logger = LoggerFactory.getLogger(OAuthManager.class.getName());
 
-    private OAuthManager() {
-        //utility class
-    }
-
-    public static GoogleAuthorizationCodeFlow buildFlow() {
+    public GoogleAuthorizationCodeFlow buildFlow() {
         return new GoogleAuthorizationCodeFlow.Builder(
                 new NetHttpTransport(),
                 JacksonFactory.getDefaultInstance(), getProperty("client.id"),
@@ -28,7 +26,7 @@ public final class OAuthManager {
                 .build();
     }
 
-    private static String getProperty(String property) {
+    private String getProperty(String property) {
         Properties properties = new Properties();
         try {
             properties.load(Objects.requireNonNull(Thread.currentThread()
