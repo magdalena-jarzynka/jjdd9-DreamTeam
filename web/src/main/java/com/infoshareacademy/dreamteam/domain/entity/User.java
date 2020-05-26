@@ -17,8 +17,8 @@ public class User {
 
     private String email;
 
-    @OneToMany(mappedBy = "users")
-    List<Reservation> reservations = new ArrayList<>();
+    @OneToMany(mappedBy = "user")
+    private List<Reservation> reservations = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "role_id")
