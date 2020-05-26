@@ -35,4 +35,3 @@ public class ReservationsServlet extends HttpServlet {
     }
 }
 
-
