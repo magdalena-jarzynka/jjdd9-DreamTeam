@@ -41,6 +41,7 @@ public class UserContextHolder {
         httpSession.removeAttribute(EMAIL);
         httpSession.removeAttribute(NAME);
         httpSession.removeAttribute(ROLE);
+        httpSession.removeAttribute(ID);
     }
 
 }
