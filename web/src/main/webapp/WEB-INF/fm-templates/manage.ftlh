@@ -47,8 +47,8 @@
                 <li><a href="search">${search}</a></li>
                 <li><a href="genres">${genres}</a></li>
                 <#if user.isUserOrHigher()>
-                <li><a href="favourites">${favourites}</a></li>
-                <li><a href="reservations">${reservations}</a></li>
+                    <li><a href="favourites">${favourites}</a></li>
+                    <li><a href="reservations">${reservations}</a></li>
                 </#if>
                 <#if user.isAdminOrHigher()>
                     <li><a href="stats">${stats}</a></li>
@@ -64,9 +64,9 @@
                 <nav class="templatemo-top-nav col-lg-12 col-md-12">
                     <ul class="text-uppercase">
                         <#if user.isLoggedIn()>
-                        <li><a href="" class="active">WYLOGUJ</a></li>
-                            <#else>
-                                <li><a href="" class="active">ZALOGUJ</a></li>
+                            <li><a href="" class="active">WYLOGUJ</a></li>
+                        <#else>
+                            <li><a href="" class="active">ZALOGUJ</a></li>
                         </#if>
                     </ul>
                 </nav>
@@ -80,6 +80,12 @@
                     <hr>
                     <p>Przepraszamy. Strona w budowie.</p>
                 </div>
+            </div>
+            <div class="templatemo-flex-row flex-content-row">
+                <form enctype="multipart/form-data" method="post" action="/manage">
+                    Image: <input type="file" name="json"/><br/><br/>
+                    <input type="submit" name="save" value="save"/><br/><br/>
+                </form>
             </div>
         </div>
     </div>

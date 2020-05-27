@@ -33,6 +33,16 @@ public class ManageServlet extends HttpServlet {
         manage.putAll(leftColumnBean.getLeftColumn());
         templatePrinter.printTemplate(resp, manage, getServletContext(), "manage.ftlh");
     }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
+        resp.setContentType("text/html; charset=UTF-8");
+
+        Map<String, Object> manage = new HashMap<>();
+        manage.put("user", user);
+        manage.putAll(leftColumnBean.getLeftColumn());
+        templatePrinter.printTemplate(resp, manage, getServletContext(), "manage.ftlh");
+
+        req.getParameter("json");
+    }
 }
-
-
