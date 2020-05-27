@@ -43,11 +43,11 @@ public class UserService {
         user.setEmail(userRequest.getEmail());
         user.setRole(roleDaoBean.findByRoleType(RoleType.USER));
         save(user);
-        return findUserByEmail(userRequest.getEmail());
+        return user;
     }
 
     public UserView login(UserRequest userRequest) {
-        User user = userDao.findUserByEmail(userRequest.getEmail()).orElse(createUser(userRequest));
+        User user = userDao.findUserByEmail(userRequest.getEmail()).orElseGet(() -> createUser(userRequest));
         return userMapper.mapEntityToView(user);
     }
 

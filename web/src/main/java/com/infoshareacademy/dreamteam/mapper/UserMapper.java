@@ -13,7 +13,7 @@ public class UserMapper {
         userView.setEmail(user.getEmail());
         userView.setId(user.getId());
         userView.setName(user.getName());
-        userView.setRole(user.getRole().toString());
+        userView.setRole(user.getRole().getName().toString());
         return userView;
     }
 }

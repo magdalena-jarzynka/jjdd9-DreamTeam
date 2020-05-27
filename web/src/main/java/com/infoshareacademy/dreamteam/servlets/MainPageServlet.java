@@ -25,6 +25,7 @@ public class MainPageServlet extends HttpServlet {
         Map<String, Object> model = modelInitializer.initModel(req);
         templatePrinter.printTemplate(resp, model, getServletContext(),
                 "main-page.ftlh");
+
     }
 
 }
