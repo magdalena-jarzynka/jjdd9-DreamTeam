@@ -6,8 +6,8 @@ public enum NavigationList {
 
     private String label;
 
-    NavigationList(String tagDescription) {
-        this.label = tagDescription;
+    NavigationList(String label) {
+        this.label = label;
     }
 
     public String getLabel() {

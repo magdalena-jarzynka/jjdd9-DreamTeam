@@ -28,4 +28,5 @@ public class BrowseServlet extends HttpServlet {
         templatePrinter.printTemplate(resp, model, getServletContext(),
                 "browse.ftlh");
     }
+
 }

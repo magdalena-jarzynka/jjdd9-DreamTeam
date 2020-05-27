@@ -1,8 +1,10 @@
 package com.infoshareacademy.dreamteam.layout.builder;
 
+import javax.enterprise.context.RequestScoped;
 import java.util.HashMap;
 import java.util.Map;
 
+@RequestScoped
 public class LeftColumnBuilder {
 
     public static Map<String, Object> build() {

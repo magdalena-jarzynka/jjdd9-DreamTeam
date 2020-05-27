@@ -12,8 +12,8 @@ public enum LeftColumnMenuList {
 
     private String label;
 
-    LeftColumnMenuList(String tagDescription) {
-        this.label = tagDescription;
+    LeftColumnMenuList(String label) {
+        this.label = label;
     }
 
     public String getLabel() {
