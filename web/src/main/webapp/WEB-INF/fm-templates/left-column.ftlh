@@ -1,16 +1,16 @@
 <nav class="templatemo-left-nav">
     <ul>
-        <li><a href="/" class="active">${main_page}</a></li>
-        <li><a href="browse">${browse}</a></li>
-        <li><a href="search">${search}</a></li>
-        <li><a href="genres">${genres}</a></li>
+        <li><a href="/" class="${_active!}">${main_page}</a></li>
+        <li><a href="browse" class="${browse_active!}">${browse}</a></li>
+        <li><a href="search" class="${search_active!}">${search}</a></li>
+        <li><a href="genres" class="${genres_active!}">${genres}</a></li>
         <#if role = "USER" || role = "ADMIN" || role = "SUPER_ADMIN">
-            <li><a href="favourites">${favourites}</a></li>
-            <li><a href="reservations">${reservations}</a></li>
+            <li><a href="favourites" class="${favourites_active!}">${favourites}</a></li>
+            <li><a href="reservations" class="${reservations_active!}">${reservations}</a></li>
         </#if>
         <#if role = "ADMIN" || role = "SUPER_ADMIN">
-            <li><a href="stats">${stats}</a></li>
-            <li><a href="manage">${manage}</a></li>
+            <li><a href="stats" class="${stats_active!}">${stats}</a></li>
+            <li><a href="manage" class="${manage_active!}">${manage}</a></li>
         </#if>
     </ul>
 </nav>

@@ -22,7 +22,7 @@ public class FavouritesServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         resp.setContentType("text/html; charset=UTF-8");
-        Map<String, Object> model = modelInitializer.initModel(req.getSession());
+        Map<String, Object> model = modelInitializer.initModel(req);
         templatePrinter.printTemplate(resp, model, getServletContext(),
                 "favourites.ftlh");
     }
