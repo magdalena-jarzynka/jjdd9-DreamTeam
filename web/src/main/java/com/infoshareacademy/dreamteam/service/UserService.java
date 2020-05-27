@@ -1,8 +1,9 @@
 package com.infoshareacademy.dreamteam.service;
 
-import com.infoshareacademy.dreamteam.cdi.Role;
-import com.infoshareacademy.dreamteam.cdi.User;
+import com.infoshareacademy.dreamteam.cdi.RoleType;
+import com.infoshareacademy.dreamteam.dao.RoleDaoBean;
 import com.infoshareacademy.dreamteam.dao.UserDao;
+import com.infoshareacademy.dreamteam.domain.entity.User;
 import com.infoshareacademy.dreamteam.domain.request.UserRequest;
 import com.infoshareacademy.dreamteam.domain.view.UserView;
 import com.infoshareacademy.dreamteam.mapper.UserMapper;
@@ -21,16 +22,15 @@ public class UserService {
     @Inject
     private UserMapper userMapper;
 
+    @EJB
+    private RoleDaoBean roleDaoBean;
+
     public void save(User user) {
         userDao.save(user);
     }
 
-    public void remove(User user) {
-        userDao.remove(user);
-    }
-
-    public User findByEmail(String email) {
-        return userDao.findByEmail(email).orElse(null);
+    public User findUserByEmail(String email) {
+        return userDao.findUserByEmail(email).orElse(null);
     }
 
     public List<User> findAll() {
@@ -41,13 +41,13 @@ public class UserService {
         User user = new User();
         user.setName(userRequest.getName());
         user.setEmail(userRequest.getEmail());
-        user.setRole(Role.USER);
+        user.setRole(roleDaoBean.findByRoleType(RoleType.USER));
         save(user);
-        return findByEmail(userRequest.getEmail());
+        return findUserByEmail(userRequest.getEmail());
     }
 
     public UserView login(UserRequest userRequest) {
-        User user = userDao.findByEmail(userRequest.getEmail()).orElse(createUser(userRequest));
+        User user = userDao.findUserByEmail(userRequest.getEmail()).orElse(createUser(userRequest));
         return userMapper.mapEntityToView(user);
     }
 

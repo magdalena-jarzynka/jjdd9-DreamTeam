@@ -1,6 +1,6 @@
 package com.infoshareacademy.dreamteam.mapper;
 
-import com.infoshareacademy.dreamteam.cdi.User;
+import com.infoshareacademy.dreamteam.domain.entity.User;
 import com.infoshareacademy.dreamteam.domain.view.UserView;
 
 import javax.enterprise.context.RequestScoped;

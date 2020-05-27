@@ -1,6 +1,6 @@
 package com.infoshareacademy.dreamteam.context;
 
-import com.infoshareacademy.dreamteam.cdi.Role;
+import com.infoshareacademy.dreamteam.cdi.RoleType;
 import com.infoshareacademy.dreamteam.domain.view.UserView;
 
 import javax.servlet.http.HttpSession;
@@ -17,7 +17,7 @@ public class UserContextHolder {
         this.httpSession = httpSession;
     }
 
-    public UserContextHolder(HttpSession httpSession, UserView userView){
+    public UserContextHolder(HttpSession httpSession, UserView userView) {
         this.httpSession = httpSession;
         setContext(userView);
     }
@@ -27,7 +27,7 @@ public class UserContextHolder {
     }
 
     public String getRole() {
-        return Optional.ofNullable((String) httpSession.getAttribute(ROLE)).orElse(String.valueOf(Role.GUEST));
+        return Optional.ofNullable((String) httpSession.getAttribute(ROLE)).orElse(String.valueOf(RoleType.GUEST));
     }
 
     private void setContext(UserView userView) {
@@ -37,7 +37,7 @@ public class UserContextHolder {
         httpSession.setAttribute(ROLE, userView.getRole());
     }
 
-    public void invalidate(){
+    public void invalidate() {
         httpSession.removeAttribute(EMAIL);
         httpSession.removeAttribute(NAME);
         httpSession.removeAttribute(ROLE);

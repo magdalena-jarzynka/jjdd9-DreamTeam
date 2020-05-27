@@ -1,7 +1,7 @@
 package com.infoshareacademy.dreamteam.dao;
 
 
-import com.infoshareacademy.dreamteam.cdi.User;
+import com.infoshareacademy.dreamteam.domain.entity.User;
 
 import javax.ejb.Local;
 import java.util.List;
@@ -12,12 +12,10 @@ public interface UserDao {
 
     void save(User user);
 
-    void remove(User user);
+    public void update(User user);
 
-    Optional<User> findByEmail(String email);
+    Optional<User> findUserByEmail(String email);
 
     List<User> findAll();
-
-
 
 }

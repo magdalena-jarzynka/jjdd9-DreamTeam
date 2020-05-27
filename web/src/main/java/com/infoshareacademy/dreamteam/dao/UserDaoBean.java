@@ -1,34 +1,40 @@
 package com.infoshareacademy.dreamteam.dao;
 
-import com.infoshareacademy.dreamteam.cdi.User;
-import com.infoshareacademy.dreamteam.storage.UserDb;
+import com.infoshareacademy.dreamteam.domain.entity.User;
 
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.util.List;
 import java.util.Optional;
 
 @Stateless
 public class UserDaoBean implements UserDao {
 
+    @PersistenceContext
+    EntityManager entityManager;
+
     @Override
     public void save(User user) {
-        UserDb.getRepository().add(user);
+        entityManager.persist(user);
     }
 
     @Override
-    public void remove(User user) {
-        UserDb.getRepository().remove(user);
+    public void update(User user) {
+        entityManager.merge(user);
     }
 
     @Override
-    public Optional<User> findByEmail(String email) {
-        return findAll().stream()
-                .filter(user -> user.getEmail().equals(email))
-                .findFirst();
+    public Optional<User> findUserByEmail(String email) {
+        Query query = entityManager.createNamedQuery("User.findUserByEmail");
+        query.setParameter("email", email);
+        return query.getResultList().stream().findFirst();
     }
 
     @Override
     public List<User> findAll() {
-        return UserDb.getRepository();
+        Query query = entityManager.createNamedQuery("User.findAll");
+        return query.getResultList();
     }
 }
