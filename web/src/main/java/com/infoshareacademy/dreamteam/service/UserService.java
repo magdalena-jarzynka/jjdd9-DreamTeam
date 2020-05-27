@@ -41,7 +41,7 @@ public class UserService {
         User user = new User();
         user.setName(userRequest.getName());
         user.setEmail(userRequest.getEmail());
-        user.setRole(roleDaoBean.findByRoleType(RoleType.USER));
+        user.setRole(roleDaoBean.findByRoleType(RoleType.USER).orElse(null));
         save(user);
         return user;
     }
