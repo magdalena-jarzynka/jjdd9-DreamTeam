@@ -5,6 +5,13 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+@NamedQueries({
+        @NamedQuery(
+                name = "Book.findBookById",
+                query = "SELECT b FROM Book b WHERE b.id=:id"
+        )
+})
+
 @Entity
 @Table(name = "book")
 public class Book {
