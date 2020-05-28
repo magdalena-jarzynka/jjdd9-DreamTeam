@@ -1,6 +1,6 @@
 package com.infoshareacademy.dreamteam.domain.entity;
 
-import com.infoshareacademy.dreamteam.cdi.RoleType;
+import com.infoshareacademy.dreamteam.role.RoleType;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

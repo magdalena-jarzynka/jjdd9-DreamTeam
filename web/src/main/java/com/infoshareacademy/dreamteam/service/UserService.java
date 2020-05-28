@@ -1,12 +1,12 @@
 package com.infoshareacademy.dreamteam.service;
 
-import com.infoshareacademy.dreamteam.cdi.RoleType;
 import com.infoshareacademy.dreamteam.dao.RoleDaoBean;
 import com.infoshareacademy.dreamteam.dao.UserDao;
 import com.infoshareacademy.dreamteam.domain.entity.User;
 import com.infoshareacademy.dreamteam.domain.request.UserRequest;
 import com.infoshareacademy.dreamteam.domain.view.UserView;
 import com.infoshareacademy.dreamteam.mapper.UserMapper;
+import com.infoshareacademy.dreamteam.role.RoleType;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -41,7 +41,7 @@ public class UserService {
         User user = new User();
         user.setName(userRequest.getName());
         user.setEmail(userRequest.getEmail());
-        user.setRole(roleDaoBean.findByRoleType(RoleType.USER).orElse(null));
+        user.setRole(roleDaoBean.findByRoleType(RoleType.USER).orElseThrow());
         save(user);
         return user;
     }

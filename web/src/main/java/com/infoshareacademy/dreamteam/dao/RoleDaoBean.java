@@ -1,7 +1,7 @@
 package com.infoshareacademy.dreamteam.dao;
 
-import com.infoshareacademy.dreamteam.cdi.RoleType;
 import com.infoshareacademy.dreamteam.domain.entity.Role;
+import com.infoshareacademy.dreamteam.role.RoleType;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;

@@ -19,4 +19,5 @@ public enum LeftColumnMenuList {
     public String getLabel() {
         return label;
     }
+
 }

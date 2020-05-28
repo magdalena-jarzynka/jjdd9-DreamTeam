@@ -37,4 +37,5 @@ public class UserDaoBean implements UserDao {
         Query query = entityManager.createNamedQuery("User.findAll");
         return query.getResultList();
     }
+
 }

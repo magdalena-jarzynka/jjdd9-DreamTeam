@@ -1,7 +1,7 @@
 package com.infoshareacademy.dreamteam.context;
 
-import com.infoshareacademy.dreamteam.cdi.RoleType;
 import com.infoshareacademy.dreamteam.domain.view.UserView;
+import com.infoshareacademy.dreamteam.role.RoleType;
 
 import javax.servlet.http.HttpSession;
 import java.util.Optional;

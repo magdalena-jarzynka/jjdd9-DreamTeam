@@ -2,8 +2,6 @@ package com.infoshareacademy.dreamteam.servlets;
 
 
 import com.infoshareacademy.dreamteam.context.UserContextHolder;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

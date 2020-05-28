@@ -1,4 +1,4 @@
-package com.infoshareacademy.dreamteam.cdi;
+package com.infoshareacademy.dreamteam.role;
 
 public enum RoleType {
     GUEST(1),

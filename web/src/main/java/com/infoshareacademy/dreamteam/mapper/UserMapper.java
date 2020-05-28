@@ -16,4 +16,5 @@ public class UserMapper {
         userView.setRole(user.getRole().getName().toString());
         return userView;
     }
+
 }

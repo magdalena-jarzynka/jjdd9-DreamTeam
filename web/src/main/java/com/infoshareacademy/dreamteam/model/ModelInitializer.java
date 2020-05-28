@@ -1,8 +1,8 @@
 package com.infoshareacademy.dreamteam.model;
 
+import com.infoshareacademy.dreamteam.context.UserContextHolder;
 import com.infoshareacademy.dreamteam.layout.builder.LeftColumnBuilder;
 import com.infoshareacademy.dreamteam.layout.builder.NavigationBuilder;
-import com.infoshareacademy.dreamteam.context.UserContextHolder;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;

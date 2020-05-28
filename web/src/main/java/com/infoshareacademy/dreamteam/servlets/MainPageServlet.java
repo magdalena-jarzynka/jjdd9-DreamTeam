@@ -22,7 +22,7 @@ public class MainPageServlet extends HttpServlet {
     private ModelInitializer modelInitializer;
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp)  throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html; charset=UTF-8");
         Map<String, Object> model = modelInitializer.initModel(req);
         templatePrinter.printTemplate(resp, model, getServletContext(),

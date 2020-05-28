@@ -22,7 +22,7 @@ public class FavouritesServlet extends HttpServlet {
     private ModelInitializer modelInitializer;
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp)  throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html; charset=UTF-8");
         boolean isLoggedIn = Boolean.parseBoolean(String.valueOf(req.getAttribute("isLoggedIn")));
         Map<String, Object> model = modelInitializer.initModel(req);
@@ -34,4 +34,5 @@ public class FavouritesServlet extends HttpServlet {
                     "no-access.ftlh");
         }
     }
+
 }

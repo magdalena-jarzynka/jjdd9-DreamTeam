@@ -13,7 +13,7 @@ import java.util.Objects;
 import java.util.Properties;
 
 @Stateless
-public  class OAuthManager {
+public class OAuthManager {
     private static final List<String> SCOPE = List.of("profile", "openid", "email");
     private static final Logger logger = LoggerFactory.getLogger(OAuthManager.class.getName());
 

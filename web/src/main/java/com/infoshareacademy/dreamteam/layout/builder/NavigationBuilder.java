@@ -13,4 +13,5 @@ public class NavigationBuilder {
         navigation.put("logOut", NavigationList.LOG_OUT.getLabel());
         return navigation;
     }
+
 }
