@@ -1,10 +1,18 @@
 package com.infoshareacademy.dreamteam.domain.entity;
 
+import com.infoshareacademy.dreamteam.role.RoleType;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+@NamedQueries({
+        @NamedQuery(
+                name = "Role.findByRoleType",
+                query = "SELECT r FROM Role r WHERE r.name=:roleType"
+        )
+})
 @Entity
 @Table(name = "user_type")
 public class Role {
@@ -13,7 +21,8 @@ public class Role {
     private Long id;
 
     @NotNull
-    private String name;
+    @Enumerated(EnumType.STRING)
+    private RoleType name;
 
     @OneToMany(mappedBy = "role")
     List<User> users = new ArrayList<>();
@@ -26,11 +35,11 @@ public class Role {
         this.id = id;
     }
 
-    public String getName() {
+    public RoleType getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(RoleType name) {
         this.name = name;
     }
 

@@ -1,6 +1,6 @@
-package com.infoshareacademy.dreamteam.cdi;
+package com.infoshareacademy.dreamteam.role;
 
-public enum Role {
+public enum RoleType {
     GUEST(1),
     USER(2),
     ADMIN(3),
@@ -8,11 +8,12 @@ public enum Role {
 
     private final int level;
 
-    Role(int level) {
+    RoleType(int level) {
         this.level = level;
     }
 
     public int getLevel() {
         return level;
     }
+
 }

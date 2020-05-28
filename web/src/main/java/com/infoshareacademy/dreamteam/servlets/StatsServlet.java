@@ -1,15 +1,15 @@
 package com.infoshareacademy.dreamteam.servlets;
 
-import com.infoshareacademy.dreamteam.bean.LeftColumnBean;
 import com.infoshareacademy.dreamteam.freemarker.TemplatePrinter;
-import com.infoshareacademy.dreamteam.cdi.User;
+import com.infoshareacademy.dreamteam.model.ModelInitializer;
 
 import javax.inject.Inject;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.HashMap;
+import java.io.IOException;
 import java.util.Map;
 
 @WebServlet("/stats")
@@ -19,20 +19,21 @@ public class StatsServlet extends HttpServlet {
     private TemplatePrinter templatePrinter;
 
     @Inject
-    private User user;
-
-    @Inject
-    private LeftColumnBean leftColumnBean;
+    private ModelInitializer modelInitializer;
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html; charset=UTF-8");
+        boolean isAdmin = Boolean.parseBoolean(String.valueOf(req.getAttribute("isAdmin")));
+        Map<String, Object> model = modelInitializer.initModel(req);
+        if (isAdmin) {
+            templatePrinter.printTemplate(resp, model, getServletContext(),
+                    "stats.ftlh");
+        } else {
+            templatePrinter.printTemplate(resp, model, getServletContext(),
+                    "no-access.ftlh");
+        }
 
-        Map<String, Object> stats = new HashMap<>();
-        stats.put("user", user);
-        stats.putAll(leftColumnBean.getLeftColumn());
-        templatePrinter.printTemplate(resp, stats, getServletContext(), "stats.ftlh");
     }
+
 }
-
-

@@ -5,6 +5,17 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+@NamedQueries({
+        @NamedQuery(
+                name = "User.findAll",
+                query = "SELECT u FROM User u"
+        ),
+        @NamedQuery(
+                name = "User.findUserByEmail",
+                query = "SELECT u FROM User u WHERE u.email LIKE:email"
+        )
+})
+
 @Entity
 @Table(name = "user")
 public class User {
@@ -13,8 +24,9 @@ public class User {
     private Long id;
 
     @NotNull
-    private String login;
+    private String name;
 
+    @NotNull
     private String email;
 
     @OneToMany(mappedBy = "user")
@@ -38,12 +50,12 @@ public class User {
         this.id = id;
     }
 
-    public String getLogin() {
-        return login;
+    public String getName() {
+        return name;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {

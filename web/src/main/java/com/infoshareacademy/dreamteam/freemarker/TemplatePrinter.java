@@ -31,4 +31,5 @@ public class TemplatePrinter {
             logger.error("Problem with printing the template {}\n", templateName, e);
         }
     }
+
 }

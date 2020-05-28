@@ -46,16 +46,14 @@
     <div class="templatemo-content col-1 light-gray-bg">
         <div class="templatemo-top-nav-container">
             <div class="row">
-<#include "navigation.ftlh">
+                <#include "navigation.ftlh">
             </div>
         </div>
         <div class="templatemo-content-container">
             <div class="templatemo-flex-row flex-content-row">
                 <div class="templatemo-content-widget white-bg col-2">
                     <div class=""></div>
-                    <h2 class="">GATUNKI</h2>
-                    <hr>
-                    <p>Przepraszamy. Strona w budowie.</p>
+                    <h2 class="">Brak uprawnień</h2>
                 </div>
             </div>
         </div>

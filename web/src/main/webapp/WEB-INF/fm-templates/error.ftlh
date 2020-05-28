@@ -40,22 +40,20 @@
         <div class="mobile-menu-icon">
             <i class="fa fa-bars"></i>
         </div>
-        <#include "left-column.ftlh">
     </div>
     <!-- Main content -->
     <div class="templatemo-content col-1 light-gray-bg">
         <div class="templatemo-top-nav-container">
             <div class="row">
-<#include "navigation.ftlh">
             </div>
         </div>
         <div class="templatemo-content-container">
             <div class="templatemo-flex-row flex-content-row">
                 <div class="templatemo-content-widget white-bg col-2">
-                    <div class=""></div>
-                    <h2 class="">GATUNKI</h2>
-                    <hr>
-                    <p>Przepraszamy. Strona w budowie.</p>
+                    <p>OOPS!</p>
+                    <p>Coś poszło nie tak! Nasi najlepsi specjaliści już nad tym pracują!</p>
+
+                    <p><a href="/">Kliknij tutaj, aby powrócić do strony głównej.</a></p>
                 </div>
             </div>
         </div>
