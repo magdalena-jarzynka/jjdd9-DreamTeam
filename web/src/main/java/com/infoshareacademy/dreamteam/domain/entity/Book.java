@@ -28,7 +28,7 @@ public class Book {
 
     private String cover;
 
-    private String audio;
+    private boolean audio;
 
     @ManyToMany(mappedBy = "books")
     List<Genre> genres = new ArrayList<>();
@@ -91,11 +91,11 @@ public class Book {
         this.cover = cover;
     }
 
-    public String getAudio() {
+    public boolean getAudio() {
         return audio;
     }
 
-    public void setAudio(String audio) {
+    public void setAudio(boolean audio) {
         this.audio = audio;
     }
 
@@ -154,4 +154,5 @@ public class Book {
     public void setReservations(List<Reservation> reservations) {
         this.reservations = reservations;
     }
+
 }

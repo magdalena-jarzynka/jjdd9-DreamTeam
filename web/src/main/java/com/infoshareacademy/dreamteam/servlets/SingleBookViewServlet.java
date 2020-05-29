@@ -1,8 +1,8 @@
 package com.infoshareacademy.dreamteam.servlets;
 
-import com.infoshareacademy.dreamteam.domain.entity.Book;
+import com.infoshareacademy.dreamteam.domain.view.BookView;
 import com.infoshareacademy.dreamteam.freemarker.TemplatePrinter;
-import com.infoshareacademy.dreamteam.model.ModelInitializer;
+import com.infoshareacademy.dreamteam.initializer.ModelInitializer;
 import com.infoshareacademy.dreamteam.service.BookService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,8 +40,9 @@ public class SingleBookViewServlet extends HttpServlet {
         } catch (NumberFormatException e) {
             logger.error("Book id not found.");
         }
-        Book book = bookService.findBookById(bookId);
-        model.put("book", book);
+
+        BookView bookView = bookService.findBookById(bookId);
+        model.put("book", bookView);
 
         templatePrinter.printTemplate(resp, model, getServletContext(),
                 "single-book-view.ftlh");

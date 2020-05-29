@@ -1,4 +1,4 @@
-package com.infoshareacademy.dreamteam.model;
+package com.infoshareacademy.dreamteam.initializer;
 
 import com.infoshareacademy.dreamteam.context.UserContextHolder;
 import com.infoshareacademy.dreamteam.layout.builder.LeftColumnBuilder;
