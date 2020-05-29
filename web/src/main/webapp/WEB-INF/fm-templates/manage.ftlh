@@ -83,7 +83,7 @@
             </div>
             <div class="templatemo-flex-row flex-content-row">
                 <form enctype="multipart/form-data" method="post" action="/manage">
-                    Image: <input type="file" name="json"/><br/><br/>
+                    File: <input type="file" name="json"/><br/><br/>
                     <input type="submit" name="save" value="save"/><br/><br/>
                 </form>
             </div>

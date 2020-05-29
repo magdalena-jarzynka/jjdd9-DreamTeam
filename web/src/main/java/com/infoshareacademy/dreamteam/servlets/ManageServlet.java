@@ -2,19 +2,23 @@ package com.infoshareacademy.dreamteam.servlets;
 
 import com.infoshareacademy.dreamteam.bean.LeftColumnBean;
 import com.infoshareacademy.dreamteam.cdi.User;
-import com.infoshareacademy.dreamteam.domain.pojo.BookPlain;
 import com.infoshareacademy.dreamteam.freemarker.TemplatePrinter;
+import com.infoshareacademy.dreamteam.service.LoadJsonService;
 
 import javax.inject.Inject;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @WebServlet("/manage")
+@MultipartConfig
 public class ManageServlet extends HttpServlet {
 
     @Inject
@@ -25,6 +29,9 @@ public class ManageServlet extends HttpServlet {
 
     @Inject
     private LeftColumnBean leftColumnBean;
+
+    @Inject
+    LoadJsonService loadJsonService;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
@@ -37,7 +44,7 @@ public class ManageServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         resp.setContentType("text/html; charset=UTF-8");
 
         Map<String, Object> manage = new HashMap<>();
@@ -45,6 +52,7 @@ public class ManageServlet extends HttpServlet {
         manage.putAll(leftColumnBean.getLeftColumn());
         templatePrinter.printTemplate(resp, manage, getServletContext(), "manage.ftlh");
 
-        List<BookPlain> BookList = req.getParameter("json");
+        Part part = req.getPart("json");
+        loadJsonService.loadFromJson(part);
     }
 }

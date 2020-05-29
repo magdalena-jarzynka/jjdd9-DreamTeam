@@ -8,11 +8,11 @@ import java.util.List;
 public class BookPlain {
     private String title;
     private List<AuthorPlain> authors;
-    private List<AuthorPlain> translators;
+    private List<TranslatorPlain> translators;
     private List<EpochPlain> epochs;
     private List<GenrePlain> genres;
     private List<KindPlain> kinds;
-    private String isbnPdf;
+    private String isbn;
     private String bookFragment;
     private List<MediaPlain> media;
 
@@ -32,11 +32,11 @@ public class BookPlain {
         this.authors = authors;
     }
 
-    public List<AuthorPlain> getTranslators() {
+    public List<TranslatorPlain> getTranslators() {
         return translators;
     }
 
-    public void setTranslators(List<AuthorPlain> translators) {
+    public void setTranslators(List<TranslatorPlain> translators) {
         this.translators = translators;
     }
 
@@ -64,12 +64,12 @@ public class BookPlain {
         this.kinds = kinds;
     }
 
-    public String getIsbnPdf() {
-        return isbnPdf;
+    public String getIsbn() {
+        return isbn;
     }
 
-    public void setIsbnPdf(String isbnPdf) {
-        this.isbnPdf = isbnPdf;
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
 
     public String getBookFragment() {
