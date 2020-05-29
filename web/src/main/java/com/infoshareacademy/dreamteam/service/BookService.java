@@ -42,7 +42,7 @@ public class BookService {
                 .add(epochMapper.mapEntityToView(epoch)));
         book.getGenres().forEach(genre -> bookView.getGenreViews()
                 .add(genreMapper.mapEntityToView(genre)));
-        book.getKinds().forEach(kind -> bookView.getGetKindViews()
+        book.getKinds().forEach(kind -> bookView.getKindViews()
                 .add(kindMapper.mapEntityToView(kind)));
         book.getTranslators().forEach(translator -> bookView.getTranslatorViews()
                 .add(translatorMapper.mapEntityToView(translator)));

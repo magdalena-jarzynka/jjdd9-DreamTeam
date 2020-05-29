@@ -15,6 +15,7 @@ public class BookMapper {
         bookView.setAudio(book.getAudio());
         bookView.setFragment(book.getFragment());
         bookView.setCover(book.getCover());
+        bookView.setIsbn(book.getIsbn());
         return bookView;
     }
 

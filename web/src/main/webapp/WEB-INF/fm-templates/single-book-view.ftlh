@@ -23,7 +23,6 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-
 </head>
 <body>
 <!-- Left column -->
@@ -51,26 +50,86 @@
         </div>
         <div class="templatemo-content-container">
             <div class="templatemo-flex-row flex-content-row">
-                <div class="templatemo-content-widget white-bg col-2">
-                    <div class=""></div>
-                    <h2 class="">${book.title!}</h2>
-                    <hr>
-                    <p><img src="${book.cover!}"></p>
-                    <p>Autorzy: <#list book.authorViews>
-                            <#items as authorView>
-                                ${authorView.name}
-                            </#items>
-                        </#list>
-                    </p>
-                    <p>ISBN: ${book.isbn!}</p>
-                    <p>Fragment książki: ${book.fragment!}</p>
-                    <p>Dostępna wersja Audio:
-                        <#if book.audio! == true>
-                            tak
-                        <#else>
-                            nie
-                        </#if></p>
+                <#--                <div class="col-1 col-lg-6 col-md-12" >-->
+<#--                <div class="templatemo-content-widget white-bg col-2">-->
+
+                <div class="templatemo-content-widget white-bg templatemo-overflow-hidden">
+                    <div class="templatemo-flex-row flex-content-row">
+                        <div class="col-1 col-lg-6 col-md-12">
+                            <p>
+                                <img src="${book.cover!}">
+                            </p>
+                        </div>
+                        <div class="col-1 col-lg-6 col-md-12">
+                            <h2><strong>${book.title!}</strong></h2>
+                            <h5 style="font-style: italic"><#list book.authorViews>
+                                    <#items as authorView>
+                                        ${authorView.name}
+                                    </#items>
+                                </#list></h5>
+                            <hr>
+                            <#if book.translatorViews?has_content>
+                            <p style="font-style: italic">tłum. <#list book.translatorViews>
+                                    <#items as translatorView>
+                                        ${translatorView.name}
+                                    </#items>
+                                </#list>
+                                </#if>
+                            </p>
+                            <#if book.genreViews?has_content>
+                                <p>Gatunek: <#list book.genreViews>
+                                        <#items as genreView>
+                                            ${genreView.name}
+                                        </#items>
+                                    </#list>
+                                </p>
+                            </#if>
+                            <#if book.kindViews?has_content>
+                                <p>Gatunek literacki: <#list book.kindViews>
+                                        <#items as kindView>
+                                            ${kindView.name}
+                                        </#items>
+                                    </#list>
+                                </p>
+                            </#if>
+                            <#if book.epochViews?has_content>
+                                <p>Epoka: <#list book.epochViews>
+                                        <#items as epochView>
+                                            ${epochView.name}
+                                        </#items>
+                                    </#list>
+                                </p>
+                            </#if>
+                            <#if book.isbn??>
+                                <p>ISBN: ${book.isbn!}</p>
+                            </#if>
+                            <#if book.fragment??>
+                                <p>Fragment książki: ${book.fragment!}</p>
+                            </#if>
+                            <p>Dostępna wersja Audio:
+                                <#if book.audio! == true>
+                                tak
+                                <#else>
+                                nie
+                            </p></#if>
+                        </div>
+                    </div>
                 </div>
+
+
+<#--                <div class="templatemo-flex-row flex-content-row">-->
+<#--                    <div class="col-1 col-lg-6 col-md-12">-->
+
+<#--                    </div>-->
+<#--                    <div class="col-1 col-lg-6 col-md-12">-->
+<#--                    </div>-->
+<#--                </div>-->
+<#--                </div>-->
+<#--                <div class="templatemo-content-widget white-bg col-2">-->
+
+                    <#--                </div>-->
+                    <#--                <div class="col-1 col-lg-6 col-md-4" style="text-align:left">-->
+                    <#--                </div>-->
             </div>
         </div>
     </div>

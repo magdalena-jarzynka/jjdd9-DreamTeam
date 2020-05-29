@@ -9,12 +9,13 @@ public class BookView {
     private String title;
     private String fragment;
     private String cover;
+    private String isbn;
     private boolean audio;
 
     private List<GenreView> genreViews = new ArrayList<>();
     private List<AuthorView> authorViews = new ArrayList<>();
     private List<TranslatorView> translatorViews = new ArrayList<>();
-    private List<KindView> getKindViews = new ArrayList<>();
+    private List<KindView> kindViews = new ArrayList<>();
     private List<EpochView> epochViews = new ArrayList<>();
 
     public Long getId() {
@@ -81,19 +82,27 @@ public class BookView {
         this.translatorViews = translatorViews;
     }
 
-    public List<KindView> getGetKindViews() {
-        return getKindViews;
-    }
-
-    public void setGetKindViews(List<KindView> getKindViews) {
-        this.getKindViews = getKindViews;
-    }
-
     public List<EpochView> getEpochViews() {
         return epochViews;
     }
 
     public void setEpochViews(List<EpochView> epochViews) {
         this.epochViews = epochViews;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    public List<KindView> getKindViews() {
+        return kindViews;
+    }
+
+    public void setKindViews(List<KindView> kindViews) {
+        this.kindViews = kindViews;
     }
 }
