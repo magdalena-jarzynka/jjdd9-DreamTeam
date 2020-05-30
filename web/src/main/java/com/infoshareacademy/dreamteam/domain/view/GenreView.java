@@ -1,10 +1,8 @@
 package com.infoshareacademy.dreamteam.domain.view;
 
-public class UserView {
+public class GenreView {
     private Long id;
     private String name;
-    private String email;
-    private String role;
 
     public Long getId() {
         return id;
@@ -20,22 +18,6 @@ public class UserView {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
     }
 
 }

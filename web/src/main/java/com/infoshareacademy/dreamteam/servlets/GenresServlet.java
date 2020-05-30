@@ -1,7 +1,7 @@
 package com.infoshareacademy.dreamteam.servlets;
 
 import com.infoshareacademy.dreamteam.freemarker.TemplatePrinter;
-import com.infoshareacademy.dreamteam.model.ModelInitializer;
+import com.infoshareacademy.dreamteam.initializer.ModelInitializer;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
