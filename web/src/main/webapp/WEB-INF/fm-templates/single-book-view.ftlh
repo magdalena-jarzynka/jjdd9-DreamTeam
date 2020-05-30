@@ -55,12 +55,14 @@
 
                 <div class="templatemo-content-widget white-bg templatemo-overflow-hidden">
                     <div class="templatemo-flex-row flex-content-row">
-                        <div class="col-1 col-lg-6 col-md-12">
+<#--                        <div class="col-1 col-lg-6 col-md-12">-->
+                        <div class="col-sm-6">
                             <p>
-                                <img src="${book.cover!}">
+                                <img src="${book.cover!}" class="img-responsive">
                             </p>
                         </div>
-                        <div class="col-1 col-lg-6 col-md-12">
+<#--                        <div class="col-1 col-lg-6 col-md-12">-->
+                        <div class="col-sm-6">
                             <h2><strong>${book.title!}</strong></h2>
                             <h5 style="font-style: italic"><#list book.authorViews>
                                     <#items as authorView>

@@ -14,8 +14,12 @@ public class BookMapper {
         bookView.setTitle(book.getTitle());
         bookView.setAudio(book.getAudio());
         bookView.setFragment(book.getFragment());
-        bookView.setCover(book.getCover());
         bookView.setIsbn(book.getIsbn());
+        if (book.getCover() == null || book.getCover().isEmpty()) {
+            bookView.setCover("/images/missing-cover.png");
+        } else {
+            bookView.setCover(book.getCover());
+        }
         return bookView;
     }
 
