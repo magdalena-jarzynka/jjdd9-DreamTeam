@@ -46,7 +46,7 @@
     <div class="templatemo-content col-1 light-gray-bg">
         <div class="templatemo-top-nav-container">
             <div class="row">
-<#include "navigation.ftlh">
+                <#include "navigation.ftlh">
             </div>
         </div>
         <div class="templatemo-content-container">
@@ -55,7 +55,8 @@
                     <div class=""></div>
                     <h2 class="">KSIĘGOZBIÓR</h2>
                     <hr>
-                    <p>Przepraszamy. Strona w budowie.</p>
+                    <div class="container-fluid">
+                    </div>
                 </div>
             </div>
         </div>
@@ -67,6 +68,7 @@
 <script src="js/jquery-migrate-1.2.1.min.js"></script> <!--  jQuery Migrate Plugin -->
 <script src="https://www.google.com/jsapi"></script> <!-- Google Chart -->
 <script type="text/javascript" src="js/templatemo-script.js"></script>      <!-- Templatemo Script -->
-
+<script type="text/javascript" src="js/browse-script.js"></script>
+<script type="text/javascript" src="js/is-audio-dropdown-list.js"></script>
 </body>
 </html>

@@ -7,9 +7,9 @@ import com.infoshareacademy.dreamteam.domain.view.BookView;
 import com.infoshareacademy.dreamteam.mapper.*;
 import com.infoshareacademy.dreamteam.repository.BookRepository;
 
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import java.util.List;
 
 @Stateless
 public class BookService {
@@ -17,7 +17,7 @@ public class BookService {
     @EJB
     private BookRepository bookRepository;
 
-    @EJB
+    @Inject
     private BookDao bookDao;
 
     @Inject
@@ -61,5 +61,31 @@ public class BookService {
                 .add(translatorMapper.mapEntityToView(translator)));
 
         return bookView;
+    }
+
+    public List<String> getGenres() {
+        return bookDao.getGenres();
+    }
+
+    public List<Book> findAll() {
+        return bookDao.findAll();
+    }
+
+    public int countBooks() {
+        return bookDao.countBooks();
+    }
+
+    public int countBooks(String audio, String genre) {
+        return bookDao.countBooks(audio, genre);
+    }
+
+    public List<Book> findBooks(int offset, int limit) {
+
+        return bookDao.findBooks(offset, limit);
+    }
+
+    public List<Book> findBooks(int offset, int limit, String audio, String genre) {
+
+        return bookDao.findBooks(offset, limit, audio, genre);
     }
 }
