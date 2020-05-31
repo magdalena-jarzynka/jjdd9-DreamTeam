@@ -40,36 +40,13 @@
         <div class="mobile-menu-icon">
             <i class="fa fa-bars"></i>
         </div>
-        <nav class="templatemo-left-nav">
-            <ul>
-                <li><a href="/">${main_page}</a></li>
-                <li><a href="browse">${browse}</a></li>
-                <li><a href="search">${search}</a></li>
-                <li><a href="genres">${genres}</a></li>
-                <#if user.isUserOrHigher()>
-                <li><a href="favourites">${favourites}</a></li>
-                <li><a href="reservations">${reservations}</a></li>
-                </#if>
-                <#if user.isAdminOrHigher()>
-                    <li><a href="stats" class="active">${stats}</a></li>
-                    <li><a href="manage">${manage}</a></li>
-                </#if>
-            </ul>
-        </nav>
+        <#include "left-column.ftlh">
     </div>
     <!-- Main content -->
     <div class="templatemo-content col-1 light-gray-bg">
         <div class="templatemo-top-nav-container">
             <div class="row">
-                <nav class="templatemo-top-nav col-lg-12 col-md-12">
-                    <ul class="text-uppercase">
-                        <#if user.isLoggedIn()>
-                        <li><a href="" class="active">WYLOGUJ</a></li>
-                            <#else>
-                                <li><a href="" class="active">ZALOGUJ</a></li>
-                        </#if>
-                    </ul>
-                </nav>
+<#include "navigation.ftlh">
             </div>
         </div>
         <div class="templatemo-content-container">

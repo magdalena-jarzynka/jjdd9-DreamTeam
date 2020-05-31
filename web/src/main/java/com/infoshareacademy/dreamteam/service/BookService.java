@@ -1,23 +1,65 @@
 package com.infoshareacademy.dreamteam.service;
 
+
 import com.infoshareacademy.dreamteam.domain.entity.Author;
 import com.infoshareacademy.dreamteam.domain.entity.Book;
 import com.infoshareacademy.dreamteam.repository.BookRepository;
+import com.infoshareacademy.dreamteam.dao.BookDao;
+import com.infoshareacademy.dreamteam.domain.entity.Book;
+import com.infoshareacademy.dreamteam.domain.view.BookView;
+import com.infoshareacademy.dreamteam.mapper.*;
 
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
+import javax.ejb.Stateless;
+import javax.inject.Inject;
 
-@RequestScoped
+@Stateless
 public class BookService {
-
-    @EJB
+  
+  @EJB
     private BookRepository bookRepository;
 
-    public void save(Book book) {
+    @EJB
+    private BookDao bookDao;
+
+    @Inject
+    private BookMapper bookMapper;
+
+    @Inject
+    private AuthorMapper authorMapper;
+
+    @Inject
+    private EpochMapper epochMapper;
+
+    @Inject
+    private GenreMapper genreMapper;
+
+    @Inject
+    private KindMapper kindMapper;
+
+    @Inject
+    private TranslatorMapper translatorMapper;
+  
+  public void save(Book book) {
         bookRepository.save(book);
     }
     public Book update(Book book) {
         return bookRepository.update(book);
-    }
 
+    public BookView findBookById(Long id) {
+        Book book = bookDao.findBookById(id).orElseThrow();
+        BookView bookView = bookMapper.mapEntityToView(book);
+        book.getAuthors().forEach(author -> bookView.getAuthorViews()
+                .add(authorMapper.mapEntityToView(author)));
+        book.getEpochs().forEach(epoch -> bookView.getEpochViews()
+                .add(epochMapper.mapEntityToView(epoch)));
+        book.getGenres().forEach(genre -> bookView.getGenreViews()
+                .add(genreMapper.mapEntityToView(genre)));
+        book.getKinds().forEach(kind -> bookView.getKindViews()
+                .add(kindMapper.mapEntityToView(kind)));
+        book.getTranslators().forEach(translator -> bookView.getTranslatorViews()
+                .add(translatorMapper.mapEntityToView(translator)));
+
+        return bookView;
+    }
 }
