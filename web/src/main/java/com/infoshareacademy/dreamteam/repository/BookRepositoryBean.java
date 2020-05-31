@@ -1,5 +1,6 @@
 package com.infoshareacademy.dreamteam.repository;
 
+import com.infoshareacademy.dreamteam.domain.entity.Author;
 import com.infoshareacademy.dreamteam.domain.entity.Book;
 
 import javax.ejb.Stateless;
@@ -13,4 +14,9 @@ public class BookRepositoryBean implements BookRepository{
 
     @Override
     public void save (Book book) {entityManager.persist(book);}
+
+    @Override
+    public Book update (Book book) {
+        return entityManager.merge(book);
+    }
 }

@@ -33,6 +33,7 @@ public class LoadJsonService {
     public void loadFromJson(Part part) throws IOException {
         BookParser bookParser = new BookParser();
         List<BookPlain> bookList = bookParser.readBookList(fileUploadProcessor.uploadFile(part));
+        List<Book> books = new ArrayList<>();
         List<Author> authors = new ArrayList<>();
         List<Genre> genres = new ArrayList<>();
         List<Kind> kinds = new ArrayList<>();
@@ -40,11 +41,15 @@ public class LoadJsonService {
         List<Translator> translators = new ArrayList<>();
 
         for (BookPlain bookPlain : bookList) {
-            Book book = new Book();
+            Book book = findBookEntityByTitle(bookPlain.getTitle(), books);
 
-            book.setTitle(bookPlain.getTitle());
-            book.setIsbn(bookPlain.getIsbn());
-            book.setFragment(bookPlain.getBookFragment());
+            if (book == null) {
+                book = new Book();
+                book.setTitle(bookPlain.getTitle());
+                book.setIsbn(bookPlain.getIsbn());
+                book.setFragment(bookPlain.getBookFragment());
+                bookService.save(book);
+            }
 
             for (AuthorPlain authorPlain : bookPlain.getAuthors()) {
                 Author author = findAuthorEntityByName(authorPlain.getName(), authors);
@@ -56,6 +61,7 @@ public class LoadJsonService {
                 book.getAuthors().add(author);
                 authorService.update(author);
             }
+            bookService.update(book);
 
             for (GenrePlain genrePlain : bookPlain.getGenres()) {
                 Genre genre = findGenreEntityByName(genrePlain.getName(), genres);
@@ -67,6 +73,7 @@ public class LoadJsonService {
                 book.getGenres().add(genre);
                 genreService.update(genre);
             }
+            bookService.update(book);
 
             for (KindPlain kindPlain : bookPlain.getKinds()) {
                 Kind kind = findKindEntityByName(kindPlain.getName(), kinds);
@@ -78,6 +85,7 @@ public class LoadJsonService {
                 book.getKinds().add(kind);
                 kindService.update(kind);
             }
+            bookService.update(book);
 
             for (EpochPlain epochPlain : bookPlain.getEpochs()) {
                 Epoch epoch = findEpochEntityByName(epochPlain.getName(), epochs);
@@ -89,6 +97,7 @@ public class LoadJsonService {
                 book.getEpochs().add(epoch);
                 epochService.update(epoch);
             }
+            bookService.update(book);
 
             for (TranslatorPlain translatorPlain : bookPlain.getTranslators()) {
                 Translator translator = findTranslatorEntityByName(translatorPlain.getName(), translators);
@@ -100,8 +109,7 @@ public class LoadJsonService {
                 book.getTranslators().add(translator);
                 translatorService.update(translator);
             }
-
-            bookService.save(book);
+            bookService.update(book);
         }
 
     }
@@ -133,6 +141,12 @@ public class LoadJsonService {
     private Epoch findEpochEntityByName(String name, List<Epoch> epochs) {
         return epochs.stream()
                 .filter(a -> a.getName().equals(name))
+                .findFirst().orElse(null);
+    }
+
+    private Book findBookEntityByTitle(String title, List<Book> books) {
+        return books.stream()
+                .filter(a -> a.getTitle().equals(title))
                 .findFirst().orElse(null);
     }
 

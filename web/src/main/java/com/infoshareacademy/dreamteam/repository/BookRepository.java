@@ -6,5 +6,7 @@ import javax.ejb.Local;
 
 @Local
 public interface BookRepository {
-    void save (Book book);
+    void save(Book book);
+
+    Book update(Book book);
 }

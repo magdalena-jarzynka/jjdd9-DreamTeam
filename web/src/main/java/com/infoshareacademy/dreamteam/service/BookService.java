@@ -1,5 +1,6 @@
 package com.infoshareacademy.dreamteam.service;
 
+import com.infoshareacademy.dreamteam.domain.entity.Author;
 import com.infoshareacademy.dreamteam.domain.entity.Book;
 import com.infoshareacademy.dreamteam.repository.BookRepository;
 
@@ -14,6 +15,9 @@ public class BookService {
 
     public void save(Book book) {
         bookRepository.save(book);
+    }
+    public Book update(Book book) {
+        return bookRepository.update(book);
     }
 
 }

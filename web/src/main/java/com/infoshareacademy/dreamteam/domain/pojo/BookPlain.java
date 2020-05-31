@@ -1,10 +1,11 @@
 package com.infoshareacademy.dreamteam.domain.pojo;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.List;
 
-
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class BookPlain {
     private String title;
     private List<AuthorPlain> authors;
