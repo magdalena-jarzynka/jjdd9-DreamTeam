@@ -23,7 +23,7 @@ public class Book {
 
     private String cover;
 
-    private String audio;
+    private Boolean hasAudio;
 
     @ManyToMany(mappedBy = "books")
     List<Genre> genres = new ArrayList<>();
@@ -86,12 +86,12 @@ public class Book {
         this.cover = cover;
     }
 
-    public String getAudio() {
-        return audio;
+    public Boolean getHasAudio() {
+        return hasAudio;
     }
 
-    public void setAudio(String audio) {
-        this.audio = audio;
+    public void setHasAudio(Boolean hasAudio) {
+        this.hasAudio = hasAudio;
     }
 
     public List<Genre> getGenres() {
