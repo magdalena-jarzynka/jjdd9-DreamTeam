@@ -1,0 +1,76 @@
+[
+{
+    "title": "Dla kogo kwiaty",
+    "url": "https://wolnelektury.pl/katalog/lektura/dla-kogo-kwiaty/",
+    "epochs": [
+        {
+            "url": "https://wolnelektury.pl/katalog/epoka/pozytywizm/",
+            "href": "https://wolnelektury.pl/api/epochs/pozytywizm/",
+            "name": "Pozytywizm",
+            "slug": "pozytywizm"
+        }
+    ],
+    "genres": [
+        {
+            "url": "https://wolnelektury.pl/katalog/gatunek/wiersz/",
+            "href": "https://wolnelektury.pl/api/genres/wiersz/",
+            "name": "Wiersz",
+            "slug": "wiersz"
+        }
+    ],
+    "kinds": [
+        {
+            "url": "https://wolnelektury.pl/katalog/rodzaj/liryka/",
+            "href": "https://wolnelektury.pl/api/kinds/liryka/",
+            "name": "Liryka",
+            "slug": "liryka"
+        }
+    ],
+    "authors": [
+        {
+            "url": "https://wolnelektury.pl/katalog/autor/maria-konopnicka/",
+            "href": "https://wolnelektury.pl/api/authors/maria-konopnicka/",
+            "name": "Maria Konopnicka",
+            "slug": "maria-konopnicka"
+        }
+    ],
+    "translators": [],
+    "fragment_data": null,
+    "children": [],
+    "parent": {
+        "kind": "Liryka",
+        "full_sort_key": "konopnicka maria$poezje dla dzieci do lat 10 cze~0s~0c~0 ii$6456",
+        "title": "Poezje dla dzieci do lat 10, część II",
+        "url": "https://wolnelektury.pl/katalog/lektura/konopnicka-poezje-czesc-ii-dla-dzieci-do-lat-10/",
+        "cover_color": "#961060",
+        "author": "Maria Konopnicka",
+        "cover": "https://wolnelektury.pl/media/book/cover/konopnicka-poezje-czesc-ii-dla-dzieci-do-lat-10.jpg",
+        "epoch": "Pozytywizm",
+        "href": "https://wolnelektury.pl/api/books/konopnicka-poezje-czesc-ii-dla-dzieci-do-lat-10/",
+        "has_audio": false,
+        "genre": "Wiersz",
+        "simple_thumb": "https://wolnelektury.pl/media/book/cover_api_thumb/konopnicka-poezje-czesc-ii-dla-dzieci-do-lat-10_fti3YeM.jpg",
+        "slug": "konopnicka-poezje-czesc-ii-dla-dzieci-do-lat-10",
+        "cover_thumb": "https://wolnelektury.pl/media/cache/03/5a/035a5425f5cd8f4ed7ff77fd652a028a.jpg",
+        "liked": null
+    },
+    "preview": false,
+    "epub": "https://wolnelektury.pl/media/book/epub/dla-kogo-kwiaty.epub",
+    "mobi": "https://wolnelektury.pl/media/book/mobi/dla-kogo-kwiaty.mobi",
+    "pdf": "https://wolnelektury.pl/media/book/pdf/dla-kogo-kwiaty.pdf",
+    "html": "https://wolnelektury.pl/media/book/html/dla-kogo-kwiaty.html",
+    "txt": "https://wolnelektury.pl/media/book/txt/dla-kogo-kwiaty.txt",
+    "fb2": "https://wolnelektury.pl/media/book/fb2/dla-kogo-kwiaty.fb2",
+    "xml": "https://wolnelektury.pl/media/book/xml/dla-kogo-kwiaty.xml",
+    "media": [],
+    "audio_length": "",
+    "cover_color": "#961060",
+    "simple_cover": "https://wolnelektury.pl/media/book/cover_simple/dla-kogo-kwiaty_c66xdVy.jpg",
+    "cover_thumb": "https://wolnelektury.pl/media/cache/29/72/29725fc30e237e4690edb79074e96615.jpg",
+    "cover": null,
+    "simple_thumb": "https://wolnelektury.pl/media/book/cover_api_thumb/dla-kogo-kwiaty_9CsVoiK.jpg",
+    "isbn_pdf": null,
+    "isbn_epub": null,
+    "isbn_mobi": null
+}
+]
