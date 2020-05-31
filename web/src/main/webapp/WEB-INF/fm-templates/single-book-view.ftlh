@@ -58,7 +58,7 @@
 <#--                        <div class="col-1 col-lg-6 col-md-12">-->
                         <div class="col-sm-6">
                             <p>
-                                <img src="${book.cover!}" class="img-responsive">
+                                <img src="${book.cover!}" class="img-responsive" width="360" height="500">
                             </p>
                         </div>
 <#--                        <div class="col-1 col-lg-6 col-md-12">-->
