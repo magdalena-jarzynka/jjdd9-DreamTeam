@@ -51,6 +51,13 @@ public class Book {
     @OneToMany(mappedBy = "book")
     List<Reservation> reservations = new ArrayList<>();
 
+    public Book(){
+    }
+
+    public Book(String title){
+        this.title = title;
+    }
+
     public Long getId() {
         return id;
     }
