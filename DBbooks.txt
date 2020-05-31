@@ -1,0 +1,803 @@
+[{
+    "title": "Akordy jesienne",
+    "url": "https://wolnelektury.pl/katalog/lektura/akordy-jesienne/",
+    "epochs": [
+        {
+            "url": "https://wolnelektury.pl/katalog/epoka/modernizm/",
+            "href": "https://wolnelektury.pl/api/epochs/modernizm/",
+            "name": "Modernizm",
+            "slug": "modernizm"
+        }
+    ],
+    "genres": [
+        {
+            "url": "https://wolnelektury.pl/katalog/gatunek/wiersz/",
+            "href": "https://wolnelektury.pl/api/genres/wiersz/",
+            "name": "Wiersz",
+            "slug": "wiersz"
+        }
+    ],
+    "kinds": [
+        {
+            "url": "https://wolnelektury.pl/katalog/rodzaj/liryka/",
+            "href": "https://wolnelektury.pl/api/kinds/liryka/",
+            "name": "Liryka",
+            "slug": "liryka"
+        }
+    ],
+    "authors": [
+        {
+            "url": "https://wolnelektury.pl/katalog/autor/jan-kasprowicz/",
+            "href": "https://wolnelektury.pl/api/authors/jan-kasprowicz/",
+            "name": "Jan Kasprowicz",
+            "slug": "jan-kasprowicz"
+        }
+    ],
+    "translators": [],
+    "fragment_data": {
+        "title": "Jan Kasprowicz, Akordy jesienne",
+        "html": "<div class=\"stanza\"><div class=\"verse\">I tak błądząc w swej podróży,</div>\n<div class=\"verse\" style=\"padding-left: 6em\">do poziomych zajrzy chat,</div>\n<div class=\"verse\">To w pałacach górnych spocznie...</div></div>"
+    },
+    "children": [],
+    "parent": null,
+    "preview": false,
+    "epub": "https://wolnelektury.pl/media/book/epub/akordy-jesienne.epub",
+    "mobi": "https://wolnelektury.pl/media/book/mobi/akordy-jesienne.mobi",
+    "pdf": "https://wolnelektury.pl/media/book/pdf/akordy-jesienne.pdf",
+    "html": "https://wolnelektury.pl/media/book/html/akordy-jesienne.html",
+    "txt": "https://wolnelektury.pl/media/book/txt/akordy-jesienne.txt",
+    "fb2": "https://wolnelektury.pl/media/book/fb2/akordy-jesienne.fb2",
+    "xml": "https://wolnelektury.pl/media/book/xml/akordy-jesienne.xml",
+    "media": [],
+    "audio_length": "",
+    "cover_color": "#7784e0",
+    "simple_cover": "https://wolnelektury.pl/media/book/cover_simple/akordy-jesienne_5ZYwUB8.jpg",
+    "cover_thumb": "https://wolnelektury.pl/media/cache/23/ac/23ac32ad928ab330eabee6d63fc70573.jpg",
+    "cover": "https://wolnelektury.pl/media/book/cover/akordy-jesienne.jpg",
+    "simple_thumb": "https://wolnelektury.pl/media/book/cover_api_thumb/akordy-jesienne_ykscJUw.jpg",
+    "isbn_pdf": null,
+    "isbn_epub": null,
+    "isbn_mobi": null
+},
+{
+    "title": "Akslop",
+    "url": "https://wolnelektury.pl/katalog/lektura/akslop/",
+    "epochs": [
+        {
+            "url": "https://wolnelektury.pl/katalog/epoka/wspolczesnosc/",
+            "href": "https://wolnelektury.pl/api/epochs/wspolczesnosc/",
+            "name": "Współczesność",
+            "slug": "wspolczesnosc"
+        }
+    ],
+    "genres": [
+        {
+            "url": "https://wolnelektury.pl/katalog/gatunek/wiersz/",
+            "href": "https://wolnelektury.pl/api/genres/wiersz/",
+            "name": "Wiersz",
+            "slug": "wiersz"
+        }
+    ],
+    "kinds": [
+        {
+            "url": "https://wolnelektury.pl/katalog/rodzaj/liryka/",
+            "href": "https://wolnelektury.pl/api/kinds/liryka/",
+            "name": "Liryka",
+            "slug": "liryka"
+        }
+    ],
+    "authors": [
+        {
+            "url": "https://wolnelektury.pl/katalog/autor/milosz-biedrzycki/",
+            "href": "https://wolnelektury.pl/api/authors/milosz-biedrzycki/",
+            "name": "Miłosz Biedrzycki",
+            "slug": "milosz-biedrzycki"
+        }
+    ],
+    "translators": [],
+    "fragment_data": {
+        "title": "Miłosz Biedrzycki, Akslop",
+        "html": "<div class=\"stanza\"><div class=\"verse\">Akslop, może to jakieś duńskie miasto</div>\n<div class=\"verse\">jestem tu przejazdem, co prawda na</div>\n<div class=\"verse\">nieco dłużej, bo...</div></div>"
+    },
+    "children": [],
+    "parent": null,
+    "preview": false,
+    "epub": "https://wolnelektury.pl/media/book/epub/akslop.epub",
+    "mobi": "https://wolnelektury.pl/media/book/mobi/akslop.mobi",
+    "pdf": "https://wolnelektury.pl/media/book/pdf/akslop.pdf",
+    "html": "https://wolnelektury.pl/media/book/html/akslop.html",
+    "txt": "https://wolnelektury.pl/media/book/txt/akslop.txt",
+    "fb2": "https://wolnelektury.pl/media/book/fb2/akslop.fb2",
+    "xml": "https://wolnelektury.pl/media/book/xml/akslop.xml",
+    "media": [
+        {
+            "url": "https://wolnelektury.pl/media/book/daisy.zip/milosz-biedrzycki-akslop.daisy.zip",
+            "director": "",
+            "type": "daisy",
+            "name": "Miłosz Biedrzycki, Akslop",
+            "artist": ""
+        },
+        {
+            "url": "https://wolnelektury.pl/media/book/mp3/milosz-biedrzycki-akslop.mp3",
+            "director": "Marcin Cisło",
+            "type": "mp3",
+            "name": "Miłosz Biedrzycki, Akslop",
+            "artist": "Wiktor Korzeniewski"
+        },
+        {
+            "url": "https://wolnelektury.pl/media/book/ogg/milosz-biedrzycki-akslop.ogg",
+            "director": "Marcin Cisło",
+            "type": "ogg",
+            "name": "Miłosz Biedrzycki, Akslop",
+            "artist": "Wiktor Korzeniewski"
+        }
+    ],
+    "audio_length": "0:45",
+    "cover_color": "#06393d",
+    "simple_cover": "https://wolnelektury.pl/media/book/cover_simple/akslop_TxskEgH.jpg",
+    "cover_thumb": "https://wolnelektury.pl/media/cache/60/c5/60c5c5bc54302d47dffda0f62e121046.jpg",
+    "cover": "https://wolnelektury.pl/media/book/cover/akslop.jpg",
+    "simple_thumb": "https://wolnelektury.pl/media/book/cover_api_thumb/akslop_Gyhg9lv.jpg",
+    "isbn_pdf": null,
+    "isbn_epub": null,
+    "isbn_mobi": null
+},
+{
+    "title": "Kasrylewka",
+    "url": "https://wolnelektury.pl/katalog/lektura/alejchem-kasrylewka/",
+    "epochs": [
+        {
+            "url": "https://wolnelektury.pl/katalog/epoka/modernizm/",
+            "href": "https://wolnelektury.pl/api/epochs/modernizm/",
+            "name": "Modernizm",
+            "slug": "modernizm"
+        }
+    ],
+    "genres": [
+        {
+            "url": "https://wolnelektury.pl/katalog/gatunek/opowiadanie/",
+            "href": "https://wolnelektury.pl/api/genres/opowiadanie/",
+            "name": "Opowiadanie",
+            "slug": "opowiadanie"
+        }
+    ],
+    "kinds": [
+        {
+            "url": "https://wolnelektury.pl/katalog/rodzaj/epika/",
+            "href": "https://wolnelektury.pl/api/kinds/epika/",
+            "name": "Epika",
+            "slug": "epika"
+        }
+    ],
+    "authors": [
+        {
+            "url": "https://wolnelektury.pl/katalog/autor/szolem-alejchem/",
+            "href": "https://wolnelektury.pl/api/authors/szolem-alejchem/",
+            "name": "Szolem-Alejchem",
+            "slug": "szolem-alejchem"
+        }
+    ],
+    "translators": [
+        {
+            "name": "Michał Friedman"
+        }
+    ],
+    "fragment_data": null,
+    "children": [],
+    "parent": null,
+    "preview": false,
+    "epub": "https://wolnelektury.pl/media/book/epub/alejchem-kasrylewka.epub",
+    "mobi": "https://wolnelektury.pl/media/book/mobi/alejchem-kasrylewka.mobi",
+    "pdf": "https://wolnelektury.pl/media/book/pdf/alejchem-kasrylewka.pdf",
+    "html": "https://wolnelektury.pl/media/book/html/alejchem-kasrylewka.html",
+    "txt": "https://wolnelektury.pl/media/book/txt/alejchem-kasrylewka.txt",
+    "fb2": "https://wolnelektury.pl/media/book/fb2/alejchem-kasrylewka.fb2",
+    "xml": "https://wolnelektury.pl/media/book/xml/alejchem-kasrylewka.xml",
+    "media": [],
+    "audio_length": "",
+    "cover_color": "#7784e0",
+    "simple_cover": "https://wolnelektury.pl/media/book/cover_simple/alejchem-kasrylewka_1twhNfh.jpg",
+    "cover_thumb": "https://wolnelektury.pl/media/cache/9d/84/9d842376d9ef5e6795be678f766c7c74.jpg",
+    "cover": "https://wolnelektury.pl/media/book/cover/alejchem-kasrylewka.jpg",
+    "simple_thumb": "https://wolnelektury.pl/media/book/cover_api_thumb/alejchem-kasrylewka_OGJvl6g.jpg",
+    "isbn_pdf": "ISBN 978-83-288-0993-2",
+    "isbn_epub": "ISBN 978-83-288-3989-2",
+    "isbn_mobi": "ISBN 978-83-288-5075-0"
+},
+{
+    "title": "Trzej muszkieterowie",
+    "url": "https://wolnelektury.pl/katalog/lektura/aleksander-dumas-trzej-muszkieterowie/",
+    "epochs": [
+        {
+            "url": "https://wolnelektury.pl/katalog/epoka/romantyzm/",
+            "href": "https://wolnelektury.pl/api/epochs/romantyzm/",
+            "name": "Romantyzm",
+            "slug": "romantyzm"
+        }
+    ],
+    "genres": [
+        {
+            "url": "https://wolnelektury.pl/katalog/gatunek/powiesc/",
+            "href": "https://wolnelektury.pl/api/genres/powiesc/",
+            "name": "Powieść",
+            "slug": "powiesc"
+        }
+    ],
+    "kinds": [
+        {
+            "url": "https://wolnelektury.pl/katalog/rodzaj/epika/",
+            "href": "https://wolnelektury.pl/api/kinds/epika/",
+            "name": "Epika",
+            "slug": "epika"
+        }
+    ],
+    "authors": [
+        {
+            "url": "https://wolnelektury.pl/katalog/autor/aleksander-dumas-ojciec/",
+            "href": "https://wolnelektury.pl/api/authors/aleksander-dumas-ojciec/",
+            "name": "Aleksander Dumas (ojciec)",
+            "slug": "aleksander-dumas-ojciec"
+        }
+    ],
+    "translators": [
+        {
+            "name": "nieznany"
+        }
+    ],
+    "fragment_data": null,
+    "children": [
+        {
+            "kind": "Epika",
+            "full_sort_key": "dumas ojciec aleksander$trzej muszkieterowie tom drugi$4627",
+            "title": "Trzej muszkieterowie, tom drugi",
+            "url": "https://wolnelektury.pl/katalog/lektura/aleksander-dumas-trzej-muszkieterowie-tom-2/",
+            "cover_color": "#db4b16",
+            "author": "Aleksander Dumas (ojciec)",
+            "cover": "https://wolnelektury.pl/media/book/cover/aleksander-dumas-trzej-muszkieterowie-tom-2.jpg",
+            "epoch": "Romantyzm",
+            "href": "https://wolnelektury.pl/api/books/aleksander-dumas-trzej-muszkieterowie-tom-2/",
+            "has_audio": false,
+            "genre": "Powieść",
+            "simple_thumb": "https://wolnelektury.pl/media/book/cover_api_thumb/aleksander-dumas-trzej-muszkieterowie-tom-2_wFiLd8H.jpg",
+            "slug": "aleksander-dumas-trzej-muszkieterowie-tom-2",
+            "cover_thumb": "https://wolnelektury.pl/media/cache/9d/1f/9d1f0e768e5f86cf59f2073138a8f9e1.jpg",
+            "liked": null
+        },
+        {
+            "kind": "Epika",
+            "full_sort_key": "dumas ojciec aleksander$trzej muszkieterowie tom pierwszy$4626",
+            "title": "Trzej muszkieterowie, tom pierwszy",
+            "url": "https://wolnelektury.pl/katalog/lektura/trzej-muszkieterowie-tom-i/",
+            "cover_color": "#db4b16",
+            "author": "Aleksander Dumas (ojciec)",
+            "cover": "https://wolnelektury.pl/media/book/cover/trzej-muszkieterowie-tom-i.jpg",
+            "epoch": "Romantyzm",
+            "href": "https://wolnelektury.pl/api/books/trzej-muszkieterowie-tom-i/",
+            "has_audio": false,
+            "genre": "Powieść",
+            "simple_thumb": "https://wolnelektury.pl/media/book/cover_api_thumb/trzej-muszkieterowie-tom-i_YgtFpTo.jpg",
+            "slug": "trzej-muszkieterowie-tom-i",
+            "cover_thumb": "https://wolnelektury.pl/media/cache/b1/2b/b12bbdbebbd1e17c470092b9a7b0a081.jpg",
+            "liked": null
+        }
+    ],
+    "parent": null,
+    "preview": false,
+    "epub": "https://wolnelektury.pl/media/book/epub/aleksander-dumas-trzej-muszkieterowie.epub",
+    "mobi": "https://wolnelektury.pl/media/book/mobi/aleksander-dumas-trzej-muszkieterowie.mobi",
+    "pdf": "https://wolnelektury.pl/media/book/pdf/aleksander-dumas-trzej-muszkieterowie.pdf",
+    "html": "",
+    "txt": "",
+    "fb2": "",
+    "xml": "https://wolnelektury.pl/media/book/xml/aleksander-dumas-trzej-muszkieterowie.xml",
+    "media": [],
+    "audio_length": "",
+    "cover_color": "#db4b16",
+    "simple_cover": "https://wolnelektury.pl/media/book/cover_simple/aleksander-dumas-trzej-muszkieterowie_LlIysOO.jpg",
+    "cover_thumb": "https://wolnelektury.pl/media/cache/33/9e/339ec9af2ee30956fc6e4febca02ff9f.jpg",
+    "cover": "https://wolnelektury.pl/media/book/cover/aleksander-dumas-trzej-muszkieterowie.jpg",
+    "simple_thumb": "https://wolnelektury.pl/media/book/cover_api_thumb/aleksander-dumas-trzej-muszkieterowie_8NBWQ1p.jpg",
+    "isbn_pdf": "ISBN 978-83-288-0593-4",
+    "isbn_epub": "ISBN 978-83-288-3589-4",
+    "isbn_mobi": "ISBN 978-83-288-4675-3"
+},
+{
+    "title": "Alinka",
+    "url": "https://wolnelektury.pl/katalog/lektura/alinka/",
+    "epochs": [
+        {
+            "url": "https://wolnelektury.pl/katalog/epoka/romantyzm/",
+            "href": "https://wolnelektury.pl/api/epochs/romantyzm/",
+            "name": "Romantyzm",
+            "slug": "romantyzm"
+        }
+    ],
+    "genres": [
+        {
+            "url": "https://wolnelektury.pl/katalog/gatunek/bajka/",
+            "href": "https://wolnelektury.pl/api/genres/bajka/",
+            "name": "Bajka",
+            "slug": "bajka"
+        }
+    ],
+    "kinds": [
+        {
+            "url": "https://wolnelektury.pl/katalog/rodzaj/epika/",
+            "href": "https://wolnelektury.pl/api/kinds/epika/",
+            "name": "Epika",
+            "slug": "epika"
+        }
+    ],
+    "authors": [
+        {
+            "url": "https://wolnelektury.pl/katalog/autor/stanislaw-jachowicz/",
+            "href": "https://wolnelektury.pl/api/authors/stanislaw-jachowicz/",
+            "name": "Stanisław Jachowicz",
+            "slug": "stanislaw-jachowicz"
+        }
+    ],
+    "translators": [],
+    "fragment_data": null,
+    "children": [],
+    "parent": {
+        "kind": "Epika",
+        "full_sort_key": "jachowicz stanisl~0aw$bajki i powiastki$5188",
+        "title": "Bajki i powiastki",
+        "url": "https://wolnelektury.pl/katalog/lektura/bajki-i-powiastki/",
+        "cover_color": "#db4b16",
+        "author": "Stanisław Jachowicz, Józef Ignacy Kraszewski",
+        "cover": "https://wolnelektury.pl/media/book/cover/bajki-i-powiastki.jpg",
+        "epoch": "Romantyzm",
+        "href": "https://wolnelektury.pl/api/books/bajki-i-powiastki/",
+        "has_audio": false,
+        "genre": "Bajka",
+        "simple_thumb": "https://wolnelektury.pl/media/book/cover_api_thumb/bajki-i-powiastki_oqnXwvQ.jpg",
+        "slug": "bajki-i-powiastki",
+        "cover_thumb": "https://wolnelektury.pl/media/cache/8c/80/8c80b466e79c0a38f9aba89d260849ff.jpg",
+        "liked": null
+    },
+    "preview": false,
+    "epub": "https://wolnelektury.pl/media/book/epub/alinka.epub",
+    "mobi": "https://wolnelektury.pl/media/book/mobi/alinka.mobi",
+    "pdf": "https://wolnelektury.pl/media/book/pdf/alinka.pdf",
+    "html": "https://wolnelektury.pl/media/book/html/alinka.html",
+    "txt": "https://wolnelektury.pl/media/book/txt/alinka.txt",
+    "fb2": "https://wolnelektury.pl/media/book/fb2/alinka.fb2",
+    "xml": "https://wolnelektury.pl/media/book/xml/alinka.xml",
+    "media": [],
+    "audio_length": "",
+    "cover_color": "#db4b16",
+    "simple_cover": "https://wolnelektury.pl/media/book/cover_simple/alinka_pwTriBo.jpg",
+    "cover_thumb": "https://wolnelektury.pl/media/cache/5f/b1/5fb199335cf4da64c87618d0dd9fe321.jpg",
+    "cover": "https://wolnelektury.pl/media/book/cover/alinka.jpg",
+    "simple_thumb": "https://wolnelektury.pl/media/book/cover_api_thumb/alinka_LKZ2EUd.jpg",
+    "isbn_pdf": null,
+    "isbn_epub": null,
+    "isbn_mobi": null
+},
+{
+    "title": "Fragmenta albo pozostałe pisma",
+    "url": "https://wolnelektury.pl/katalog/lektura/fragmenta/",
+    "epochs": [
+        {
+            "url": "https://wolnelektury.pl/katalog/epoka/renesans/",
+            "href": "https://wolnelektury.pl/api/epochs/renesans/",
+            "name": "Renesans",
+            "slug": "renesans"
+        }
+    ],
+    "genres": [
+        {
+            "url": "https://wolnelektury.pl/katalog/gatunek/piesn/",
+            "href": "https://wolnelektury.pl/api/genres/piesn/",
+            "name": "Pieśń",
+            "slug": "piesn"
+        }
+    ],
+    "kinds": [
+        {
+            "url": "https://wolnelektury.pl/katalog/rodzaj/liryka/",
+            "href": "https://wolnelektury.pl/api/kinds/liryka/",
+            "name": "Liryka",
+            "slug": "liryka"
+        }
+    ],
+    "authors": [
+        {
+            "url": "https://wolnelektury.pl/katalog/autor/jan-kochanowski/",
+            "href": "https://wolnelektury.pl/api/authors/jan-kochanowski/",
+            "name": "Jan Kochanowski",
+            "slug": "jan-kochanowski"
+        }
+    ],
+    "translators": [],
+    "fragment_data": null,
+    "children": [
+        {
+            "kind": "Liryka",
+            "full_sort_key": "kochanowski jan$pies~0n~0 czego chcesz od nas panie za twe hojne dary $1403",
+            "title": "Pieśń (Czego chcesz od nas, Panie, za Twe hojne dary?)",
+            "url": "https://wolnelektury.pl/katalog/lektura/fragmenta-piesn-czego-chcesz-od-nas-panie/",
+            "cover_color": "#8ca629",
+            "author": "Jan Kochanowski",
+            "cover": "https://wolnelektury.pl/media/book/cover/fragmenta-piesn-czego-chcesz-od-nas-panie.jpg",
+            "epoch": "Renesans",
+            "href": "https://wolnelektury.pl/api/books/fragmenta-piesn-czego-chcesz-od-nas-panie/",
+            "has_audio": true,
+            "genre": "Pieśń",
+            "simple_thumb": "https://wolnelektury.pl/media/book/cover_api_thumb/fragmenta-piesn-czego-chcesz-od-nas-panie_66D7GG7.jpg",
+            "slug": "fragmenta-piesn-czego-chcesz-od-nas-panie",
+            "cover_thumb": "https://wolnelektury.pl/media/cache/b6/6f/b66f0526c6ddbbe3bd8fd0c999edd8cc.jpg",
+            "liked": null
+        },
+        {
+            "kind": "Liryka",
+            "full_sort_key": "kochanowski jan$pies~0n~0 iii oko s~0miertelne boga nie widzial~0o $1393",
+            "title": "Pieśń III (Oko śmiertelne Boga nie widziało...)",
+            "url": "https://wolnelektury.pl/katalog/lektura/fragmenta-piesn-iii-oko-smiertelne-boga-nie-widzialo/",
+            "cover_color": "#8ca629",
+            "author": "Jan Kochanowski",
+            "cover": "https://wolnelektury.pl/media/book/cover/fragmenta-piesn-iii-oko-smiertelne-boga-nie-widzialo.jpg",
+            "epoch": "Renesans",
+            "href": "https://wolnelektury.pl/api/books/fragmenta-piesn-iii-oko-smiertelne-boga-nie-widzialo/",
+            "has_audio": false,
+            "genre": "Pieśń",
+            "simple_thumb": "https://wolnelektury.pl/media/book/cover_api_thumb/fragmenta-piesn-iii-oko-smiertelne-boga-nie-widzialo_Gtzohd6.jpg",
+            "slug": "fragmenta-piesn-iii-oko-smiertelne-boga-nie-widzialo",
+            "cover_thumb": "https://wolnelektury.pl/media/cache/86/5b/865b5d874389d725a614551153f1efc8.jpg",
+            "liked": null
+        },
+        {
+            "kind": "Liryka",
+            "full_sort_key": "kochanowski jan$pies~0n~0 ii nie ma s~0wiat nic trwal~0ego a to barzo k rzeczy $1392",
+            "title": "Pieśń II (Nie ma świat nic trwałego, a to barzo k rzeczy...)",
+            "url": "https://wolnelektury.pl/katalog/lektura/fragmenta-piesn-ii-nie-ma-swiat-nic-trwalego-a-to-barzo-k-rzeczy/",
+            "cover_color": "#8ca629",
+            "author": "Jan Kochanowski",
+            "cover": "https://wolnelektury.pl/media/book/cover/fragmenta-piesn-ii-nie-ma-swiat-nic-trwalego-a-to-barzo-k-rzeczy.jpg",
+            "epoch": "Renesans",
+            "href": "https://wolnelektury.pl/api/books/fragmenta-piesn-ii-nie-ma-swiat-nic-trwalego-a-to-barzo-k-rzeczy/",
+            "has_audio": false,
+            "genre": "Pieśń",
+            "simple_thumb": "https://wolnelektury.pl/media/book/cover_api_thumb/fragmenta-piesn-ii-nie-ma-swiat-nic-trwalego-a-to-barzo-k-rzeczy_hCk4zqm.jpg",
+            "slug": "fragmenta-piesn-ii-nie-ma-swiat-nic-trwalego-a-to-barzo-k-rzeczy",
+            "cover_thumb": "https://wolnelektury.pl/media/cache/44/21/442107df664aaa1616d26b871ad3a69a.jpg",
+            "liked": null
+        },
+        {
+            "kind": "Liryka",
+            "full_sort_key": "kochanowski jan$pies~0n~0 i pewienem tego a nic sie nie myle~0 $1391",
+            "title": "Pieśń I (Pewienem tego, a nic sie nie mylę...)",
+            "url": "https://wolnelektury.pl/katalog/lektura/fragmenta-piesn-i-pewienem-tego-a-nic-sie-nie-myle/",
+            "cover_color": "#8ca629",
+            "author": "Jan Kochanowski",
+            "cover": "https://wolnelektury.pl/media/book/cover/fragmenta-piesn-i-pewienem-tego-a-nic-sie-nie-myle.jpg",
+            "epoch": "Renesans",
+            "href": "https://wolnelektury.pl/api/books/fragmenta-piesn-i-pewienem-tego-a-nic-sie-nie-myle/",
+            "has_audio": false,
+            "genre": "Pieśń",
+            "simple_thumb": "https://wolnelektury.pl/media/book/cover_api_thumb/fragmenta-piesn-i-pewienem-tego-a-nic-sie-nie-myle_lGpOxdo.jpg",
+            "slug": "fragmenta-piesn-i-pewienem-tego-a-nic-sie-nie-myle",
+            "cover_thumb": "https://wolnelektury.pl/media/cache/d4/eb/d4eb34dead0404b217d35e03d1e3cfad.jpg",
+            "liked": null
+        },
+        {
+            "kind": "Liryka",
+            "full_sort_key": "kochanowski jan$pies~0n~0 iv kiedy by kogo bo~0g byl~0 swymi sl~0owy $1394",
+            "title": "Pieśń IV (Kiedy by kogo Bóg był swymi słowy...)",
+            "url": "https://wolnelektury.pl/katalog/lektura/fragmenta-piesn-iv-kiedy-by-kogo-bog-byl-swymi-slowy/",
+            "cover_color": "#8ca629",
+            "author": "Jan Kochanowski",
+            "cover": "https://wolnelektury.pl/media/book/cover/fragmenta-piesn-iv-kiedy-by-kogo-bog-byl-swymi-slowy.jpg",
+            "epoch": "Renesans",
+            "href": "https://wolnelektury.pl/api/books/fragmenta-piesn-iv-kiedy-by-kogo-bog-byl-swymi-slowy/",
+            "has_audio": false,
+            "genre": "Pieśń",
+            "simple_thumb": "https://wolnelektury.pl/media/book/cover_api_thumb/fragmenta-piesn-iv-kiedy-by-kogo-bog-byl-swymi-slowy_JQOKBwR.jpg",
+            "slug": "fragmenta-piesn-iv-kiedy-by-kogo-bog-byl-swymi-slowy",
+            "cover_thumb": "https://wolnelektury.pl/media/cache/e7/29/e72962f2f02d0b3f2a0c5099f2818599.jpg",
+            "liked": null
+        },
+        {
+            "kind": "Liryka",
+            "full_sort_key": "kochanowski jan$pies~0n~0 ix kto mi wiary dac~0 nie chce daj ja~0 oku swemu $1399",
+            "title": "Pieśń IX (Kto mi wiary dać nie chce, daj ją oku swemu...)",
+            "url": "https://wolnelektury.pl/katalog/lektura/fragmenta-piesn-ix-kto-mi-wiary-dac-nie-chce-daj-ja-oku-swemu/",
+            "cover_color": "#8ca629",
+            "author": "Jan Kochanowski",
+            "cover": "https://wolnelektury.pl/media/book/cover/fragmenta-piesn-ix-kto-mi-wiary-dac-nie-chce-daj-ja-oku-swemu.jpg",
+            "epoch": "Renesans",
+            "href": "https://wolnelektury.pl/api/books/fragmenta-piesn-ix-kto-mi-wiary-dac-nie-chce-daj-ja-oku-swemu/",
+            "has_audio": false,
+            "genre": "Pieśń",
+            "simple_thumb": "https://wolnelektury.pl/media/book/cover_api_thumb/fragmenta-piesn-ix-kto-mi-wiary-dac-nie-chce-daj-ja-oku-swemu_1QPp8zM.jpg",
+            "slug": "fragmenta-piesn-ix-kto-mi-wiary-dac-nie-chce-daj-ja-oku-swemu",
+            "cover_thumb": "https://wolnelektury.pl/media/cache/1d/c2/1dc2612166918a1e20e58f8f6682cff5.jpg",
+            "liked": null
+        },
+        {
+            "kind": "Liryka",
+            "full_sort_key": "kochanowski jan$pies~0n~0 vi co by ty urodziwa hanno na to dal~0a $1396",
+            "title": "Pieśń VI (Co by ty, urodziwa Hanno, na to dała...)",
+            "url": "https://wolnelektury.pl/katalog/lektura/fragmenta-piesn-vi-co-by-ty-urodziwa-hanno-na-to-dala/",
+            "cover_color": "#8ca629",
+            "author": "Jan Kochanowski",
+            "cover": "https://wolnelektury.pl/media/book/cover/fragmenta-piesn-vi-co-by-ty-urodziwa-hanno-na-to-dala.jpg",
+            "epoch": "Renesans",
+            "href": "https://wolnelektury.pl/api/books/fragmenta-piesn-vi-co-by-ty-urodziwa-hanno-na-to-dala/",
+            "has_audio": false,
+            "genre": "Pieśń",
+            "simple_thumb": "https://wolnelektury.pl/media/book/cover_api_thumb/fragmenta-piesn-vi-co-by-ty-urodziwa-hanno-na-to-dala_ZdkRa65.jpg",
+            "slug": "fragmenta-piesn-vi-co-by-ty-urodziwa-hanno-na-to-dala",
+            "cover_thumb": "https://wolnelektury.pl/media/cache/6d/b3/6db342879771f21669365717ce5a3566.jpg",
+            "liked": null
+        },
+        {
+            "kind": "Liryka",
+            "full_sort_key": "kochanowski jan$pies~0n~0 vii bodaj ci zl~0e dni $1397",
+            "title": "Pieśń VII (Bodaj ci złe dni!)",
+            "url": "https://wolnelektury.pl/katalog/lektura/fragmenta-piesn-vii-bodaj-ci-zle-dni/",
+            "cover_color": "#8ca629",
+            "author": "Jan Kochanowski",
+            "cover": "https://wolnelektury.pl/media/book/cover/fragmenta-piesn-vii-bodaj-ci-zle-dni.jpg",
+            "epoch": "Renesans",
+            "href": "https://wolnelektury.pl/api/books/fragmenta-piesn-vii-bodaj-ci-zle-dni/",
+            "has_audio": false,
+            "genre": "Pieśń",
+            "simple_thumb": "https://wolnelektury.pl/media/book/cover_api_thumb/fragmenta-piesn-vii-bodaj-ci-zle-dni_nt452QV.jpg",
+            "slug": "fragmenta-piesn-vii-bodaj-ci-zle-dni",
+            "cover_thumb": "https://wolnelektury.pl/media/cache/47/a2/47a25280def5bd132c31a371f5d4728f.jpg",
+            "liked": null
+        },
+        {
+            "kind": "Liryka",
+            "full_sort_key": "kochanowski jan$pies~0n~0 viii kiedy sie rane zapalaja~0 zorza $1398",
+            "title": "Pieśń VIII (Kiedy sie rane zapalają zorza...)",
+            "url": "https://wolnelektury.pl/katalog/lektura/fragmenta-piesn-viii-kiedy-sie-rane-zapalaja-zorza/",
+            "cover_color": "#8ca629",
+            "author": "Jan Kochanowski",
+            "cover": "https://wolnelektury.pl/media/book/cover/fragmenta-piesn-viii-kiedy-sie-rane-zapalaja-zorza.jpg",
+            "epoch": "Renesans",
+            "href": "https://wolnelektury.pl/api/books/fragmenta-piesn-viii-kiedy-sie-rane-zapalaja-zorza/",
+            "has_audio": false,
+            "genre": "Pieśń",
+            "simple_thumb": "https://wolnelektury.pl/media/book/cover_api_thumb/fragmenta-piesn-viii-kiedy-sie-rane-zapalaja-zorza_cQiCaZV.jpg",
+            "slug": "fragmenta-piesn-viii-kiedy-sie-rane-zapalaja-zorza",
+            "cover_thumb": "https://wolnelektury.pl/media/cache/2d/2a/2d2afa02d0979cf76689172851d8160f.jpg",
+            "liked": null
+        },
+        {
+            "kind": "Liryka",
+            "full_sort_key": "kochanowski jan$pies~0n~0 v panie jako barzo bl~0a~0dza~0 $1395",
+            "title": "Pieśń V (Panie, jako barzo błądzą...)",
+            "url": "https://wolnelektury.pl/katalog/lektura/fragmenta-piesn-v-panie-jako-barzo-bladza/",
+            "cover_color": "#8ca629",
+            "author": "Jan Kochanowski",
+            "cover": "https://wolnelektury.pl/media/book/cover/fragmenta-piesn-v-panie-jako-barzo-bladza.jpg",
+            "epoch": "Renesans",
+            "href": "https://wolnelektury.pl/api/books/fragmenta-piesn-v-panie-jako-barzo-bladza/",
+            "has_audio": false,
+            "genre": "Pieśń",
+            "simple_thumb": "https://wolnelektury.pl/media/book/cover_api_thumb/fragmenta-piesn-v-panie-jako-barzo-bladza_pcYoSjM.jpg",
+            "slug": "fragmenta-piesn-v-panie-jako-barzo-bladza",
+            "cover_thumb": "https://wolnelektury.pl/media/cache/72/76/72768b99ed6bc38093dd9676a523423d.jpg",
+            "liked": null
+        },
+        {
+            "kind": "Liryka",
+            "full_sort_key": "kochanowski jan$pies~0n~0 xi pro~0zna twa chl~0uba nie kochaj sie w sobie $1401",
+            "title": "Pieśń XI (Prózna twa chłuba, nie kochaj sie w sobie...)",
+            "url": "https://wolnelektury.pl/katalog/lektura/fragmenta-piesn-xi-prozna-twa-chluba-nie-kochaj-sie-w-sobie/",
+            "cover_color": "#8ca629",
+            "author": "Jan Kochanowski",
+            "cover": "https://wolnelektury.pl/media/book/cover/fragmenta-piesn-xi-prozna-twa-chluba-nie-kochaj-sie-w-sobie.jpg",
+            "epoch": "Renesans",
+            "href": "https://wolnelektury.pl/api/books/fragmenta-piesn-xi-prozna-twa-chluba-nie-kochaj-sie-w-sobie/",
+            "has_audio": false,
+            "genre": "Pieśń",
+            "simple_thumb": "https://wolnelektury.pl/media/book/cover_api_thumb/fragmenta-piesn-xi-prozna-twa-chluba-nie-kochaj-sie-w-sobie_qSQBRvb.jpg",
+            "slug": "fragmenta-piesn-xi-prozna-twa-chluba-nie-kochaj-sie-w-sobie",
+            "cover_thumb": "https://wolnelektury.pl/media/cache/4e/0e/4e0ee93416a420cad4e66e5f0479e6dd.jpg",
+            "liked": null
+        },
+        {
+            "kind": "Liryka",
+            "full_sort_key": "kochanowski jan$pies~0n~0 x juno porzuc~0 swo~0j gniew dl~0ugi $1400",
+            "title": "Pieśń X (Juno, porzuć swój gniew długi...)",
+            "url": "https://wolnelektury.pl/katalog/lektura/fragmenta-piesn-x-juno-porzuc-swoj-gniew-dlugi/",
+            "cover_color": "#8ca629",
+            "author": "Jan Kochanowski",
+            "cover": "https://wolnelektury.pl/media/book/cover/fragmenta-piesn-x-juno-porzuc-swoj-gniew-dlugi.jpg",
+            "epoch": "Renesans",
+            "href": "https://wolnelektury.pl/api/books/fragmenta-piesn-x-juno-porzuc-swoj-gniew-dlugi/",
+            "has_audio": false,
+            "genre": "Pieśń",
+            "simple_thumb": "https://wolnelektury.pl/media/book/cover_api_thumb/fragmenta-piesn-x-juno-porzuc-swoj-gniew-dlugi_vIpQccR.jpg",
+            "slug": "fragmenta-piesn-x-juno-porzuc-swoj-gniew-dlugi",
+            "cover_thumb": "https://wolnelektury.pl/media/cache/d5/22/d52284402cc4310234b16c45bc647393.jpg",
+            "liked": null
+        }
+    ],
+    "parent": null,
+    "preview": false,
+    "epub": "https://wolnelektury.pl/media/book/epub/fragmenta.epub",
+    "mobi": "https://wolnelektury.pl/media/book/mobi/fragmenta.mobi",
+    "pdf": "https://wolnelektury.pl/media/book/pdf/fragmenta.pdf",
+    "html": "",
+    "txt": "",
+    "fb2": "",
+    "xml": "https://wolnelektury.pl/media/book/xml/fragmenta.xml",
+    "media": [],
+    "audio_length": "",
+    "cover_color": "#8ca629",
+    "simple_cover": "https://wolnelektury.pl/media/book/cover_simple/fragmenta_eaRD9YO.jpg",
+    "cover_thumb": "https://wolnelektury.pl/media/cache/4e/0d/4e0d40b13af4bf9ac5c1b94b8dac9217.jpg",
+    "cover": "https://wolnelektury.pl/media/book/cover/fragmenta.jpg",
+    "simple_thumb": "https://wolnelektury.pl/media/book/cover_api_thumb/fragmenta_JwchEjP.jpg",
+    "isbn_pdf": "ISBN 978-83-288-0356-5",
+    "isbn_epub": "ISBN 978-83-288-3352-4",
+    "isbn_mobi": "ISBN 978-83-288-4438-4"
+},
+{
+    "title": "Pieśń (Czego chcesz od nas, Panie, za Twe hojne dary?)",
+    "url": "https://wolnelektury.pl/katalog/lektura/fragmenta-piesn-czego-chcesz-od-nas-panie/",
+    "epochs": [
+        {
+            "url": "https://wolnelektury.pl/katalog/epoka/renesans/",
+            "href": "https://wolnelektury.pl/api/epochs/renesans/",
+            "name": "Renesans",
+            "slug": "renesans"
+        }
+    ],
+    "genres": [
+        {
+            "url": "https://wolnelektury.pl/katalog/gatunek/piesn/",
+            "href": "https://wolnelektury.pl/api/genres/piesn/",
+            "name": "Pieśń",
+            "slug": "piesn"
+        }
+    ],
+    "kinds": [
+        {
+            "url": "https://wolnelektury.pl/katalog/rodzaj/liryka/",
+            "href": "https://wolnelektury.pl/api/kinds/liryka/",
+            "name": "Liryka",
+            "slug": "liryka"
+        }
+    ],
+    "authors": [
+        {
+            "url": "https://wolnelektury.pl/katalog/autor/jan-kochanowski/",
+            "href": "https://wolnelektury.pl/api/authors/jan-kochanowski/",
+            "name": "Jan Kochanowski",
+            "slug": "jan-kochanowski"
+        }
+    ],
+    "translators": [],
+    "fragment_data": null,
+    "children": [],
+    "parent": {
+        "kind": "Liryka",
+        "full_sort_key": "kochanowski jan$fragmenta albo pozostal~0e pisma$1402",
+        "title": "Fragmenta albo pozostałe pisma",
+        "url": "https://wolnelektury.pl/katalog/lektura/fragmenta/",
+        "cover_color": "#8ca629",
+        "author": "Jan Kochanowski",
+        "cover": "https://wolnelektury.pl/media/book/cover/fragmenta.jpg",
+        "epoch": "Renesans",
+        "href": "https://wolnelektury.pl/api/books/fragmenta/",
+        "has_audio": false,
+        "genre": "Pieśń",
+        "simple_thumb": "https://wolnelektury.pl/media/book/cover_api_thumb/fragmenta_JwchEjP.jpg",
+        "slug": "fragmenta",
+        "cover_thumb": "https://wolnelektury.pl/media/cache/4e/0d/4e0d40b13af4bf9ac5c1b94b8dac9217.jpg",
+        "liked": null
+    },
+    "preview": false,
+    "epub": "https://wolnelektury.pl/media/book/epub/fragmenta-piesn-czego-chcesz-od-nas-panie.epub",
+    "mobi": "https://wolnelektury.pl/media/book/mobi/fragmenta-piesn-czego-chcesz-od-nas-panie.mobi",
+    "pdf": "https://wolnelektury.pl/media/book/pdf/fragmenta-piesn-czego-chcesz-od-nas-panie.pdf",
+    "html": "https://wolnelektury.pl/media/book/html/fragmenta-piesn-czego-chcesz-od-nas-panie.html",
+    "txt": "https://wolnelektury.pl/media/book/txt/fragmenta-piesn-czego-chcesz-od-nas-panie.txt",
+    "fb2": "https://wolnelektury.pl/media/book/fb2/fragmenta-piesn-czego-chcesz-od-nas-panie.fb2",
+    "xml": "https://wolnelektury.pl/media/book/xml/fragmenta-piesn-czego-chcesz-od-nas-panie.xml",
+    "media": [
+        {
+            "url": "https://wolnelektury.pl/media/book/mp3/jan-kochanowski-fragmenta-albo-pozostale-pisma-piesn-czego-chcesz-od-nas-panie-za-twe-hojne-dary.mp3",
+            "director": "Iwo Vedral",
+            "type": "mp3",
+            "name": "Jan Kochanowski, Fragmenta albo pozostałe pisma, Pieśń (Czego chcesz od nas, Panie, za Twe hojne dary?)",
+            "artist": "Krzysztof Skonieczny"
+        },
+        {
+            "url": "https://wolnelektury.pl/media/book/ogg/jan-kochanowski-fragmenta-albo-pozostale-pisma-piesn-czego-chcesz-od-nas-panie-za-twe-hojne-dary.ogg",
+            "director": "Iwo Vedral",
+            "type": "ogg",
+            "name": "Jan Kochanowski, Fragmenta albo pozostałe pisma, Pieśń (Czego chcesz od nas, Panie, za Twe hojne dary?)",
+            "artist": "Krzysztof Skonieczny"
+        }
+    ],
+    "audio_length": "2:25",
+    "cover_color": "#8ca629",
+    "simple_cover": "https://wolnelektury.pl/media/book/cover_simple/fragmenta-piesn-czego-chcesz-od-nas-panie_cyMQg8Z.jpg",
+    "cover_thumb": "https://wolnelektury.pl/media/cache/b6/6f/b66f0526c6ddbbe3bd8fd0c999edd8cc.jpg",
+    "cover": "https://wolnelektury.pl/media/book/cover/fragmenta-piesn-czego-chcesz-od-nas-panie.jpg",
+    "simple_thumb": "https://wolnelektury.pl/media/book/cover_api_thumb/fragmenta-piesn-czego-chcesz-od-nas-panie_66D7GG7.jpg",
+    "isbn_pdf": null,
+    "isbn_epub": null,
+    "isbn_mobi": null
+},
+{
+    "title": "Pieśń III (Oko śmiertelne Boga nie widziało...)",
+    "url": "https://wolnelektury.pl/katalog/lektura/fragmenta-piesn-iii-oko-smiertelne-boga-nie-widzialo/",
+    "epochs": [
+        {
+            "url": "https://wolnelektury.pl/katalog/epoka/renesans/",
+            "href": "https://wolnelektury.pl/api/epochs/renesans/",
+            "name": "Renesans",
+            "slug": "renesans"
+        }
+    ],
+    "genres": [
+        {
+            "url": "https://wolnelektury.pl/katalog/gatunek/piesn/",
+            "href": "https://wolnelektury.pl/api/genres/piesn/",
+            "name": "Pieśń",
+            "slug": "piesn"
+        }
+    ],
+    "kinds": [
+        {
+            "url": "https://wolnelektury.pl/katalog/rodzaj/liryka/",
+            "href": "https://wolnelektury.pl/api/kinds/liryka/",
+            "name": "Liryka",
+            "slug": "liryka"
+        }
+    ],
+    "authors": [
+        {
+            "url": "https://wolnelektury.pl/katalog/autor/jan-kochanowski/",
+            "href": "https://wolnelektury.pl/api/authors/jan-kochanowski/",
+            "name": "Jan Kochanowski",
+            "slug": "jan-kochanowski"
+        }
+    ],
+    "translators": [],
+    "fragment_data": null,
+    "children": [],
+    "parent": {
+        "kind": "Liryka",
+        "full_sort_key": "kochanowski jan$fragmenta albo pozostal~0e pisma$1402",
+        "title": "Fragmenta albo pozostałe pisma",
+        "url": "https://wolnelektury.pl/katalog/lektura/fragmenta/",
+        "cover_color": "#8ca629",
+        "author": "Jan Kochanowski",
+        "cover": "https://wolnelektury.pl/media/book/cover/fragmenta.jpg",
+        "epoch": "Renesans",
+        "href": "https://wolnelektury.pl/api/books/fragmenta/",
+        "has_audio": false,
+        "genre": "Pieśń",
+        "simple_thumb": "https://wolnelektury.pl/media/book/cover_api_thumb/fragmenta_JwchEjP.jpg",
+        "slug": "fragmenta",
+        "cover_thumb": "https://wolnelektury.pl/media/cache/4e/0d/4e0d40b13af4bf9ac5c1b94b8dac9217.jpg",
+        "liked": null
+    },
+    "preview": false,
+    "epub": "https://wolnelektury.pl/media/book/epub/fragmenta-piesn-iii-oko-smiertelne-boga-nie-widzialo.epub",
+    "mobi": "https://wolnelektury.pl/media/book/mobi/fragmenta-piesn-iii-oko-smiertelne-boga-nie-widzialo.mobi",
+    "pdf": "https://wolnelektury.pl/media/book/pdf/fragmenta-piesn-iii-oko-smiertelne-boga-nie-widzialo.pdf",
+    "html": "https://wolnelektury.pl/media/book/html/fragmenta-piesn-iii-oko-smiertelne-boga-nie-widzialo.html",
+    "txt": "https://wolnelektury.pl/media/book/txt/fragmenta-piesn-iii-oko-smiertelne-boga-nie-widzialo.txt",
+    "fb2": "https://wolnelektury.pl/media/book/fb2/fragmenta-piesn-iii-oko-smiertelne-boga-nie-widzialo.fb2",
+    "xml": "https://wolnelektury.pl/media/book/xml/fragmenta-piesn-iii-oko-smiertelne-boga-nie-widzialo.xml",
+    "media": [],
+    "audio_length": "",
+    "cover_color": "#8ca629",
+    "simple_cover": "https://wolnelektury.pl/media/book/cover_simple/fragmenta-piesn-iii-oko-smiertelne-boga-nie-widzialo_gOHLCYP.jpg",
+    "cover_thumb": "https://wolnelektury.pl/media/cache/86/5b/865b5d874389d725a614551153f1efc8.jpg",
+    "cover": "https://wolnelektury.pl/media/book/cover/fragmenta-piesn-iii-oko-smiertelne-boga-nie-widzialo.jpg",
+    "simple_thumb": "https://wolnelektury.pl/media/book/cover_api_thumb/fragmenta-piesn-iii-oko-smiertelne-boga-nie-widzialo_Gtzohd6.jpg",
+    "isbn_pdf": null,
+    "isbn_epub": null,
+    "isbn_mobi": null
+}]
