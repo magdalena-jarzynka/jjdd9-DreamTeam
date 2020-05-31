@@ -2,6 +2,7 @@ package com.infoshareacademy.dreamteam.service;
 
 
 import com.infoshareacademy.dreamteam.dao.BookDao;
+import com.infoshareacademy.dreamteam.domain.entity.Author;
 import com.infoshareacademy.dreamteam.domain.entity.Book;
 import com.infoshareacademy.dreamteam.domain.view.BookView;
 import com.infoshareacademy.dreamteam.mapper.*;
@@ -45,6 +46,11 @@ public class BookService {
 
     public Book update(Book book) {
         return bookRepository.update(book);
+    }
+
+    public Book findByTitle(String title) {
+        Book book = bookRepository.findByTitle(title).orElse(null);
+        return book;
     }
 
     public BookView findBookById(Long id) {

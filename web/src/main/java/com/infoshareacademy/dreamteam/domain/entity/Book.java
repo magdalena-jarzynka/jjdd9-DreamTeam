@@ -11,6 +11,10 @@ import java.util.List;
                 query = "SELECT b FROM Book b WHERE b.id=:id"
         ),
         @NamedQuery(
+                name = "Book.findBookByTitle",
+                query="SELECT b FROM Book b WHERE b.title = :title"
+        ),
+        @NamedQuery(
                 name = "Book.findAll",
                 query = "SELECT b FROM Book b"
         )

@@ -1,5 +1,6 @@
 package com.infoshareacademy.dreamteam.service;
 
+import com.infoshareacademy.dreamteam.domain.entity.Author;
 import com.infoshareacademy.dreamteam.domain.entity.Genre;
 import com.infoshareacademy.dreamteam.repository.GenreRepository;
 
@@ -17,5 +18,10 @@ public class GenreService {
 
     public Genre update(Genre genre) {
         return genreRepository.update(genre);
+    }
+
+    public Genre findByName(String name) {
+        Genre genre = genreRepository.findByName(name).orElse(null);
+        return genre;
     }
 }

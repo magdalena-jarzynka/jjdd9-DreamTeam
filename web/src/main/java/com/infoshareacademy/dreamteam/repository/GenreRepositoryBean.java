@@ -1,10 +1,13 @@
 package com.infoshareacademy.dreamteam.repository;
 
+import com.infoshareacademy.dreamteam.domain.entity.Author;
 import com.infoshareacademy.dreamteam.domain.entity.Genre;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import java.util.Optional;
 
 @Stateless
 public class GenreRepositoryBean implements GenreRepository{
@@ -19,5 +22,12 @@ public class GenreRepositoryBean implements GenreRepository{
     @Override
     public Genre update(Genre genre) {
         return entityManager.merge(genre);
+    }
+
+    @Override
+    public Optional<Genre> findByName(String name) {
+        Query query = entityManager.createNamedQuery("Genre.findGenreByName");
+        query.setParameter("name", name);
+        return query.getResultList().stream().findAny();
     }
 }
