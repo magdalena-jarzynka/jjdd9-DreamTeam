@@ -1,5 +1,7 @@
 package com.infoshareacademy.dreamteam.domain.entity;
 
+import com.infoshareacademy.dreamteam.domain.pojo.FragmentData;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;

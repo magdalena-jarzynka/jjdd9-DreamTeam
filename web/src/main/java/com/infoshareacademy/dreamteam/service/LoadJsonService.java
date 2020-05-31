@@ -47,7 +47,8 @@ public class LoadJsonService {
                 book = new Book();
                 book.setTitle(bookPlain.getTitle());
                 book.setIsbn(bookPlain.getIsbn());
-                book.setFragment(bookPlain.getBookFragment());
+                FragmentData fragmentData = new FragmentData();
+                book.setFragment(fragmentData.getFragment(bookPlain));
                 bookService.save(book);
             }
 

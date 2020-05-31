@@ -2,6 +2,7 @@ package com.infoshareacademy.dreamteam.domain.pojo;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
@@ -13,8 +14,10 @@ public class BookPlain {
     private List<EpochPlain> epochs;
     private List<GenrePlain> genres;
     private List<KindPlain> kinds;
+    @JsonProperty("isbn_pdf")
     private String isbn;
-    private String bookFragment;
+    @JsonProperty("fragment_data")
+    private FragmentData bookFragment;
     private List<MediaPlain> media;
 
     public String getTitle() {
@@ -73,11 +76,11 @@ public class BookPlain {
         this.isbn = isbn;
     }
 
-    public String getBookFragment() {
+    public FragmentData getBookFragment() {
         return bookFragment;
     }
 
-    public void setBookFragment(String bookFragment) {
+    public void setBookFragment(FragmentData bookFragment) {
         this.bookFragment = bookFragment;
     }
 
