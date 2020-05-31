@@ -34,5 +34,6 @@ public class Reader {
             STDOUT.error("Nie udało się odczytać pliku! \n", e);
             return List.of();
         }
+
     }
 }

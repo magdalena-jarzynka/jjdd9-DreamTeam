@@ -1,5 +1,7 @@
 package com.infoshareacademy.dreamteam.domain.entity;
 
+import com.infoshareacademy.dreamteam.domain.pojo.FragmentData;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
@@ -101,7 +103,6 @@ public class Book {
     public void setCover(String cover) {
         this.cover = cover;
     }
-
     public boolean getAudio() {
         return audio;
     }
