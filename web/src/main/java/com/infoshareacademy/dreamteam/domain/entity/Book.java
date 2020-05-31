@@ -1,7 +1,5 @@
 package com.infoshareacademy.dreamteam.domain.entity;
 
-import com.infoshareacademy.dreamteam.domain.pojo.FragmentData;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
@@ -36,19 +34,19 @@ public class Book {
 
     private boolean audio;
 
-    @ManyToMany(mappedBy = "books")
+    @ManyToMany(mappedBy = "books", cascade = CascadeType.ALL)
     List<Genre> genres = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "books")
+    @ManyToMany(mappedBy = "books", cascade = CascadeType.ALL)
     List<Epoch> epochs = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "books")
+    @ManyToMany(mappedBy = "books", cascade = CascadeType.ALL)
     List<Kind> kinds = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "books")
+    @ManyToMany(mappedBy = "books", cascade = CascadeType.ALL)
     List<Author> authors = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "books")
+    @ManyToMany(mappedBy = "books", cascade = CascadeType.ALL)
     List<Translator> translators = new ArrayList<>();
 
     @ManyToMany(mappedBy = "favourites")
@@ -57,10 +55,10 @@ public class Book {
     @OneToMany(mappedBy = "book")
     List<Reservation> reservations = new ArrayList<>();
 
-    public Book(){
+    public Book() {
     }
 
-    public Book(String title){
+    public Book(String title) {
         this.title = title;
     }
 
@@ -103,6 +101,7 @@ public class Book {
     public void setCover(String cover) {
         this.cover = cover;
     }
+
     public boolean getAudio() {
         return audio;
     }

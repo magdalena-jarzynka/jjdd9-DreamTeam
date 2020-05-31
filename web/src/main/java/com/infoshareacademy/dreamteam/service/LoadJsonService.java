@@ -5,15 +5,16 @@ import com.infoshareacademy.dreamteam.domain.entity.*;
 import com.infoshareacademy.dreamteam.domain.pojo.*;
 import com.infoshareacademy.dreamteam.parser.BookParser;
 
-import javax.enterprise.context.RequestScoped;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.servlet.http.Part;
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 
-@RequestScoped
+@Stateless
 public class LoadJsonService {
     @Inject
     private FileUploadProcessor fileUploadProcessor;
@@ -30,6 +31,7 @@ public class LoadJsonService {
     @Inject
     private TranslatorService translatorService;
 
+    @Transactional
     public void loadFromJson(Part part) throws IOException {
         BookParser bookParser = new BookParser();
         List<BookPlain> bookList = bookParser.readBookList(fileUploadProcessor.uploadFile(part));
@@ -51,7 +53,6 @@ public class LoadJsonService {
                 book.setAudio(!bookPlain.getAudio().isEmpty());
                 FragmentData fragmentData = new FragmentData();
                 book.setFragment(fragmentData.getFragment(bookPlain));
-                bookService.save(book);
             }
 
             for (AuthorPlain authorPlain : bookPlain.getAuthors()) {
@@ -64,9 +65,7 @@ public class LoadJsonService {
                 }
                 author.getBooks().add(book);
                 book.getAuthors().add(author);
-                authorService.update(author);
             }
-            bookService.update(book);
 
             for (GenrePlain genrePlain : bookPlain.getGenres()) {
                 Genre genre = findGenreEntityByName(genrePlain.getName(), genres);
@@ -78,10 +77,7 @@ public class LoadJsonService {
                 }
                 genre.getBooks().add(book);
                 book.getGenres().add(genre);
-                genreService.update(genre);
             }
-            bookService.update(book);
-
             for (KindPlain kindPlain : bookPlain.getKinds()) {
                 Kind kind = findKindEntityByName(kindPlain.getName(), kinds);
                 if (kind == null) {
@@ -92,10 +88,7 @@ public class LoadJsonService {
                 }
                 kind.getBooks().add(book);
                 book.getKinds().add(kind);
-                kindService.update(kind);
             }
-            bookService.update(book);
-
             for (EpochPlain epochPlain : bookPlain.getEpochs()) {
                 Epoch epoch = findEpochEntityByName(epochPlain.getName(), epochs);
                 if (epoch == null) {
@@ -107,9 +100,7 @@ public class LoadJsonService {
                 }
                 epoch.getBooks().add(book);
                 book.getEpochs().add(epoch);
-                epochService.update(epoch); }
-            bookService.update(book);
-
+            }
             for (TranslatorPlain translatorPlain : bookPlain.getTranslators()) {
                 Translator translator = findTranslatorEntityByName(translatorPlain.getName(), translators);
                 if (translator == null) {
@@ -120,7 +111,6 @@ public class LoadJsonService {
                 }
                 translator.getBooks().add(book);
                 book.getTranslators().add(translator);
-                translatorService.update(translator);
             }
             bookService.update(book);
         }
