@@ -56,6 +56,8 @@ public class LoadJsonService {
                 if (author == null) {
                     author = new Author();
                     author.setName(authorPlain.getName());
+                    authorService.save(author);
+                    authors.add(author);
                 }
                 author.getBooks().add(book);
                 book.getAuthors().add(author);
@@ -68,6 +70,8 @@ public class LoadJsonService {
                 if (genre == null) {
                     genre = new Genre();
                     genre.setName(genrePlain.getName());
+                    genreService.save(genre);
+                    genres.add(genre);
                 }
                 genre.getBooks().add(book);
                 book.getGenres().add(genre);
@@ -80,6 +84,8 @@ public class LoadJsonService {
                 if (kind == null) {
                     kind = new Kind();
                     kind.setName(kindPlain.getName());
+                    kindService.save(kind);
+                    kinds.add(kind);
                 }
                 kind.getBooks().add(book);
                 book.getKinds().add(kind);
@@ -92,11 +98,13 @@ public class LoadJsonService {
                 if (epoch == null) {
                     epoch = new Epoch();
                     epoch.setName(epochPlain.getName());
+                    epochService.save(epoch);
+                    epochs.add(epoch);
+
                 }
                 epoch.getBooks().add(book);
                 book.getEpochs().add(epoch);
-                epochService.update(epoch);
-            }
+                epochService.update(epoch); }
             bookService.update(book);
 
             for (TranslatorPlain translatorPlain : bookPlain.getTranslators()) {
@@ -104,6 +112,8 @@ public class LoadJsonService {
                 if (translator == null) {
                     translator = new Translator();
                     translator.setName(translatorPlain.getName());
+                    translatorService.save(translator);
+                    translators.add(translator);
                 }
                 translator.getBooks().add(book);
                 book.getTranslators().add(translator);
