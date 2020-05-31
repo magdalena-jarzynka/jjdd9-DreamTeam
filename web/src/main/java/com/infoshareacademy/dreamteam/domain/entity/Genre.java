@@ -5,6 +5,11 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+@NamedQueries({
+        @NamedQuery(
+                name = "Genre.getGenres",
+                query = "SELECT g FROM Genre g"
+        )})
 @Entity
 @Table(name = "genre")
 public class Genre {

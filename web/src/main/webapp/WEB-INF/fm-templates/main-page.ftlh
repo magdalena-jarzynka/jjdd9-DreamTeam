@@ -59,7 +59,6 @@
                         się z nimi w zakładce ${browse}.</p>
                     <p>Jeżeli szukasz konkretnej pozycji skorzystaj z naszej wyszukiwarki dostępnej w zakładce ${search}
                         .</p>
-                    <p>Jeżeli jesteś zainteresowany pozycjami z konkretnego gatunku skorzystaj z zakładki ${genres}.</p>
                     <#if role = "GUEST">
                     <p>ZALOGUJ SIĘ, aby zarezerwować pozycję lub dodać pozycję do ulubionych.</p>
                     </#if>
