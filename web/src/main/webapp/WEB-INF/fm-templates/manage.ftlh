@@ -56,15 +56,30 @@
                     <h2 class="">ZARZĄDZANIE</h2>
                     <hr>
                     <p>
-                    <form enctype="multipart/form-data" method="post" action="/manage">
-                        File: <input type="file" name="json"/><br/><br/>
-                        <input type="submit" name="save" value="save"/><br/><br/>
-                    </form>
-                    </p>
+                    <div class="templatemo-flex-row flex-content-row">
+                        <div class="col-1">
+                            <div class="panel panel-default margin-10">
+                                <div class="panel-heading"><h2 class="text-uppercase">ŁADOWANIE DANYCH Z PLIKU</h2>
+                                </div>
+                                <div class="panel-body">
+                                    <form enctype="multipart/form-data" method="post" action="/manage">
+                                        <div class="row form-group">
+                                            <div class="col-lg-12">
+                                                <label class="margin-bottom-10">Wybierz plik</label>
+                                                <input type="file" name="json">
+                                            </div>
+                                        </div>
+                                        <button type="submit" name="save" value="save"
+                                                class="templatemo-blue-button">Zapisz
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="templatemo-flex-row flex-content-row">
-
+                <div class="templatemo-flex-row flex-content-row">
+                </div>
             </div>
         </div>
     </div>
