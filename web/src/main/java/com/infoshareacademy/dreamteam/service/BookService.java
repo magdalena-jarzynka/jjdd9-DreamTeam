@@ -1,13 +1,11 @@
 package com.infoshareacademy.dreamteam.service;
 
 
-import com.infoshareacademy.dreamteam.domain.entity.Author;
-import com.infoshareacademy.dreamteam.domain.entity.Book;
-import com.infoshareacademy.dreamteam.repository.BookRepository;
 import com.infoshareacademy.dreamteam.dao.BookDao;
 import com.infoshareacademy.dreamteam.domain.entity.Book;
 import com.infoshareacademy.dreamteam.domain.view.BookView;
 import com.infoshareacademy.dreamteam.mapper.*;
+import com.infoshareacademy.dreamteam.repository.BookRepository;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -15,8 +13,8 @@ import javax.inject.Inject;
 
 @Stateless
 public class BookService {
-  
-  @EJB
+
+    @EJB
     private BookRepository bookRepository;
 
     @EJB
@@ -39,12 +37,14 @@ public class BookService {
 
     @Inject
     private TranslatorMapper translatorMapper;
-  
-  public void save(Book book) {
+
+    public void save(Book book) {
         bookRepository.save(book);
     }
+
     public Book update(Book book) {
         return bookRepository.update(book);
+    }
 
     public BookView findBookById(Long id) {
         Book book = bookDao.findBookById(id).orElseThrow();
