@@ -34,16 +34,15 @@ public class SingleBookViewServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html; charset=UTF-8");
         Map<String, Object> model = modelInitializer.initModel(req);
-        long bookId = 1L;
+        String param = req.getParameter("id");
+        long bookId = 0;
         try {
-            bookId = Long.parseLong(req.getParameter("bookId"));
+            bookId = Long.parseLong(param);
         } catch (NumberFormatException e) {
-            logger.error("Book id not found.");
+            logger.error(e.getMessage());
         }
-
         BookView bookView = bookService.findBookById(bookId);
         model.put("book", bookView);
-
         templatePrinter.printTemplate(resp, model, getServletContext(),
                 "single-book-view.ftlh");
     }
