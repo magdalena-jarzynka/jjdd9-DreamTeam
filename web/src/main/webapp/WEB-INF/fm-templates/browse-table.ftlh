@@ -20,12 +20,12 @@
 <table class="table table-striped table-bordered templatemo-user-table">
     <thead>
     <tr>
-        <td><a href="" class="white-text templatemo-sort-by">Id</a></td>
-        <td><a href="" class="white-text templatemo-sort-by">Tytuł</a></td>
-        <td><a href="" class="white-text templatemo-sort-by">Autor</a></td>
-        <td><a href="" class="white-text templatemo-sort-by">Gatunek</a></td>
-        <td><a href="" class="white-text templatemo-sort-by">Wersja audio</a></td>
-        <td><a href="" class="white-text templatemo-sort-by">Zobacz szczegóły</a></td>
+        <td>Id</td>
+        <td>Tytuł</td>
+        <td>Autor</td>
+        <td>Gatunek</td>
+        <td>Wersja audio</td>
+        <td>Zobacz szczegóły</td>
     </tr>
     </thead>
     <tbody>
@@ -54,13 +54,13 @@
     <div class="pagination-wrap">
         <ul class="pagination">
             <li>
-                <a onclick="toPage(1)" aria-label="FirstPage">
+                <a onclick="toPage(1)" href="#" aria-label="FirstPage">
                     <span aria-hidden="true">Pierwsza strona</span>
                 </a>
             </li>
             <#if pageNum !=1>
                 <li>
-                    <a onclick="toPage(${pageNum-1})" aria-label="Previous">
+                    <a onclick="toPage(${pageNum-1})" href="#" aria-label="Previous">
                         <span aria-hidden="true">&ltrif;</span>
                     </a>
                 </li>
@@ -68,11 +68,11 @@
 
             <#list 1..numberOfPages as i>
                 <#if i = pageNum>
-                    <li class="active"><a onclick="toPage(${pageNum})"><span class="sr-only">(current)</span>${pageNum}
+                    <li class="active"><a onclick="toPage(${pageNum})" href="#"><span class="sr-only">(current)</span>${pageNum}
                         </a>
                     </li>
                 <#elseif (i gt pageNum-3) && (i lt pageNum + 3)>
-                    <li><a onclick="toPage(${i})">${i}</a></li>
+                    <li><a onclick="toPage(${i})" href="#">${i}</a></li>
                 </#if>
             </#list>
             <#if pageNum != numberOfPages>
@@ -83,7 +83,7 @@
                 </li>
             </#if>
             <li>
-                <a onclick="toPage(${numberOfPages})" href="#" aria-label="Next">
+                <a onclick="toPage(${numberOfPages})" href="#" aria-label="Last Page">
                     <span aria-hidden="true">Ostatnia strona</span>
                 </a>
             </li>
