@@ -7,6 +7,7 @@ import com.infoshareacademy.dreamteam.domain.view.BookView;
 import com.infoshareacademy.dreamteam.mapper.*;
 import com.infoshareacademy.dreamteam.repository.BookRepository;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.util.List;
