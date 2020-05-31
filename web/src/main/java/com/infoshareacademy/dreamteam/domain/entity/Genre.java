@@ -9,6 +9,10 @@ import java.util.List;
         @NamedQuery(
                 name = "Genre.getGenres",
                 query = "SELECT g FROM Genre g"
+        ),
+        @NamedQuery(
+                name="Genre.findGenreByName",
+                query="SELECT g FROM Genre g WHERE g.name = :name"
         )})
 @Entity
 @Table(name = "genre")

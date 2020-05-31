@@ -7,6 +7,10 @@ import java.util.List;
 
 @Entity
 @Table(name = "translator")
+@NamedQuery(
+        name="Translator.findTranslatorByName",
+        query="SELECT t FROM Translator t WHERE t.name = :name"
+)
 public class Translator {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

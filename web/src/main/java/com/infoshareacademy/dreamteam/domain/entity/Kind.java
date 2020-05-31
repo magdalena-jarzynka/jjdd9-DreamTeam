@@ -7,6 +7,10 @@ import java.util.List;
 
 @Entity
 @Table(name = "kind")
+@NamedQuery(
+        name="Kind.findKindByName",
+        query="SELECT k FROM Kind k WHERE k.name = :name"
+)
 public class Kind {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

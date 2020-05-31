@@ -7,6 +7,12 @@ import java.util.List;
 
 @Entity
 @Table(name = "epoch")
+@NamedQueries({
+        @NamedQuery(
+                name="Epoch.findEpochByName",
+                query="SELECT e FROM Epoch e WHERE e.name = :name"
+        )
+})
 public class Epoch {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

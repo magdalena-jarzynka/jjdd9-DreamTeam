@@ -1,5 +1,6 @@
 package com.infoshareacademy.dreamteam.service;
 
+import com.infoshareacademy.dreamteam.domain.entity.Author;
 import com.infoshareacademy.dreamteam.domain.entity.Translator;
 import com.infoshareacademy.dreamteam.repository.TranslatorRepository;
 
@@ -17,5 +18,10 @@ public class TranslatorService {
 
     public Translator update(Translator translator) {
         return translatorRepository.update(translator);
+    }
+
+    public Translator findByName(String name) {
+        Translator translator = translatorRepository.findByName(name).orElse(null);
+        return translator;
     }
 }

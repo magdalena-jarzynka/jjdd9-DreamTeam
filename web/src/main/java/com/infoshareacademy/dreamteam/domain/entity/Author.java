@@ -7,6 +7,12 @@ import java.util.List;
 
 @Entity
 @Table(name = "author")
+@NamedQueries({
+        @NamedQuery(
+                name="Author.findAuthorByName",
+                query="SELECT a FROM Author a WHERE a.name = :name"
+        )
+})
 public class Author {
 
     @Id

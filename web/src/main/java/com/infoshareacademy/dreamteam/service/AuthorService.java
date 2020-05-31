@@ -14,7 +14,13 @@ public class AuthorService {
     public void save(Author author) {
         authorRepository.save(author);
     }
+
     public Author update(Author author) {
         return authorRepository.update(author);
+    }
+
+    public Author findByName(String name) {
+        Author author = authorRepository.findByName(name).orElse(null);
+        return author;
     }
 }
