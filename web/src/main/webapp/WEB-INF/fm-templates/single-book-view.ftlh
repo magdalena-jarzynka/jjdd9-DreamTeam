@@ -108,12 +108,13 @@
                             <#if book.fragment??>
                                 <p>Fragment książki: ${book.fragment!}</p>
                             </#if>
+                            <#if book.authorViews?has_content>
                             <p>Dostępna wersja Audio:
                                 <#if book.audio! == true>
                                 tak
                                 <#else>
                                 nie
-                            </p></#if>
+                            </p></#if></#if>
                         </div>
                     </div>
                 </div>
