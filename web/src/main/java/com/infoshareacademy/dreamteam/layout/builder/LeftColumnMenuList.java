@@ -4,7 +4,6 @@ public enum LeftColumnMenuList {
     MAIN_PAGE("STRONA GŁÓWNA"),
     BROWSE("KSIĘGOZBIÓR"),
     SEARCH("WYSZUKAJ"),
-    GENRES("GATUNKI"),
     FAVOURITES("ULUBIONE"),
     RESERVATIONS("REZERWACJE"),
     STATS("STATYSTYKI"),
