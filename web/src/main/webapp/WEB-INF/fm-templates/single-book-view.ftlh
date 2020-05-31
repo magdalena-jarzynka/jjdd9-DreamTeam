@@ -58,7 +58,7 @@
 <#--                        <div class="col-1 col-lg-6 col-md-12">-->
                         <div class="col-sm-6">
                             <p>
-                                <img src="${book.cover!}" class="img-responsive">
+                                <img src="${book.cover!}" class="img-responsive" width="360" height="500">
                             </p>
                         </div>
 <#--                        <div class="col-1 col-lg-6 col-md-12">-->
@@ -108,12 +108,13 @@
                             <#if book.fragment??>
                                 <p>Fragment książki: ${book.fragment!}</p>
                             </#if>
+                            <#if book.authorViews?has_content>
                             <p>Dostępna wersja Audio:
                                 <#if book.audio! == true>
                                 tak
                                 <#else>
                                 nie
-                            </p></#if>
+                            </p></#if></#if>
                         </div>
                     </div>
                 </div>

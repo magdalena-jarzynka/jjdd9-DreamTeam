@@ -25,6 +25,7 @@
         <td><a href="" class="white-text templatemo-sort-by">Autor</a></td>
         <td><a href="" class="white-text templatemo-sort-by">Gatunek</a></td>
         <td><a href="" class="white-text templatemo-sort-by">Wersja audio</a></td>
+        <td><a href="" class="white-text templatemo-sort-by">Zobacz szczegóły</a></td>
     </tr>
     </thead>
     <tbody>
@@ -42,6 +43,9 @@
                     ${genre.getName()}
                 </#list></td>
             <td>${book.getAudio()?string("dostępna","niedostępna")}</td>
+            <td>
+                <a href="/single?id=${book.getId()}" class="templatemo-edit-btn">SZCZEGÓŁY >>></a>
+            </td>
         </tr>
     </#list>
     </tbody>

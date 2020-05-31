@@ -48,7 +48,8 @@ public class BookService {
     }
 
     public BookView findBookById(Long id) {
-        Book book = bookDao.findBookById(id).orElseThrow();
+        Book book = bookDao.findBookById(id)
+                .orElse(new Book("Nie znaleziono książki o podanym identyfikatorze."));
         BookView bookView = bookMapper.mapEntityToView(book);
         book.getAuthors().forEach(author -> bookView.getAuthorViews()
                 .add(authorMapper.mapEntityToView(author)));
