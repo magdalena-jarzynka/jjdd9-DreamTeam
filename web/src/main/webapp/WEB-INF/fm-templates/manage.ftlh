@@ -46,7 +46,7 @@
     <div class="templatemo-content col-1 light-gray-bg">
         <div class="templatemo-top-nav-container">
             <div class="row">
-<#include "navigation.ftlh">
+                <#include "navigation.ftlh">
             </div>
         </div>
         <div class="templatemo-content-container">
@@ -55,14 +55,16 @@
                     <div class=""></div>
                     <h2 class="">ZARZĄDZANIE</h2>
                     <hr>
-                    <p>Przepraszamy. Strona w budowie.</p>
+                    <p>
+                    <form enctype="multipart/form-data" method="post" action="/manage">
+                        File: <input type="file" name="json"/><br/><br/>
+                        <input type="submit" name="save" value="save"/><br/><br/>
+                    </form>
+                    </p>
                 </div>
             </div>
             <div class="templatemo-flex-row flex-content-row">
-                <form enctype="multipart/form-data" method="post" action="/manage">
-                    File: <input type="file" name="json"/><br/><br/>
-                    <input type="submit" name="save" value="save"/><br/><br/>
-                </form>
+
             </div>
         </div>
     </div>
