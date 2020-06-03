@@ -1,8 +1,6 @@
 package com.infoshareacademy.dreamteam.dao;
 
 import com.infoshareacademy.dreamteam.domain.entity.Book;
-import com.infoshareacademy.dreamteam.domain.entity.Genre;
-import org.hibernate.Hibernate;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -10,11 +8,11 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Stateless
 public class BookDaoBean implements BookDao {
+
+    private static final int BOOKS_PER_PAGE = 20;
 
     @PersistenceContext
     EntityManager entityManager;
@@ -27,55 +25,37 @@ public class BookDaoBean implements BookDao {
     }
 
     @Override
-    public List<Book> findAll() {
+    public long countBooks() {
+        Query query = entityManager.createNamedQuery("Book.countAll");
+        return (long) query.getSingleResult();
+    }
+
+    @Override
+    public long countBooks(String audio, String genre) {
+        Query query = entityManager.createNamedQuery("Book.countWithAudioAndGenre");
+        query.setParameter("audio", audio == null ? null : Boolean.valueOf(audio));
+        query.setParameter("genre", genre);
+        return (long) query.getSingleResult();
+    }
+
+    @Override
+    public List<Book> findBooks(int offset) {
+
         Query query = entityManager.createNamedQuery("Book.findAll");
-        List<Book> books = query.getResultList();
-        for (Book book : books) {
-            Hibernate.initialize(book.getAuthors());
-            Hibernate.initialize(book.getGenres());
-            Hibernate.initialize(book.getEpochs());
-            Hibernate.initialize(book.getKinds());
-            Hibernate.initialize(book.getTranslators());
-            Hibernate.initialize(book.getFavourites());
-            Hibernate.initialize(book.getReservations());
-        }
-        return books;
+        query.setFirstResult(offset);
+        query.setMaxResults(BOOKS_PER_PAGE);
+        return query.getResultList();
     }
 
     @Override
-    public int countBooks() {
-        return findAll().size();
-    }
+    public List<Book> findBooks(int offset, String audio, String genre) {
 
-    @Override
-    public int countBooks(String audio, String genre) {
-        return findBooks(0, Integer.MAX_VALUE, audio, genre).size();
-    }
-
-    @Override
-    public List<Book> findBooks(int offset, int limit) {
-
-        List<Book> allBooks = findAll();
-        int toIndex = Math.min(offset + limit, allBooks.size());
-        return allBooks.subList(offset, toIndex);
-    }
-
-    @Override
-    public List<Book> findBooks(int offset, int limit, String audio, String genre) {
-
-        List<Book> allBooks = findAll();
-        Stream<Book> bookStream = allBooks.stream();
-        if (audio != null && !audio.equals("blank")) {
-            bookStream = bookStream.filter(book -> book.getAudio() == Boolean.parseBoolean(audio));
-        }
-        if (genre != null && !genre.equals("blank")) {
-            bookStream = bookStream.filter(book -> book.getGenres().stream().map(Genre::getName).collect(Collectors.toList()).contains(genre));
-        }
-        List<Book> books = bookStream
-                .collect(Collectors.toList());
-
-        int toIndex = Math.min(offset + limit, books.size());
-        return books.subList(offset, toIndex);
+        Query query = entityManager.createNamedQuery("Book.findWithAudioAndGenre");
+        query.setFirstResult(offset);
+        query.setMaxResults(BOOKS_PER_PAGE);
+        query.setParameter("audio", audio == null || "blank".equals(audio) ? null : Boolean.valueOf(audio));
+        query.setParameter("genre", genre == null || "blank".equals(genre) ? null : genre);
+        return query.getResultList();
     }
 
     @Override

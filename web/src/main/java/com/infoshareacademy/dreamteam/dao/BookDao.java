@@ -12,15 +12,13 @@ public interface BookDao {
 
     Optional<Book> findBookById(Long id);
 
-    List<Book> findAll();
+    long countBooks();
 
-    int countBooks();
+    long countBooks(String audio, String genre);
 
-    int countBooks(String audio, String genre);
+    List<Book> findBooks(int offset);
 
-    List<Book> findBooks(int offset, int limit);
-
-    List<Book> findBooks(int offset, int limit, String audio, String genre);
+    List<Book> findBooks(int offset, String audio, String genre);
 
     List<String> getGenres();
 }

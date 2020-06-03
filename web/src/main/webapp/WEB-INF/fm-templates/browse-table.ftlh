@@ -20,7 +20,6 @@
 <table class="table table-striped table-bordered templatemo-user-table">
     <thead>
     <tr>
-        <td>Id</td>
         <td>Tytuł</td>
         <td>Autor</td>
         <td>Gatunek</td>
@@ -31,18 +30,18 @@
     <tbody>
     <#list books as book>
         <tr>
-            <td>${book.getId()}</td>
             <td>${book.getTitle()}</td>
             <td>
                 <#list book.getAuthors() as author>
-                    ${author.getName()}
+                    ${author}
                 </#list>
             </td>
             <td>
                 <#list book.getGenres() as genre>
-                    ${genre.getName()}
-                </#list></td>
-            <td>${book.getAudio()?string("dostępna","niedostępna")}</td>
+                    ${genre}
+                </#list>
+            </td>
+            <td>${book.isAudio()?string("dostępna","niedostępna")}</td>
             <td>
                 <a href="/single?id=${book.getId()}" class="templatemo-edit-btn">SZCZEGÓŁY >>></a>
             </td>
@@ -68,7 +67,8 @@
 
             <#list 1..numberOfPages as i>
                 <#if i = pageNum>
-                    <li class="active"><a onclick="toPage(${pageNum})" href="#"><span class="sr-only">(current)</span>${pageNum}
+                    <li class="active"><a onclick="toPage(${pageNum})" href="#"><span
+                                    class="sr-only">(current)</span>${pageNum}
                         </a>
                     </li>
                 <#elseif (i gt pageNum-3) && (i lt pageNum + 3)>

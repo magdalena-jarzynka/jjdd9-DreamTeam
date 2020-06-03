@@ -4,6 +4,8 @@ package com.infoshareacademy.dreamteam.service;
 import com.infoshareacademy.dreamteam.dao.BookDao;
 import com.infoshareacademy.dreamteam.domain.entity.Author;
 import com.infoshareacademy.dreamteam.domain.entity.Book;
+import com.infoshareacademy.dreamteam.domain.entity.Genre;
+import com.infoshareacademy.dreamteam.domain.view.BookRowView;
 import com.infoshareacademy.dreamteam.domain.view.BookView;
 import com.infoshareacademy.dreamteam.mapper.*;
 import com.infoshareacademy.dreamteam.repository.BookRepository;
@@ -11,7 +13,9 @@ import com.infoshareacademy.dreamteam.repository.BookRepository;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Stateless
 public class BookService {
@@ -49,8 +53,7 @@ public class BookService {
     }
 
     public Book findByTitle(String title) {
-        Book book = bookRepository.findByTitle(title).orElse(null);
-        return book;
+        return bookRepository.findByTitle(title).orElse(null);
     }
 
     public BookView findBookById(Long id) {
@@ -75,25 +78,38 @@ public class BookService {
         return bookDao.getGenres();
     }
 
-    public List<Book> findAll() {
-        return bookDao.findAll();
-    }
-
-    public int countBooks() {
+    public long countBooks() {
         return bookDao.countBooks();
     }
 
-    public int countBooks(String audio, String genre) {
+    public long countBooks(String audio, String genre) {
         return bookDao.countBooks(audio, genre);
     }
 
-    public List<Book> findBooks(int offset, int limit) {
-
-        return bookDao.findBooks(offset, limit);
+    public List<BookRowView> findBooks(int offset) {
+        List<BookRowView> bookRowViews = new ArrayList<>();
+        for (Book book : bookDao.findBooks(offset)) {
+            getBookRowViews(bookRowViews, book);
+        }
+        return bookRowViews;
     }
 
-    public List<Book> findBooks(int offset, int limit, String audio, String genre) {
+    public List<BookRowView> findBooks(int offset, String audio, String genre) {
+        List<BookRowView> bookRowViews = new ArrayList<>();
+        for (Book book : bookDao.findBooks(offset, audio, genre)) {
+            getBookRowViews(bookRowViews, book);
+        }
+        return bookRowViews;
+    }
 
-        return bookDao.findBooks(offset, limit, audio, genre);
+    private List<BookRowView> getBookRowViews(List<BookRowView> bookRowViews, Book book) {
+        BookRowView bookRowView = new BookRowView();
+        bookRowView.setId(book.getId());
+        bookRowView.setTitle(book.getTitle());
+        bookRowView.setAuthors(book.getAuthors().stream().map(Author::getName).collect(Collectors.toList()));
+        bookRowView.setGenres(book.getGenres().stream().map(Genre::getName).collect(Collectors.toList()));
+        bookRowView.setAudio(book.getAudio());
+        bookRowViews.add(bookRowView);
+        return bookRowViews;
     }
 }
