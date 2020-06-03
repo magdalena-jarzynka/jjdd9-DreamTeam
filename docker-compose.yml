@@ -6,11 +6,10 @@ services:
     environment:
       MYSQL_DATABASE: 'dreamteamdb'
       MYSQL_USER: 'root'
-      MYSQL_PASSWORD: 'root'
       MYSQL_ROOT_PASSWORD: 'root'
     ports:
       - 4392:3306
-    command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8 --collation-server=utf8_general_ci --init=connect='SET NAMES UTF8;'
+    command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8 --collation-server=utf8_general_ci --init-connect='SET NAMES UTF8;'
 
   wildfly:
     build: ./web
