@@ -3,6 +3,17 @@ package com.infoshareacademy.dreamteam.domain.entity;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@NamedQueries({
+        @NamedQuery(
+                name = "Reservation.findReservationsByUser",
+                query = "SELECT r from Reservation r where r.user =: user"
+        ),
+        @NamedQuery(
+                name = "Reservation.findReservationByBook",
+                query = "SELECT r from Reservation r where r.book =: book"
+        )
+})
+
 @Entity
 @Table(name = "reservation")
 public class Reservation {

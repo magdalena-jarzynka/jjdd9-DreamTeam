@@ -1,6 +1,5 @@
 package com.infoshareacademy.dreamteam.repository;
 
-import com.infoshareacademy.dreamteam.domain.entity.Author;
 import com.infoshareacademy.dreamteam.domain.entity.Book;
 
 import javax.ejb.Local;
