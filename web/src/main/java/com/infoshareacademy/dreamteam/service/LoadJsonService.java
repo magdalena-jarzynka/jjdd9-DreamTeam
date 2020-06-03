@@ -3,13 +3,15 @@ package com.infoshareacademy.dreamteam.service;
 import com.infoshareacademy.dreamteam.cdi.FileUploadProcessor;
 import com.infoshareacademy.dreamteam.domain.entity.*;
 import com.infoshareacademy.dreamteam.domain.pojo.*;
-import com.infoshareacademy.dreamteam.parser.BookParser;
+import com.infoshareacademy.dreamteam.parser.FileParser;
+import com.infoshareacademy.dreamteam.parser.URLParser;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.servlet.http.Part;
 import javax.transaction.Transactional;
 import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 
 
@@ -31,9 +33,7 @@ public class LoadJsonService {
     private TranslatorService translatorService;
 
     @Transactional
-    public void loadFromJson(Part part) throws IOException {
-        BookParser bookParser = new BookParser();
-        List<BookPlain> bookList = bookParser.readBookList(fileUploadProcessor.uploadFile(part));
+    public void loadDatabase(List<BookPlain> bookList) {
 
         for (BookPlain bookPlain : bookList) {
             Book book = bookService.findByTitle(bookPlain.getTitle());
@@ -106,5 +106,15 @@ public class LoadJsonService {
             }
             bookService.update(book);
         }
+    }
+
+    public List<BookPlain> loadFromJson(Part part) throws IOException {
+        FileParser fileParser = new FileParser();
+        return fileParser.readBookList(fileUploadProcessor.uploadFile(part));
+    }
+
+    public List<BookPlain> loadFromURL(URL url) throws IOException {
+        URLParser urlParser = new URLParser();
+        return urlParser.readBookList(url);
     }
 }

@@ -10,9 +10,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-public class BookParser {
-
-    private static final Logger logger = LoggerFactory.getLogger(BookParser.class.getName());
+public class FileParser {
+    private static final Logger logger = LoggerFactory.getLogger(FileParser.class.getName());
 
     public List<BookPlain> readBookList(File file) {
         ObjectMapper mapper = new ObjectMapper();

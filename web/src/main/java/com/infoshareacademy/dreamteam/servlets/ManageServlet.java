@@ -57,6 +57,6 @@ public class ManageServlet extends HttpServlet {
         }
 
         Part part = req.getPart("json");
-        loadJsonService.loadFromJson(part);
+        loadJsonService.loadDatabase(loadJsonService.loadFromJson(part));
     }
 }
