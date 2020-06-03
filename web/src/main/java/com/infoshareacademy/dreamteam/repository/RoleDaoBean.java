@@ -1,4 +1,4 @@
-package com.infoshareacademy.dreamteam.dao;
+package com.infoshareacademy.dreamteam.repository;
 
 import com.infoshareacademy.dreamteam.domain.entity.Role;
 import com.infoshareacademy.dreamteam.role.RoleType;
