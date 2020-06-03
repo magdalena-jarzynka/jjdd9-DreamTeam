@@ -6,7 +6,6 @@ services:
     environment:
       MYSQL_DATABASE: 'dreamteamdb'
       MYSQL_USER: 'root'
-      MYSQL_PASSWORD: 'root'
       MYSQL_ROOT_PASSWORD: 'root'
     ports:
       - 4392:3306
