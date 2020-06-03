@@ -12,9 +12,8 @@
     <data-source>
         <name>java:ds/dreamteamDS</name>
         <class-name>com.mysql.cj.jdbc.MysqlDataSource</class-name>
-        <url>jdbc:mysql://0.0.0.0:3306/dreamteamdb?useLegacyDatetimeCode=false&amp;
-            serverTimezone=Europe/Warsaw
-        </url>
+        <url>jdbc:mysql://mysql/dreamteamdb?useLegacyDatetimeCode=false&amp;serverTimezone=Europe/Warsaw</url>
+<!--        <url>jdbc:mysql://0.0.0.0:3306/dreamteamdb?useLegacyDatetimeCode=false&amp;serverTimezone=Europe/Warsaw</url>-->
         <user>root</user>
         <password>root</password>
     </data-source>

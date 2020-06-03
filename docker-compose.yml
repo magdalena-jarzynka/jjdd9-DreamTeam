@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql
+    environment:
+      MYSQL_DATABASE: 'dreamteamdb'
+      MYSQL_USER: 'root'
+      MYSQL_PASSWORD: 'root'
+      MYSQL_ROOT_PASSWORD: 'root'
+    ports:
+      - '4392:3306'
+    command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8 --collation-server=utf8_general_ci --init=connect='SET NAMES UTF8;'
+
+  wildfly:
+    build: ./web
+    ports:
+      - "4390:8080"
+      - "4391:9990"
+    links:
+      - "mysql"
+    depends_on:
+      - "mysql"
+    environment:
+      - "TZ=Europe/Warsaw"
+
