@@ -8,7 +8,7 @@ import java.io.IOException;
 
 @WebFilter(
         filterName = "UserAccessFilter",
-        urlPatterns = {"/favourites", "/reservations"}
+        urlPatterns = {"/favourites/*", "/reservations/*"}
 )
 
 public class UserAccessFilter implements Filter {
