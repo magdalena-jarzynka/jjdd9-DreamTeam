@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  db:
+  db: mysql
     image: mysql
     environment:
       MYSQL_DATABASE: 'dreamteamdb'
@@ -14,7 +14,6 @@ services:
 
   wildfly:
     build: ./web
-    container_name: "wildfly"
     ports:
       - "4390:8080"
       - "4391:9990"
