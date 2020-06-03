@@ -6,6 +6,7 @@ import com.infoshareacademy.dreamteam.domain.pojo.*;
 import com.infoshareacademy.dreamteam.parser.FileParser;
 import com.infoshareacademy.dreamteam.parser.URLParser;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.servlet.http.Part;

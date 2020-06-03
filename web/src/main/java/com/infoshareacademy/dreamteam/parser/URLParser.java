@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 public class URLParser {
@@ -15,9 +16,10 @@ public class URLParser {
 
     public List<BookPlain> readBookList(URL url) throws IOException{
         ObjectMapper mapper = new ObjectMapper();
+        List<BookPlain> listOfBooks= new ArrayList<>();
         try {
-            return mapper.readValue(url, new TypeReference<List<BookPlain>>() {
-            });
+            listOfBooks.add(mapper.readValue(url, new TypeReference<BookPlain>() {}));
+            return listOfBooks;
         } catch (IOException e) {
             logger.error(e.getMessage(), e);
             return List.of();

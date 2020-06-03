@@ -22,7 +22,7 @@ import java.util.List;
 @Startup
 public class APILoadBean {
     private static final Logger logger = LoggerFactory.getLogger(APILoadBean.class.getName());
-    private static final String url = "https://wolnelektury.pl/api/books/";
+    private static final String url = "https://wolnelektury.pl/api/books/?format=json";
     Client client = ClientBuilder.newClient();
     WebTarget target = client.target(url);
 
@@ -30,16 +30,16 @@ public class APILoadBean {
     public void loadBooksFromAPI() throws IOException {
         LoadJsonService loadJsonService = new LoadJsonService();
         List<BookUrl> urls = getURLList(url);
-        for (BookUrl url : urls) {
-            loadJsonService.loadDatabase(loadJsonService.loadFromURL(new URL(url.getHref())));
+        for (BookUrl bookUrl : urls) {
+            loadJsonService.loadDatabase(loadJsonService.loadFromURL(new URL(bookUrl.getHref() + "?format=json")));
         }
     }
 
-    public List<BookUrl> getURLList(String URL) {
+    public List<BookUrl> getURLList(String url) {
         ObjectMapper mapper = new ObjectMapper();
         List<BookUrl> urls;
         try {
-            urls = mapper.readValue(URL, new TypeReference<List<BookPlain>>() {
+            urls = mapper.readValue(new URL(url), new TypeReference<List<BookUrl>>() {
             });
         } catch (IOException e) {
             logger.error(e.getMessage(), e);
