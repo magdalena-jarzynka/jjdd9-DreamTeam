@@ -45,7 +45,7 @@ public class BrowseServlet extends HttpServlet {
 
         int rows;
         if ((audio == null || audio.equals("blank")) && (genre == null || genre.equals("blank"))  ) {
-            tableData.put("books", bookService.findBooks(startPage * pageSize, pageSize));
+            tableData.put("books", bookService.  findBooks(startPage * pageSize, pageSize));
             rows = bookService.countBooks();
         } else {
             tableData.put("books", bookService.findBooks(startPage * pageSize, pageSize, audio, genre));
