@@ -6,6 +6,7 @@ import com.infoshareacademy.dreamteam.domain.entity.User;
 
 import javax.ejb.Local;
 import java.util.List;
+import java.util.Optional;
 
 @Local
 public interface ReservationRepository {
@@ -17,4 +18,5 @@ public interface ReservationRepository {
 
     List<Reservation> findReservationsByBook(Book book);
 
+    Optional<Reservation> findReservationById(Long id);
 }

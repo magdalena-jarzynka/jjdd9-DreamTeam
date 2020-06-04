@@ -53,7 +53,7 @@ public class BookService {
         return book;
     }
 
-    public BookView findBookById(Long id) {
+    public BookView findBookViewById(Long id) {
         Book book = bookDao.findBookById(id)
                 .orElse(new Book("Nie znaleziono książki o podanym identyfikatorze."));
         BookView bookView = bookMapper.mapEntityToView(book);
@@ -70,6 +70,8 @@ public class BookService {
 
         return bookView;
     }
+
+
 
     public List<String> getGenres() {
         return bookDao.getGenres();

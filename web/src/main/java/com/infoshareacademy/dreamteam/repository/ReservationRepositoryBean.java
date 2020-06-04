@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.List;
+import java.util.Optional;
 
 @Stateless
 public class ReservationRepositoryBean implements ReservationRepository {
@@ -39,6 +40,13 @@ public class ReservationRepositoryBean implements ReservationRepository {
         Query query = entityManager.createNamedQuery("Reservation.findReservationByBook");
         query.setParameter("book", book);
         return query.getResultList();
+    }
+
+    @Override
+    public Optional<Reservation> findReservationById(Long id) {
+        Query query = entityManager.createNamedQuery("Reservation.findReservationById");
+        query.setParameter("id", id);
+        return query.getResultList().stream().findFirst();
     }
 
 }

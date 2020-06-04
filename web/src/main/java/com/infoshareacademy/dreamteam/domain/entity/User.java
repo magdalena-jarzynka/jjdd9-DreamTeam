@@ -13,6 +13,10 @@ import java.util.List;
         @NamedQuery(
                 name = "User.findUserByEmail",
                 query = "SELECT u FROM User u WHERE u.email LIKE:email"
+        ),
+        @NamedQuery(
+                name = "User.findUserById",
+                query = "SELECT u FROM User u WHERE u.id LIKE:id"
         )
 })
 

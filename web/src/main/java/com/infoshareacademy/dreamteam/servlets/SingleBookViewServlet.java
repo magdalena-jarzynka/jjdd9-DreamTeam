@@ -41,7 +41,7 @@ public class SingleBookViewServlet extends HttpServlet {
         } catch (NumberFormatException e) {
             logger.error(e.getMessage());
         }
-        BookView bookView = bookService.findBookById(bookId);
+        BookView bookView = bookService.findBookViewById(bookId);
         model.put("book", bookView);
         templatePrinter.printTemplate(resp, model, getServletContext(),
                 "single-book-view.ftlh");
