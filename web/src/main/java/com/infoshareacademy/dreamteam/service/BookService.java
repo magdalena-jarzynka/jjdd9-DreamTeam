@@ -1,8 +1,6 @@
 package com.infoshareacademy.dreamteam.service;
 
-
 import com.infoshareacademy.dreamteam.dao.BookDao;
-import com.infoshareacademy.dreamteam.domain.entity.Author;
 import com.infoshareacademy.dreamteam.domain.entity.Book;
 import com.infoshareacademy.dreamteam.domain.view.BookView;
 import com.infoshareacademy.dreamteam.mapper.*;
@@ -11,10 +9,13 @@ import com.infoshareacademy.dreamteam.repository.BookRepository;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.List;
 
 @Stateless
 public class BookService {
+
+    private static final int BOOKS_PER_PAGE = 20;
 
     @EJB
     private BookRepository bookRepository;
@@ -49,13 +50,16 @@ public class BookService {
     }
 
     public Book findByTitle(String title) {
-        Book book = bookRepository.findByTitle(title).orElse(null);
-        return book;
+        return bookRepository.findByTitle(title).orElse(null);
     }
 
     public BookView findBookById(Long id) {
         Book book = bookDao.findBookById(id)
                 .orElse(new Book("Nie znaleziono książki o podanym identyfikatorze."));
+        return mapBookEntityWithRelationsToView(book);
+    }
+
+    private BookView mapBookEntityWithRelationsToView(Book book) {
         BookView bookView = bookMapper.mapEntityToView(book);
         book.getAuthors().forEach(author -> bookView.getAuthorViews()
                 .add(authorMapper.mapEntityToView(author)));
@@ -67,7 +71,6 @@ public class BookService {
                 .add(kindMapper.mapEntityToView(kind)));
         book.getTranslators().forEach(translator -> bookView.getTranslatorViews()
                 .add(translatorMapper.mapEntityToView(translator)));
-
         return bookView;
     }
 
@@ -75,25 +78,47 @@ public class BookService {
         return bookDao.getGenres();
     }
 
-    public List<Book> findAll() {
-        return bookDao.findAll();
-    }
-
-    public int countBooks() {
+    public long countBooks() {
         return bookDao.countBooks();
     }
 
-    public int countBooks(String audio, String genre) {
-        return bookDao.countBooks(audio, genre);
+    public long countBooksByAudioAndGenre(String audio, String genre) {
+        Boolean audioBoolean = convertAudio(audio);
+        genre = convertGenre(genre);
+        return bookDao.countBooksByAudioAndGenre(audioBoolean, genre);
     }
 
-    public List<Book> findBooks(int offset, int limit) {
-
-        return bookDao.findBooks(offset, limit);
+    private String convertGenre(String genre) {
+        if ("blank".equals(genre)) {
+            genre = null;
+        }
+        return genre;
     }
 
-    public List<Book> findBooks(int offset, int limit, String audio, String genre) {
+    private Boolean convertAudio(String audio) {
+        if (audio == null || "blank".equals(audio)) {
+            return null;
+        } else {
+            return Boolean.valueOf(audio);
+        }
+    }
 
-        return bookDao.findBooks(offset, limit, audio, genre);
+    public List<BookView> findBooks(int offset) {
+        List<BookView> bookViews = new ArrayList<>();
+        for (Book book : bookDao.findBooks(offset, BOOKS_PER_PAGE)) {
+            bookViews.add(mapBookEntityWithRelationsToView(book));
+        }
+        return bookViews;
+    }
+
+    public List<BookView> findBooksByAudioAndGenre(int offset, String audio, String genre) {
+        List<BookView> bookViews = new ArrayList<>();
+        Boolean audioBoolean = convertAudio(audio);
+        genre = convertGenre(genre);
+
+        for (Book book : bookDao.findBooksByAudioAndGenre(offset, BOOKS_PER_PAGE, audioBoolean, genre)) {
+            bookViews.add(mapBookEntityWithRelationsToView(book));
+        }
+        return bookViews;
     }
 }

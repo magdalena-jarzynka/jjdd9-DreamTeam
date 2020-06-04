@@ -1,6 +1,5 @@
 package com.infoshareacademy.dreamteam.service;
 
-import com.infoshareacademy.dreamteam.domain.entity.Author;
 import com.infoshareacademy.dreamteam.domain.entity.Kind;
 import com.infoshareacademy.dreamteam.repository.KindRepository;
 
@@ -12,8 +11,8 @@ public class KindService {
     @EJB
     private KindRepository kindRepository;
 
-    public void save(Kind Kind) {
-        kindRepository.save(Kind);
+    public void save(Kind kind) {
+        kindRepository.save(kind);
     }
 
     public Kind update(Kind kind) {
@@ -21,7 +20,6 @@ public class KindService {
     }
 
     public Kind findByName(String name) {
-        Kind kind = kindRepository.findByName(name).orElse(null);
-        return kind;
+        return kindRepository.findByName(name).orElse(null);
     }
 }

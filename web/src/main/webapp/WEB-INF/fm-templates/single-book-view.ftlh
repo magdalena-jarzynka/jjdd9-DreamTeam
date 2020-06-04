@@ -66,14 +66,14 @@
                             <h2><strong>${book.title!}</strong></h2>
                             <h5 style="font-style: italic"><#list book.authorViews>
                                     <#items as authorView>
-                                        ${authorView.name}
+                                        ${authorView.name}<#sep>,
                                     </#items>
                                 </#list></h5>
                             <hr>
                             <#if book.translatorViews?has_content>
                             <p style="font-style: italic">tłum. <#list book.translatorViews>
                                     <#items as translatorView>
-                                        ${translatorView.name}
+                                        ${translatorView.name}<#sep>,
                                     </#items>
                                 </#list>
                                 </#if>
@@ -81,7 +81,7 @@
                             <#if book.genreViews?has_content>
                                 <p>Gatunek: <#list book.genreViews>
                                         <#items as genreView>
-                                            ${genreView.name}
+                                            ${genreView.name}<#sep>,
                                         </#items>
                                     </#list>
                                 </p>
@@ -89,7 +89,7 @@
                             <#if book.kindViews?has_content>
                                 <p>Gatunek literacki: <#list book.kindViews>
                                         <#items as kindView>
-                                            ${kindView.name}
+                                            ${kindView.name}<#sep>,
                                         </#items>
                                     </#list>
                                 </p>
@@ -97,7 +97,7 @@
                             <#if book.epochViews?has_content>
                                 <p>Epoka: <#list book.epochViews>
                                         <#items as epochView>
-                                            ${epochView.name}
+                                            ${epochView.name}<#sep>,
                                         </#items>
                                     </#list>
                                 </p>

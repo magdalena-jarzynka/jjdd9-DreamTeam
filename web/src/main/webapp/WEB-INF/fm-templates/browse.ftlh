@@ -52,7 +52,6 @@
         <div class="templatemo-content-container">
             <div class="templatemo-flex-row flex-content-row">
                 <div class="templatemo-content-widget white-bg col-2">
-                    <div class=""></div>
                     <h2 class="">KSIĘGOZBIÓR</h2>
                     <hr>
                     <div class="container-fluid">
