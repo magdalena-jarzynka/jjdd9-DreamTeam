@@ -48,8 +48,8 @@ public class BrowseServlet extends HttpServlet {
             tableData.put("books", bookService.findBooks(startPage * pageSize));
             rows = bookService.countBooks();
         } else {
-            tableData.put("books", bookService.findBooks(startPage * pageSize, audio, genre));
-            rows = bookService.countBooks(audio, genre);
+            tableData.put("books", bookService.findBooksByAudioAndGenre(startPage * pageSize, audio, genre));
+            rows = bookService.countBooksByAudioAndGenre(audio, genre);
         }
 
         tableData.put("pageNum", startPage + 1);

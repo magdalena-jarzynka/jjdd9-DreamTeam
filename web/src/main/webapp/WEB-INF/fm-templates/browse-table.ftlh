@@ -11,44 +11,58 @@
     <select class="form-control" id="genre" onchange="toPage(1)">
         <option value="blank">- - - Wybierz - - -</option>
         <#list genres as genre>
-            <option value="${genre.getName()}">
-                ${genre.getName()}
+            <option value="${genre.name}">
+                ${genre.name}
             </option>
         </#list>
     </select>
 </div>
-<table class="table table-striped table-bordered templatemo-user-table">
-    <thead>
-    <tr>
-        <td>Tytuł</td>
-        <td>Autor</td>
-        <td>Gatunek</td>
-        <td>Wersja audio</td>
-        <td>Zobacz szczegóły</td>
-    </tr>
-    </thead>
-    <tbody>
-    <#list books as book>
-        <tr>
-            <td>${book.getTitle()}</td>
-            <td>
-                <#list book.getAuthors() as author>
-                    ${author}
-                </#list>
-            </td>
-            <td>
-                <#list book.getGenres() as genre>
-                    ${genre}
-                </#list>
-            </td>
-            <td>${book.isAudio()?string("dostępna","niedostępna")}</td>
-            <td>
-                <a href="/single?id=${book.getId()}" class="templatemo-edit-btn">SZCZEGÓŁY >>></a>
-            </td>
-        </tr>
-    </#list>
-    </tbody>
-</table>
+    <div class="panel panel-default table-responsive">
+        <table class="table table-striped table-bordered templatemo-user-table">
+            <thead>
+            <tr>
+                <td></td>
+                <td>Tytuł</td>
+                <td>Autor</td>
+                <td>Gatunek</td>
+                <td>Wersja audio</td>
+                <td>Zobacz szczegóły</td>
+            </tr>
+            </thead>
+            <tbody>
+            <#list books as book>
+                <tr>
+                    <td>
+                        <img src="${book.cover!}" class="img-responsive" width="180" height="250">
+                    </td>
+                    <td>${book.title!}</td>
+                    <td>
+                        <#if book.authorViews?has_content>
+                        <#list book.authorViews>
+                            <#items as authorView>
+                                ${authorView.name}<#sep>,
+                            </#items>
+                        </#list>
+                        </#if>
+                    </td>
+                    <td>
+                        <#if book.genreViews?has_content>
+                        <#list book.genreViews>
+                            <#items as genreView>
+                                ${genreView.name}<#sep>,
+                            </#items>
+                        </#list>
+                        </#if>
+                    </td>
+                    <td>${book.isAudio()?string("dostępna","niedostępna")}</td>
+                    <td>
+                        <a href="/single?id=${book.getId()}" class="templatemo-edit-btn" style="white-space: nowrap">SZCZEGÓŁY >>></a>
+                    </td>
+                </tr>
+            </#list>
+            </tbody>
+        </table>
+    </div>
 <#if numberOfPages gt 1>
     <div class="pagination-wrap">
         <ul class="pagination">

@@ -1,11 +1,7 @@
 package com.infoshareacademy.dreamteam.service;
 
-
 import com.infoshareacademy.dreamteam.dao.BookDao;
-import com.infoshareacademy.dreamteam.domain.entity.Author;
 import com.infoshareacademy.dreamteam.domain.entity.Book;
-import com.infoshareacademy.dreamteam.domain.entity.Genre;
-import com.infoshareacademy.dreamteam.domain.view.BookRowView;
 import com.infoshareacademy.dreamteam.domain.view.BookView;
 import com.infoshareacademy.dreamteam.mapper.*;
 import com.infoshareacademy.dreamteam.repository.BookRepository;
@@ -15,10 +11,11 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Stateless
 public class BookService {
+
+    private static final int BOOKS_PER_PAGE = 20;
 
     @EJB
     private BookRepository bookRepository;
@@ -59,6 +56,10 @@ public class BookService {
     public BookView findBookById(Long id) {
         Book book = bookDao.findBookById(id)
                 .orElse(new Book("Nie znaleziono książki o podanym identyfikatorze."));
+        return initializeBookView(book);
+    }
+
+    private BookView initializeBookView(Book book) {
         BookView bookView = bookMapper.mapEntityToView(book);
         book.getAuthors().forEach(author -> bookView.getAuthorViews()
                 .add(authorMapper.mapEntityToView(author)));
@@ -70,7 +71,6 @@ public class BookService {
                 .add(kindMapper.mapEntityToView(kind)));
         book.getTranslators().forEach(translator -> bookView.getTranslatorViews()
                 .add(translatorMapper.mapEntityToView(translator)));
-
         return bookView;
     }
 
@@ -82,34 +82,45 @@ public class BookService {
         return bookDao.countBooks();
     }
 
-    public long countBooks(String audio, String genre) {
-        return bookDao.countBooks(audio, genre);
+    public long countBooksByAudioAndGenre(String audio, String genre) {
+        Boolean audioBoolean = convertAudio(audio);
+        genre = convertGenre(genre);
+        return bookDao.countBooksByAudioAndGenre(audioBoolean, genre);
     }
 
-    public List<BookRowView> findBooks(int offset) {
-        List<BookRowView> bookRowViews = new ArrayList<>();
-        for (Book book : bookDao.findBooks(offset)) {
-            getBookRowViews(bookRowViews, book);
+    private String convertGenre(String genre) {
+        if ("blank".equals(genre)) {
+            genre = null;
         }
-        return bookRowViews;
+        return genre;
     }
 
-    public List<BookRowView> findBooks(int offset, String audio, String genre) {
-        List<BookRowView> bookRowViews = new ArrayList<>();
-        for (Book book : bookDao.findBooks(offset, audio, genre)) {
-            getBookRowViews(bookRowViews, book);
+    private Boolean convertAudio(String audio) {
+        Boolean audioBoolean;
+        if (audio == null || "blank".equals(audio)) {
+            audioBoolean = null;
+        } else {
+            audioBoolean = Boolean.valueOf(audio);
         }
-        return bookRowViews;
+        return audioBoolean;
     }
 
-    private List<BookRowView> getBookRowViews(List<BookRowView> bookRowViews, Book book) {
-        BookRowView bookRowView = new BookRowView();
-        bookRowView.setId(book.getId());
-        bookRowView.setTitle(book.getTitle());
-        bookRowView.setAuthors(book.getAuthors().stream().map(Author::getName).collect(Collectors.toList()));
-        bookRowView.setGenres(book.getGenres().stream().map(Genre::getName).collect(Collectors.toList()));
-        bookRowView.setAudio(book.getAudio());
-        bookRowViews.add(bookRowView);
-        return bookRowViews;
+    public List<BookView> findBooks(int offset) {
+        List<BookView> bookViews = new ArrayList<>();
+        for (Book book : bookDao.findBooks(offset, BOOKS_PER_PAGE)) {
+            bookViews.add(initializeBookView(book));
+        }
+        return bookViews;
+    }
+
+    public List<BookView> findBooksByAudioAndGenre(int offset, String audio, String genre) {
+        List<BookView> bookViews = new ArrayList<>();
+        Boolean audioBoolean = convertAudio(audio);
+        genre = convertGenre(genre);
+
+        for (Book book : bookDao.findBooksByAudioAndGenre(offset, BOOKS_PER_PAGE, audioBoolean, genre)) {
+            bookViews.add(initializeBookView(book));
+        }
+        return bookViews;
     }
 }

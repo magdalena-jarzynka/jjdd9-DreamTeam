@@ -14,11 +14,11 @@ public interface BookDao {
 
     long countBooks();
 
-    long countBooks(String audio, String genre);
+    long countBooksByAudioAndGenre(Boolean audio, String genre);
 
-    List<Book> findBooks(int offset);
+    List<Book> findBooks(int offset, int limit);
 
-    List<Book> findBooks(int offset, String audio, String genre);
+    List<Book> findBooksByAudioAndGenre(int offset, int limit, Boolean audio, String genre);
 
     List<String> getGenres();
 }

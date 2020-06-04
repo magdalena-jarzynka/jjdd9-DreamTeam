@@ -23,15 +23,15 @@ import java.util.List;
                 query = "SELECT COUNT(b) FROM Book b"
         ),
         @NamedQuery(
-                name = "Book.countWithAudioAndGenre",
+                name = "Book.countByAudioAndGenre",
                 query = "SELECT COUNT(b) FROM Book b " +
                         "INNER JOIN b.genres g " +
                         "WHERE (b.audio =:audio OR :audio is null) " +
                         "AND (g.name =:genre OR :genre is null)"
         ),
         @NamedQuery(
-                name = "Book.findWithAudioAndGenre",
-                query = "SELECT b FROM Book b " +
+                name = "Book.findByAudioAndGenre",
+                query = "SELECT DISTINCT b FROM Book b " +
                         "INNER JOIN b.genres g " +
                         "WHERE (b.audio =:audio OR :audio is null) " +
                         "AND (g.name =:genre OR :genre is null)"

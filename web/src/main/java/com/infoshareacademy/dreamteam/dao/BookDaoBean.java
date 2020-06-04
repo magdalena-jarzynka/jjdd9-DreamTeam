@@ -12,8 +12,6 @@ import java.util.Optional;
 @Stateless
 public class BookDaoBean implements BookDao {
 
-    private static final int BOOKS_PER_PAGE = 20;
-
     @PersistenceContext
     EntityManager entityManager;
 
@@ -31,30 +29,30 @@ public class BookDaoBean implements BookDao {
     }
 
     @Override
-    public long countBooks(String audio, String genre) {
-        Query query = entityManager.createNamedQuery("Book.countWithAudioAndGenre");
-        query.setParameter("audio", audio == null ? null : Boolean.valueOf(audio));
+    public long countBooksByAudioAndGenre(Boolean audio, String genre) {
+        Query query = entityManager.createNamedQuery("Book.countByAudioAndGenre");
+        query.setParameter("audio", audio);
         query.setParameter("genre", genre);
         return (long) query.getSingleResult();
     }
 
     @Override
-    public List<Book> findBooks(int offset) {
+    public List<Book> findBooks(int offset, int limit) {
 
         Query query = entityManager.createNamedQuery("Book.findAll");
         query.setFirstResult(offset);
-        query.setMaxResults(BOOKS_PER_PAGE);
+        query.setMaxResults(limit);
         return query.getResultList();
     }
 
     @Override
-    public List<Book> findBooks(int offset, String audio, String genre) {
+    public List<Book> findBooksByAudioAndGenre(int offset, int limit, Boolean audio, String genre) {
 
-        Query query = entityManager.createNamedQuery("Book.findWithAudioAndGenre");
+        Query query = entityManager.createNamedQuery("Book.findByAudioAndGenre");
         query.setFirstResult(offset);
-        query.setMaxResults(BOOKS_PER_PAGE);
-        query.setParameter("audio", audio == null || "blank".equals(audio) ? null : Boolean.valueOf(audio));
-        query.setParameter("genre", genre == null || "blank".equals(genre) ? null : genre);
+        query.setMaxResults(limit);
+        query.setParameter("audio", audio);
+        query.setParameter("genre", genre);
         return query.getResultList();
     }
 

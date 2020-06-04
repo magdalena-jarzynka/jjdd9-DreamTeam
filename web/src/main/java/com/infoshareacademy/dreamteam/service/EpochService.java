@@ -1,6 +1,5 @@
 package com.infoshareacademy.dreamteam.service;
 
-import com.infoshareacademy.dreamteam.domain.entity.Author;
 import com.infoshareacademy.dreamteam.domain.entity.Epoch;
 import com.infoshareacademy.dreamteam.repository.EpochRepository;
 
@@ -21,7 +20,6 @@ public class EpochService {
     }
 
     public Epoch findByName(String name) {
-        Epoch epoch = epochRepository.findByName(name).orElse(null);
-        return epoch;
+        return epochRepository.findByName(name).orElse(null);
     }
 }
