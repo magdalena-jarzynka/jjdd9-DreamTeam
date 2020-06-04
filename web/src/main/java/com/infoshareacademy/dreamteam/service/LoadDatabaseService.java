@@ -26,7 +26,7 @@ import java.util.List;
 @Startup
 public class LoadDatabaseService {
     private static final Logger logger = LoggerFactory.getLogger(LoadDatabaseService.class.getName());
-    private static final String url = "https://wolnelektury.pl/api/books/?format=json";
+    private static final String url = "http://isa-proxy.blueazurit.com/books/books/?format=json";
 
     @Inject
     private FileUploadProcessor fileUploadProcessor;
@@ -123,9 +123,17 @@ public class LoadDatabaseService {
         List<BookUrl> urls = getURLList(url);
         List<BookPlain> bookPlainList = new ArrayList<>();
         URLParser urlParser = new URLParser();
+        int i = 0;
+
         for (BookUrl bookUrl : urls) {
+            i++;
+            if(i > 100) {
+                break;
+            }
+            bookUrl.setHref("http://isa-proxy.blueazurit.com/books/" + bookUrl.getHref().replace("https://wolnelektury.pl/api/", ""));
             BookPlain bookPlain = (urlParser.readBook(new URL(bookUrl.getHref() + "?format=json")));
             bookPlainList.add(bookPlain);
+            logger.info("Pobrano {} książkę", i);
         }
         loadDatabase(bookPlainList);
     }
