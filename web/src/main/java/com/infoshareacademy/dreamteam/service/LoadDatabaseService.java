@@ -151,8 +151,6 @@ public class LoadDatabaseService {
 
     public List<BookPlain> loadFromJson(Part part) throws IOException {
         FileParser fileParser = new FileParser();
-        List<BookPlain> bookPlainList = new ArrayList<>();
-        bookPlainList.add(fileParser.readBookList(fileUploadProcessor.uploadFile(part)));
-        return bookPlainList;
+        return fileParser.readBookList(fileUploadProcessor.uploadFile(part));
     }
 }
