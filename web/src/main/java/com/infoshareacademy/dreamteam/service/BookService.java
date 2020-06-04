@@ -56,10 +56,10 @@ public class BookService {
     public BookView findBookById(Long id) {
         Book book = bookDao.findBookById(id)
                 .orElse(new Book("Nie znaleziono książki o podanym identyfikatorze."));
-        return initializeBookView(book);
+        return mapBookEntityWithRelationsToView(book);
     }
 
-    private BookView initializeBookView(Book book) {
+    private BookView mapBookEntityWithRelationsToView(Book book) {
         BookView bookView = bookMapper.mapEntityToView(book);
         book.getAuthors().forEach(author -> bookView.getAuthorViews()
                 .add(authorMapper.mapEntityToView(author)));
@@ -96,19 +96,17 @@ public class BookService {
     }
 
     private Boolean convertAudio(String audio) {
-        Boolean audioBoolean;
         if (audio == null || "blank".equals(audio)) {
-            audioBoolean = null;
+            return null;
         } else {
-            audioBoolean = Boolean.valueOf(audio);
+            return Boolean.valueOf(audio);
         }
-        return audioBoolean;
     }
 
     public List<BookView> findBooks(int offset) {
         List<BookView> bookViews = new ArrayList<>();
         for (Book book : bookDao.findBooks(offset, BOOKS_PER_PAGE)) {
-            bookViews.add(initializeBookView(book));
+            bookViews.add(mapBookEntityWithRelationsToView(book));
         }
         return bookViews;
     }
@@ -119,7 +117,7 @@ public class BookService {
         genre = convertGenre(genre);
 
         for (Book book : bookDao.findBooksByAudioAndGenre(offset, BOOKS_PER_PAGE, audioBoolean, genre)) {
-            bookViews.add(initializeBookView(book));
+            bookViews.add(mapBookEntityWithRelationsToView(book));
         }
         return bookViews;
     }
