@@ -2,7 +2,7 @@ package com.infoshareacademy.dreamteam.servlets;
 
 import com.infoshareacademy.dreamteam.freemarker.TemplatePrinter;
 import com.infoshareacademy.dreamteam.initializer.ModelInitializer;
-import com.infoshareacademy.dreamteam.service.LoadJsonService;
+import com.infoshareacademy.dreamteam.service.LoadDatabaseService;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -26,7 +26,7 @@ public class ManageServlet extends HttpServlet {
     private ModelInitializer modelInitializer;
 
     @Inject
-    LoadJsonService loadJsonService;
+    LoadDatabaseService loadDatabaseService;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -57,6 +57,6 @@ public class ManageServlet extends HttpServlet {
         }
 
         Part part = req.getPart("json");
-        loadJsonService.loadDatabase(loadJsonService.loadFromJson(part));
+        loadDatabaseService.loadDatabase(loadDatabaseService.loadFromJson(part));
     }
 }

@@ -8,19 +8,18 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
 public class FileParser {
     private static final Logger logger = LoggerFactory.getLogger(FileParser.class.getName());
 
-    public List<BookPlain> readBookList(File file) {
+    public BookPlain readBookList(File file) {
         ObjectMapper mapper = new ObjectMapper();
         try {
-            return mapper.readValue(file, new TypeReference<List<BookPlain>>() {
+            return mapper.readValue(file, new TypeReference<BookPlain>() {
             });
         } catch (IOException e) {
             logger.error(e.getMessage(), e);
-            return List.of();
+            return null;
         }
     }
 

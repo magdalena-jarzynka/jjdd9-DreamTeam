@@ -8,23 +8,20 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 
 public class URLParser {
     private static final Logger logger = LoggerFactory.getLogger(URLParser.class.getName());
 
-    public List<BookPlain> readBookList(URL url) throws IOException{
+    public BookPlain readBook(URL url) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
-        List<BookPlain> listOfBooks= new ArrayList<>();
+        BookPlain book;
         try {
-            listOfBooks.add(mapper.readValue(url, new TypeReference<BookPlain>() {}));
-            return listOfBooks;
+            book = mapper.readValue(url, new TypeReference<BookPlain>() {
+            });
+            return book;
         } catch (IOException e) {
             logger.error(e.getMessage(), e);
-            return List.of();
+            return null;
         }
     }
-
-
 }

@@ -1,23 +1,33 @@
 package com.infoshareacademy.dreamteam.service;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.infoshareacademy.dreamteam.cdi.FileUploadProcessor;
 import com.infoshareacademy.dreamteam.domain.entity.*;
 import com.infoshareacademy.dreamteam.domain.pojo.*;
 import com.infoshareacademy.dreamteam.parser.FileParser;
 import com.infoshareacademy.dreamteam.parser.URLParser;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.annotation.PostConstruct;
-import javax.ejb.Stateless;
+import javax.ejb.Singleton;
+import javax.ejb.Startup;
 import javax.inject.Inject;
 import javax.servlet.http.Part;
 import javax.transaction.Transactional;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 
-@Stateless
-public class LoadJsonService {
+@Singleton
+@Startup
+public class LoadDatabaseService {
+    private static final Logger logger = LoggerFactory.getLogger(LoadDatabaseService.class.getName());
+    private static final String url = "https://wolnelektury.pl/api/books/?format=json";
+
     @Inject
     private FileUploadProcessor fileUploadProcessor;
     @Inject
@@ -35,7 +45,6 @@ public class LoadJsonService {
 
     @Transactional
     public void loadDatabase(List<BookPlain> bookList) {
-
         for (BookPlain bookPlain : bookList) {
             Book book = bookService.findByTitle(bookPlain.getTitle());
 
@@ -109,13 +118,41 @@ public class LoadJsonService {
         }
     }
 
-    public List<BookPlain> loadFromJson(Part part) throws IOException {
-        FileParser fileParser = new FileParser();
-        return fileParser.readBookList(fileUploadProcessor.uploadFile(part));
+    @PostConstruct
+    public void loadBooksFromAPI() throws IOException {
+        List<BookUrl> urls = getURLList(url);
+        List<BookPlain> bookPlainList = new ArrayList<>();
+        URLParser urlParser = new URLParser();
+        int i = 0;
+        for (BookUrl bookUrl : urls) {
+            if (i > 1000) {
+                break;
+            }
+            i++;
+            BookPlain bookPlain = (urlParser.readBook(new URL(bookUrl.getHref() + "?format=json")));
+            bookPlainList.add(bookPlain);
+            logger.info("Pobrano książkę nr {}", i);
+        }
+        loadDatabase(bookPlainList);
     }
 
-    public List<BookPlain> loadFromURL(URL url) throws IOException {
-        URLParser urlParser = new URLParser();
-        return urlParser.readBookList(url);
+    public List<BookUrl> getURLList(String url) {
+        ObjectMapper mapper = new ObjectMapper();
+        List<BookUrl> urls;
+        try {
+            urls = mapper.readValue(new URL(url), new TypeReference<List<BookUrl>>() {
+            });
+        } catch (IOException e) {
+            logger.error(e.getMessage(), e);
+            return List.of();
+        }
+        return urls;
+    }
+
+    public List<BookPlain> loadFromJson(Part part) throws IOException {
+        FileParser fileParser = new FileParser();
+        List<BookPlain> bookPlainList = new ArrayList<>();
+        bookPlainList.add(fileParser.readBookList(fileUploadProcessor.uploadFile(part)));
+        return bookPlainList;
     }
 }
