@@ -123,15 +123,9 @@ public class LoadDatabaseService {
         List<BookUrl> urls = getURLList(url);
         List<BookPlain> bookPlainList = new ArrayList<>();
         URLParser urlParser = new URLParser();
-        int i = 0;
         for (BookUrl bookUrl : urls) {
-            if (i > 1000) {
-                break;
-            }
-            i++;
             BookPlain bookPlain = (urlParser.readBook(new URL(bookUrl.getHref() + "?format=json")));
             bookPlainList.add(bookPlain);
-            logger.info("Pobrano książkę nr {}", i);
         }
         loadDatabase(bookPlainList);
     }
