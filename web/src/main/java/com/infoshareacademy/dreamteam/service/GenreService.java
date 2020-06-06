@@ -28,8 +28,7 @@ public class GenreService {
     }
 
     public Genre findByName(String name) {
-        Genre genre = genreRepository.findByName(name).orElse(null);
-        return genre;
+        return genreRepository.findByName(name).orElse(null);
     }
 
     public List<GenrePlain> parseGenresFromApi(String url) throws IOException {

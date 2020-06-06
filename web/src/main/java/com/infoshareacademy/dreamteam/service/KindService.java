@@ -28,8 +28,7 @@ public class KindService {
     }
 
     public Kind findByName(String name) {
-        Kind kind = kindRepository.findByName(name).orElse(null);
-        return kind;
+        return kindRepository.findByName(name).orElse(null);
     }
 
     public List<KindPlain> parseKindsFromApi(String url) throws IOException {

@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.ejb.EJB;
+import javax.ejb.Startup;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.client.Client;
@@ -48,9 +49,6 @@ public class BookService {
 
     @Inject
     private KindMapper kindMapper;
-//
-//    @Inject
-//    private TranslatorMapper translatorMapper;
 
     public void save(Book book) {
         bookRepository.save(book);
@@ -77,8 +75,6 @@ public class BookService {
                 .add(genreMapper.mapEntityToView(genre)));
         book.getKinds().forEach(kind -> bookView.getKindViews()
                 .add(kindMapper.mapEntityToView(kind)));
-//        book.getTranslators().forEach(translator -> bookView.getTranslatorViews()
-//                .add(translatorMapper.mapEntityToView(translator)));
 
         return bookView;
     }

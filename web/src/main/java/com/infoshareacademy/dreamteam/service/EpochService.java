@@ -28,8 +28,7 @@ public class EpochService {
     }
 
     public Epoch findByName(String name) {
-        Epoch epoch = epochRepository.findByName(name).orElse(null);
-        return epoch;
+        return epochRepository.findByName(name).orElse(null);
     }
 
     public List<EpochPlain> parseEpochsFromApi(String url) throws IOException {

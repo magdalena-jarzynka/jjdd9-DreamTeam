@@ -38,6 +38,8 @@ public class Book {
 
     private boolean audio;
 
+    private String translators;
+
     @ManyToMany(mappedBy = "books", cascade = CascadeType.ALL)
     List<Genre> genres = new ArrayList<>();
 
@@ -49,9 +51,6 @@ public class Book {
 
     @ManyToMany(mappedBy = "books", cascade = CascadeType.ALL)
     List<Author> authors = new ArrayList<>();
-
-    @ManyToMany(mappedBy = "books", cascade = CascadeType.ALL)
-    List<Author> translators = new ArrayList<>();
 
     @ManyToMany(mappedBy = "favourites")
     List<User> favourites = new ArrayList<>();
@@ -146,14 +145,6 @@ public class Book {
         this.authors = authors;
     }
 
-    public List<Author> getTranslators() {
-        return translators;
-    }
-
-    public void setTranslators(List<Author> translators) {
-        this.translators = translators;
-    }
-
     public List<User> getFavourites() {
         return favourites;
     }
@@ -168,6 +159,14 @@ public class Book {
 
     public void setReservations(List<Reservation> reservations) {
         this.reservations = reservations;
+    }
+
+    public String getTranslators() {
+        return translators;
+    }
+
+    public void setTranslators(String translators) {
+        this.translators = translators;
     }
 
 }

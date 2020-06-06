@@ -12,7 +12,7 @@ public class BookDetailsPlain {
 
     private String title;
     private List<AuthorPlain> authors;
-    private List<AuthorPlain> translators;
+    private List<TranslatorPlain> translators;
     private List<EpochPlain> epochs;
     private List<GenrePlain> genres;
     private List<KindPlain> kinds;
@@ -57,11 +57,11 @@ public class BookDetailsPlain {
         this.authors = authors;
     }
 
-    public List<AuthorPlain> getTranslators() {
+    public List<TranslatorPlain> getTranslators() {
         return translators;
     }
 
-    public void setTranslators(List<AuthorPlain> translators) {
+    public void setTranslators(List<TranslatorPlain> translators) {
         this.translators = translators;
     }
 

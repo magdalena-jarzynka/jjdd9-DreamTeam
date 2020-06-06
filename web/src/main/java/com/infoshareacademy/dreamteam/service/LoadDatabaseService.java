@@ -1,11 +1,14 @@
 package com.infoshareacademy.dreamteam.service;
 
-import com.infoshareacademy.dreamteam.cdi.FileUploadProcessor;
-import com.infoshareacademy.dreamteam.domain.entity.*;
+import com.infoshareacademy.dreamteam.concurrent.Processor;
+import com.infoshareacademy.dreamteam.domain.entity.Author;
+import com.infoshareacademy.dreamteam.domain.entity.Epoch;
+import com.infoshareacademy.dreamteam.domain.entity.Genre;
+import com.infoshareacademy.dreamteam.domain.entity.Kind;
 import com.infoshareacademy.dreamteam.domain.pojo.*;
 import com.infoshareacademy.dreamteam.mapper.BookMapper;
 import com.infoshareacademy.dreamteam.parser.FileParser;
-import org.apache.http.client.HttpResponseException;
+import com.infoshareacademy.dreamteam.parser.FileUploadProcessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,8 +35,6 @@ public class LoadDatabaseService {
     private static final String GENRES_URL = "/genres/";
     private static final String EPOCHS_URL = "/epochs/";
     private static final String KINDS_URL = "/kinds/";
-    private static final String FORMAT_URL = "?format=json";
-
 
     @Inject
     private FileUploadProcessor fileUploadProcessor;
@@ -97,46 +98,9 @@ public class LoadDatabaseService {
             int itemsCount = i < threadsWithMaxItems ? maxItemsPerThread : minItemsPerThread;
             int endIndex = startIndex + itemsCount;
 
-            Processor r = new Processor(books.subList(startIndex, endIndex));
+            Processor r = new Processor(books.subList(startIndex, endIndex), bookMapper, bookService);
             executorService.execute(r);
             startIndex = endIndex;
-        }
-    }
-
-    // TODO wydzielic processor
-    public class Processor implements Runnable {
-
-        List<BookPlain> bookPlains;
-
-        public Processor(List<BookPlain> subBooksPlain) {
-            bookPlains = subBooksPlain;
-        }
-
-        public void run() {
-            int i = 0;
-            for (BookPlain bookPlain : bookPlains) {
-                BookDetailsPlain bookDetailsPlain;
-                i++;
-                if (i > 25) {
-                    break;
-                }
-                try {
-                    bookDetailsPlain = bookService.parseBookDetailsFromApi(bookPlain.getHref());
-                } catch (HttpResponseException e) {
-                    continue;
-                }
-                Book book = new Book();
-                book = bookMapper.mapPlaintoEntity(bookDetailsPlain);
-
-
-
-//    TODO        book.setFragment(bookDetailsPlain.getBookFragment().getHtml());
-//        TODO        book.setAudio(bookPlain.getAudio());
-
-                // TODO relacje
-                // TODO wywalić translatora, uporządkować formatowanie oraz importy
-                bookService.save(book);
-            }
         }
     }
 

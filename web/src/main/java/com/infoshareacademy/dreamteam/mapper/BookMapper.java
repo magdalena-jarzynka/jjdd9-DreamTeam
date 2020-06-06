@@ -12,6 +12,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequestScoped
 public class BookMapper {
@@ -41,6 +42,7 @@ public class BookMapper {
         bookView.setAudio(book.getAudio());
         bookView.setFragment(book.getFragment());
         bookView.setIsbn(book.getIsbn());
+        bookView.setTranslators(book.getTranslators());
         if (book.getCover() == null || book.getCover().isEmpty()) {
             bookView.setCover("/images/missing-cover.png");
         } else {
@@ -49,7 +51,7 @@ public class BookMapper {
         return bookView;
     }
 
-    public Book mapPlaintoEntity(BookDetailsPlain bookDetailsPlain) {
+    public Book mapPlainToEntity(BookDetailsPlain bookDetailsPlain) {
         Book book = new Book();
         book.setId(bookDetailsPlain.getId());
         book.setTitle(bookDetailsPlain.getTitle());
@@ -57,6 +59,10 @@ public class BookMapper {
         FragmentData fragmentData = new FragmentData();
         book.setFragment(fragmentData.getFragment(bookDetailsPlain));
         book.setIsbn(bookDetailsPlain.getIsbn());
+        book.setTranslators(bookDetailsPlain.getTranslators()
+                .stream()
+                .map(TranslatorPlain::getName)
+                .collect(Collectors.joining(", ")));
         if (bookDetailsPlain.getCover() == null || bookDetailsPlain.getCover().isEmpty()) {
             book.setCover("/images/missing-cover.png");
         } else {

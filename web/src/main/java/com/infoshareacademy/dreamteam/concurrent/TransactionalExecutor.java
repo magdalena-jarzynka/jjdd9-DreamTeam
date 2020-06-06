@@ -1,4 +1,4 @@
-package com.infoshareacademy.dreamteam.service;
+package com.infoshareacademy.dreamteam.concurrent;
 
 import javax.ejb.Asynchronous;
 import javax.ejb.Stateless;
