@@ -11,6 +11,7 @@ public class BookPlain {
     @JsonProperty("has_audio")
     private Boolean audio;
 
+
     public String getHref() {
         return href;
     }

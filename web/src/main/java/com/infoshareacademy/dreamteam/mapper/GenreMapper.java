@@ -1,6 +1,9 @@
 package com.infoshareacademy.dreamteam.mapper;
 
+import com.infoshareacademy.dreamteam.domain.entity.Epoch;
 import com.infoshareacademy.dreamteam.domain.entity.Genre;
+import com.infoshareacademy.dreamteam.domain.pojo.EpochPlain;
+import com.infoshareacademy.dreamteam.domain.pojo.GenrePlain;
 import com.infoshareacademy.dreamteam.domain.view.GenreView;
 
 import javax.enterprise.context.RequestScoped;
@@ -13,6 +16,13 @@ public class GenreMapper {
         genreView.setId(genre.getId());
         genreView.setName(genre.getName());
         return genreView;
+    }
+
+    public Genre mapPlainToEntity(GenrePlain genrePlain) {
+        Genre genre = new Genre();
+        genre.setId(genrePlain.getId());
+        genre.setName(genrePlain.getName());
+        return genre;
     }
 
 }

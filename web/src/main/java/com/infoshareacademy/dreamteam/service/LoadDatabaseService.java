@@ -3,6 +3,7 @@ package com.infoshareacademy.dreamteam.service;
 import com.infoshareacademy.dreamteam.cdi.FileUploadProcessor;
 import com.infoshareacademy.dreamteam.domain.entity.*;
 import com.infoshareacademy.dreamteam.domain.pojo.*;
+import com.infoshareacademy.dreamteam.mapper.BookMapper;
 import com.infoshareacademy.dreamteam.parser.FileParser;
 import org.apache.http.client.HttpResponseException;
 import org.slf4j.Logger;
@@ -46,6 +47,8 @@ public class LoadDatabaseService {
     private KindService kindService;
     @Inject
     private EpochService epochService;
+    @Inject
+    private BookMapper bookMapper;
 
     @Inject
     private Executor executorService;
@@ -100,7 +103,7 @@ public class LoadDatabaseService {
         }
     }
 
-// TODO wydzielic processor
+    // TODO wydzielic processor
     public class Processor implements Runnable {
 
         List<BookPlain> bookPlains;
@@ -110,19 +113,26 @@ public class LoadDatabaseService {
         }
 
         public void run() {
+            int i = 0;
             for (BookPlain bookPlain : bookPlains) {
                 BookDetailsPlain bookDetailsPlain;
+                i++;
+                if (i > 25) {
+                    break;
+                }
                 try {
                     bookDetailsPlain = bookService.parseBookDetailsFromApi(bookPlain.getHref());
                 } catch (HttpResponseException e) {
                     continue;
                 }
                 Book book = new Book();
-                book.setTitle(bookDetailsPlain.getTitle());
-                book.setCover(bookDetailsPlain.getCover());
-                book.setIsbn(bookDetailsPlain.getIsbn());
+                book = bookMapper.mapPlaintoEntity(bookDetailsPlain);
+
+
+
 //    TODO        book.setFragment(bookDetailsPlain.getBookFragment().getHtml());
 //        TODO        book.setAudio(bookPlain.getAudio());
+
                 // TODO relacje
                 // TODO wywalić translatora, uporządkować formatowanie oraz importy
                 bookService.save(book);

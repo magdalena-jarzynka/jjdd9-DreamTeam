@@ -1,6 +1,7 @@
 package com.infoshareacademy.dreamteam.mapper;
 
 import com.infoshareacademy.dreamteam.domain.entity.Epoch;
+import com.infoshareacademy.dreamteam.domain.pojo.EpochPlain;
 import com.infoshareacademy.dreamteam.domain.view.EpochView;
 
 import javax.enterprise.context.RequestScoped;
@@ -13,6 +14,13 @@ public class EpochMapper {
         epochView.setId(epoch.getId());
         epochView.setName(epoch.getName());
         return epochView;
+    }
+
+    public Epoch mapPlainToEntity(EpochPlain epochPlain) {
+        Epoch epoch = new Epoch();
+        epoch.setId(epochPlain.getId());
+        epoch.setName(epochPlain.getName());
+        return epoch;
     }
 
 }
