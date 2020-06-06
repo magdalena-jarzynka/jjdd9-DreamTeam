@@ -17,11 +17,12 @@ public class FragmentData {
         return Jsoup.parse(html).text();
     }
 
-    public String getFragment(BookPlain book) {
+    public String getFragment(BookDetailsPlain book) {
         return Optional.ofNullable(book)
-                .map(BookPlain::getBookFragment)
+                .map(BookDetailsPlain::getBookFragment)
                 .map(FragmentData::getHtml)
                 .filter(fragment -> !((String) fragment).isEmpty())
                 .orElse("");
     }
+
 }

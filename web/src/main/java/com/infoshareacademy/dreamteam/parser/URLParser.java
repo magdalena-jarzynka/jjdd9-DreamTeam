@@ -7,21 +7,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.net.URL;
+import java.util.List;
 
 public class URLParser {
     private static final Logger logger = LoggerFactory.getLogger(URLParser.class.getName());
 
-    public BookPlain readBook(URL url) throws IOException {
+    public List<BookPlain> readBooks(String json) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
-        BookPlain book;
-        try {
-            book = mapper.readValue(url, new TypeReference<BookPlain>() {
-            });
-            return book;
-        } catch (IOException e) {
-            logger.error(e.getMessage(), e);
-            return null;
-        }
+        return mapper.readValue(json, new TypeReference<List<BookPlain>>() {
+        });
     }
+
 }

@@ -51,7 +51,7 @@ public class Book {
     List<Author> authors = new ArrayList<>();
 
     @ManyToMany(mappedBy = "books", cascade = CascadeType.ALL)
-    List<Translator> translators = new ArrayList<>();
+    List<Author> translators = new ArrayList<>();
 
     @ManyToMany(mappedBy = "favourites")
     List<User> favourites = new ArrayList<>();
@@ -146,11 +146,11 @@ public class Book {
         this.authors = authors;
     }
 
-    public List<Translator> getTranslators() {
+    public List<Author> getTranslators() {
         return translators;
     }
 
-    public void setTranslators(List<Translator> translators) {
+    public void setTranslators(List<Author> translators) {
         this.translators = translators;
     }
 

@@ -2,19 +2,31 @@ package com.infoshareacademy.dreamteam.service;
 
 
 import com.infoshareacademy.dreamteam.dao.BookDao;
-import com.infoshareacademy.dreamteam.domain.entity.Author;
 import com.infoshareacademy.dreamteam.domain.entity.Book;
+import com.infoshareacademy.dreamteam.domain.pojo.BookDetailsPlain;
+import com.infoshareacademy.dreamteam.domain.pojo.BookPlain;
 import com.infoshareacademy.dreamteam.domain.view.BookView;
 import com.infoshareacademy.dreamteam.mapper.*;
 import com.infoshareacademy.dreamteam.repository.BookRepository;
+import org.apache.http.client.HttpResponseException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.core.GenericType;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.io.IOException;
 import java.util.List;
 
 @Stateless
 public class BookService {
+
+    private static final Logger logger = LoggerFactory.getLogger(BookService.class.getName());
 
     @EJB
     private BookRepository bookRepository;
@@ -36,9 +48,9 @@ public class BookService {
 
     @Inject
     private KindMapper kindMapper;
-
-    @Inject
-    private TranslatorMapper translatorMapper;
+//
+//    @Inject
+//    private TranslatorMapper translatorMapper;
 
     public void save(Book book) {
         bookRepository.save(book);
@@ -65,8 +77,8 @@ public class BookService {
                 .add(genreMapper.mapEntityToView(genre)));
         book.getKinds().forEach(kind -> bookView.getKindViews()
                 .add(kindMapper.mapEntityToView(kind)));
-        book.getTranslators().forEach(translator -> bookView.getTranslatorViews()
-                .add(translatorMapper.mapEntityToView(translator)));
+//        book.getTranslators().forEach(translator -> bookView.getTranslatorViews()
+//                .add(translatorMapper.mapEntityToView(translator)));
 
         return bookView;
     }
@@ -95,5 +107,31 @@ public class BookService {
     public List<Book> findBooks(int offset, int limit, String audio, String genre) {
 
         return bookDao.findBooks(offset, limit, audio, genre);
+    }
+
+    public List<BookPlain> parseBooksFromApi(String url) throws IOException {
+        Client client = ClientBuilder.newClient();
+        return client.target(url)
+                .request(MediaType.APPLICATION_JSON_TYPE)
+                .get(Response.class)
+                .readEntity(new GenericType<List<BookPlain>>() {
+                });
+    }
+
+    public BookDetailsPlain parseBookDetailsFromApi(String url) throws HttpResponseException {
+        Client client = ClientBuilder.newClient();
+        BookDetailsPlain bookDetailsPlain;
+
+        try {
+            bookDetailsPlain = client.target(url)
+                    .request(MediaType.APPLICATION_JSON_TYPE)
+                    .get(Response.class)
+                    .readEntity(new GenericType<BookDetailsPlain>() {
+                    });
+        } catch (Exception e) {
+            logger.error(e.getMessage() + " " + url, e);
+            throw new HttpResponseException(422, "Bad response from book rest api");
+        }
+        return bookDetailsPlain;
     }
 }
