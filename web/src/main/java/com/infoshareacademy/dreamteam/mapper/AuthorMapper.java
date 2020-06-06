@@ -16,11 +16,4 @@ public class AuthorMapper {
         return authorView;
     }
 
-    public Author mapPlainToEntity(AuthorPlain authorPlain){
-        Author author = new Author();
-        author.setId(authorPlain.getId());
-        author.setName(authorPlain.getName());
-        return author;
-    }
-
 }

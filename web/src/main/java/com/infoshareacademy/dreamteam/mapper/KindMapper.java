@@ -18,11 +18,4 @@ public class KindMapper {
         return kindView;
     }
 
-    public Kind mapPlainToEntity(KindPlain kindPlain) {
-        Kind kind = new Kind();
-        kind.setId(kindPlain.getId());
-        kind.setName(kindPlain.getName());
-        return kind;
-    }
-
 }

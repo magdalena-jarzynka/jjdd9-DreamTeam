@@ -1,7 +1,7 @@
 package com.infoshareacademy.dreamteam.service;
 
 
-import com.infoshareacademy.dreamteam.dao.BookDao;
+import com.infoshareacademy.dreamteam.repository.BookRepository;
 import com.infoshareacademy.dreamteam.domain.entity.Book;
 import com.infoshareacademy.dreamteam.domain.pojo.BookDetailsPlain;
 import com.infoshareacademy.dreamteam.domain.pojo.BookPlain;
@@ -13,7 +13,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.ejb.EJB;
-import javax.ejb.Startup;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.client.Client;
@@ -31,9 +30,6 @@ public class BookService {
 
     @EJB
     private BookRepository bookRepository;
-
-    @Inject
-    private BookDao bookDao;
 
     @Inject
     private BookMapper bookMapper;
@@ -64,7 +60,7 @@ public class BookService {
     }
 
     public BookView findBookById(Long id) {
-        Book book = bookDao.findBookById(id)
+        Book book = bookRepository.findBookById(id)
                 .orElse(new Book("Nie znaleziono książki o podanym identyfikatorze."));
         BookView bookView = bookMapper.mapEntityToView(book);
         book.getAuthors().forEach(author -> bookView.getAuthorViews()
@@ -80,29 +76,29 @@ public class BookService {
     }
 
     public List<String> getGenres() {
-        return bookDao.getGenres();
+        return bookRepository.getGenres();
     }
 
     public List<Book> findAll() {
-        return bookDao.findAll();
+        return bookRepository.findAll();
     }
 
     public int countBooks() {
-        return bookDao.countBooks();
+        return bookRepository.countBooks();
     }
 
     public int countBooks(String audio, String genre) {
-        return bookDao.countBooks(audio, genre);
+        return bookRepository.countBooks(audio, genre);
     }
 
     public List<Book> findBooks(int offset, int limit) {
 
-        return bookDao.findBooks(offset, limit);
+        return bookRepository.findBooks(offset, limit);
     }
 
     public List<Book> findBooks(int offset, int limit, String audio, String genre) {
 
-        return bookDao.findBooks(offset, limit, audio, genre);
+        return bookRepository.findBooks(offset, limit, audio, genre);
     }
 
     public List<BookPlain> parseBooksFromApi(String url) throws IOException {
@@ -119,12 +115,16 @@ public class BookService {
         BookDetailsPlain bookDetailsPlain;
 
         try {
-            bookDetailsPlain = client.target(url)
+            bookDetailsPlain = client
+//                    .register(JacksonConfig.class)
+                    .target(url)
                     .request(MediaType.APPLICATION_JSON_TYPE)
                     .get(Response.class)
                     .readEntity(new GenericType<BookDetailsPlain>() {
                     });
-        } catch (Exception e) {
+
+        } catch (
+                Exception e) {
             logger.error(e.getMessage() + " " + url, e);
             throw new HttpResponseException(422, "Bad response from book rest api");
         }

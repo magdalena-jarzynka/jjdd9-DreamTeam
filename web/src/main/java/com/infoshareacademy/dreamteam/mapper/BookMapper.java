@@ -18,14 +18,6 @@ import java.util.stream.Collectors;
 public class BookMapper {
 
     @Inject
-    private AuthorMapper authorMapper;
-    @Inject
-    private EpochMapper epochMapper;
-    @Inject
-    private GenreMapper genreMapper;
-    @Inject
-    private KindMapper kindMapper;
-    @Inject
     private AuthorService authorService;
     @Inject
     private EpochService epochService;
@@ -55,10 +47,10 @@ public class BookMapper {
         Book book = new Book();
         book.setId(bookDetailsPlain.getId());
         book.setTitle(bookDetailsPlain.getTitle());
-//        book.setAudio(bookDetailsPlain.getAudio());
+//        book.setAudio(!bookDetailsPlain.getAudioLength().isEmpty());
         FragmentData fragmentData = new FragmentData();
         book.setFragment(fragmentData.getFragment(bookDetailsPlain));
-        book.setIsbn(bookDetailsPlain.getIsbn());
+//        book.setIsbn(bookDetailsPlain.getIsbn());
         book.setTranslators(bookDetailsPlain.getTranslators()
                 .stream()
                 .map(TranslatorPlain::getName)

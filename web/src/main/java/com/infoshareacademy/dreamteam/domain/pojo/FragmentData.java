@@ -19,7 +19,7 @@ public class FragmentData {
 
     public String getFragment(BookDetailsPlain book) {
         return Optional.ofNullable(book)
-                .map(BookDetailsPlain::getBookFragment)
+                .map(BookDetailsPlain::getFragmentData)
                 .map(FragmentData::getHtml)
                 .filter(fragment -> !((String) fragment).isEmpty())
                 .orElse("");

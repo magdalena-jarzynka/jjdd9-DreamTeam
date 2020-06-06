@@ -16,11 +16,4 @@ public class EpochMapper {
         return epochView;
     }
 
-    public Epoch mapPlainToEntity(EpochPlain epochPlain) {
-        Epoch epoch = new Epoch();
-        epoch.setId(epochPlain.getId());
-        epoch.setName(epochPlain.getName());
-        return epoch;
-    }
-
 }

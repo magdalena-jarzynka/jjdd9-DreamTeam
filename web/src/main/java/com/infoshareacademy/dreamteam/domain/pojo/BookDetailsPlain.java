@@ -19,9 +19,10 @@ public class BookDetailsPlain {
     @XmlElement(name = "isbn_pdf")
     private String isbn;
     private String cover;
-    private Boolean audio;
-    @JsonProperty("fragment_data")
-    private FragmentData bookFragment;
+    @JsonProperty("audio_length")
+    private String audioLength;
+    @XmlElement(name = "fragment_data")
+    private FragmentData fragmentData;
     private List<MediaPlain> media;
     private Long id;
 
@@ -97,20 +98,12 @@ public class BookDetailsPlain {
         this.cover = cover;
     }
 
-    public Boolean getAudio() {
-        return audio;
+    public FragmentData getFragmentData() {
+        return fragmentData;
     }
 
-    public void setAudio(Boolean audio) {
-        this.audio = audio;
-    }
-
-    public FragmentData getBookFragment() {
-        return bookFragment;
-    }
-
-    public void setBookFragment(FragmentData bookFragment) {
-        this.bookFragment = bookFragment;
+    public void setFragmentData(FragmentData fragmentData) {
+        this.fragmentData = fragmentData;
     }
 
     public List<MediaPlain> getMedia() {
@@ -119,5 +112,13 @@ public class BookDetailsPlain {
 
     public void setMedia(List<MediaPlain> media) {
         this.media = media;
+    }
+
+    public String getAudioLength() {
+        return audioLength;
+    }
+
+    public void setAudioLength(String audioLength) {
+        this.audioLength = audioLength;
     }
 }

@@ -18,11 +18,4 @@ public class GenreMapper {
         return genreView;
     }
 
-    public Genre mapPlainToEntity(GenrePlain genrePlain) {
-        Genre genre = new Genre();
-        genre.setId(genrePlain.getId());
-        genre.setName(genrePlain.getName());
-        return genre;
-    }
-
 }
