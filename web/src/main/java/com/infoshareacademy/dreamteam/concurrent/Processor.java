@@ -38,11 +38,6 @@ public class Processor implements Runnable {
             }
             Book book = new Book();
             book = bookMapper.mapPlainToEntity(bookDetailsPlain);
-
-            // TODO book.setFragment(bookDetailsPlain.getBookFragment().getHtml());
-            // TODO book.setAudio(bookPlain.getAudio());
-            // TODO relacje
-            // TODO wywalić translatora, uporządkować formatowanie oraz importy
             bookService.save(book);
         }
     }

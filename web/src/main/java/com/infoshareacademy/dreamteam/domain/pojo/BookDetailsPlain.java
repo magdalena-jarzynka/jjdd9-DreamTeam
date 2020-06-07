@@ -4,7 +4,6 @@ package com.infoshareacademy.dreamteam.domain.pojo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.xml.bind.annotation.XmlElement;
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -16,12 +15,12 @@ public class BookDetailsPlain {
     private List<EpochPlain> epochs;
     private List<GenrePlain> genres;
     private List<KindPlain> kinds;
-    @XmlElement(name = "isbn_pdf")
+    @JsonProperty("isbn_pdf")
     private String isbn;
     private String cover;
     @JsonProperty("audio_length")
     private String audioLength;
-    @XmlElement(name = "fragment_data")
+    @JsonProperty("fragment_data")
     private FragmentData fragmentData;
     private List<MediaPlain> media;
     private Long id;

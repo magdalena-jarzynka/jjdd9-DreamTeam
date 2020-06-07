@@ -116,7 +116,7 @@ public class BookService {
 
         try {
             bookDetailsPlain = client
-//                    .register(JacksonConfig.class)
+                    .register(JacksonConfig.class)
                     .target(url)
                     .request(MediaType.APPLICATION_JSON_TYPE)
                     .get(Response.class)
