@@ -1,7 +1,5 @@
 package com.infoshareacademy.dreamteam.service;
 
-
-import com.infoshareacademy.dreamteam.repository.BookRepository;
 import com.infoshareacademy.dreamteam.domain.entity.Book;
 import com.infoshareacademy.dreamteam.domain.pojo.BookDetailsPlain;
 import com.infoshareacademy.dreamteam.domain.pojo.BookPlain;
@@ -21,12 +19,14 @@ import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Stateless
 public class BookService {
 
     private static final Logger logger = LoggerFactory.getLogger(BookService.class.getName());
+    private static final int BOOKS_PER_PAGE = 20;
 
     @EJB
     private BookRepository bookRepository;
@@ -55,13 +55,16 @@ public class BookService {
     }
 
     public Book findByTitle(String title) {
-        Book book = bookRepository.findByTitle(title).orElse(null);
-        return book;
+        return bookRepository.findByTitle(title).orElse(null);
     }
 
     public BookView findBookById(Long id) {
         Book book = bookRepository.findBookById(id)
                 .orElse(new Book("Nie znaleziono książki o podanym identyfikatorze."));
+        return mapBookEntityWithRelationsToView(book);
+    }
+
+    private BookView mapBookEntityWithRelationsToView(Book book) {
         BookView bookView = bookMapper.mapEntityToView(book);
         book.getAuthors().forEach(author -> bookView.getAuthorViews()
                 .add(authorMapper.mapEntityToView(author)));
@@ -79,26 +82,48 @@ public class BookService {
         return bookRepository.getGenres();
     }
 
-    public List<Book> findAll() {
-        return bookRepository.findAll();
-    }
-
-    public int countBooks() {
+    public long countBooks() {
         return bookRepository.countBooks();
     }
 
-    public int countBooks(String audio, String genre) {
-        return bookRepository.countBooks(audio, genre);
+    public long countBooksByAudioAndGenre(String audio, String genre) {
+        Boolean audioBoolean = convertAudio(audio);
+        genre = convertGenre(genre);
+        return bookRepository.countBooksByAudioAndGenre(audioBoolean, genre);
     }
 
-    public List<Book> findBooks(int offset, int limit) {
-
-        return bookRepository.findBooks(offset, limit);
+    private String convertGenre(String genre) {
+        if ("blank".equals(genre)) {
+            genre = null;
+        }
+        return genre;
     }
 
-    public List<Book> findBooks(int offset, int limit, String audio, String genre) {
+    private Boolean convertAudio(String audio) {
+        if (audio == null || "blank".equals(audio)) {
+            return null;
+        } else {
+            return Boolean.valueOf(audio);
+        }
+    }
 
-        return bookRepository.findBooks(offset, limit, audio, genre);
+    public List<BookView> findBooks(int offset) {
+        List<BookView> bookViews = new ArrayList<>();
+        for (Book book : bookRepository.findBooks(offset, BOOKS_PER_PAGE)) {
+            bookViews.add(mapBookEntityWithRelationsToView(book));
+        }
+        return bookViews;
+    }
+
+    public List<BookView> findBooksByAudioAndGenre(int offset, String audio, String genre) {
+        List<BookView> bookViews = new ArrayList<>();
+        Boolean audioBoolean = convertAudio(audio);
+        genre = convertGenre(genre);
+
+        for (Book book : bookRepository.findBooksByAudioAndGenre(offset, BOOKS_PER_PAGE, audioBoolean, genre)) {
+            bookViews.add(mapBookEntityWithRelationsToView(book));
+        }
+        return bookViews;
     }
 
     public List<BookPlain> parseBooksFromApi(String url) throws IOException {
@@ -130,4 +155,5 @@ public class BookService {
         }
         return bookDetailsPlain;
     }
+
 }

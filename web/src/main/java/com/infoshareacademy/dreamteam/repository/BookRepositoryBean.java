@@ -42,55 +42,37 @@ public class BookRepositoryBean implements BookRepository{
     }
 
     @Override
-    public List<Book> findAll() {
-        Query query = entityManager.createNamedQuery("Book.findAll");
-        List<Book> books = query.getResultList();
-        for (Book book : books) {
-            Hibernate.initialize(book.getAuthors());
-            Hibernate.initialize(book.getGenres());
-            Hibernate.initialize(book.getEpochs());
-            Hibernate.initialize(book.getKinds());
-            Hibernate.initialize(book.getTranslators());
-            Hibernate.initialize(book.getFavourites());
-            Hibernate.initialize(book.getReservations());
-        }
-        return books;
+    public Long countBooks() {
+        Query query = entityManager.createNamedQuery("Book.countAll");
+        return (long) query.getSingleResult();
     }
 
     @Override
-    public int countBooks() {
-        return findAll().size();
-    }
-
-    @Override
-    public int countBooks(String audio, String genre) {
-        return findBooks(0, Integer.MAX_VALUE, audio, genre).size();
+    public Long countBooksByAudioAndGenre(Boolean audio, String genre) {
+        Query query = entityManager.createNamedQuery("Book.countByAudioAndGenre");
+        query.setParameter("audio", audio);
+        query.setParameter("genre", genre);
+        return (long) query.getSingleResult();
     }
 
     @Override
     public List<Book> findBooks(int offset, int limit) {
 
-        List<Book> allBooks = findAll();
-        int toIndex = Math.min(offset + limit, allBooks.size());
-        return allBooks.subList(offset, toIndex);
+        Query query = entityManager.createNamedQuery("Book.findAll");
+        query.setFirstResult(offset);
+        query.setMaxResults(limit);
+        return query.getResultList();
     }
 
     @Override
-    public List<Book> findBooks(int offset, int limit, String audio, String genre) {
+    public List<Book> findBooksByAudioAndGenre(int offset, int limit, Boolean audio, String genre) {
 
-        List<Book> allBooks = findAll();
-        Stream<Book> bookStream = allBooks.stream();
-        if (audio != null && !audio.equals("blank")) {
-            bookStream = bookStream.filter(book -> book.getAudio() == Boolean.parseBoolean(audio));
-        }
-        if (genre != null && !genre.equals("blank")) {
-            bookStream = bookStream.filter(book -> book.getGenres().stream().map(Genre::getName).collect(Collectors.toList()).contains(genre));
-        }
-        List<Book> books = bookStream
-                .collect(Collectors.toList());
-
-        int toIndex = Math.min(offset + limit, books.size());
-        return books.subList(offset, toIndex);
+        Query query = entityManager.createNamedQuery("Book.findByAudioAndGenre");
+        query.setFirstResult(offset);
+        query.setMaxResults(limit);
+        query.setParameter("audio", audio);
+        query.setParameter("genre", genre);
+        return query.getResultList();
     }
 
     @Override
@@ -98,4 +80,5 @@ public class BookRepositoryBean implements BookRepository{
         Query query = entityManager.createNamedQuery("Genre.getGenres");
         return query.getResultList();
     }
+
 }

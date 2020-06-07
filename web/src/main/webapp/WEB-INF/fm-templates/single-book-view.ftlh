@@ -50,38 +50,29 @@
         </div>
         <div class="templatemo-content-container">
             <div class="templatemo-flex-row flex-content-row">
-                <#--                <div class="col-1 col-lg-6 col-md-12" >-->
-<#--                <div class="templatemo-content-widget white-bg col-2">-->
 
                 <div class="templatemo-content-widget white-bg templatemo-overflow-hidden">
                     <div class="templatemo-flex-row flex-content-row">
-<#--                        <div class="col-1 col-lg-6 col-md-12">-->
                         <div class="col-sm-6">
                             <p>
                                 <img src="${book.cover!}" class="img-responsive" width="360" height="500">
                             </p>
                         </div>
-<#--                        <div class="col-1 col-lg-6 col-md-12">-->
                         <div class="col-sm-6">
                             <h2><strong>${book.title!}</strong></h2>
                             <h5 style="font-style: italic"><#list book.authorViews>
                                     <#items as authorView>
-                                        ${authorView.name}
+                                        ${authorView.name}<#sep>,
                                     </#items>
                                 </#list></h5>
                             <hr>
-                            <#if book.translatorViews?has_content>
-                            <p style="font-style: italic">tłum. <#list book.translatorViews>
-                                    <#items as translatorView>
-                                        ${translatorView.name}
-                                    </#items>
-                                </#list>
-                                </#if>
-                            </p>
+                            <#if book.translators?has_content>
+                            <p style="font-style: italic">tłum. ${book.translators}</p>
+                            </#if>
                             <#if book.genreViews?has_content>
                                 <p>Gatunek: <#list book.genreViews>
                                         <#items as genreView>
-                                            ${genreView.name}
+                                            ${genreView.name}<#sep>,
                                         </#items>
                                     </#list>
                                 </p>
@@ -89,7 +80,7 @@
                             <#if book.kindViews?has_content>
                                 <p>Gatunek literacki: <#list book.kindViews>
                                         <#items as kindView>
-                                            ${kindView.name}
+                                            ${kindView.name}<#sep>,
                                         </#items>
                                     </#list>
                                 </p>
@@ -97,7 +88,7 @@
                             <#if book.epochViews?has_content>
                                 <p>Epoka: <#list book.epochViews>
                                         <#items as epochView>
-                                            ${epochView.name}
+                                            ${epochView.name}<#sep>,
                                         </#items>
                                     </#list>
                                 </p>
@@ -109,30 +100,16 @@
                                 <p>Fragment książki: ${book.fragment!}</p>
                             </#if>
                             <#if book.authorViews?has_content>
-                            <p>Dostępna wersja Audio:
+                                <p>Dostępna wersja Audio:
                                 <#if book.audio! == true>
-                                tak
+                                    tak
                                 <#else>
-                                nie
-                            </p></#if></#if>
+                                    nie
+                                    </p></#if></#if>
                         </div>
                     </div>
                 </div>
 
-
-<#--                <div class="templatemo-flex-row flex-content-row">-->
-<#--                    <div class="col-1 col-lg-6 col-md-12">-->
-
-<#--                    </div>-->
-<#--                    <div class="col-1 col-lg-6 col-md-12">-->
-<#--                    </div>-->
-<#--                </div>-->
-<#--                </div>-->
-<#--                <div class="templatemo-content-widget white-bg col-2">-->
-
-                    <#--                </div>-->
-                    <#--                <div class="col-1 col-lg-6 col-md-4" style="text-align:left">-->
-                    <#--                </div>-->
             </div>
         </div>
     </div>

@@ -19,8 +19,8 @@ public class KindService {
     @EJB
     private KindRepository kindRepository;
 
-    public void save(Kind Kind) {
-        kindRepository.save(Kind);
+    public void save(Kind kind) {
+        kindRepository.save(kind);
     }
 
     public Kind update(Kind kind) {

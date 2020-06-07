@@ -12,12 +12,30 @@ import java.util.List;
         ),
         @NamedQuery(
                 name = "Book.findBookByTitle",
-                query="SELECT b FROM Book b WHERE b.title = :title"
+                query = "SELECT b FROM Book b WHERE b.title = :title"
         ),
         @NamedQuery(
                 name = "Book.findAll",
                 query = "SELECT b FROM Book b"
-        )
+        ),
+        @NamedQuery(
+                name = "Book.countAll",
+                query = "SELECT COUNT(b) FROM Book b"
+        ),
+        @NamedQuery(
+                name = "Book.countByAudioAndGenre",
+                query = "SELECT COUNT(b) FROM Book b " +
+                        "INNER JOIN b.genres g " +
+                        "WHERE (b.audio =:audio OR :audio is null) " +
+                        "AND (g.name =:genre OR :genre is null)"
+        ),
+        @NamedQuery(
+                name = "Book.findByAudioAndGenre",
+                query = "SELECT DISTINCT b FROM Book b " +
+                        "INNER JOIN b.genres g " +
+                        "WHERE (b.audio =:audio OR :audio is null) " +
+                        "AND (g.name =:genre OR :genre is null)"
+        ),
 })
 
 @Entity
