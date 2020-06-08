@@ -7,6 +7,8 @@ import com.infoshareacademy.dreamteam.domain.view.BookView;
 import com.infoshareacademy.dreamteam.mapper.*;
 import com.infoshareacademy.dreamteam.repository.BookRepository;
 import org.apache.http.client.HttpResponseException;
+import org.glassfish.jersey.jackson.JacksonFeature;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -141,6 +143,7 @@ public class BookService {
 
         try {
             bookDetailsPlain = client
+                    .register(JacksonFeature.class)
                     .register(JacksonConfig.class)
                     .target(url)
                     .request(MediaType.APPLICATION_JSON_TYPE)

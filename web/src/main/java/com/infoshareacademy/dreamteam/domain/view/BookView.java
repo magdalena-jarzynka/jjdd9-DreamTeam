@@ -10,7 +10,7 @@ public class BookView {
     private String fragment;
     private String cover;
     private String isbn;
-    private boolean audio;
+    private Boolean audio;
     private String translators;
 
     private List<GenreView> genreViews = new ArrayList<>();
@@ -50,11 +50,11 @@ public class BookView {
         this.cover = cover;
     }
 
-    public boolean isAudio() {
+    public Boolean isAudio() {
         return audio;
     }
 
-    public void setAudio(boolean audio) {
+    public void setAudio(Boolean audio) {
         this.audio = audio;
     }
 

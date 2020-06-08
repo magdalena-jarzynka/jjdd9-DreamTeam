@@ -12,14 +12,14 @@ import java.util.List;
 
 public class Processor implements Runnable {
 
-    List<BookPlain> bookPlains;
-    BookMapper bookMapper;
-    BookService bookService;
+    private List<BookPlain> bookPlains;
+    private BookMapper bookMapper;
+    private BookService bookService;
 
-    public Processor(List<BookPlain> subBooksPlain, BookMapper bM, BookService bS) {
-        bookPlains = subBooksPlain;
-        bookMapper = bM;
-        bookService = bS;
+    public Processor(List<BookPlain> booksPlain, BookMapper bookMapper, BookService bookService) {
+        this.bookPlains = booksPlain;
+        this.bookMapper = bookMapper;
+        this.bookService = bookService;
     }
 
     public void run() {
@@ -27,17 +27,16 @@ public class Processor implements Runnable {
         for (BookPlain bookPlain : bookPlains) {
             BookDetailsPlain bookDetailsPlain;
             i++;
-            if (i > 254) {
+            if (i > 25) {
                 break;
             }
-
             try {
                 bookDetailsPlain = bookService.parseBookDetailsFromApi(bookPlain.getHref());
             } catch (HttpResponseException e) {
                 continue;
             }
-            Book book = new Book();
-            book = bookMapper.mapPlainToEntity(bookDetailsPlain);
+            Book book = bookMapper.mapPlainToEntity(bookDetailsPlain);
+            book.setAudio(bookPlain.getAudio());
             bookService.save(book);
         }
     }

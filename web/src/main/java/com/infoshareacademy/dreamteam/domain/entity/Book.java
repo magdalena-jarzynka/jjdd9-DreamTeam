@@ -54,7 +54,7 @@ public class Book {
 
     private String cover;
 
-    private boolean audio;
+    private Boolean audio;
 
     private String translators;
 
@@ -123,11 +123,11 @@ public class Book {
         this.cover = cover;
     }
 
-    public boolean getAudio() {
+    public Boolean getAudio() {
         return audio;
     }
 
-    public void setAudio(boolean audio) {
+    public void setAudio(Boolean audio) {
         this.audio = audio;
     }
 

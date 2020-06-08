@@ -18,8 +18,6 @@ public class BookDetailsPlain {
     @JsonProperty("isbn_pdf")
     private String isbn;
     private String cover;
-    @JsonProperty("audio_length")
-    private String audioLength;
     @JsonProperty("fragment_data")
     private FragmentData fragmentData;
     private List<MediaPlain> media;
@@ -111,13 +109,5 @@ public class BookDetailsPlain {
 
     public void setMedia(List<MediaPlain> media) {
         this.media = media;
-    }
-
-    public String getAudioLength() {
-        return audioLength;
-    }
-
-    public void setAudioLength(String audioLength) {
-        this.audioLength = audioLength;
     }
 }

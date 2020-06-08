@@ -47,10 +47,8 @@ public class BookMapper {
         Book book = new Book();
         book.setId(bookDetailsPlain.getId());
         book.setTitle(bookDetailsPlain.getTitle());
-//        book.setAudio(!bookDetailsPlain.getAudioLength().isEmpty());
-        FragmentData fragmentData = new FragmentData();
-        book.setFragment(fragmentData.getFragment(bookDetailsPlain));
-//        book.setIsbn(bookDetailsPlain.getIsbn());
+//        book.setFragment(bookDetailsPlain.getFragmentData().getHtml());
+        book.setIsbn(bookDetailsPlain.getIsbn());
         book.setTranslators(bookDetailsPlain.getTranslators()
                 .stream()
                 .map(TranslatorPlain::getName)
