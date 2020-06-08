@@ -2,7 +2,7 @@ package com.infoshareacademy.dreamteam.parser;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.infoshareacademy.dreamteam.domain.pojo.BookPlain;
+import com.infoshareacademy.dreamteam.domain.api.BookPlain;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

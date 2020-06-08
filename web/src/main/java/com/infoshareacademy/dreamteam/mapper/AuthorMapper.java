@@ -1,7 +1,6 @@
 package com.infoshareacademy.dreamteam.mapper;
 
 import com.infoshareacademy.dreamteam.domain.entity.Author;
-import com.infoshareacademy.dreamteam.domain.pojo.AuthorPlain;
 import com.infoshareacademy.dreamteam.domain.view.AuthorView;
 
 import javax.enterprise.context.RequestScoped;

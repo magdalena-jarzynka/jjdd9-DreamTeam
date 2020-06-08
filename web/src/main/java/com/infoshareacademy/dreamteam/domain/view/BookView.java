@@ -50,7 +50,7 @@ public class BookView {
         this.cover = cover;
     }
 
-    public Boolean isAudio() {
+    public Boolean getAudio() {
         return audio;
     }
 

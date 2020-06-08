@@ -1,7 +1,7 @@
 package com.infoshareacademy.dreamteam.service;
 
 import com.infoshareacademy.dreamteam.domain.entity.Author;
-import com.infoshareacademy.dreamteam.domain.pojo.AuthorPlain;
+import com.infoshareacademy.dreamteam.domain.api.AuthorPlain;
 import com.infoshareacademy.dreamteam.repository.AuthorRepository;
 
 import javax.ejb.EJB;

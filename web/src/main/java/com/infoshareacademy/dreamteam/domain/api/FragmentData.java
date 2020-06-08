@@ -1,4 +1,4 @@
-package com.infoshareacademy.dreamteam.domain.pojo;
+package com.infoshareacademy.dreamteam.domain.api;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.jsoup.Jsoup;

@@ -1,7 +1,7 @@
 package com.infoshareacademy.dreamteam.mapper;
 
 import com.infoshareacademy.dreamteam.domain.entity.*;
-import com.infoshareacademy.dreamteam.domain.pojo.*;
+import com.infoshareacademy.dreamteam.domain.api.*;
 import com.infoshareacademy.dreamteam.domain.view.BookView;
 import com.infoshareacademy.dreamteam.service.AuthorService;
 import com.infoshareacademy.dreamteam.service.EpochService;
@@ -41,6 +41,15 @@ public class BookMapper {
             bookView.setCover(book.getCover());
         }
         return bookView;
+    }
+
+    public Book mapPlainAudioToEntity(BookPlain bookPlain, Book book){
+        if(bookPlain.getAudio() != null) {
+            book.setAudio(bookPlain.getAudio());
+        } else {
+            book.setAudio(false);
+        }
+        return book;
     }
 
     public Book mapPlainToEntity(BookDetailsPlain bookDetailsPlain) {

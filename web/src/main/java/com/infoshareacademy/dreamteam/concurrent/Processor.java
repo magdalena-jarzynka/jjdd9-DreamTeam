@@ -1,9 +1,8 @@
 package com.infoshareacademy.dreamteam.concurrent;
 
-
 import com.infoshareacademy.dreamteam.domain.entity.Book;
-import com.infoshareacademy.dreamteam.domain.pojo.BookDetailsPlain;
-import com.infoshareacademy.dreamteam.domain.pojo.BookPlain;
+import com.infoshareacademy.dreamteam.domain.api.BookDetailsPlain;
+import com.infoshareacademy.dreamteam.domain.api.BookPlain;
 import com.infoshareacademy.dreamteam.mapper.BookMapper;
 import com.infoshareacademy.dreamteam.service.BookService;
 import org.apache.http.client.HttpResponseException;
@@ -26,17 +25,13 @@ public class Processor implements Runnable {
         int i = 0;
         for (BookPlain bookPlain : bookPlains) {
             BookDetailsPlain bookDetailsPlain;
-            i++;
-            if (i > 25) {
-                break;
-            }
             try {
                 bookDetailsPlain = bookService.parseBookDetailsFromApi(bookPlain.getHref());
             } catch (HttpResponseException e) {
                 continue;
             }
             Book book = bookMapper.mapPlainToEntity(bookDetailsPlain);
-            book.setAudio(bookPlain.getAudio());
+            book = bookMapper.mapPlainAudioToEntity(bookPlain, book);
             bookService.save(book);
         }
     }

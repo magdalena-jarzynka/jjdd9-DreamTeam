@@ -55,9 +55,7 @@
                         </#if>
                     </td>
                     <td>
-<#--                    <#if book.audio??>-->
-                    ${book.audio?string("dostępna","niedostępna")}
-<#--                    </#if>-->
+                    ${book.audio?then("dostępna","niedostępna")}
                     </td>
                     <td>
                         <a href="/single?id=${book.id}" class="templatemo-edit-btn" style="white-space: nowrap">SZCZEGÓŁY >>></a>

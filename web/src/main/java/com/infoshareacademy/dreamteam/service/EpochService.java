@@ -1,7 +1,7 @@
 package com.infoshareacademy.dreamteam.service;
 
 import com.infoshareacademy.dreamteam.domain.entity.Epoch;
-import com.infoshareacademy.dreamteam.domain.pojo.EpochPlain;
+import com.infoshareacademy.dreamteam.domain.api.EpochPlain;
 import com.infoshareacademy.dreamteam.repository.EpochRepository;
 
 import javax.ejb.EJB;

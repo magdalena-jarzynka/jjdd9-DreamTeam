@@ -1,7 +1,7 @@
 package com.infoshareacademy.dreamteam.service;
 
 import com.infoshareacademy.dreamteam.domain.entity.Genre;
-import com.infoshareacademy.dreamteam.domain.pojo.GenrePlain;
+import com.infoshareacademy.dreamteam.domain.api.GenrePlain;
 import com.infoshareacademy.dreamteam.repository.GenreRepository;
 
 import javax.ejb.EJB;

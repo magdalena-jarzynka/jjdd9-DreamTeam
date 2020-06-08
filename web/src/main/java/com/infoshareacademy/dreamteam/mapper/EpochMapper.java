@@ -1,7 +1,6 @@
 package com.infoshareacademy.dreamteam.mapper;
 
 import com.infoshareacademy.dreamteam.domain.entity.Epoch;
-import com.infoshareacademy.dreamteam.domain.pojo.EpochPlain;
 import com.infoshareacademy.dreamteam.domain.view.EpochView;
 
 import javax.enterprise.context.RequestScoped;

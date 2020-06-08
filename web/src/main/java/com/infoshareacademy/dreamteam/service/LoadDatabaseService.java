@@ -5,7 +5,7 @@ import com.infoshareacademy.dreamteam.domain.entity.Author;
 import com.infoshareacademy.dreamteam.domain.entity.Epoch;
 import com.infoshareacademy.dreamteam.domain.entity.Genre;
 import com.infoshareacademy.dreamteam.domain.entity.Kind;
-import com.infoshareacademy.dreamteam.domain.pojo.*;
+import com.infoshareacademy.dreamteam.domain.api.*;
 import com.infoshareacademy.dreamteam.mapper.BookMapper;
 import com.infoshareacademy.dreamteam.parser.FileParser;
 import com.infoshareacademy.dreamteam.parser.FileUploadProcessor;

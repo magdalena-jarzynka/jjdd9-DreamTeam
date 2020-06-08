@@ -1,7 +1,7 @@
 package com.infoshareacademy.dreamteam.service;
 
 import com.infoshareacademy.dreamteam.domain.entity.Kind;
-import com.infoshareacademy.dreamteam.domain.pojo.KindPlain;
+import com.infoshareacademy.dreamteam.domain.api.KindPlain;
 import com.infoshareacademy.dreamteam.repository.KindRepository;
 
 import javax.ejb.EJB;

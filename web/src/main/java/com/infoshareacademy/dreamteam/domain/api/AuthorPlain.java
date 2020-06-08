@@ -1,9 +1,9 @@
-package com.infoshareacademy.dreamteam.domain.pojo;
+package com.infoshareacademy.dreamteam.domain.api;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class EpochPlain {
+public class AuthorPlain {
     private String name;
     private Long id;
 

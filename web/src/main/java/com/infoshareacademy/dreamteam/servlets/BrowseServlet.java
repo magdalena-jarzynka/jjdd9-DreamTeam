@@ -42,7 +42,6 @@ public class BrowseServlet extends HttpServlet {
         String audio = req.getParameter("audio");
         String genre = req.getParameter("genre");
         Map<String, Object> tableData = new HashMap<>();
-
         long rows;
         if ((audio == null || audio.equals("blank")) && (genre == null || genre.equals("blank"))) {
             tableData.put("books", bookService.findBooks(startPage * pageSize));
