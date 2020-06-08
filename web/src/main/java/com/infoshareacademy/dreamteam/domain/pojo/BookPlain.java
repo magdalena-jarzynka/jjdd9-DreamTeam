@@ -2,13 +2,14 @@ package com.infoshareacademy.dreamteam.domain.pojo;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+
+import javax.json.bind.annotation.JsonbProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class BookPlain {
 
     private String href;
-    @JsonProperty("has_audio")
+    @JsonbProperty("has_audio")
     private Boolean audio;
 
 

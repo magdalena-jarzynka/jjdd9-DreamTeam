@@ -47,7 +47,9 @@ public class BookMapper {
         Book book = new Book();
         book.setId(bookDetailsPlain.getId());
         book.setTitle(bookDetailsPlain.getTitle());
-//        book.setFragment(bookDetailsPlain.getFragmentData().getHtml());
+        if(bookDetailsPlain.getFragmentData() != null) {
+            book.setFragment(bookDetailsPlain.getFragmentData().getHtml());
+        }
         book.setIsbn(bookDetailsPlain.getIsbn());
         book.setTranslators(bookDetailsPlain.getTranslators()
                 .stream()
