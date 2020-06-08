@@ -1,27 +1,42 @@
-package com.infoshareacademy.dreamteam.domain.pojo;
+package com.infoshareacademy.dreamteam.domain.api;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
+import javax.json.bind.annotation.JsonbProperty;
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class BookPlain {
+public class BookDetailsPlain {
+
     private String title;
     private List<AuthorPlain> authors;
     private List<TranslatorPlain> translators;
     private List<EpochPlain> epochs;
     private List<GenrePlain> genres;
     private List<KindPlain> kinds;
-    @JsonProperty("isbn_pdf")
+    @JsonbProperty("isbn_pdf")
     private String isbn;
     private String cover;
-    @JsonProperty("audio_length")
-    private String audioLength;
-    @JsonProperty("fragment_data")
-    private FragmentData bookFragment;
+    @JsonbProperty("fragment_data")
+    private FragmentData fragmentData;
     private List<MediaPlain> media;
+    private Long id;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
 
     public String getTitle() {
         return title;
@@ -71,30 +86,6 @@ public class BookPlain {
         this.kinds = kinds;
     }
 
-    public String getIsbn() {
-        return isbn;
-    }
-
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
-    }
-
-    public FragmentData getBookFragment() {
-        return bookFragment;
-    }
-
-    public void setBookFragment(FragmentData bookFragment) {
-        this.bookFragment = bookFragment;
-    }
-
-    public List<MediaPlain> getMedia() {
-        return media;
-    }
-
-    public void setMedia(List<MediaPlain> media) {
-        this.media = media;
-    }
-
     public String getCover() {
         return cover;
     }
@@ -103,11 +94,19 @@ public class BookPlain {
         this.cover = cover;
     }
 
-    public String getAudio() {
-        return audioLength;
+    public FragmentData getFragmentData() {
+        return fragmentData;
     }
 
-    public void setAudio(String audio) {
-        this.audioLength = audio;
+    public void setFragmentData(FragmentData fragmentData) {
+        this.fragmentData = fragmentData;
+    }
+
+    public List<MediaPlain> getMedia() {
+        return media;
+    }
+
+    public void setMedia(List<MediaPlain> media) {
+        this.media = media;
     }
 }

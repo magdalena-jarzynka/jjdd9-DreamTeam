@@ -19,6 +19,7 @@ public class ConfigProvider {
             configuration.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
             configuration.setLogTemplateExceptions(false);
             configuration.setWrapUncheckedExceptions(true);
+            configuration.setNumberFormat("0.######");
         }
         return configuration;
     }

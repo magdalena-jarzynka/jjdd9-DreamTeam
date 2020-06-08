@@ -10,11 +10,11 @@ public class BookView {
     private String fragment;
     private String cover;
     private String isbn;
-    private boolean audio;
+    private Boolean audio;
+    private String translators;
 
     private List<GenreView> genreViews = new ArrayList<>();
     private List<AuthorView> authorViews = new ArrayList<>();
-    private List<TranslatorView> translatorViews = new ArrayList<>();
     private List<KindView> kindViews = new ArrayList<>();
     private List<EpochView> epochViews = new ArrayList<>();
 
@@ -50,11 +50,11 @@ public class BookView {
         this.cover = cover;
     }
 
-    public boolean isAudio() {
+    public Boolean getAudio() {
         return audio;
     }
 
-    public void setAudio(boolean audio) {
+    public void setAudio(Boolean audio) {
         this.audio = audio;
     }
 
@@ -72,14 +72,6 @@ public class BookView {
 
     public void setAuthorViews(List<AuthorView> authorViews) {
         this.authorViews = authorViews;
-    }
-
-    public List<TranslatorView> getTranslatorViews() {
-        return translatorViews;
-    }
-
-    public void setTranslatorViews(List<TranslatorView> translatorViews) {
-        this.translatorViews = translatorViews;
     }
 
     public List<EpochView> getEpochViews() {
@@ -104,5 +96,13 @@ public class BookView {
 
     public void setKindViews(List<KindView> kindViews) {
         this.kindViews = kindViews;
+    }
+
+    public String getTranslators() {
+        return translators;
+    }
+
+    public void setTranslators(String translators) {
+        this.translators = translators;
     }
 }
