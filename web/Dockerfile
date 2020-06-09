@@ -1,4 +1,4 @@
-FROM jboss/wildfly
+FROM jboss/wildfly:19.1.0.Final
 
 RUN /opt/jboss/wildfly/bin/add-user.sh root root --silent
 
