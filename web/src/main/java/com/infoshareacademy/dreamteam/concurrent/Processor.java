@@ -22,7 +22,6 @@ public class Processor implements Runnable {
     }
 
     public void run() {
-        int i = 0;
         for (BookPlain bookPlain : bookPlains) {
             BookDetailsPlain bookDetailsPlain;
             try {

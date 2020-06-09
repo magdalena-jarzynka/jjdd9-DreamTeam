@@ -56,6 +56,7 @@ public class Book {
 
     private Boolean audio;
 
+    @Column(length = 2000)
     private String translators;
 
     @ManyToMany(mappedBy = "books", cascade = CascadeType.ALL)
