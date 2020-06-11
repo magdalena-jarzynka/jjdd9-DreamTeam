@@ -78,8 +78,6 @@ public class BookService {
         return bookView;
     }
 
-
-
     public List<String> getGenres() {
         return bookRepository.getGenres();
     }

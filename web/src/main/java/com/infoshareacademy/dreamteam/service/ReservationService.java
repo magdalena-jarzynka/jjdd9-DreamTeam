@@ -1,17 +1,16 @@
 package com.infoshareacademy.dreamteam.service;
 
-
-import com.infoshareacademy.dreamteam.dao.BookDao;
-import com.infoshareacademy.dreamteam.dao.UserDao;
-import com.infoshareacademy.dreamteam.domain.entity.Book;
+import com.infoshareacademy.dreamteam.context.UserContextHolder;
 import com.infoshareacademy.dreamteam.domain.entity.Reservation;
 import com.infoshareacademy.dreamteam.domain.entity.User;
-import com.infoshareacademy.dreamteam.domain.view.ReservationView;
+import com.infoshareacademy.dreamteam.repository.BookRepository;
 import com.infoshareacademy.dreamteam.repository.ReservationRepository;
+import com.infoshareacademy.dreamteam.repository.UserRepository;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 
 @RequestScoped
@@ -24,29 +23,33 @@ public class ReservationService {
     private BookService bookService;
 
     @Inject
-    private BookDao bookDao;
+    private BookRepository bookRepository;
 
     @Inject
-    private UserDao userDao;
+    private UserRepository userRepository;
 
-    public void addReservation(ReservationView reservationView) {
-        Long bookViewId = reservationView.getBookView().getId();
-        Long userViewId = reservationView.getUserView().getId();
-        User user = userDao.findUserById(userViewId).orElseThrow();
+    public User findUser(HttpSession httpSession) {
+        UserContextHolder userContextHolder = new UserContextHolder(httpSession);
+        Long userId = Long.valueOf(userContextHolder.getId());
+        return userRepository.findUserById(userId).orElseThrow();
+    }
+
+    public Reservation addReservation(Long userId, Long bookId) {
         Reservation reservation = new Reservation();
+        reservation.setUser(userRepository.findUserById(userId).orElseThrow());
+        reservation.setBook(bookRepository.findBookById(bookId).orElseThrow());
         reservation.setStartDate(LocalDateTime.now());
-        reservation.setBook(bookDao.findBookById(bookViewId)
-                .orElse(new Book("Nie znaleziono książki o podanym identyfikatorze.")));
-        reservation.setUser(userDao.findUserById(user.getId()).orElseThrow());
+        reservation.setEndDate(LocalDateTime.now().plusMinutes(5));
+//        user.getReservations().add(reservation);
+//        userRepository.update(user);
         reservationRepository.add(reservation);
+        return reservation;
     }
 
-    public void delete(Reservation reservation) {
+    public void delete(Reservation reservation, HttpSession httpSession) {
+        User user = findUser(httpSession);
         reservationRepository.delete(reservation);
-    }
-
-    public ReservationView findReservationById(Long id){
-        Reservation reservation = reservationRepository.
+        user.getReservations().remove(reservation);
     }
 
 

@@ -6,16 +6,17 @@ import com.infoshareacademy.dreamteam.domain.view.UserView;
 import java.time.LocalDateTime;
 
 public class ReservationRequest {
-    private LocalDateTime startDate;
+    private LocalDateTime startTime;
+    private LocalDateTime expiryTime;
     private UserView userView;
     private BookView bookView;
 
-    public LocalDateTime getStartDate() {
-        return startDate;
+    public LocalDateTime getStartTime() {
+        return startTime;
     }
 
-    public void setStartDate(LocalDateTime startDate) {
-        this.startDate = startDate;
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
     }
 
     public UserView getUserView() {
@@ -32,5 +33,13 @@ public class ReservationRequest {
 
     public void setBookView(BookView bookView) {
         this.bookView = bookView;
+    }
+
+    public LocalDateTime getExpiryTime() {
+        return expiryTime;
+    }
+
+    public void setExpiryTime(LocalDateTime expiryTime) {
+        this.expiryTime = expiryTime;
     }
 }

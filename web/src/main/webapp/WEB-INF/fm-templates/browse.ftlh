@@ -65,6 +65,7 @@
 <!-- JS -->
 <script src="js/jquery-1.11.2.min.js"></script>      <!-- jQuery -->
 <script src="js/jquery-migrate-1.2.1.min.js"></script> <!--  jQuery Migrate Plugin -->
+<script type="text/javascript" src="../../js/reservation.js"></script>
 <script src="https://www.google.com/jsapi"></script> <!-- Google Chart -->
 <script type="text/javascript" src="js/templatemo-script.js"></script>      <!-- Templatemo Script -->
 <script type="text/javascript" src="js/browse-script.js"></script>
