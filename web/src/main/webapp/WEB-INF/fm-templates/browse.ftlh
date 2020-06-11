@@ -54,6 +54,11 @@
                 <div class="templatemo-content-widget white-bg col-2">
                     <h2 class="">KSIĘGOZBIÓR</h2>
                     <hr>
+                    <div class="templatemo-search-form" role="search">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Szukaj" name="search" id="search" onchange="toPageWithNoFilters(1)" autocomplete="off">
+                        </div>
+                    </div>
                     <div class="container-fluid">
                     </div>
                 </div>
@@ -68,6 +73,5 @@
 <script src="https://www.google.com/jsapi"></script> <!-- Google Chart -->
 <script type="text/javascript" src="js/templatemo-script.js"></script>      <!-- Templatemo Script -->
 <script type="text/javascript" src="js/browse-script.js"></script>
-<script type="text/javascript" src="js/is-audio-dropdown-list.js"></script>
 </body>
 </html>

@@ -1,5 +1,6 @@
 package com.infoshareacademy.dreamteam.service;
 
+import com.infoshareacademy.dreamteam.domain.entity.Author;
 import com.infoshareacademy.dreamteam.domain.entity.Book;
 import com.infoshareacademy.dreamteam.domain.api.BookDetailsPlain;
 import com.infoshareacademy.dreamteam.domain.api.BookPlain;
@@ -21,6 +22,7 @@ import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Stateless
 public class BookService {
@@ -86,10 +88,10 @@ public class BookService {
         return bookRepository.countBooks();
     }
 
-    public long countBooksByAudioAndGenre(String audio, String genre) {
+    public long countBooksByAudioAndGenreAndStringOfCharacters(String audio, String genre, String stringOfCharacters) {
         Boolean audioBoolean = convertAudio(audio);
         genre = convertGenre(genre);
-        return bookRepository.countBooksByAudioAndGenre(audioBoolean, genre);
+        return bookRepository.countBooksByAudioAndGenreAndStringOfCharacters(audioBoolean, genre, stringOfCharacters);
     }
 
     private String convertGenre(String genre) {
@@ -115,12 +117,12 @@ public class BookService {
         return bookViews;
     }
 
-    public List<BookView> findBooksByAudioAndGenre(int offset, String audio, String genre) {
+    public List<BookView> findBooksByAudioAndGenreAndStringOfCharacters(int offset, String audio, String genre, String stringOfCharacters) {
         List<BookView> bookViews = new ArrayList<>();
         Boolean audioBoolean = convertAudio(audio);
         genre = convertGenre(genre);
 
-        for (Book book : bookRepository.findBooksByAudioAndGenre(offset, BOOKS_PER_PAGE, audioBoolean, genre)) {
+        for (Book book : bookRepository.findBooksByAudioAndGenreAndStringOfCharacters(offset, BOOKS_PER_PAGE, audioBoolean, genre, stringOfCharacters)) {
             bookViews.add(mapBookEntityWithRelationsToView(book));
         }
         return bookViews;
@@ -155,4 +157,12 @@ public class BookService {
         return bookDetailsPlain;
     }
 
+    public List<String> getSearchList(String searchString) {
+        List<String> searchList = new ArrayList<>();
+
+        for (Book book : bookRepository.findBooksByStringOfCharacters(searchString)) {
+            searchList.add(book.getTitle() + book.getAuthors().stream().map(Author::getName).collect(Collectors.joining(", ")));
+        }
+        return searchList;
+    }
 }

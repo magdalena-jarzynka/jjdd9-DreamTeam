@@ -48,10 +48,11 @@ public class BookRepositoryBean implements BookRepository{
     }
 
     @Override
-    public Long countBooksByAudioAndGenre(Boolean audio, String genre) {
-        Query query = entityManager.createNamedQuery("Book.countByAudioAndGenre");
+    public Long countBooksByAudioAndGenreAndStringOfCharacters(Boolean audio, String genre, String stringOfCharacters) {
+        Query query = entityManager.createNamedQuery("Book.countByAudioAndGenreAndStringOfCharacters");
         query.setParameter("audio", audio);
         query.setParameter("genre", genre);
+        query.setParameter("stringOfCharacters", "%" + stringOfCharacters + "%");
         return (long) query.getSingleResult();
     }
 
@@ -65,13 +66,22 @@ public class BookRepositoryBean implements BookRepository{
     }
 
     @Override
-    public List<Book> findBooksByAudioAndGenre(int offset, int limit, Boolean audio, String genre) {
+    public List<Book> findBooksByAudioAndGenreAndStringOfCharacters(int offset, int limit, Boolean audio, String genre, String stringOfCharacters) {
 
-        Query query = entityManager.createNamedQuery("Book.findByAudioAndGenre");
+        Query query = entityManager.createNamedQuery("Book.findByAudioAndGenreAndStringOfCharacters");
         query.setFirstResult(offset);
         query.setMaxResults(limit);
         query.setParameter("audio", audio);
         query.setParameter("genre", genre);
+        query.setParameter("stringOfCharacters", "%" + stringOfCharacters + "%");
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Book> findBooksByStringOfCharacters(String stringOfCharacters) {
+
+        Query query = entityManager.createNamedQuery("Book.findByStringOfCharacters");
+        query.setParameter("stringOfCharacters", "%" + stringOfCharacters + "%");
         return query.getResultList();
     }
 
@@ -80,5 +90,4 @@ public class BookRepositoryBean implements BookRepository{
         Query query = entityManager.createNamedQuery("Genre.getGenres");
         return query.getResultList();
     }
-
 }
