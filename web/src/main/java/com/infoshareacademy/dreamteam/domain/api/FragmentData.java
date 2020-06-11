@@ -1,4 +1,4 @@
-package com.infoshareacademy.dreamteam.domain.pojo;
+package com.infoshareacademy.dreamteam.domain.api;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.jsoup.Jsoup;
@@ -17,11 +17,12 @@ public class FragmentData {
         return Jsoup.parse(html).text();
     }
 
-    public String getFragment(BookPlain book) {
+    public String getFragment(BookDetailsPlain book) {
         return Optional.ofNullable(book)
-                .map(BookPlain::getBookFragment)
+                .map(BookDetailsPlain::getFragmentData)
                 .map(FragmentData::getHtml)
                 .filter(fragment -> !((String) fragment).isEmpty())
                 .orElse("");
     }
+
 }

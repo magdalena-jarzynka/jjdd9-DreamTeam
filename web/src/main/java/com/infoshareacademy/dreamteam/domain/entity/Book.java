@@ -12,12 +12,30 @@ import java.util.List;
         ),
         @NamedQuery(
                 name = "Book.findBookByTitle",
-                query="SELECT b FROM Book b WHERE b.title = :title"
+                query = "SELECT b FROM Book b WHERE b.title = :title"
         ),
         @NamedQuery(
                 name = "Book.findAll",
                 query = "SELECT b FROM Book b"
-        )
+        ),
+        @NamedQuery(
+                name = "Book.countAll",
+                query = "SELECT COUNT(b) FROM Book b"
+        ),
+        @NamedQuery(
+                name = "Book.countByAudioAndGenre",
+                query = "SELECT COUNT(b) FROM Book b " +
+                        "INNER JOIN b.genres g " +
+                        "WHERE (b.audio =:audio OR :audio is null) " +
+                        "AND (g.name =:genre OR :genre is null)"
+        ),
+        @NamedQuery(
+                name = "Book.findByAudioAndGenre",
+                query = "SELECT DISTINCT b FROM Book b " +
+                        "INNER JOIN b.genres g " +
+                        "WHERE (b.audio =:audio OR :audio is null) " +
+                        "AND (g.name =:genre OR :genre is null)"
+        ),
 })
 
 @Entity
@@ -36,7 +54,10 @@ public class Book {
 
     private String cover;
 
-    private boolean audio;
+    private Boolean audio;
+
+    @Column(length = 2000)
+    private String translators;
 
     @ManyToMany(mappedBy = "books", cascade = CascadeType.ALL)
     List<Genre> genres = new ArrayList<>();
@@ -49,9 +70,6 @@ public class Book {
 
     @ManyToMany(mappedBy = "books", cascade = CascadeType.ALL)
     List<Author> authors = new ArrayList<>();
-
-    @ManyToMany(mappedBy = "books", cascade = CascadeType.ALL)
-    List<Translator> translators = new ArrayList<>();
 
     @ManyToMany(mappedBy = "favourites")
     List<User> favourites = new ArrayList<>();
@@ -106,11 +124,11 @@ public class Book {
         this.cover = cover;
     }
 
-    public boolean getAudio() {
+    public Boolean getAudio() {
         return audio;
     }
 
-    public void setAudio(boolean audio) {
+    public void setAudio(Boolean audio) {
         this.audio = audio;
     }
 
@@ -146,14 +164,6 @@ public class Book {
         this.authors = authors;
     }
 
-    public List<Translator> getTranslators() {
-        return translators;
-    }
-
-    public void setTranslators(List<Translator> translators) {
-        this.translators = translators;
-    }
-
     public List<User> getFavourites() {
         return favourites;
     }
@@ -168,6 +178,14 @@ public class Book {
 
     public void setReservations(List<Reservation> reservations) {
         this.reservations = reservations;
+    }
+
+    public String getTranslators() {
+        return translators;
+    }
+
+    public void setTranslators(String translators) {
+        this.translators = translators;
     }
 
 }

@@ -1,4 +1,4 @@
-package com.infoshareacademy.dreamteam.dao;
+package com.infoshareacademy.dreamteam.repository;
 
 
 import com.infoshareacademy.dreamteam.domain.entity.User;
@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Local
-public interface UserDao {
+public interface UserRepository {
 
     void save(User user);
 

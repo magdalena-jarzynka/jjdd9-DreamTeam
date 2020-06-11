@@ -8,7 +8,7 @@ import java.io.IOException;
 
 @WebFilter(
         filterName = "AdminAccessFilter",
-        urlPatterns = {"/stats", "/manage"}
+        urlPatterns = {"/stats/*", "/manage/*"}
 )
 
 public class AdminAccessFilter implements Filter {

@@ -1,26 +1,35 @@
 package com.infoshareacademy.dreamteam.service;
 
-
-import com.infoshareacademy.dreamteam.dao.BookDao;
-import com.infoshareacademy.dreamteam.domain.entity.Author;
 import com.infoshareacademy.dreamteam.domain.entity.Book;
+import com.infoshareacademy.dreamteam.domain.api.BookDetailsPlain;
+import com.infoshareacademy.dreamteam.domain.api.BookPlain;
 import com.infoshareacademy.dreamteam.domain.view.BookView;
 import com.infoshareacademy.dreamteam.mapper.*;
 import com.infoshareacademy.dreamteam.repository.BookRepository;
+import org.apache.http.client.HttpResponseException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.core.GenericType;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Stateless
 public class BookService {
 
+    private static final Logger logger = LoggerFactory.getLogger(BookService.class.getName());
+    private static final int BOOKS_PER_PAGE = 20;
+
     @EJB
     private BookRepository bookRepository;
-
-    @Inject
-    private BookDao bookDao;
 
     @Inject
     private BookMapper bookMapper;
@@ -37,9 +46,6 @@ public class BookService {
     @Inject
     private KindMapper kindMapper;
 
-    @Inject
-    private TranslatorMapper translatorMapper;
-
     public void save(Book book) {
         bookRepository.save(book);
     }
@@ -49,13 +55,16 @@ public class BookService {
     }
 
     public Book findByTitle(String title) {
-        Book book = bookRepository.findByTitle(title).orElse(null);
-        return book;
+        return bookRepository.findByTitle(title).orElse(null);
     }
 
-    public BookView findBookViewById(Long id) {
-        Book book = bookDao.findBookById(id)
+    public BookView findBookById(Long id) {
+        Book book = bookRepository.findBookById(id)
                 .orElse(new Book("Nie znaleziono książki o podanym identyfikatorze."));
+        return mapBookEntityWithRelationsToView(book);
+    }
+
+    private BookView mapBookEntityWithRelationsToView(Book book) {
         BookView bookView = bookMapper.mapEntityToView(book);
         book.getAuthors().forEach(author -> bookView.getAuthorViews()
                 .add(authorMapper.mapEntityToView(author)));
@@ -65,8 +74,6 @@ public class BookService {
                 .add(genreMapper.mapEntityToView(genre)));
         book.getKinds().forEach(kind -> bookView.getKindViews()
                 .add(kindMapper.mapEntityToView(kind)));
-        book.getTranslators().forEach(translator -> bookView.getTranslatorViews()
-                .add(translatorMapper.mapEntityToView(translator)));
 
         return bookView;
     }
@@ -74,28 +81,80 @@ public class BookService {
 
 
     public List<String> getGenres() {
-        return bookDao.getGenres();
+        return bookRepository.getGenres();
     }
 
-    public List<Book> findAll() {
-        return bookDao.findAll();
+    public long countBooks() {
+        return bookRepository.countBooks();
     }
 
-    public int countBooks() {
-        return bookDao.countBooks();
+    public long countBooksByAudioAndGenre(String audio, String genre) {
+        Boolean audioBoolean = convertAudio(audio);
+        genre = convertGenre(genre);
+        return bookRepository.countBooksByAudioAndGenre(audioBoolean, genre);
     }
 
-    public int countBooks(String audio, String genre) {
-        return bookDao.countBooks(audio, genre);
+    private String convertGenre(String genre) {
+        if ("blank".equals(genre)) {
+            genre = null;
+        }
+        return genre;
     }
 
-    public List<Book> findBooks(int offset, int limit) {
-
-        return bookDao.findBooks(offset, limit);
+    private Boolean convertAudio(String audio) {
+        if (audio == null || "blank".equals(audio)) {
+            return null;
+        } else {
+            return Boolean.valueOf(audio);
+        }
     }
 
-    public List<Book> findBooks(int offset, int limit, String audio, String genre) {
-
-        return bookDao.findBooks(offset, limit, audio, genre);
+    public List<BookView> findBooks(int offset) {
+        List<BookView> bookViews = new ArrayList<>();
+        for (Book book : bookRepository.findBooks(offset, BOOKS_PER_PAGE)) {
+            bookViews.add(mapBookEntityWithRelationsToView(book));
+        }
+        return bookViews;
     }
+
+    public List<BookView> findBooksByAudioAndGenre(int offset, String audio, String genre) {
+        List<BookView> bookViews = new ArrayList<>();
+        Boolean audioBoolean = convertAudio(audio);
+        genre = convertGenre(genre);
+
+        for (Book book : bookRepository.findBooksByAudioAndGenre(offset, BOOKS_PER_PAGE, audioBoolean, genre)) {
+            bookViews.add(mapBookEntityWithRelationsToView(book));
+        }
+        return bookViews;
+    }
+
+    public List<BookPlain> parseBooksFromApi(String url) throws IOException {
+        Client client = ClientBuilder.newClient();
+        return client.target(url)
+                .request(MediaType.APPLICATION_JSON_TYPE)
+                .get(Response.class)
+                .readEntity(new GenericType<List<BookPlain>>() {
+                });
+    }
+
+    public BookDetailsPlain parseBookDetailsFromApi(String url) throws HttpResponseException {
+        Client client = ClientBuilder.newClient();
+        BookDetailsPlain bookDetailsPlain;
+
+        try {
+            bookDetailsPlain = client
+                    .target(url)
+                    .request(MediaType.APPLICATION_JSON_TYPE)
+                    .get(Response.class)
+                    .readEntity(new GenericType<BookDetailsPlain>() {
+                    });
+
+        } catch (
+                Exception e) {
+            logger.error(e.getMessage() + " " + url, e);
+            throw new HttpResponseException(422, "Bad response from book rest api");
+        }
+        return bookDetailsPlain;
+    }
+
 }

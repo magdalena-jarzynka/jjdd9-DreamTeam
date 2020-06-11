@@ -1,8 +1,8 @@
 package com.infoshareacademy.dreamteam.servlets;
 
 import com.infoshareacademy.dreamteam.freemarker.TemplatePrinter;
-import com.infoshareacademy.dreamteam.service.BookService;
 import com.infoshareacademy.dreamteam.initializer.ModelInitializer;
+import com.infoshareacademy.dreamteam.service.BookService;
 
 import javax.inject.Inject;
 import javax.servlet.annotation.WebServlet;
@@ -42,19 +42,18 @@ public class BrowseServlet extends HttpServlet {
         String audio = req.getParameter("audio");
         String genre = req.getParameter("genre");
         Map<String, Object> tableData = new HashMap<>();
-
-        int rows;
-        if ((audio == null || audio.equals("blank")) && (genre == null || genre.equals("blank"))  ) {
-            tableData.put("books", bookService.  findBooks(startPage * pageSize, pageSize));
+        long rows;
+        if ((audio == null || audio.equals("blank")) && (genre == null || genre.equals("blank"))) {
+            tableData.put("books", bookService.findBooks(startPage * pageSize));
             rows = bookService.countBooks();
         } else {
-            tableData.put("books", bookService.findBooks(startPage * pageSize, pageSize, audio, genre));
-            rows = bookService.countBooks(audio, genre);
+            tableData.put("books", bookService.findBooksByAudioAndGenre(startPage * pageSize, audio, genre));
+            rows = bookService.countBooksByAudioAndGenre(audio, genre);
         }
 
         tableData.put("pageNum", startPage + 1);
 
-        int numberOfPages = rows / pageSize;
+        long numberOfPages = rows / pageSize;
         if (numberOfPages % pageSize > 0) {
             numberOfPages++;
         }

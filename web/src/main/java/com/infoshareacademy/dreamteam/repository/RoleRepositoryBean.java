@@ -1,4 +1,4 @@
-package com.infoshareacademy.dreamteam.dao;
+package com.infoshareacademy.dreamteam.repository;
 
 import com.infoshareacademy.dreamteam.domain.entity.Role;
 import com.infoshareacademy.dreamteam.role.RoleType;
@@ -10,7 +10,7 @@ import javax.persistence.Query;
 import java.util.Optional;
 
 @Stateless
-public class RoleDaoBean {
+public class RoleRepositoryBean {
 
     @PersistenceContext
     private EntityManager entityManager;

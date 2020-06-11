@@ -1,4 +1,4 @@
-package com.infoshareacademy.dreamteam.dao;
+package com.infoshareacademy.dreamteam.repository;
 
 import com.infoshareacademy.dreamteam.domain.entity.User;
 
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Stateless
-public class UserDaoBean implements UserDao {
+public class UserRepositoryBean implements UserRepository {
 
     @PersistenceContext
     EntityManager entityManager;

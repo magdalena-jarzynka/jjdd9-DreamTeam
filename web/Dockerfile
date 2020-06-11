@@ -1,4 +1,4 @@
-FROM jboss/wildfly
+FROM jboss/wildfly:19.1.0.Final
 
 RUN /opt/jboss/wildfly/bin/add-user.sh root root --silent
 
@@ -11,6 +11,7 @@ RUN tar -xvf openjdk-13_linux-x64_bin.tar.gz
 
 ADD target/web.war /opt/jboss/wildfly/standalone/deployments/
 ADD standalone.conf /opt/jboss/wildfly/bin
+ADD standalone.xml /opt/jboss/wildfly/standalone/configuration
 
 CMD ["/opt/jboss/wildfly/bin/standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0"]
 

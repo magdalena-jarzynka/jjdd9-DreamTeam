@@ -1,4 +1,4 @@
-package com.infoshareacademy.dreamteam.cdi;
+package com.infoshareacademy.dreamteam.parser;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.servlet.http.Part;
@@ -24,4 +24,5 @@ public class FileUploadProcessor {
         fileContent.close();
         return file;
     }
+
 }

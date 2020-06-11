@@ -2,7 +2,7 @@ package com.infoshareacademy.dreamteam.parser;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.infoshareacademy.dreamteam.domain.pojo.BookPlain;
+import com.infoshareacademy.dreamteam.domain.api.BookPlain;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,9 +10,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-public class BookParser {
-
-    private static final Logger logger = LoggerFactory.getLogger(BookParser.class.getName());
+public class FileParser {
+    private static final Logger logger = LoggerFactory.getLogger(FileParser.class.getName());
 
     public List<BookPlain> readBookList(File file) {
         ObjectMapper mapper = new ObjectMapper();
@@ -24,5 +23,4 @@ public class BookParser {
             return List.of();
         }
     }
-
 }
