@@ -23,6 +23,7 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
 
 </head>
 <body>
@@ -58,7 +59,11 @@
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Szukaj" name="search" id="search" onchange="toPageWithNoFilters(1)" autocomplete="off">
                         </div>
+                        <select class="js-example-basic-single form-control" name="state" onchange="">
+                        </select>
                     </div>
+
+
                     <div class="container-fluid">
                     </div>
                 </div>
@@ -73,5 +78,8 @@
 <script src="https://www.google.com/jsapi"></script> <!-- Google Chart -->
 <script type="text/javascript" src="js/templatemo-script.js"></script>      <!-- Templatemo Script -->
 <script type="text/javascript" src="js/browse-script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/i18n/pl.js"></script>
+<script type="text/javascript" src="js/search-script.js"></script>
 </body>
 </html>

@@ -1,5 +1,7 @@
 package com.infoshareacademy.dreamteam.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.infoshareacademy.dreamteam.domain.entity.Author;
 import com.infoshareacademy.dreamteam.domain.entity.Book;
 import com.infoshareacademy.dreamteam.domain.api.BookDetailsPlain;
@@ -8,6 +10,8 @@ import com.infoshareacademy.dreamteam.domain.view.BookView;
 import com.infoshareacademy.dreamteam.mapper.*;
 import com.infoshareacademy.dreamteam.repository.BookRepository;
 import org.apache.http.client.HttpResponseException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -128,6 +132,21 @@ public class BookService {
         return bookViews;
     }
 
+    public String getSearchListJson(String searchString) {
+        List<BookView> bookViews = new ArrayList<>();
+
+        for (Book book : bookRepository.findBooksByStringOfCharacters(searchString)) {
+            bookViews.add(mapBookEntityWithRelationsToView(book));
+        }
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            return objectMapper.writeValueAsString(bookViews);
+        } catch (JsonProcessingException e) {
+            logger.error("Problem with creating json from bookViews\n", e);
+        }
+        return null;
+    }
     public List<BookPlain> parseBooksFromApi(String url) throws IOException {
         Client client = ClientBuilder.newClient();
         return client.target(url)
@@ -165,4 +184,5 @@ public class BookService {
         }
         return searchList;
     }
+
 }

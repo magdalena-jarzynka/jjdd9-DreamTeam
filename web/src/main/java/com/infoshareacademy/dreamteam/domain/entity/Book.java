@@ -31,12 +31,6 @@ import java.util.List;
                         "AND (g.name =:genre OR :genre is null) " +
                         "AND (b.title like :stringOfCharacters OR a.name like :stringOfCharacters)"
         ),
-//        @NamedQuery(
-//                name = "Book.countByStringOfCharacters",
-//                query = "SELECT COUNT(b) FROM Book b " +
-//                        "INNER JOIN b.authors a " +
-//                        "WHERE b.title like :stringOfCharacters OR a.name like :stringOfCharacters"
-//        ),
         @NamedQuery(
                 name = "Book.findByAudioAndGenreAndStringOfCharacters",
                 query = "SELECT DISTINCT b FROM Book b " +
