@@ -33,6 +33,11 @@ public class UserService {
         return userRepository.findUserByEmail(email).orElse(null);
     }
 
+    public UserView findUserViewById(Long id) {
+        User user = userRepository.findUserById(id).orElseThrow();
+        return userMapper.mapEntityToView(user);
+    }
+
     public User findUserById(Long id) {
         return userRepository.findUserById(id).orElse(null);
     }

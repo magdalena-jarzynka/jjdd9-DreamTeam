@@ -1,8 +1,10 @@
 package com.infoshareacademy.dreamteam.service;
 
 import com.infoshareacademy.dreamteam.context.UserContextHolder;
+import com.infoshareacademy.dreamteam.domain.entity.Book;
 import com.infoshareacademy.dreamteam.domain.entity.Reservation;
 import com.infoshareacademy.dreamteam.domain.entity.User;
+import com.infoshareacademy.dreamteam.domain.request.ReservationRequest;
 import com.infoshareacademy.dreamteam.repository.BookRepository;
 import com.infoshareacademy.dreamteam.repository.ReservationRepository;
 import com.infoshareacademy.dreamteam.repository.UserRepository;
@@ -36,13 +38,19 @@ public class ReservationService {
     }
 
     @Transactional
-    public Reservation addReservation(Long userId, Long bookId) {
+    public Reservation addReservation(ReservationRequest reservationRequest) {
         Reservation reservation = new Reservation();
+
+        Long userId = reservationRequest.getUserView().getId();
         User user = userRepository.findUserById(userId).orElseThrow();
         reservation.setUser(user);
-        reservation.setBook(bookRepository.findBookById(bookId).orElseThrow());
+
+        Long bookId = reservationRequest.getBookView().getId();
+        Book book = bookRepository.findBookById(bookId).orElseThrow();
+        reservation.setBook(book);
+
         reservation.setStartDate(LocalDateTime.now());
-        reservation.setEndDate(LocalDateTime.now().plusMinutes(5));
+        reservation.setEndDate(LocalDateTime.now().plusMinutes(15));
         user.getReservations().add(reservation);
         userRepository.update(user);
         reservationRepository.add(reservation);
@@ -54,6 +62,5 @@ public class ReservationService {
         reservationRepository.delete(reservation);
         user.getReservations().remove(reservation);
     }
-
 
 }
