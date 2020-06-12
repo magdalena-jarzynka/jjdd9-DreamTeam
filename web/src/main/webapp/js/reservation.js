@@ -12,15 +12,3 @@ $(".add-reservation").click(function () {
         }
     })
 });
-
-// $("deleteReservation").click(function (book) {
-//     var postId = $(book.target).attr("data-id");
-//     $.ajax({
-//         url: "/api/reservations",
-//         method: "DELETE",
-//         data: {id: postId},
-//         success: function () {
-//             location.reload();
-//         }
-//     })
-// });

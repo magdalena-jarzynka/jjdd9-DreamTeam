@@ -11,6 +11,7 @@ import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 
 @RequestScoped
@@ -34,14 +35,16 @@ public class ReservationService {
         return userRepository.findUserById(userId).orElseThrow();
     }
 
+    @Transactional
     public Reservation addReservation(Long userId, Long bookId) {
         Reservation reservation = new Reservation();
-        reservation.setUser(userRepository.findUserById(userId).orElseThrow());
+        User user = userRepository.findUserById(userId).orElseThrow();
+        reservation.setUser(user);
         reservation.setBook(bookRepository.findBookById(bookId).orElseThrow());
         reservation.setStartDate(LocalDateTime.now());
         reservation.setEndDate(LocalDateTime.now().plusMinutes(5));
-//        user.getReservations().add(reservation);
-//        userRepository.update(user);
+        user.getReservations().add(reservation);
+        userRepository.update(user);
         reservationRepository.add(reservation);
         return reservation;
     }

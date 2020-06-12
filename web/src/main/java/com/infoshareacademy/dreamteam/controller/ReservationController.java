@@ -18,9 +18,8 @@ public class ReservationController {
     @Path("/add-reservation/{userId}/book/{bookId}")
     public Response addReservation(@PathParam("userId") Long userId,
                                    @PathParam("bookId") Long bookId) {
-        return Response.status(Response.Status.CREATED)
-                .entity(reservationService.addReservation(userId, bookId))
-                .build();
+        reservationService.addReservation(userId, bookId);
+        return Response.status(Response.Status.CREATED).build();
     }
 
 }
