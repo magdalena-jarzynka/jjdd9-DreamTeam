@@ -5,6 +5,7 @@ import com.infoshareacademy.dreamteam.domain.entity.Book;
 import com.infoshareacademy.dreamteam.domain.entity.Reservation;
 import com.infoshareacademy.dreamteam.domain.entity.User;
 import com.infoshareacademy.dreamteam.domain.request.ReservationRequest;
+import com.infoshareacademy.dreamteam.email.EmailManager;
 import com.infoshareacademy.dreamteam.repository.BookRepository;
 import com.infoshareacademy.dreamteam.repository.ReservationRepository;
 import com.infoshareacademy.dreamteam.repository.UserRepository;
@@ -31,6 +32,9 @@ public class ReservationService {
     @Inject
     private UserRepository userRepository;
 
+    @Inject
+    private EmailManager emailManager;
+
     public User findUser(HttpSession httpSession) {
         UserContextHolder userContextHolder = new UserContextHolder(httpSession);
         Long userId = Long.valueOf(userContextHolder.getId());
@@ -54,6 +58,7 @@ public class ReservationService {
         user.getReservations().add(reservation);
         userRepository.update(user);
         reservationRepository.add(reservation);
+        emailManager.sendEmail(reservationRequest);
         return reservation;
     }
 

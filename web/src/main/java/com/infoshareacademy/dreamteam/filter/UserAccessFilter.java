@@ -24,7 +24,6 @@ public class UserAccessFilter implements Filter {
 
         servletRequest.setAttribute("isLoggedIn", isLoggedIn);
 
-
         filterChain.doFilter(servletRequest, servletResponse);
     }
 
