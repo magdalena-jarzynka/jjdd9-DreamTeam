@@ -61,10 +61,14 @@ public class BookService {
         return bookRepository.findByTitle(title).orElse(null);
     }
 
-    public BookView findBookById(Long id) {
+    public BookView findBookViewById(Long id) {
         Book book = bookRepository.findBookById(id)
                 .orElse(new Book("Nie znaleziono książki o podanym identyfikatorze."));
         return mapBookEntityWithRelationsToView(book);
+    }
+
+    public Book findBookById(Long id) {
+        return bookRepository.findBookById(id).orElse(new Book("Nie znaleziono książki o podanym identyfikatorze."));
     }
 
     private BookView mapBookEntityWithRelationsToView(Book book) {

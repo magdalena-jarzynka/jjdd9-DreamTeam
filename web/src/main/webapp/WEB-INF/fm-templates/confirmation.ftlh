@@ -56,9 +56,6 @@
                     <h2 class="">Rezerwacja książki ${title}</h2>
                     <hr>
                     <p>${result}</p>
-                    <p><a href="/" class="templatemo-edit-btn" style="white-space: nowrap">STRONA GŁÓWNA</a></p>
-                    <p><a href="/reservations" class="templatemo-edit-btn" style="white-space: nowrap">REZERWACJE</a>
-                    </p>
                 </div>
             </div>
         </div>

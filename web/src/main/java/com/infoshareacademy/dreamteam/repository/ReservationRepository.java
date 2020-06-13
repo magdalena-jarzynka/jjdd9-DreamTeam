@@ -12,11 +12,13 @@ import java.util.Optional;
 public interface ReservationRepository {
     void add(Reservation reservation);
 
-    void delete(Reservation reservation);
+    void delete(Long reservationId);
 
     Reservation update(Reservation reservation);
 
     List<Reservation> findReservationsByUser(User user);
+
+    Optional<Reservation> findReservationRequestByUserIdAndBookId(Long userId, Long bookId);
 
     List<Reservation> findReservationsByBook(Book book);
 

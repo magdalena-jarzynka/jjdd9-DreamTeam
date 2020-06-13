@@ -6,19 +6,23 @@ import java.time.LocalDateTime;
 @NamedQueries({
         @NamedQuery(
                 name = "Reservation.findReservationsByUser",
-                query = "SELECT r from Reservation r where r.user =: user"
+                query = "SELECT r FROM Reservation r WHERE r.user =: user"
         ),
         @NamedQuery(
                 name = "Reservation.findReservationByBook",
-                query = "SELECT r from Reservation r where r.book =: book"
+                query = "SELECT r FROM Reservation r WHERE r.book =: book"
         ),
         @NamedQuery(
                 name = "Reservation.findReservationByToken",
-                query = "SELECT r from Reservation r where r.token =: token"
+                query = "SELECT r FROM Reservation r WHERE r.token =: token"
         ),
         @NamedQuery(
                 name = "Reservation.findReservationById",
-                query = "SELECT r from Reservation r where r.id =: id"
+                query = "SELECT r FROM Reservation r WHERE r.id =: id"
+        ),
+        @NamedQuery(
+                name = "Reservation.findReservationRequestByUserIdAndBookId",
+                query = "SELECT r FROM Reservation r WHERE r.user.id =: user_id AND r.book.id =: book_id"
         )
 })
 

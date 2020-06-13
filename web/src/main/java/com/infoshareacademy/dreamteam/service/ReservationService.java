@@ -1,11 +1,11 @@
 package com.infoshareacademy.dreamteam.service;
 
-import com.infoshareacademy.dreamteam.context.UserContextHolder;
 import com.infoshareacademy.dreamteam.domain.entity.Book;
 import com.infoshareacademy.dreamteam.domain.entity.Reservation;
 import com.infoshareacademy.dreamteam.domain.entity.User;
 import com.infoshareacademy.dreamteam.domain.request.ReservationRequest;
 import com.infoshareacademy.dreamteam.domain.view.ReservationView;
+import com.infoshareacademy.dreamteam.domain.view.UserView;
 import com.infoshareacademy.dreamteam.email.EmailManager;
 import com.infoshareacademy.dreamteam.mapper.BookMapper;
 import com.infoshareacademy.dreamteam.mapper.ReservationMapper;
@@ -17,7 +17,6 @@ import com.infoshareacademy.dreamteam.repository.UserRepository;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -47,11 +46,11 @@ public class ReservationService {
     @Inject
     private UserMapper userMapper;
 
-    public User findUser(HttpSession httpSession) {
-        UserContextHolder userContextHolder = new UserContextHolder(httpSession);
-        Long userId = Long.valueOf(userContextHolder.getId());
-        return userRepository.findUserById(userId).orElseThrow();
-    }
+    @Inject
+    private UserService userService;
+
+    @Inject
+    private BookService bookService;
 
     @Transactional
     public Reservation addReservation(ReservationRequest reservationRequest) {
@@ -98,17 +97,19 @@ public class ReservationService {
 
     @Transactional
     public ReservationView findReservationViewByToken(String token) {
-        Reservation reservation = reservationRepository.findReservationByToken(token).orElseThrow();
+        Reservation reservation = reservationRepository.findReservationByToken(token).get();
         ReservationView reservationView = reservationMapper.mapEntityToView(reservation);
         reservationView.setBookView(bookMapper.mapEntityToView(reservation.getBook()));
         reservationView.setUserView(userMapper.mapEntityToView(reservation.getUser()));
         return reservationView;
     }
 
-    public List<ReservationView> findReservationsByUser(User user) {
+    @Transactional
+    public List<ReservationView> findReservationsByUser(UserView userView) {
+        User user = userService.findUserById(userView.getId());
         List<Reservation> reservations = user.getReservations();
         List<ReservationView> reservationViews = new ArrayList<>();
-        for(Reservation reservation : reservations){
+        for (Reservation reservation : reservations) {
             ReservationView reservationView = reservationMapper.mapEntityToView(reservation);
             reservationView.setBookView(bookMapper.mapEntityToView(reservation.getBook()));
             reservationView.setUserView(userMapper.mapEntityToView(reservation.getUser()));
@@ -117,10 +118,16 @@ public class ReservationService {
         return reservationViews;
     }
 
-    public void delete(Reservation reservation, HttpSession httpSession) {
-        User user = findUser(httpSession);
-        reservationRepository.delete(reservation);
-        user.getReservations().remove(reservation);
+    public ReservationView findReservationByUserIdAndBookId(Long userId, Long bookId) {
+        Reservation reservation = reservationRepository.findReservationRequestByUserIdAndBookId(userId, bookId).get();
+        ReservationView reservationView = reservationMapper.mapEntityToView(reservation);
+        reservationView.setBookView(bookMapper.mapEntityToView(reservation.getBook()));
+        reservationView.setUserView(userMapper.mapEntityToView(reservation.getUser()));
+        return reservationView;
+    }
+
+    public void delete(ReservationView reservationView) {
+        reservationRepository.delete(reservationView.getId());
     }
 
 }

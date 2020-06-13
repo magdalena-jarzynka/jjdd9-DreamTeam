@@ -36,10 +36,6 @@ public class ReservationConfirmServlet extends HttpServlet {
         resp.setContentType("text/html; charset=UTF-8");
         Map<String, Object> model = modelInitializer.initModel(req);
         String reservationToken = req.getParameter("token");
-//        if (reservationToken == null || reservationToken.isEmpty()) {
-//            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-//            return;
-//        }
         try {
             ReservationView reservation = reservationService.findReservationViewByToken(reservationToken);
             boolean isSuccessfullyConfirmed = reservationService.confirmReservation(reservation);

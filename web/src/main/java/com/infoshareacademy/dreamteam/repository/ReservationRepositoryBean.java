@@ -24,7 +24,8 @@ public class ReservationRepositoryBean implements ReservationRepository {
     }
 
     @Override
-    public void delete(Reservation reservation) {
+    public void delete(Long reservationId) {
+        Reservation reservation = findReservationById(reservationId).get();
         entityManager.remove(reservation);
     }
 
@@ -39,6 +40,15 @@ public class ReservationRepositoryBean implements ReservationRepository {
         query.setParameter("user", user);
         return query.getResultList();
     }
+
+    @Override
+    public Optional<Reservation> findReservationRequestByUserIdAndBookId(Long userId, Long bookId) {
+        Query query = entityManager.createNamedQuery("Reservation.findReservationRequestByUserIdAndBookId");
+        query.setParameter("user_id", userId)
+                .setParameter("book_id", bookId);
+        return query.getResultList().stream().findFirst();
+    }
+
 
     @Override
     public List<Reservation> findReservationsByBook(Book book) {

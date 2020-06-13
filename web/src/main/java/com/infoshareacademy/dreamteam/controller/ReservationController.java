@@ -1,11 +1,13 @@
 package com.infoshareacademy.dreamteam.controller;
 
 import com.infoshareacademy.dreamteam.domain.request.ReservationRequest;
+import com.infoshareacademy.dreamteam.domain.view.ReservationView;
 import com.infoshareacademy.dreamteam.service.BookService;
 import com.infoshareacademy.dreamteam.service.ReservationService;
 import com.infoshareacademy.dreamteam.service.UserService;
 
 import javax.inject.Inject;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -30,13 +32,22 @@ public class ReservationController {
                                    @PathParam("bookId") Long bookId) {
 
         ReservationRequest reservationRequest = new ReservationRequest();
-        reservationRequest.setBookView(bookService.findBookById(bookId));
+        reservationRequest.setBookView(bookService.findBookViewById(bookId));
         reservationRequest.setUserView(userService.findUserViewById(userId));
         reservationRequest.setToken(String.valueOf(UUID.randomUUID()));
         reservationRequest.setConfirmed(false);
         reservationService.addReservation(reservationRequest);
 
         return Response.status(Response.Status.CREATED).build();
+    }
+
+    @DELETE
+    @Path("/cancel-reservation/{userId}/book/{bookId}")
+    public Response cancelReservation(@PathParam("userId") Long userId,
+                                      @PathParam("bookId") Long bookId) {
+        ReservationView reservationView = reservationService.findReservationByUserIdAndBookId(userId, bookId);
+        reservationService.delete(reservationView);
+        return Response.status(Response.Status.NO_CONTENT).build();
     }
 
 }

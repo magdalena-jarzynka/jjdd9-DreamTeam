@@ -12,3 +12,17 @@ $(".add-reservation").click(function () {
         }
     })
 });
+
+$(".cancel-reservation").click(function () {
+    $.ajax({
+        type: 'DELETE',
+        url: '/api/reservations/cancel-reservation/'
+            + $(this).attr('data-id-user')
+            + '/book/'
+            + $(this).attr('data-id-book'),
+        success: function (result) {
+            alert('Rezerwacja książki została anulowana.');
+            location.reload();
+        }
+    });
+});
