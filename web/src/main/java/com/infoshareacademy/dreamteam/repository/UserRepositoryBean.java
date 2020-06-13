@@ -38,4 +38,10 @@ public class UserRepositoryBean implements UserRepository {
         return query.getResultList();
     }
 
+    @Override
+    public List<String> getFavourites(Long id) {
+        Query query = entityManager.createNamedQuery("User.getFavourites");
+        query.setParameter("id", id);
+        return query.getResultList();
+    }
 }

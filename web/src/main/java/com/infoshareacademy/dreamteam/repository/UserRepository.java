@@ -18,4 +18,6 @@ public interface UserRepository {
 
     List<User> findAll();
 
+    List<String> getFavourites(Long id);
+
 }

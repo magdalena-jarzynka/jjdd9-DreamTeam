@@ -12,6 +12,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.util.List;
+import java.util.Optional;
 
 @Stateless
 public class UserService {
@@ -49,6 +50,10 @@ public class UserService {
     public UserView login(UserRequest userRequest) {
         User user = userRepository.findUserByEmail(userRequest.getEmail()).orElseGet(() -> createUser(userRequest));
         return userMapper.mapEntityToView(user);
+    }
+
+    public List<String> getFavourites(Long id) {
+        return Optional.ofNullable(userRepository.getFavourites(id)).orElse(List.of());
     }
 
 }

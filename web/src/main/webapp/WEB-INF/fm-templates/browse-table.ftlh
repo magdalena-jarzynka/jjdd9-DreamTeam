@@ -59,6 +59,11 @@
                     </td>
                     <td>
                         <a href="/single?id=${book.id}" class="templatemo-edit-btn" style="white-space: nowrap">SZCZEGÓŁY >>></a>
+                        <#if favourites?seq_contains(book.title)>
+                        <a href="/single?id=${book.id}" class="templatemo-edit-btn" style="white-space: nowrap">Dodaj do ulubionych</a>
+                        <#else>
+                            <a href="/single?id=${book.id}" class="templatemo-edit-btn" style="white-space: nowrap">Usuń z ulubionych</a>
+                        </#if>
                     </td>
                 </tr>
             </#list>

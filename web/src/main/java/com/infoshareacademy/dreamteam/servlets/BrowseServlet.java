@@ -1,8 +1,10 @@
 package com.infoshareacademy.dreamteam.servlets;
 
+import com.infoshareacademy.dreamteam.context.UserContextHolder;
 import com.infoshareacademy.dreamteam.freemarker.TemplatePrinter;
 import com.infoshareacademy.dreamteam.initializer.ModelInitializer;
 import com.infoshareacademy.dreamteam.service.BookService;
+import com.infoshareacademy.dreamteam.service.UserService;
 
 import javax.inject.Inject;
 import javax.servlet.annotation.WebServlet;
@@ -24,6 +26,9 @@ public class BrowseServlet extends HttpServlet {
     @Inject
     private ModelInitializer modelInitializer;
 
+    @Inject
+    private UserService userService;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         resp.setContentType("text/html; charset=UTF-8");
@@ -36,6 +41,7 @@ public class BrowseServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
         resp.setContentType("text/html; charset=UTF-8");
+        UserContextHolder userContextHolder = new UserContextHolder(req.getSession());
 
         int startPage = Integer.parseInt(req.getParameter("pageNum")) - 1;
         int pageSize = Integer.parseInt(req.getParameter("pageSize"));
@@ -60,6 +66,8 @@ public class BrowseServlet extends HttpServlet {
 
         tableData.put("genres", bookService.getGenres());
         tableData.put("numberOfPages", numberOfPages);
+        tableData.put("favourites", userService
+                .getFavourites(Long.parseLong(userContextHolder.getId())));
         templatePrinter.printTemplate(resp, tableData, getServletContext(), "browse-table.ftlh");
     }
 }
