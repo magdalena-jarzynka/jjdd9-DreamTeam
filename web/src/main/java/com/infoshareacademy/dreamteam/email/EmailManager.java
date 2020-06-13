@@ -1,6 +1,7 @@
 package com.infoshareacademy.dreamteam.email;
 
 import com.infoshareacademy.dreamteam.domain.request.ReservationRequest;
+import com.infoshareacademy.dreamteam.domain.view.BookView;
 import com.infoshareacademy.dreamteam.domain.view.UserView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,19 +10,24 @@ import javax.ejb.Stateless;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.io.IOException;
+import java.util.Objects;
 import java.util.Properties;
 
 @Stateless
 public class EmailManager {
 
     private static final Logger logger = LoggerFactory.getLogger(EmailManager.class.getName());
+    public static final String MAIL_TITLE = "Potwierdź rezerwację swojej książki";
+    //TODO ZMIEŃ NA LOCALHOSTA NA CZAS TESTOWANIA LOKALNIE
+    public static final String BASE_URL = "http://localhost:8080/confirm?token=";
+//    public static final String BASE_URL = "http://localhost:4390/confirm?token=";
+//    public static final String BASE_URL = "http://dreamteam.jjdd9.is-academy.pl/confirm?token=";
 
-    //TODO CO PRZYJMUJE FUNKCJA
-//    public void sendEmail(ZASTANOWIĆ SIĘ) {
+
     public void sendEmail(ReservationRequest reservationRequest) {
-        final String username = "jjdd9dtmail@gmail.com";
-//        final String password = "dT997g3F";
-        final String password = "nkwzaglybaqxcbuw";
+        final String username = getProperty("username");
+        final String password = getProperty("password");
 
         Properties prop = new Properties();
         prop.put("mail.smtp.host", "smtp.gmail.com");
@@ -42,20 +48,33 @@ public class EmailManager {
             UserView userView = reservationRequest.getUserView();
             message.setRecipients(
                     Message.RecipientType.TO,
-                    //TODO TUTAJ PODAĆ ADRES ODBIORCY user.getEmail()
-//                    InternetAddress.parse(OOOO TUTAJ)
                     InternetAddress.parse(userView.getEmail())
             );
 
-            //TODO TUTAJ PODAĆ CO MA BYĆ W MAILU
-            message.setSubject("Potwierdź rezerwację swojej książki");
-            message.setText("Próba 1");
-
+            BookView bookView = reservationRequest.getBookView();
+            message.setSubject(MAIL_TITLE);
+            message.setText("Sznowny czytelniku/Szanowna czytelniczko, \n\n" +
+                    "Chcąc potwierdzić rezerwację książki: " + "\"" + bookView.getTitle() +
+                    "\"" + " kliknij w poniższy link w ciągu najbliższych 15 minut: \n" +
+                    BASE_URL + reservationRequest.getToken() +
+                    "\n\nŻyczymy miłego dnia, załoga DreamTeam.");
             Transport.send(message);
 
         } catch (MessagingException e) {
             logger.info(String.format("Problem occured when sending the confirmation email: %s", e.getMessage()));
         }
-
     }
+
+    private String getProperty(String property) {
+        Properties properties = new Properties();
+        try {
+            properties.load(Objects.requireNonNull(Thread.currentThread()
+                    .getContextClassLoader().getResource("email.properties"))
+                    .openStream());
+        } catch (IOException e) {
+            logger.error(e.getMessage());
+        }
+        return properties.getProperty(property);
+    }
+
 }

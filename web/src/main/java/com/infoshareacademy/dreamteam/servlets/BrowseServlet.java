@@ -1,6 +1,5 @@
 package com.infoshareacademy.dreamteam.servlets;
 
-import com.infoshareacademy.dreamteam.context.UserContextHolder;
 import com.infoshareacademy.dreamteam.freemarker.TemplatePrinter;
 import com.infoshareacademy.dreamteam.initializer.ModelInitializer;
 import com.infoshareacademy.dreamteam.service.BookService;
@@ -44,6 +43,7 @@ public class BrowseServlet extends HttpServlet {
         String genre = req.getParameter("genre");
         Map<String, Object> tableData = new HashMap<>();
         long rows;
+
         if ((audio == null || audio.equals("blank")) && (genre == null || genre.equals("blank"))) {
             tableData.put("books", bookService.findBooks(startPage * pageSize));
             rows = bookService.countBooks();
@@ -62,15 +62,6 @@ public class BrowseServlet extends HttpServlet {
         tableData.put("genres", bookService.getGenres());
         tableData.put("numberOfPages", numberOfPages);
 
-        UserContextHolder userContextHolder = new UserContextHolder(req.getSession());
-        String userIdString = userContextHolder.getId();
-        long userId = 0L;
-        if(!userIdString.equals("null")){
-            userId = Long.parseLong(userIdString);
-        }
-        String userRole = userContextHolder.getRole();
-        tableData.put("userId", userId);
-        tableData.put("userRole", userRole);
         templatePrinter.printTemplate(resp, tableData, getServletContext(), "browse-table.ftlh");
     }
 }

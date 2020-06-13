@@ -17,6 +17,7 @@ public class BookView {
     private List<AuthorView> authorViews = new ArrayList<>();
     private List<KindView> kindViews = new ArrayList<>();
     private List<EpochView> epochViews = new ArrayList<>();
+    private List<ReservationView> reservationViews = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -105,4 +106,13 @@ public class BookView {
     public void setTranslators(String translators) {
         this.translators = translators;
     }
+
+    public List<ReservationView> getReservationViews() {
+        return reservationViews;
+    }
+
+    public void setReservationViews(List<ReservationView> reservationViews) {
+        this.reservationViews = reservationViews;
+    }
+
 }

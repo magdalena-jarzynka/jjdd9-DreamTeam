@@ -11,6 +11,14 @@ import java.time.LocalDateTime;
         @NamedQuery(
                 name = "Reservation.findReservationByBook",
                 query = "SELECT r from Reservation r where r.book =: book"
+        ),
+        @NamedQuery(
+                name = "Reservation.findReservationByToken",
+                query = "SELECT r from Reservation r where r.token =: token"
+        ),
+        @NamedQuery(
+                name = "Reservation.findReservationById",
+                query = "SELECT r from Reservation r where r.id =: id"
         )
 })
 
@@ -20,6 +28,10 @@ public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    private String token;
+
+    private Boolean confirmed;
 
     private LocalDateTime startDate;
 
@@ -71,5 +83,21 @@ public class Reservation {
 
     public void setBook(Book book) {
         this.book = book;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public Boolean getConfirmed() {
+        return confirmed;
+    }
+
+    public void setConfirmed(Boolean confirmed) {
+        this.confirmed = confirmed;
     }
 }

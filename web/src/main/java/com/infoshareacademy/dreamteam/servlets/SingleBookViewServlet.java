@@ -1,5 +1,6 @@
 package com.infoshareacademy.dreamteam.servlets;
 
+import com.infoshareacademy.dreamteam.context.UserContextHolder;
 import com.infoshareacademy.dreamteam.domain.view.BookView;
 import com.infoshareacademy.dreamteam.freemarker.TemplatePrinter;
 import com.infoshareacademy.dreamteam.initializer.ModelInitializer;
@@ -44,8 +45,27 @@ public class SingleBookViewServlet extends HttpServlet {
         }
         BookView bookView = bookService.findBookById(bookId);
         model.put("book", bookView);
+
+        UserContextHolder userContextHolder = new UserContextHolder(req.getSession());
+        String userIdString = userContextHolder.getId();
+        long userId = 0L;
+        if(!userIdString.equals("null")){
+            userId = Long.parseLong(userIdString);
+        }
+        String userRole = userContextHolder.getRole();
+        model.put("userId", userId);
+        model.put("userRole", userRole);
+
+        boolean reserved = false;
+        if(!bookView.getReservationViews().isEmpty()){
+            reserved = true;
+        }
+        model.put("reserved", reserved);
+
         templatePrinter.printTemplate(resp, model, getServletContext(),
                 "single-book-view.ftlh");
+
+
     }
 
 }

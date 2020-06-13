@@ -29,6 +29,11 @@ public class ReservationRepositoryBean implements ReservationRepository {
     }
 
     @Override
+    public Reservation update(Reservation reservation) {
+        return entityManager.merge(reservation);
+    }
+
+    @Override
     public List<Reservation> findReservationsByUser(User user) {
         Query query = entityManager.createNamedQuery("Reservation.findReservationsByUser");
         query.setParameter("user", user);
@@ -46,6 +51,13 @@ public class ReservationRepositoryBean implements ReservationRepository {
     public Optional<Reservation> findReservationById(Long id) {
         Query query = entityManager.createNamedQuery("Reservation.findReservationById");
         query.setParameter("id", id);
+        return query.getResultList().stream().findFirst();
+    }
+
+    @Override
+    public Optional<Reservation> findReservationByToken(String token) {
+        Query query = entityManager.createNamedQuery("Reservation.findReservationByToken");
+        query.setParameter("token", token);
         return query.getResultList().stream().findFirst();
     }
 

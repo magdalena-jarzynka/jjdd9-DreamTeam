@@ -1,8 +1,8 @@
 package com.infoshareacademy.dreamteam.service;
 
-import com.infoshareacademy.dreamteam.domain.entity.Book;
 import com.infoshareacademy.dreamteam.domain.api.BookDetailsPlain;
 import com.infoshareacademy.dreamteam.domain.api.BookPlain;
+import com.infoshareacademy.dreamteam.domain.entity.Book;
 import com.infoshareacademy.dreamteam.domain.view.BookView;
 import com.infoshareacademy.dreamteam.mapper.*;
 import com.infoshareacademy.dreamteam.repository.BookRepository;
@@ -46,6 +46,9 @@ public class BookService {
     @Inject
     private KindMapper kindMapper;
 
+    @Inject
+    private ReservationMapper reservationMapper;
+
     public void save(Book book) {
         bookRepository.save(book);
     }
@@ -74,6 +77,8 @@ public class BookService {
                 .add(genreMapper.mapEntityToView(genre)));
         book.getKinds().forEach(kind -> bookView.getKindViews()
                 .add(kindMapper.mapEntityToView(kind)));
+        book.getReservations().forEach(reservation -> bookView.getReservationViews()
+                .add(reservationMapper.mapEntityToView(reservation)));
 
         return bookView;
     }

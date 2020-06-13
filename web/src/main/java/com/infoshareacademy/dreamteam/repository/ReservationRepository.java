@@ -14,9 +14,13 @@ public interface ReservationRepository {
 
     void delete(Reservation reservation);
 
+    Reservation update(Reservation reservation);
+
     List<Reservation> findReservationsByUser(User user);
 
     List<Reservation> findReservationsByBook(Book book);
 
     Optional<Reservation> findReservationById(Long id);
+
+    Optional<Reservation> findReservationByToken(String token);
 }

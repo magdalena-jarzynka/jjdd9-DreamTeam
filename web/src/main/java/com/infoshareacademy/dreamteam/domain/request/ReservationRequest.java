@@ -6,6 +6,8 @@ import com.infoshareacademy.dreamteam.domain.view.UserView;
 import java.time.LocalDateTime;
 
 public class ReservationRequest {
+    private String token;
+    private Boolean confirmed;
     private LocalDateTime startTime;
     private LocalDateTime expiryTime;
     private UserView userView;
@@ -41,5 +43,21 @@ public class ReservationRequest {
 
     public void setExpiryTime(LocalDateTime expiryTime) {
         this.expiryTime = expiryTime;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public Boolean getConfirmed() {
+        return confirmed;
+    }
+
+    public void setConfirmed(Boolean confirmed) {
+        this.confirmed = confirmed;
     }
 }

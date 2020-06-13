@@ -58,13 +58,7 @@
                     ${book.audio?then("dostępna","niedostępna")}
                 </td>
                 <td>
-                    <a href="/single?id=${book.id}" class="templatemo-edit-btn"
-                       style="white-space: nowrap">SZCZEGÓŁY</a>
-                    <#if userRole != "GUEST">
-                    <br><br>
-                    <a class="btn templatemo-edit-btn add-reservation" data-id-book="${book.id?c}"
-                       data-id-user="${userId}">ZAEREZERWUJ</a>
-                    </#if>
+                    <a href="/single?id=${book.id}" class="templatemo-edit-btn" style="white-space: nowrap">SZCZEGÓŁY >>></a>
                 </td>
             </tr>
         </#list>
@@ -112,4 +106,3 @@
         </ul>
     </div>
 </#if>
-<script type="text/javascript" src="../../js/reservation.js"></script>

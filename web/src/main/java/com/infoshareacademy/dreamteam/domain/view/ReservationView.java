@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 public class ReservationView {
 
     private Long id;
+    private String token;
+    private Boolean confirmed;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
     private UserView userView;
@@ -48,5 +50,21 @@ public class ReservationView {
 
     public void setBookView(BookView bookView) {
         this.bookView = bookView;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public Boolean getConfirmed() {
+        return confirmed;
+    }
+
+    public void setConfirmed(Boolean confirmed) {
+        this.confirmed = confirmed;
     }
 }
