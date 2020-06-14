@@ -14,7 +14,7 @@ public class ReservationScheduler {
     @Inject
     ReservationService reservationService;
 
-    @Schedule(hour = "*", minute = "*/3", second = "*")
+    @Schedule(hour = "*", minute = "*/2", second = "*")
     public void cancelUnconfirmedReservations() {
         reservationService.cancelUnconfirmedReservations();
     }

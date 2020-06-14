@@ -66,8 +66,8 @@ public class ReservationService {
 
         reservation.setStartDate(LocalDateTime.now());
         //Na czas testów można ustawić 1 minutę
-        reservation.setEndDate(LocalDateTime.now().plusMinutes(1));
-//        reservation.setEndDate(LocalDateTime.now().plusMinutes(15));
+//        reservation.setEndDate(LocalDateTime.now().plusMinutes(1));
+        reservation.setEndDate(LocalDateTime.now().plusMinutes(15));
         user.getReservations().add(reservation);
         userRepository.update(user);
         reservationRepository.add(reservation);

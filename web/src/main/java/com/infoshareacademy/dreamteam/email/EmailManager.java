@@ -21,8 +21,8 @@ public class EmailManager {
     public static final String MAIL_TITLE = "Potwierdź rezerwację swojej książki";
     //ZMIEŃ NA LOCALHOSTA NA CZAS TESTOWANIA LOKALNIE
 //    public static final String BASE_URL = "http://localhost:8080/confirm?token=";
-    public static final String BASE_URL = "http://localhost:4390/confirm?token=";
-//    public static final String BASE_URL = "http://dreamteam.jjdd9.is-academy.pl/confirm?token=";
+//    public static final String BASE_URL = "http://localhost:4390/confirm?token=";
+    public static final String BASE_URL = "http://dreamteam.jjdd9.is-academy.pl/confirm?token=";
 
 
     public void sendEmail(ReservationRequest reservationRequest) {
