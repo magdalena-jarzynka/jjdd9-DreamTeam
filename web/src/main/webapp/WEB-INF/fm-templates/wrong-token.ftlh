@@ -56,7 +56,8 @@
                     <h2 class="">Link do rezerwacji jest niepoprawny</h2>
                     <hr>
                     <p>Upewnij się, że wybrałeś/wybrałaś prawidłowy link do potwierdzenia rezerwacji.</p>
-                    <p>Jeżeli nie potwierdziłeś/potwierdziłaś rezerwacji w ciągu 15 minut musisz dokonać rezerwacji ponownie.</p>
+                    <p>Jeżeli nie potwierdziłeś/potwierdziłaś rezerwacji w ciągu 15 minut musisz dokonać rezerwacji
+                        ponownie.</p>
                 </div>
             </div>
         </div>

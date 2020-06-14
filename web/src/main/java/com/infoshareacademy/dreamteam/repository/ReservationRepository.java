@@ -25,4 +25,6 @@ public interface ReservationRepository {
     Optional<Reservation> findReservationById(Long id);
 
     Optional<Reservation> findReservationByToken(String token);
+
+    List<Reservation> findAllReservations();
 }

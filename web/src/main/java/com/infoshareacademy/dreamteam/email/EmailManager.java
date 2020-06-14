@@ -8,9 +8,9 @@ import org.slf4j.LoggerFactory;
 
 import javax.ejb.Stateless;
 import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
+import javax.mail.internet.*;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.Objects;
 import java.util.Properties;
 
@@ -19,9 +19,9 @@ public class EmailManager {
 
     private static final Logger logger = LoggerFactory.getLogger(EmailManager.class.getName());
     public static final String MAIL_TITLE = "Potwierdź rezerwację swojej książki";
-    //TODO ZMIEŃ NA LOCALHOSTA NA CZAS TESTOWANIA LOKALNIE
-    public static final String BASE_URL = "http://localhost:8080/confirm?token=";
-//    public static final String BASE_URL = "http://localhost:4390/confirm?token=";
+    //ZMIEŃ NA LOCALHOSTA NA CZAS TESTOWANIA LOKALNIE
+//    public static final String BASE_URL = "http://localhost:8080/confirm?token=";
+    public static final String BASE_URL = "http://localhost:4390/confirm?token=";
 //    public static final String BASE_URL = "http://dreamteam.jjdd9.is-academy.pl/confirm?token=";
 
 
@@ -34,6 +34,8 @@ public class EmailManager {
         prop.put("mail.smtp.port", "587");
         prop.put("mail.smtp.auth", "true");
         prop.put("mail.smtp.starttls.enable", "true");
+        prop.put("mail.mime.allowutf8", true);
+
 
         Session session = Session.getInstance(prop,
                 new javax.mail.Authenticator() {
@@ -44,6 +46,7 @@ public class EmailManager {
 
         try {
             Message message = new MimeMessage(session);
+            Multipart multiPart = new MimeMultipart("alternative");
             message.setFrom(new InternetAddress("jjdd9dt@gmail.com"));
             UserView userView = reservationRequest.getUserView();
             message.setRecipients(
@@ -52,16 +55,23 @@ public class EmailManager {
             );
 
             BookView bookView = reservationRequest.getBookView();
-            message.setSubject(MAIL_TITLE);
-            message.setText("Sznowny czytelniku/Szanowna czytelniczko, \n\n" +
+            MimeBodyPart textPart = new MimeBodyPart();
+            textPart.setText("Szanowny czytelniku/Szanowna czytelniczko, \n\n" +
                     "Chcąc potwierdzić rezerwację książki: " + "\"" + bookView.getTitle() +
                     "\"" + " kliknij w poniższy link w ciągu najbliższych 15 minut: \n" +
                     BASE_URL + reservationRequest.getToken() +
-                    "\n\nŻyczymy miłego dnia, załoga DreamTeam.");
+                    "\n\nŻyczymy miłego dnia, załoga DreamTeam.", "utf-8");
+            multiPart.addBodyPart(textPart);
+            try {
+                message.setSubject(MimeUtility.encodeText(MAIL_TITLE, "utf-8", "B"));
+            } catch (UnsupportedEncodingException e) {
+                logger.info(String.format("Problem occurred when encoding the email title: \" %s", e.getMessage()));
+            }
+            message.setContent(multiPart);
             Transport.send(message);
 
         } catch (MessagingException e) {
-            logger.info(String.format("Problem occured when sending the confirmation email: %s", e.getMessage()));
+            logger.info(String.format("Problem occurred when sending the confirmation email: %s", e.getMessage()));
         }
     }
 

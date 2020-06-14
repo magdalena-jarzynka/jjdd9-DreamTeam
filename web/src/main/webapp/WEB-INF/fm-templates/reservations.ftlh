@@ -91,7 +91,8 @@
                                            style="white-space: nowrap">SZCZEGÓŁY >>></a>
                                     </td>
                                     <td>
-                                        <a class="btn templatemo-edit-btn cancel-reservation" data-id-book="${reservation.bookView.id?c}"
+                                        <a class="btn templatemo-edit-btn cancel-reservation"
+                                           data-id-book="${reservation.bookView.id?c}"
                                            data-id-user="${userId}">ANULUJ REZERWACJĘ</a>
                                     </td>
                                 </tr>

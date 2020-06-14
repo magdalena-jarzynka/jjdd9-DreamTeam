@@ -23,6 +23,10 @@ import java.time.LocalDateTime;
         @NamedQuery(
                 name = "Reservation.findReservationRequestByUserIdAndBookId",
                 query = "SELECT r FROM Reservation r WHERE r.user.id =: user_id AND r.book.id =: book_id"
+        ),
+        @NamedQuery(
+                name = "Reservation.findAllReservations",
+                query = "SELECT r FROM Reservation r"
         )
 })
 

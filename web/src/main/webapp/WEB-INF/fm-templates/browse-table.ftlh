@@ -58,7 +58,8 @@
                     ${book.audio?then("dostępna","niedostępna")}
                 </td>
                 <td>
-                    <a href="/single?id=${book.id}" class="templatemo-edit-btn" style="white-space: nowrap">SZCZEGÓŁY >>></a>
+                    <a href="/single?id=${book.id}" class="templatemo-edit-btn" style="white-space: nowrap">SZCZEGÓŁY
+                        >>></a>
                 </td>
             </tr>
         </#list>

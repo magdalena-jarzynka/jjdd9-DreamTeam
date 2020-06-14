@@ -42,26 +42,26 @@ public class ReservationsServlet extends HttpServlet {
         resp.setContentType("text/html; charset=UTF-8");
         boolean isLoggedIn = Boolean.parseBoolean(String.valueOf(req.getAttribute("isLoggedIn")));
         Map<String, Object> model = modelInitializer.initModel(req);
-        String id = String.valueOf(req.getSession().getAttribute("id"));
-        long userId = 0L;
-        try {
-            userId = Long.parseLong(id);
-        } catch (NumberFormatException e) {
-            logger.error(e.getMessage());
-        }
-        model.put("userId", userId);
-        UserView userView = userService.findUserViewById(userId);
-        List<ReservationView> reservations = reservationService.findReservationsByUser(userView);
-        List<ReservationView> confirmedReservations = new ArrayList<>();
-        for (ReservationView reservationView : reservations) {
-            if (reservationView.getConfirmed()) {
-                confirmedReservations.add(reservationView);
-            }
-        }
-        model.put("userReservations", confirmedReservations);
-
 
         if (isLoggedIn) {
+            String id = String.valueOf(req.getSession().getAttribute("id"));
+            long userId = 0L;
+            try {
+                userId = Long.parseLong(id);
+            } catch (NumberFormatException e) {
+                logger.error(e.getMessage());
+            }
+            model.put("userId", userId);
+            UserView userView = userService.findUserViewById(userId);
+            List<ReservationView> reservations = reservationService.findReservationsByUser(userView);
+            List<ReservationView> confirmedReservations = new ArrayList<>();
+            for (ReservationView reservationView : reservations) {
+                if (reservationView.getConfirmed()) {
+                    confirmedReservations.add(reservationView);
+                }
+            }
+            model.put("userReservations", confirmedReservations);
+
             templatePrinter.printTemplate(resp, model, getServletContext(),
                     "reservations.ftlh");
         } else {

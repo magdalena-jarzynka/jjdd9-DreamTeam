@@ -71,4 +71,10 @@ public class ReservationRepositoryBean implements ReservationRepository {
         return query.getResultList().stream().findFirst();
     }
 
+    @Override
+    public List<Reservation> findAllReservations(){
+        Query query = entityManager.createNamedQuery("Reservation.findAllReservations");
+        return query.getResultList();
+    }
+
 }

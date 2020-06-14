@@ -49,9 +49,6 @@ public class ReservationService {
     @Inject
     private UserService userService;
 
-    @Inject
-    private BookService bookService;
-
     @Transactional
     public Reservation addReservation(ReservationRequest reservationRequest) {
         Reservation reservation = new Reservation();
@@ -68,9 +65,9 @@ public class ReservationService {
         reservation.setUser(user);
 
         reservation.setStartDate(LocalDateTime.now());
-        //TODO na czas testów ustawiona 1 minuta
-//        reservation.setEndDate(LocalDateTime.now().plusMinutes(15));
+        //Na czas testów można ustawić 1 minutę
         reservation.setEndDate(LocalDateTime.now().plusMinutes(1));
+//        reservation.setEndDate(LocalDateTime.now().plusMinutes(15));
         user.getReservations().add(reservation);
         userRepository.update(user);
         reservationRepository.add(reservation);
@@ -78,6 +75,7 @@ public class ReservationService {
         return reservation;
     }
 
+    @Transactional
     public Boolean confirmReservation(ReservationView reservationView) {
         Reservation reservation = findReservationById(reservationView.getId());
         boolean notExpired = reservation.getEndDate().isAfter(LocalDateTime.now());
@@ -126,8 +124,24 @@ public class ReservationService {
         return reservationView;
     }
 
-    public void delete(ReservationView reservationView) {
+    @Transactional
+    public void delete(Long userId, Long bookId) {
+        ReservationView reservationView = findReservationByUserIdAndBookId(userId, bookId);
         reservationRepository.delete(reservationView.getId());
+    }
+
+    public void removeUnconfirmedReservation(Reservation reservation) {
+        reservationRepository.delete(reservation.getId());
+    }
+
+    public void cancelUnconfirmedReservations() {
+        List<Reservation> reservations = reservationRepository.findAllReservations();
+        if (!reservations.isEmpty()) {
+            reservations.stream()
+                    .filter(reservation -> reservation.getEndDate().isBefore(LocalDateTime.now()))
+                    .filter(reservation -> !reservation.getConfirmed())
+                    .forEach(this::removeUnconfirmedReservation);
+        }
     }
 
 }

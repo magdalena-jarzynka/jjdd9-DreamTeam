@@ -1,7 +1,6 @@
 package com.infoshareacademy.dreamteam.controller;
 
 import com.infoshareacademy.dreamteam.domain.request.ReservationRequest;
-import com.infoshareacademy.dreamteam.domain.view.ReservationView;
 import com.infoshareacademy.dreamteam.service.BookService;
 import com.infoshareacademy.dreamteam.service.ReservationService;
 import com.infoshareacademy.dreamteam.service.UserService;
@@ -45,8 +44,7 @@ public class ReservationController {
     @Path("/cancel-reservation/{userId}/book/{bookId}")
     public Response cancelReservation(@PathParam("userId") Long userId,
                                       @PathParam("bookId") Long bookId) {
-        ReservationView reservationView = reservationService.findReservationByUserIdAndBookId(userId, bookId);
-        reservationService.delete(reservationView);
+        reservationService.delete(userId, bookId);
         return Response.status(Response.Status.NO_CONTENT).build();
     }
 
