@@ -1,35 +1,27 @@
-$(document).ready(function () {
-    $('.js-example-basic-single').select2({
-        ajax: {
-            url: '/search',
-            data: function (params) {
-                var query = {
-                    search: params.term
-                };
-                return query;
-            },
-            processResults: function (data) {
-                console.log(data);
-                return {
-                    results: $.map(JSON.parse(data), function (book) {
-                        let text = book.title + " - ";
-                        for (let key in book.authorViews) {
-                            if (!book.authorViews.hasOwnProperty(key)) continue;
-                            console.log(book.authorViews[key]);
-                            text += book.authorViews[key].name + " ";
-                        }
-                        return {id: book.id, text: text}
-                    })
-                };
-            }
+function doSearch(search) {
+    if (search.length < 3) {
+        return;
+    }
+    $.ajax({
+        url: '/search',
+        type: 'GET',
+        data: {
+            'search': search,
         },
-        minimumInputLength: 3,
-        placeholder: 'Wyszukaj',
-        language: 'pl'
+        success: function (data) {
+            $("#search").autocomplete({
+                source: $.map(JSON.parse(data), function (book) {
+                    let text = book.title + " - ";
+                    for (let key in book.authorViews) {
+                        if (!book.authorViews.hasOwnProperty(key)) continue;
+                        text += book.authorViews[key].name + " ";
+                    }
+                    return {value: text, id: book.id};
+                }),
+                select: function (e, ui) {
+                    window.location.href = "/single?id=" + ui.item.id;
+                },
+            });
+        }
     });
-
-    $('.js-example-basic-single').on('select2:select', function (e) {
-        window.location.href = "/single?id=" + e.params.data.id;
-    });
-});
-
+}

@@ -33,7 +33,9 @@ function toPage(num) {
 
 function toPageWithNoFilters(num) {
     let search = $("#search").val();
-
+    if (search.length < 3) {
+        return;
+    }
     $.ajax({
         url: '/browse',
         type: 'POST',

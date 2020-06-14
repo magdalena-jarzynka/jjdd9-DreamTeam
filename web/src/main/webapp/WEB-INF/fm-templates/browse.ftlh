@@ -16,6 +16,7 @@
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/templatemo-style.css" rel="stylesheet">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -23,7 +24,6 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
 
 </head>
 <body>
@@ -56,11 +56,9 @@
                     <h2 class="">KSIĘGOZBIÓR</h2>
                     <hr>
                     <div class="templatemo-search-form" role="search">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Szukaj" name="search" id="search" onchange="toPageWithNoFilters(1)" autocomplete="off">
+                        <div class="ui-widget">
+                            <input class="form-control" placeholder="Szukaj" name="search" id="search" onchange="toPageWithNoFilters(1)" oninput="doSearch(this.value)" autocomplete="off" minlength="3">
                         </div>
-                        <select class="js-example-basic-single form-control" name="state" onchange="">
-                        </select>
                     </div>
 
 
@@ -78,8 +76,7 @@
 <script src="https://www.google.com/jsapi"></script> <!-- Google Chart -->
 <script type="text/javascript" src="js/templatemo-script.js"></script>      <!-- Templatemo Script -->
 <script type="text/javascript" src="js/browse-script.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/i18n/pl.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript" src="js/search-script.js"></script>
 </body>
 </html>
