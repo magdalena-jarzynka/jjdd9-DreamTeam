@@ -3,7 +3,6 @@ package com.infoshareacademy.dreamteam.layout.builder;
 public enum LeftColumnMenuList {
     MAIN_PAGE("STRONA GŁÓWNA"),
     BROWSE("KSIĘGOZBIÓR"),
-    SEARCH("WYSZUKAJ"),
     FAVOURITES("ULUBIONE"),
     RESERVATIONS("REZERWACJE"),
     STATS("STATYSTYKI"),

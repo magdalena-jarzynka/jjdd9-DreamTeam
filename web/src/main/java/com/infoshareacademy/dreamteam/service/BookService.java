@@ -2,16 +2,14 @@ package com.infoshareacademy.dreamteam.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.infoshareacademy.dreamteam.domain.entity.Author;
-import com.infoshareacademy.dreamteam.domain.entity.Book;
 import com.infoshareacademy.dreamteam.domain.api.BookDetailsPlain;
 import com.infoshareacademy.dreamteam.domain.api.BookPlain;
+import com.infoshareacademy.dreamteam.domain.entity.Author;
+import com.infoshareacademy.dreamteam.domain.entity.Book;
 import com.infoshareacademy.dreamteam.domain.view.BookView;
 import com.infoshareacademy.dreamteam.mapper.*;
 import com.infoshareacademy.dreamteam.repository.BookRepository;
 import org.apache.http.client.HttpResponseException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -147,7 +145,8 @@ public class BookService {
         }
         return null;
     }
-    public List<BookPlain> parseBooksFromApi(String url) throws IOException {
+
+    public List<BookPlain> parseBooksFromApi(String url) {
         Client client = ClientBuilder.newClient();
         return client.target(url)
                 .request(MediaType.APPLICATION_JSON_TYPE)

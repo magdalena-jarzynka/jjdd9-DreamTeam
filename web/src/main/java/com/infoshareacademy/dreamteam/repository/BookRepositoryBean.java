@@ -1,9 +1,6 @@
 package com.infoshareacademy.dreamteam.repository;
 
-import com.infoshareacademy.dreamteam.domain.entity.Author;
 import com.infoshareacademy.dreamteam.domain.entity.Book;
-import com.infoshareacademy.dreamteam.domain.entity.Genre;
-import org.hibernate.Hibernate;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -11,19 +8,19 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Stateless
-public class BookRepositoryBean implements BookRepository{
+public class BookRepositoryBean implements BookRepository {
     @PersistenceContext
     EntityManager entityManager;
 
     @Override
-    public void save (Book book) {entityManager.persist(book);}
+    public void save(Book book) {
+        entityManager.persist(book);
+    }
 
     @Override
-    public Book update (Book book) {
+    public Book update(Book book) {
         return entityManager.merge(book);
     }
 
