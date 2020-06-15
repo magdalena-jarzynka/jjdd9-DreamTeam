@@ -5,7 +5,7 @@ $(function () {
 });
 
 function toPage(num) {
-    let audio =  $("#isAudio").val();
+    let audio = $("#isAudio").val();
     let genre = $("#genre").val();
     let search = $("#search").val();
     audio = (audio === undefined) ? "blank" : audio;
@@ -33,7 +33,7 @@ function toPage(num) {
 
 function toPageWithNoFilters(num) {
     let search = $("#search").val();
-    if (search.length < 3) {
+    if (search.length > 0 && search.length < 3) {
         return;
     }
     $.ajax({
@@ -47,6 +47,7 @@ function toPageWithNoFilters(num) {
         success: function (data) {
             $(".container-fluid").empty();
             $(".container-fluid").append(data);
+            $("#search").autocomplete("close");
         }
     })
 }
