@@ -12,7 +12,7 @@ import javax.inject.Inject;
 public class ReservationScheduler {
 
     @Inject
-    ReservationService reservationService;
+    private ReservationService reservationService;
 
     @Schedule(hour = "*", minute = "*/2", second = "*")
     public void cancelUnconfirmedReservations() {

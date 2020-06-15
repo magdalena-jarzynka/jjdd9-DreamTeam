@@ -16,7 +16,7 @@ import java.util.Optional;
 public class ReservationRepositoryBean implements ReservationRepository {
 
     @PersistenceContext
-    EntityManager entityManager;
+    private EntityManager entityManager;
 
     @Override
     public void add(Reservation reservation) {

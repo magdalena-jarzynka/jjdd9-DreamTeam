@@ -15,7 +15,6 @@ public class RoleRepositoryBean {
     @PersistenceContext
     private EntityManager entityManager;
 
-
     public Optional<Role> findByRoleType(RoleType roleType) {
         Query query = entityManager.createNamedQuery("Role.findByRoleType");
         query.setParameter("roleType", roleType);

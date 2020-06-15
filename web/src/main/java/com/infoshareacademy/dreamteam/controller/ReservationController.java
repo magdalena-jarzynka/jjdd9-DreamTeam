@@ -17,13 +17,13 @@ import java.util.UUID;
 public class ReservationController {
 
     @Inject
-    ReservationService reservationService;
+    private ReservationService reservationService;
 
     @Inject
-    BookService bookService;
+    private BookService bookService;
 
     @Inject
-    UserService userService;
+    private UserService userService;
 
     @POST
     @Path("/add-reservation/{userId}/book/{bookId}")

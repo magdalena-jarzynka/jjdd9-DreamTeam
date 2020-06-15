@@ -22,8 +22,9 @@ public class ReservationConfirmServlet extends HttpServlet {
             "Pamiętaj, że na potwierdzenie masz dokładnie 15 minut.";
     public static final String CONFIRMATION_SUCCESS = "Twoja rezerwacja została poprawnie potwierdzona. \n" +
             "Twoja rezerwacja już powinna być widoczna w panelu REZERWACJE.";
+
     @Inject
-    ReservationService reservationService;
+    private ReservationService reservationService;
 
     @Inject
     private TemplatePrinter templatePrinter;
