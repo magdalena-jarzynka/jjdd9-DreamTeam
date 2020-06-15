@@ -6,6 +6,7 @@ import com.infoshareacademy.dreamteam.domain.entity.User;
 import com.infoshareacademy.dreamteam.domain.request.ReservationRequest;
 import com.infoshareacademy.dreamteam.domain.view.ReservationView;
 import com.infoshareacademy.dreamteam.domain.view.UserView;
+import com.infoshareacademy.dreamteam.email.BookReservationEmailBuilder;
 import com.infoshareacademy.dreamteam.email.EmailManager;
 import com.infoshareacademy.dreamteam.mapper.BookMapper;
 import com.infoshareacademy.dreamteam.mapper.ReservationMapper;
@@ -13,6 +14,8 @@ import com.infoshareacademy.dreamteam.mapper.UserMapper;
 import com.infoshareacademy.dreamteam.repository.BookRepository;
 import com.infoshareacademy.dreamteam.repository.ReservationRepository;
 import com.infoshareacademy.dreamteam.repository.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
@@ -21,9 +24,17 @@ import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RequestScoped
 public class ReservationService {
+
+    private static final Logger logger = LoggerFactory.getLogger(ReservationService.class.getName());
+    public static final String CONFIRMATION_FAILURE = "Bardzo nam przykro, ale rezerwacja książki wygasła. \n" +
+            "Pamiętaj, że na potwierdzenie masz dokładnie 15 minut.";
+    public static final String CONFIRMATION_SUCCESS = "Twoja rezerwacja została poprawnie potwierdzona. \n" +
+            "Twoja rezerwacja już powinna być widoczna w panelu REZERWACJE.";
+//TODO STRING FORMAT!
 
     @EJB
     private ReservationRepository reservationRepository;
@@ -65,13 +76,12 @@ public class ReservationService {
         reservation.setUser(user);
 
         reservation.setStartDate(LocalDateTime.now());
-        //Na czas testów można ustawić 1 minutę
-//        reservation.setEndDate(LocalDateTime.now().plusMinutes(1));
         reservation.setEndDate(LocalDateTime.now().plusMinutes(15));
         user.getReservations().add(reservation);
         userRepository.update(user);
         reservationRepository.add(reservation);
-        emailManager.sendEmail(reservationRequest);
+        String confirmationUrl = emailManager.getEmailProperty("url") + reservationRequest.getToken();
+        emailManager.sendEmail(new BookReservationEmailBuilder(book.getTitle(), confirmationUrl), reservationRequest.getUserView().getEmail());
         return reservation;
     }
 
@@ -94,12 +104,12 @@ public class ReservationService {
     }
 
     @Transactional
-    public ReservationView findReservationViewByToken(String token) {
+    public Optional<ReservationView> findReservationViewByToken(String token) {
         Reservation reservation = reservationRepository.findReservationByToken(token).get();
         ReservationView reservationView = reservationMapper.mapEntityToView(reservation);
         reservationView.setBookView(bookMapper.mapEntityToView(reservation.getBook()));
         reservationView.setUserView(userMapper.mapEntityToView(reservation.getUser()));
-        return reservationView;
+        return Optional.of(reservationView);
     }
 
     @Transactional
@@ -142,6 +152,13 @@ public class ReservationService {
                     .filter(reservation -> !reservation.getConfirmed())
                     .forEach(this::removeUnconfirmedReservation);
         }
+    }
+
+    public String getConfirmationResult(ReservationView reservationView) {
+        if (confirmReservation(reservationView)) {
+            return CONFIRMATION_SUCCESS;
+        }
+        return CONFIRMATION_FAILURE;
     }
 
 }

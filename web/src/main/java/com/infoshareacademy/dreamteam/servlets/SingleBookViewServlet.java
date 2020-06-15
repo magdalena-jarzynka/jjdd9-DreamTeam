@@ -5,6 +5,7 @@ import com.infoshareacademy.dreamteam.domain.view.BookView;
 import com.infoshareacademy.dreamteam.freemarker.TemplatePrinter;
 import com.infoshareacademy.dreamteam.initializer.ModelInitializer;
 import com.infoshareacademy.dreamteam.service.BookService;
+import com.infoshareacademy.dreamteam.service.ValidationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,37 +35,24 @@ public class SingleBookViewServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html; charset=UTF-8");
         Map<String, Object> model = modelInitializer.initModel(req);
-        String param = req.getParameter("id");
-        long bookId = 0;
-        try {
-            bookId = Long.parseLong(param);
-        } catch (NumberFormatException e) {
-            logger.error(e.getMessage());
+        String bookIdParameter = req.getParameter("id");
+
+        if (ValidationService.validateIfParsableToLong(bookIdParameter)) {
+            BookView bookView = bookService.findBookViewById(Long.parseLong(bookIdParameter));
+            model.put("book", bookView);
+            model.put("reserved", !bookView.getReservationViews().isEmpty());
         }
-        BookView bookView = bookService.findBookViewById(bookId);
-        model.put("book", bookView);
 
         UserContextHolder userContextHolder = new UserContextHolder(req.getSession());
-        String userIdString = userContextHolder.getId();
-        long userId = 0L;
-        if(!userIdString.equals("null")){
-            userId = Long.parseLong(userIdString);
-        }
-        String userRole = userContextHolder.getRole();
-        model.put("userId", userId);
-        model.put("userRole", userRole);
+        model.put("userRole", userContextHolder.getRole());
 
-        boolean reserved = false;
-        if(!bookView.getReservationViews().isEmpty()){
-            reserved = true;
+        if (ValidationService.validateIfParsableToLong(userContextHolder.getId())) {
+            model.put("userId", Long.parseLong(userContextHolder.getId()));
         }
-        model.put("reserved", reserved);
 
         templatePrinter.printTemplate(resp, model, getServletContext(),
                 "single-book-view.ftlh");
-
 
     }
 

@@ -26,7 +26,7 @@ public class ReservationController {
     private UserService userService;
 
     @POST
-    @Path("/add-reservation/{userId}/book/{bookId}")
+    @Path("/users/{userId}/books/{bookId}")
     public Response addReservation(@PathParam("userId") Long userId,
                                    @PathParam("bookId") Long bookId) {
 
@@ -41,7 +41,7 @@ public class ReservationController {
     }
 
     @DELETE
-    @Path("/cancel-reservation/{userId}/book/{bookId}")
+    @Path("/users/{userId}/books/{bookId}")
     public Response cancelReservation(@PathParam("userId") Long userId,
                                       @PathParam("bookId") Long bookId) {
         reservationService.delete(userId, bookId);

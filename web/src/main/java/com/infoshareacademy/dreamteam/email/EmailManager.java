@@ -1,8 +1,5 @@
 package com.infoshareacademy.dreamteam.email;
 
-import com.infoshareacademy.dreamteam.domain.request.ReservationRequest;
-import com.infoshareacademy.dreamteam.domain.view.BookView;
-import com.infoshareacademy.dreamteam.domain.view.UserView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,9 +15,8 @@ import java.util.Properties;
 public class EmailManager {
 
     private static final Logger logger = LoggerFactory.getLogger(EmailManager.class.getName());
-    public static final String MAIL_TITLE = "Potwierdź rezerwację swojej książki";
 
-    public void sendEmail(ReservationRequest reservationRequest) {
+    public void sendEmail(EmailMessageBuilder emailMessageBuilder, String recipient) {
         final String username = getEmailProperty("username");
         final String password = getEmailProperty("password");
 
@@ -35,36 +31,30 @@ public class EmailManager {
             Message message = new MimeMessage(session);
             Multipart multiPart = new MimeMultipart("alternative");
             message.setFrom(new InternetAddress(getEmailProperty("email")));
-            UserView userView = reservationRequest.getUserView();
             message.setRecipients(
                     Message.RecipientType.TO,
-                    InternetAddress.parse(userView.getEmail())
+                    InternetAddress.parse(recipient)
             );
 
-            BookView bookView = reservationRequest.getBookView();
             MimeBodyPart textPart = new MimeBodyPart();
-            textPart.setText("Szanowny czytelniku/Szanowna czytelniczko, \n\n" +
-                    "Chcąc potwierdzić rezerwację książki: " + "\"" + bookView.getTitle() +
-                    "\"" + " kliknij w poniższy link w ciągu najbliższych 15 minut: \n" +
-                    getEmailProperty("url") + reservationRequest.getToken() +
-                    "\n\nŻyczymy miłego dnia, załoga DreamTeam.", "utf-8");
+            textPart.setText(emailMessageBuilder.buildContent(), "utf-8");
             multiPart.addBodyPart(textPart);
             try {
-                message.setSubject(MimeUtility.encodeText(MAIL_TITLE, "utf-8", "B"));
+                message.setSubject(MimeUtility.encodeText(emailMessageBuilder.buildSubject(), "utf-8", "B"));
             } catch (UnsupportedEncodingException e) {
-                logger.info(String.format("Problem occurred when encoding the email title: \" %s", e.getMessage()));
+                logger.info(String.format("Problem occurred when encoding the email title: %s", e.getMessage()));
             }
             message.setContent(multiPart);
             Transport.send(message);
 
         } catch (MessagingException e) {
-            logger.info(String.format("Problem occurred when sending the confirmation email: %s", e.getMessage()));
+            logger.info(String.format("Problem occurred when sending an email: %s", e.getMessage()));
         }
     }
 
-    private Properties getSessionProperties(){
+    private Properties getSessionProperties() {
         Properties properties = new Properties();
-        try{
+        try {
             properties.load(Objects.requireNonNull(Thread.currentThread()
                     .getContextClassLoader().getResource("session.properties"))
                     .openStream());
@@ -74,7 +64,7 @@ public class EmailManager {
         return properties;
     }
 
-    private String getEmailProperty(String property) {
+    public String getEmailProperty(String property) {
         Properties properties = new Properties();
         try {
             properties.load(Objects.requireNonNull(Thread.currentThread()

@@ -1,9 +1,9 @@
 $(".add-reservation").click(function () {
     $.ajax({
         type: 'POST',
-        url: '/api/reservations/add-reservation/'
+        url: '/api/reservations/users/'
             + $(this).attr('data-id-user')
-            + '/book/'
+            + '/books/'
             + $(this).attr('data-id-book'),
         success: function () {
             alert("Na twój adres e-mail został wysłany link" +
@@ -16,9 +16,9 @@ $(".add-reservation").click(function () {
 $(".cancel-reservation").click(function () {
     $.ajax({
         type: 'DELETE',
-        url: '/api/reservations/cancel-reservation/'
+        url: '/api/reservations/users/'
             + $(this).attr('data-id-user')
-            + '/book/'
+            + '/books/'
             + $(this).attr('data-id-book'),
         success: function (result) {
             alert('Rezerwacja książki została anulowana.');
