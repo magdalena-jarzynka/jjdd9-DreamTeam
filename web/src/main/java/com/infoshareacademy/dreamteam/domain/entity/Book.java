@@ -23,18 +23,28 @@ import java.util.List;
                 query = "SELECT COUNT(b) FROM Book b"
         ),
         @NamedQuery(
-                name = "Book.countByAudioAndGenre",
+                name = "Book.countByAudioAndGenreAndStringOfCharacters",
                 query = "SELECT COUNT(b) FROM Book b " +
                         "INNER JOIN b.genres g " +
+                        "INNER JOIN b.authors a " +
                         "WHERE (b.audio =:audio OR :audio is null) " +
-                        "AND (g.name =:genre OR :genre is null)"
+                        "AND (g.name =:genre OR :genre is null) " +
+                        "AND (b.title like :stringOfCharacters OR a.name like :stringOfCharacters)"
         ),
         @NamedQuery(
-                name = "Book.findByAudioAndGenre",
+                name = "Book.findByAudioAndGenreAndStringOfCharacters",
                 query = "SELECT DISTINCT b FROM Book b " +
                         "INNER JOIN b.genres g " +
+                        "INNER JOIN b.authors a " +
                         "WHERE (b.audio =:audio OR :audio is null) " +
-                        "AND (g.name =:genre OR :genre is null)"
+                        "AND (g.name =:genre OR :genre is null) "+
+                        "AND (b.title like :stringOfCharacters OR a.name like :stringOfCharacters)"
+        ),
+        @NamedQuery(
+                name = "Book.findByStringOfCharacters",
+                query = "SELECT DISTINCT b FROM Book b " +
+                        "INNER JOIN b.authors a " +
+                        "WHERE b.title like :stringOfCharacters OR a.name like :stringOfCharacters"
         ),
 })
 

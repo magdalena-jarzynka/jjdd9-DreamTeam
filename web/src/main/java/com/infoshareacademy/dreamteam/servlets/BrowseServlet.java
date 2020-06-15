@@ -37,27 +37,32 @@ public class BrowseServlet extends HttpServlet {
         int pageSize = Integer.parseInt(req.getParameter("pageSize"));
         String audio = req.getParameter("audio");
         String genre = req.getParameter("genre");
+        String search = req.getParameter("search");
         Map<String, Object> tableData = new HashMap<>();
         long rows;
 
         if ((audio == null || audio.equals("blank")) && (genre == null || genre.equals("blank"))) {
-            tableData.put("books", bookService.findBooks(startPage * pageSize));
-            rows = bookService.countBooks();
-        } else {
-            tableData.put("books", bookService.findBooksByAudioAndGenre(startPage * pageSize, audio, genre));
-            rows = bookService.countBooksByAudioAndGenre(audio, genre);
+            if ((audio == null || audio.equals("blank"))
+                    && (genre == null || genre.equals("blank"))
+                    && (search == null || search.isEmpty())) {
+                tableData.put("books", bookService.findBooks(startPage * pageSize));
+                rows = bookService.countBooks();
+            } else {
+                tableData.put("books", bookService.findBooksByAudioAndGenreAndStringOfCharacters(startPage * pageSize, audio, genre, search));
+                rows = bookService.countBooksByAudioAndGenreAndStringOfCharacters(audio, genre, search);
+            }
+
+            tableData.put("pageNum", startPage + 1);
+
+            long numberOfPages = rows / pageSize;
+            if (numberOfPages % pageSize > 0) {
+                numberOfPages++;
+            }
+
+            tableData.put("genres", bookService.getGenres());
+            tableData.put("numberOfPages", numberOfPages);
+
+            templatePrinter.printTemplate(resp, tableData, getServletContext(), "browse-table.ftlh");
         }
-
-        tableData.put("pageNum", startPage + 1);
-
-        long numberOfPages = rows / pageSize;
-        if (numberOfPages % pageSize > 0) {
-            numberOfPages++;
-        }
-
-        tableData.put("genres", bookService.getGenres());
-        tableData.put("numberOfPages", numberOfPages);
-
-        templatePrinter.printTemplate(resp, tableData, getServletContext(), "browse-table.ftlh");
     }
 }

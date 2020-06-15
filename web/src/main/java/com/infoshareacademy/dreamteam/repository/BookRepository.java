@@ -18,11 +18,13 @@ public interface BookRepository {
 
     Long countBooks();
 
-    Long countBooksByAudioAndGenre(Boolean audio, String genre);
+    Long countBooksByAudioAndGenreAndStringOfCharacters(Boolean audio, String genre, String stringOfCharacters);
 
     List<Book> findBooks(int offset, int limit);
 
-    List<Book> findBooksByAudioAndGenre(int offset, int limit, Boolean audio, String genre);
+    List<Book> findBooksByAudioAndGenreAndStringOfCharacters(int offset, int limit, Boolean audio, String genre, String stringOfCharacters);
+
+    List<Book> findBooksByStringOfCharacters(String stringOfCharacters);
 
     List<String> getGenres();
 }
