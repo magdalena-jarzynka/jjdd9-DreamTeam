@@ -114,7 +114,7 @@ public class ReservationService {
     }
 
     @Transactional
-    public List<ReservationView> findReservationsByUser(UserView userView) {
+    private List<ReservationView> findReservationsByUser(UserView userView) {
         User user = userService.findUserById(userView.getId());
         List<Reservation> reservations = user.getReservations();
         List<ReservationView> reservationViews = new ArrayList<>();
@@ -127,7 +127,7 @@ public class ReservationService {
         return reservationViews;
     }
 
-    private List<ReservationView> findConfirmedReservationsByUser(Long userId) {
+    public List<ReservationView> findConfirmedReservationsByUser(Long userId) {
         return findReservationsByUser(userService.findUserViewById(userId))
                 .stream()
                 .filter(ReservationView::getConfirmed)
