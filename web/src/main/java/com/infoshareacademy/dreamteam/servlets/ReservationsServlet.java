@@ -47,11 +47,7 @@ public class ReservationsServlet extends HttpServlet {
 
             long userId = Long.parseLong(userContextHolder.getId());
             model.put("userId", userId);
-
-            model.put("userReservations", reservationService.findReservationsByUser(userService.findUserViewById(userId))
-                    .stream()
-                    .filter(ReservationView::getConfirmed)
-                    .collect(Collectors.toList()));
+            model.put("userReservations", reservationService.findConfirmedReservationsByUser(userId));
 
             templatePrinter.printTemplate(resp, model, getServletContext(),
                     "reservations.ftlh");

@@ -25,6 +25,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequestScoped
 public class ReservationService {
@@ -126,6 +127,13 @@ public class ReservationService {
         return reservationViews;
     }
 
+    public List<ReservationView> findConfirmedReservationsByUser(Long userId) {
+        return findReservationsByUser(userService.findUserViewById(userId))
+                .stream()
+                .filter(ReservationView::getConfirmed)
+                .collect(Collectors.toList());
+    }
+
     public ReservationView findReservationByUserIdAndBookId(Long userId, Long bookId) {
         Reservation reservation = reservationRepository.findReservationRequestByUserIdAndBookId(userId, bookId).get();
         ReservationView reservationView = reservationMapper.mapEntityToView(reservation);
@@ -160,5 +168,7 @@ public class ReservationService {
         }
         return CONFIRMATION_FAILURE;
     }
+
+
 
 }
