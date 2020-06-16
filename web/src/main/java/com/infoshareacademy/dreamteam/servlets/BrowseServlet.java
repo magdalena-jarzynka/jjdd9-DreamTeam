@@ -26,6 +26,7 @@ public class BrowseServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
+        resp.setContentType("text/html; charset=UTF-8");
         Map<String, Object> model = modelInitializer.initModel(req);
         templatePrinter.printTemplate(resp, model, getServletContext(),
                 "browse.ftlh");
@@ -33,6 +34,7 @@ public class BrowseServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
+        resp.setContentType("text/html; charset=UTF-8");
         int startPage = Integer.parseInt(req.getParameter("pageNum")) - 1;
         int pageSize = Integer.parseInt(req.getParameter("pageSize"));
         String audio = req.getParameter("audio");

@@ -39,6 +39,7 @@ public class ReservationsServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html; charset=UTF-8");
         boolean isLoggedIn = Boolean.parseBoolean(String.valueOf(req.getAttribute("isLoggedIn")));
         Map<String, Object> model = modelInitializer.initModel(req);
         UserContextHolder userContextHolder = new UserContextHolder(req.getSession());

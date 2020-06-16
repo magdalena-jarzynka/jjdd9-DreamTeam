@@ -17,6 +17,7 @@ public class SearchServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        resp.setContentType("text/html; charset=UTF-8");
         String searchString = req.getParameter("search");
         resp.getWriter().write(bookService.getSearchListJson(searchString));
 

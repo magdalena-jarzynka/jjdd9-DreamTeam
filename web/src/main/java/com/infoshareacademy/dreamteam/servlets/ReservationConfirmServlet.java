@@ -30,6 +30,7 @@ public class ReservationConfirmServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html; charset=UTF-8");
         Map<String, Object> model = modelInitializer.initModel(req);
         String reservationToken = req.getParameter("token");
         Optional<ReservationView> reservationOpt = reservationService.findReservationViewByToken(reservationToken);
