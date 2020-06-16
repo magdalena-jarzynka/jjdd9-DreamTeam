@@ -11,7 +11,6 @@ public class LeftColumnBuilder {
         Map<String, Object> leftColumn = new HashMap<>();
         leftColumn.put("main_page", LeftColumnMenuList.MAIN_PAGE.getLabel());
         leftColumn.put("browse", LeftColumnMenuList.BROWSE.getLabel());
-        leftColumn.put("search", LeftColumnMenuList.SEARCH.getLabel());
 
         leftColumn.put("favourites", LeftColumnMenuList.FAVOURITES.getLabel());
         leftColumn.put("reservations", LeftColumnMenuList.RESERVATIONS.getLabel());

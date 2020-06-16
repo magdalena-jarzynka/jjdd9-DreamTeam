@@ -47,15 +47,18 @@ public class BrowseServlet extends HttpServlet {
         int pageSize = Integer.parseInt(req.getParameter("pageSize"));
         String audio = req.getParameter("audio");
         String genre = req.getParameter("genre");
+        String search = req.getParameter("search");
         String userRole = userContextHolder.getRole();
         Map<String, Object> tableData = new HashMap<>();
         long rows;
-        if ((audio == null || audio.equals("blank")) && (genre == null || genre.equals("blank"))) {
+        if ((audio == null || audio.equals("blank"))
+                && (genre == null || genre.equals("blank"))
+                && (search == null || search.isEmpty())) {
             tableData.put("books", bookService.findBooks(startPage * pageSize));
             rows = bookService.countBooks();
         } else {
-            tableData.put("books", bookService.findBooksByAudioAndGenre(startPage * pageSize, audio, genre));
-            rows = bookService.countBooksByAudioAndGenre(audio, genre);
+            tableData.put("books", bookService.findBooksByAudioAndGenreAndStringOfCharacters(startPage * pageSize, audio, genre, search));
+            rows = bookService.countBooksByAudioAndGenreAndStringOfCharacters(audio, genre, search);
         }
 
         tableData.put("pageNum", startPage + 1);
