@@ -127,7 +127,7 @@ public class ReservationService {
         return reservationViews;
     }
 
-    public List<ReservationView> findConfirmedReservationsByUser(Long userId) {
+    private List<ReservationView> findConfirmedReservationsByUser(Long userId) {
         return findReservationsByUser(userService.findUserViewById(userId))
                 .stream()
                 .filter(ReservationView::getConfirmed)
