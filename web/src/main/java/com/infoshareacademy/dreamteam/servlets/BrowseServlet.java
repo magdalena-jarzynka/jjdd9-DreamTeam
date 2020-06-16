@@ -26,7 +26,7 @@ public class BrowseServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
-        
+
         Map<String, Object> model = modelInitializer.initModel(req);
         templatePrinter.printTemplate(resp, model, getServletContext(),
                 "browse.ftlh");
@@ -34,7 +34,7 @@ public class BrowseServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
-        
+
         int startPage = Integer.parseInt(req.getParameter("pageNum")) - 1;
         int pageSize = Integer.parseInt(req.getParameter("pageSize"));
         String audio = req.getParameter("audio");
@@ -43,28 +43,27 @@ public class BrowseServlet extends HttpServlet {
         Map<String, Object> tableData = new HashMap<>();
         long rows;
 
-        if ((audio == null || audio.equals("blank")) && (genre == null || genre.equals("blank"))) {
-            if ((audio == null || audio.equals("blank"))
-                    && (genre == null || genre.equals("blank"))
-                    && (search == null || search.isEmpty())) {
-                tableData.put("books", bookService.findBooks(startPage * pageSize));
-                rows = bookService.countBooks();
-            } else {
-                tableData.put("books", bookService.findBooksByAudioAndGenreAndStringOfCharacters(startPage * pageSize, audio, genre, search));
-                rows = bookService.countBooksByAudioAndGenreAndStringOfCharacters(audio, genre, search);
-            }
-
-            tableData.put("pageNum", startPage + 1);
-
-            long numberOfPages = rows / pageSize;
-            if (numberOfPages % pageSize > 0) {
-                numberOfPages++;
-            }
-
-            tableData.put("genres", bookService.getGenres());
-            tableData.put("numberOfPages", numberOfPages);
-
-            templatePrinter.printTemplate(resp, tableData, getServletContext(), "browse-table.ftlh");
+        if ((audio == null || audio.equals("blank"))
+                && (genre == null || genre.equals("blank"))
+                && (search == null || search.isEmpty())) {
+            tableData.put("books", bookService.findBooks(startPage * pageSize));
+            rows = bookService.countBooks();
+        } else {
+            tableData.put("books", bookService.findBooksByAudioAndGenreAndStringOfCharacters(startPage * pageSize, audio, genre, search));
+            rows = bookService.countBooksByAudioAndGenreAndStringOfCharacters(audio, genre, search);
         }
+
+        tableData.put("pageNum", startPage + 1);
+
+        long numberOfPages = rows / pageSize;
+        if (numberOfPages % pageSize > 0) {
+            numberOfPages++;
+        }
+
+        tableData.put("genres", bookService.getGenres());
+        tableData.put("numberOfPages", numberOfPages);
+
+        templatePrinter.printTemplate(resp, tableData, getServletContext(), "browse-table.ftlh");
     }
 }
+

@@ -11,12 +11,10 @@ import org.slf4j.LoggerFactory;
 
 import javax.ejb.EJB;
 import javax.inject.Inject;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.Map;
 
 @WebServlet("/single")
@@ -39,7 +37,7 @@ public class SingleBookViewServlet extends HttpServlet {
         Map<String, Object> model = modelInitializer.initModel(req);
         String bookIdParameter = req.getParameter("id");
 
-        if (ValidationService.validateIfParsableToLong(bookIdParameter)) {
+        if (ValidationService.validate(bookIdParameter)) {
             BookView bookView = bookService.findBookViewById(Long.parseLong(bookIdParameter));
             model.put("book", bookView);
             model.put("reserved", !bookView.getReservationViews().isEmpty());
@@ -48,7 +46,7 @@ public class SingleBookViewServlet extends HttpServlet {
         UserContextHolder userContextHolder = new UserContextHolder(req.getSession());
         model.put("userRole", userContextHolder.getRole());
 
-        if (ValidationService.validateIfParsableToLong(userContextHolder.getId())) {
+        if (ValidationService.validate(userContextHolder.getId())) {
             model.put("userId", Long.parseLong(userContextHolder.getId()));
         }
 
