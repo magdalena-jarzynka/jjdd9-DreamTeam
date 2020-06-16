@@ -48,4 +48,8 @@ public class UserContextHolder {
         httpSession.removeAttribute(ID);
     }
 
+    public Boolean isAuthenticated(){
+        return getName() != null;
+    }
+
 }

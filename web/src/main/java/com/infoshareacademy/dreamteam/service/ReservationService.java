@@ -127,6 +127,7 @@ public class ReservationService {
         return reservationViews;
     }
 
+    @Transactional
     public List<ReservationView> findConfirmedReservationsByUser(Long userId) {
         return findReservationsByUser(userService.findUserViewById(userId))
                 .stream()

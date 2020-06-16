@@ -29,8 +29,8 @@ public class ReservationConfirmServlet extends HttpServlet {
     private ModelInitializer modelInitializer;
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html; charset=UTF-8");
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
+        
         Map<String, Object> model = modelInitializer.initModel(req);
         String reservationToken = req.getParameter("token");
         Optional<ReservationView> reservationOpt = reservationService.findReservationViewByToken(reservationToken);

@@ -29,8 +29,8 @@ public class ManageServlet extends HttpServlet {
     LoadDatabaseService loadDatabaseService;
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html; charset=UTF-8");
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
+        
         boolean isAdmin = Boolean.parseBoolean(String.valueOf(req.getAttribute("isAdmin")));
         Map<String, Object> model = modelInitializer.initModel(req);
         if (isAdmin) {
@@ -44,7 +44,7 @@ public class ManageServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        resp.setContentType("text/html; charset=UTF-8");
+        
         boolean isAdmin = Boolean.parseBoolean(String.valueOf(req.getAttribute("isAdmin")));
         Map<String, Object> model = modelInitializer.initModel(req);
         if (isAdmin) {
@@ -56,6 +56,7 @@ public class ManageServlet extends HttpServlet {
         }
 
         Part part = req.getPart("json");
-//        loadDatabaseService.loadDatabase(loadDatabaseService.loadFromJson(part));
+
+        loadDatabaseService.loadFromJson(part);
     }
 }
