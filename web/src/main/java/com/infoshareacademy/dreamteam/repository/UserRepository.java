@@ -12,9 +12,11 @@ public interface UserRepository {
 
     void save(User user);
 
-    public void update(User user);
+    void update(User user);
 
     Optional<User> findUserByEmail(String email);
+
+    Optional<User> findUserById(Long id);
 
     List<User> findAll();
 

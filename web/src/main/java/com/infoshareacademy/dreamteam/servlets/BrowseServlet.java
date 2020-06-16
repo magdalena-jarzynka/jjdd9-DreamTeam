@@ -47,6 +47,7 @@ public class BrowseServlet extends HttpServlet {
         int pageSize = Integer.parseInt(req.getParameter("pageSize"));
         String audio = req.getParameter("audio");
         String genre = req.getParameter("genre");
+        String userRole = userContextHolder.getRole();
         Map<String, Object> tableData = new HashMap<>();
         long rows;
         if ((audio == null || audio.equals("blank")) && (genre == null || genre.equals("blank"))) {
@@ -66,8 +67,9 @@ public class BrowseServlet extends HttpServlet {
 
         tableData.put("genres", bookService.getGenres());
         tableData.put("numberOfPages", numberOfPages);
+        tableData.put("userRole", userRole);
         tableData.put("favourites", userService
-                .getFavourites(Long.parseLong(userContextHolder.getId())));
+                .getFavourites(userContextHolder.getId()));
         templatePrinter.printTemplate(resp, tableData, getServletContext(), "browse-table.ftlh");
     }
 }

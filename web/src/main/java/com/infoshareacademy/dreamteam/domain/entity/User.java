@@ -15,6 +15,10 @@ import java.util.List;
                 query = "SELECT u FROM User u WHERE u.email LIKE:email"
         ),
         @NamedQuery(
+                name = "User.findUserById",
+                query = "SELECT u FROM User u WHERE u.id = :id"
+        ),
+        @NamedQuery(
                 name = "User.getFavourites",
                 query = "SELECT u.favourites FROM User u WHERE u.id = :id"
         )

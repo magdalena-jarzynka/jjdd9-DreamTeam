@@ -59,10 +59,12 @@
                     </td>
                     <td>
                         <a href="/single?id=${book.id}" class="templatemo-edit-btn" style="white-space: nowrap">SZCZEGÓŁY >>></a>
-                        <#if favourites?seq_contains(book.title)>
-                        <a href="/single?id=${book.id}" class="templatemo-edit-btn" style="white-space: nowrap">Dodaj do ulubionych</a>
-                        <#else>
-                            <a href="/single?id=${book.id}" class="templatemo-edit-btn" style="white-space: nowrap">Usuń z ulubionych</a>
+                        <#if userRole != "GUEST" && favourites?seq_contains(book.title)>
+                            <a class="templatemo-edit-btn remove-favourites" data-id-book="${book.id?c}"
+                               data-id-user="${userId}" style="white-space: nowrap">Usuń z ulubionych</a>
+                        <#elseif userRole != "GUEST" && !favourites?seq_contains(book.title)>
+                            <a class="templatemo-edit-btn add-favourites" data-id-book="${book.id?c}"
+                               data-id-user="${userId}" style="white-space: nowrap">Dodaj do ulubionych</a>
                         </#if>
                     </td>
                 </tr>
@@ -111,3 +113,4 @@
         </ul>
     </div>
 </#if>
+

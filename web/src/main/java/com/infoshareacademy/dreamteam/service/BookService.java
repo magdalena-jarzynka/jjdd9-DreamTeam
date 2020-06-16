@@ -3,6 +3,7 @@ package com.infoshareacademy.dreamteam.service;
 import com.infoshareacademy.dreamteam.domain.entity.Book;
 import com.infoshareacademy.dreamteam.domain.api.BookDetailsPlain;
 import com.infoshareacademy.dreamteam.domain.api.BookPlain;
+import com.infoshareacademy.dreamteam.domain.entity.User;
 import com.infoshareacademy.dreamteam.domain.view.BookView;
 import com.infoshareacademy.dreamteam.mapper.*;
 import com.infoshareacademy.dreamteam.repository.BookRepository;
@@ -13,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.GenericType;
@@ -76,6 +78,11 @@ public class BookService {
                 .add(kindMapper.mapEntityToView(kind)));
 
         return bookView;
+    }
+
+    public Book findById(Long id) {
+        return bookRepository.findBookById(id)
+                .orElse(null);
     }
 
     public List<String> getGenres() {

@@ -33,6 +33,13 @@ public class UserRepositoryBean implements UserRepository {
     }
 
     @Override
+    public Optional<User> findUserById(Long id) {
+        Query query = entityManager.createNamedQuery("User.findUserById");
+        query.setParameter("id", id);
+        return query.getResultList().stream().findFirst();
+    }
+
+    @Override
     public List<User> findAll() {
         Query query = entityManager.createNamedQuery("User.findAll");
         return query.getResultList();

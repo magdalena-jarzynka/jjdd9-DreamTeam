@@ -26,7 +26,7 @@ public class Processor implements Runnable {
         for (BookPlain bookPlain : bookPlains) {
             BookDetailsPlain bookDetailsPlain;
             i++;
-            if(i > 100) {
+            if(i > 25) {
                 break;
             }
             try {
