@@ -1,11 +1,11 @@
 package com.infoshareacademy.dreamteam.service;
 
-import com.infoshareacademy.dreamteam.repository.RoleRepositoryBean;
-import com.infoshareacademy.dreamteam.repository.UserRepository;
 import com.infoshareacademy.dreamteam.domain.entity.User;
 import com.infoshareacademy.dreamteam.domain.request.UserRequest;
 import com.infoshareacademy.dreamteam.domain.view.UserView;
 import com.infoshareacademy.dreamteam.mapper.UserMapper;
+import com.infoshareacademy.dreamteam.repository.RoleRepositoryBean;
+import com.infoshareacademy.dreamteam.repository.UserRepository;
 import com.infoshareacademy.dreamteam.role.RoleType;
 
 import javax.ejb.EJB;
@@ -31,6 +31,15 @@ public class UserService {
 
     public User findUserByEmail(String email) {
         return userRepository.findUserByEmail(email).orElse(null);
+    }
+
+    public UserView findUserViewById(Long id) {
+        User user = userRepository.findUserById(id).orElseThrow();
+        return userMapper.mapEntityToView(user);
+    }
+
+    public User findUserById(Long id) {
+        return userRepository.findUserById(id).orElse(null);
     }
 
     public List<User> findAll() {

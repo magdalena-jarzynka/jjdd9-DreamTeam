@@ -26,7 +26,6 @@ public class BrowseServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
-        resp.setContentType("text/html; charset=UTF-8");
 
         Map<String, Object> model = modelInitializer.initModel(req);
         templatePrinter.printTemplate(resp, model, getServletContext(),
@@ -35,7 +34,6 @@ public class BrowseServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
-        resp.setContentType("text/html; charset=UTF-8");
 
         int startPage = Integer.parseInt(req.getParameter("pageNum")) - 1;
         int pageSize = Integer.parseInt(req.getParameter("pageSize"));
@@ -44,6 +42,7 @@ public class BrowseServlet extends HttpServlet {
         String search = req.getParameter("search");
         Map<String, Object> tableData = new HashMap<>();
         long rows;
+
         if ((audio == null || audio.equals("blank"))
                 && (genre == null || genre.equals("blank"))
                 && (search == null || search.isEmpty())) {
@@ -63,6 +62,8 @@ public class BrowseServlet extends HttpServlet {
 
         tableData.put("genres", bookService.getGenres());
         tableData.put("numberOfPages", numberOfPages);
+
         templatePrinter.printTemplate(resp, tableData, getServletContext(), "browse-table.ftlh");
     }
 }
+

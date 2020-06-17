@@ -50,6 +50,9 @@ public class BookService {
     @Inject
     private KindMapper kindMapper;
 
+    @Inject
+    private ReservationMapper reservationMapper;
+
     public void save(Book book) {
         bookRepository.save(book);
     }
@@ -62,10 +65,14 @@ public class BookService {
         return bookRepository.findByTitle(title).orElse(null);
     }
 
-    public BookView findBookById(Long id) {
+    public BookView findBookViewById(Long id) {
         Book book = bookRepository.findBookById(id)
                 .orElse(new Book("Nie znaleziono książki o podanym identyfikatorze."));
         return mapBookEntityWithRelationsToView(book);
+    }
+
+    public Book findBookById(Long id) {
+        return bookRepository.findBookById(id).orElse(new Book("Nie znaleziono książki o podanym identyfikatorze."));
     }
 
     private BookView mapBookEntityWithRelationsToView(Book book) {
@@ -78,6 +85,8 @@ public class BookService {
                 .add(genreMapper.mapEntityToView(genre)));
         book.getKinds().forEach(kind -> bookView.getKindViews()
                 .add(kindMapper.mapEntityToView(kind)));
+        book.getReservations().forEach(reservation -> bookView.getReservationViews()
+                .add(reservationMapper.mapEntityToView(reservation)));
 
         return bookView;
     }

@@ -46,7 +46,7 @@
     <div class="templatemo-content col-1 light-gray-bg">
         <div class="templatemo-top-nav-container">
             <div class="row">
-<#include "navigation.ftlh">
+                <#include "navigation.ftlh">
             </div>
         </div>
         <div class="templatemo-content-container">
@@ -55,7 +55,54 @@
                     <div class=""></div>
                     <h2 class="">REZERWACJE</h2>
                     <hr>
-                    <p>Przepraszamy. Strona w budowie.</p>
+                    <#if userReservations?has_content>
+                    <div class="panel panel-default table-responsive">
+                        <table class="table table-striped table-bordered templatemo-user-table">
+                            <thead>
+                            <tr>
+                                <td>Numer rezerwacji</td>
+                                <td>Pozycja</td>
+                                <td>Zobacz szczegóły</td>
+                                <td>Anuluj rezerwację</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <#list userReservations as reservation>
+                                <tr>
+                                    <td width="50">${reservation?index + 1}.</td>
+
+                                    <td>
+                                        <table class="table borderless">
+                                            <tr>
+                                                <td width="100">
+                                                    <img src="${reservation.bookView.cover!}" class="img-responsive"
+                                                         width="68"
+                                                         height="93">
+                                                </td>
+                                                <td>
+                                                    ${reservation.bookView.title}
+                                                </td>
+                                            </tr>
+                                        </table>
+
+                                    </td>
+                                    <td>
+                                        <a href="/single?id=${reservation.bookView.id}" class="templatemo-edit-btn"
+                                           style="white-space: nowrap">SZCZEGÓŁY >>></a>
+                                    </td>
+                                    <td>
+                                        <a class="btn templatemo-edit-btn cancel-reservation"
+                                           data-id-book="${reservation.bookView.id?c}"
+                                           data-id-user="${userId}">ANULUJ REZERWACJĘ</a>
+                                    </td>
+                                </tr>
+                            </#list>
+                            </tbody>
+                        </table>
+                        <#else>
+                            <p>Brak potwierdzonych rezerwacji</p>
+                        </#if>
+                    </div>
                 </div>
             </div>
         </div>
@@ -67,6 +114,7 @@
 <script src="js/jquery-migrate-1.2.1.min.js"></script> <!--  jQuery Migrate Plugin -->
 <script src="https://www.google.com/jsapi"></script> <!-- Google Chart -->
 <script type="text/javascript" src="js/templatemo-script.js"></script>      <!-- Templatemo Script -->
+<script type="text/javascript" src="../../js/reservation.js"></script>
 
 </body>
 </html>

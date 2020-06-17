@@ -1,10 +1,13 @@
 package com.infoshareacademy.dreamteam.domain.view;
 
+import java.util.List;
+
 public class UserView {
     private Long id;
     private String name;
     private String email;
     private String role;
+    private List<ReservationView> reservationViews;
 
     public Long getId() {
         return id;
@@ -38,4 +41,11 @@ public class UserView {
         this.role = role;
     }
 
+    public List<ReservationView> getReservationViews() {
+        return reservationViews;
+    }
+
+    public void setReservationViews(List<ReservationView> reservationViews) {
+        this.reservationViews = reservationViews;
+    }
 }

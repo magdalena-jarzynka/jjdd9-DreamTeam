@@ -16,7 +16,6 @@
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/templatemo-style.css" rel="stylesheet">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -53,17 +52,12 @@
         <div class="templatemo-content-container">
             <div class="templatemo-flex-row flex-content-row">
                 <div class="templatemo-content-widget white-bg col-2">
-                    <h2 class="">KSIĘGOZBIÓR</h2>
+                    <div class=""></div>
+                    <h2 class="">Link do rezerwacji jest niepoprawny</h2>
                     <hr>
-                    <div class="templatemo-search-form" role="search">
-                        <div class="ui-widget">
-                            <input class="form-control" placeholder="Szukaj" name="search" id="search" onchange="toPageWithNoFilters(1)" oninput="doSearch(this.value)" autocomplete="off" minlength="3">
-                        </div>
-                    </div>
-
-
-                    <div class="container-fluid">
-                    </div>
+                    <p>Upewnij się, że wybrałeś/wybrałaś prawidłowy link do potwierdzenia rezerwacji.</p>
+                    <p>Jeżeli nie potwierdziłeś/potwierdziłaś rezerwacji w ciągu 15 minut musisz dokonać rezerwacji
+                        ponownie.</p>
                 </div>
             </div>
         </div>
@@ -73,11 +67,8 @@
 <!-- JS -->
 <script src="js/jquery-1.11.2.min.js"></script>      <!-- jQuery -->
 <script src="js/jquery-migrate-1.2.1.min.js"></script> <!--  jQuery Migrate Plugin -->
-<script type="text/javascript" src="../../js/reservation.js"></script>
 <script src="https://www.google.com/jsapi"></script> <!-- Google Chart -->
 <script type="text/javascript" src="js/templatemo-script.js"></script>      <!-- Templatemo Script -->
-<script type="text/javascript" src="js/browse-script.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script type="text/javascript" src="js/search-script.js"></script>
+
 </body>
 </html>

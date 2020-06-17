@@ -66,8 +66,14 @@
                                     </#items>
                                 </#list></h5>
                             <hr>
+                            <p>
+                                <#if userRole != "GUEST" && reserved == false>
+                                    <a class="btn templatemo-edit-btn add-reservation" data-id-book="${book.id?c}"
+                                       data-id-user="${userId}">ZAREZERWUJ KSIĄŻKĘ</a>
+                                </#if>
+                            </p>
                             <#if book.translators?has_content>
-                            <p style="font-style: italic">tłum. ${book.translators}</p>
+                                <p style="font-style: italic">tłum. ${book.translators}</p>
                             </#if>
                             <#if book.genreViews?has_content>
                                 <p>Gatunek: <#list book.genreViews>
@@ -120,6 +126,7 @@
 <script src="js/jquery-migrate-1.2.1.min.js"></script> <!--  jQuery Migrate Plugin -->
 <script src="https://www.google.com/jsapi"></script> <!-- Google Chart -->
 <script type="text/javascript" src="js/templatemo-script.js"></script>      <!-- Templatemo Script -->
+<script type="text/javascript" src="../../js/reservation.js"></script>
 
 </body>
 </html>
