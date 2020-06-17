@@ -96,17 +96,21 @@ public class ReservationService {
         }
     }
 
-    public Reservation findReservationById(Long id) {
+    private Reservation findReservationById(Long id) {
         return reservationRepository.findReservationById(id).orElseThrow();
     }
 
     @Transactional
     public Optional<ReservationView> findReservationViewByToken(String token) {
-        Reservation reservation = reservationRepository.findReservationByToken(token).get();
-        ReservationView reservationView = reservationMapper.mapEntityToView(reservation);
-        reservationView.setBookView(bookMapper.mapEntityToView(reservation.getBook()));
-        reservationView.setUserView(userMapper.mapEntityToView(reservation.getUser()));
-        return Optional.of(reservationView);
+        Optional<Reservation> reservationOpt = reservationRepository.findReservationByToken(token);
+        if (reservationOpt.isPresent()) {
+            Reservation reservation = reservationOpt.get();
+            ReservationView reservationView = reservationMapper.mapEntityToView(reservation);
+            reservationView.setBookView(bookMapper.mapEntityToView(reservation.getBook()));
+            reservationView.setUserView(userMapper.mapEntityToView(reservation.getUser()));
+            return Optional.of(reservationView);
+        }
+        return Optional.empty();
     }
 
     @Transactional

@@ -69,7 +69,7 @@
                             <p>
                                 <#if userRole != "GUEST" && reserved == false>
                                     <a class="btn templatemo-edit-btn add-reservation" data-id-book="${book.id?c}"
-                                       data-id-user="${userId}">ZAEREZERWUJ KSIĄŻKĘ</a>
+                                       data-id-user="${userId}">ZAREZERWUJ KSIĄŻKĘ</a>
                                 </#if>
                             </p>
                             <#if book.translators?has_content>
