@@ -1,6 +1,7 @@
 package com.infoshareacademy.dreamteam.repository;
 
 
+import com.infoshareacademy.dreamteam.domain.entity.Book;
 import com.infoshareacademy.dreamteam.domain.entity.User;
 
 import javax.ejb.Local;
@@ -20,6 +21,6 @@ public interface UserRepository {
 
     List<User> findAll();
 
-    List<String> getFavourites(Long id);
+    List<Book> getFavourites(Long id);
 
 }

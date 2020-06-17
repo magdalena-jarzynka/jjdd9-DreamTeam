@@ -24,6 +24,7 @@ public class FavouritesService {
             return false;
         } else {
             user.getFavourites().add(book);
+            book.getFavourites().add(user);
             userservice.update(user);
             bookService.update(book);
             return true;
@@ -36,6 +37,7 @@ public class FavouritesService {
         Book book = bookService.findById(bookId);
         if(user.getFavourites().contains(book)) {
             user.getFavourites().remove(book);
+            book.getFavourites().remove(user);
             userservice.update(user);
             bookService.update(book);
             return true;

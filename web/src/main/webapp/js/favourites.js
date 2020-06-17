@@ -1,9 +1,10 @@
-$(".add-favourites").click(function() {
+$(".add-favourites").click(function () {
    $.ajax({
-   type: 'POST',
-   url: 'api/users/'
+   type: 'PUT',
+   url: '/api/favourites/users/'
        + $(this).attr('data-id-user')
-       + 'favourites',
+       + '/books/'
+       + $(this).attr('data-id-book'),
        success: function () {
        alert("Książka została dodana do ulubionych")
            location.reload();
@@ -14,9 +15,9 @@ $(".add-favourites").click(function() {
 $(".remove-favourites").click(function () {
 $.ajax({
     type: 'DELETE',
-    url: 'api/users/'
+    url: '/api/favourites/users/'
         + $(this).attr('data-id-user')
-        + 'favourites'
+        + '/books/'
         + $(this).attr('data-id-book'),
     success: function () {
         alert("Książka została usunięta ulubionych")

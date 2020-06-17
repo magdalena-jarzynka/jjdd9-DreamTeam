@@ -1,6 +1,7 @@
 package com.infoshareacademy.dreamteam.servlets;
 
 import com.infoshareacademy.dreamteam.context.UserContextHolder;
+import com.infoshareacademy.dreamteam.domain.entity.Book;
 import com.infoshareacademy.dreamteam.freemarker.TemplatePrinter;
 import com.infoshareacademy.dreamteam.initializer.ModelInitializer;
 import com.infoshareacademy.dreamteam.service.BookService;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @WebServlet("/browse")
 public class BrowseServlet extends HttpServlet {
@@ -49,6 +51,7 @@ public class BrowseServlet extends HttpServlet {
         String genre = req.getParameter("genre");
         String search = req.getParameter("search");
         String userRole = userContextHolder.getRole();
+        Long userId = userContextHolder.getId();
         Map<String, Object> tableData = new HashMap<>();
         long rows;
         if ((audio == null || audio.equals("blank"))
@@ -71,8 +74,10 @@ public class BrowseServlet extends HttpServlet {
         tableData.put("genres", bookService.getGenres());
         tableData.put("numberOfPages", numberOfPages);
         tableData.put("userRole", userRole);
+        tableData.put("userId", userId);
         tableData.put("favourites", userService
-                .getFavourites(userContextHolder.getId()));
+                .getFavourites(userContextHolder.getId()).stream()
+                .map(Book::getId).collect(Collectors.toList()));
         templatePrinter.printTemplate(resp, tableData, getServletContext(), "browse-table.ftlh");
     }
 }

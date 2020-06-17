@@ -59,12 +59,13 @@
                     </td>
                     <td>
                         <a href="/single?id=${book.id}" class="templatemo-edit-btn" style="white-space: nowrap">SZCZEGÓŁY >>></a>
-                        <#if userRole != "GUEST" && favourites?seq_contains(book.title)>
-                            <a class="templatemo-edit-btn remove-favourites" data-id-book="${book.id?c}"
-                               data-id-user="${userId}" style="white-space: nowrap">Usuń z ulubionych</a>
-                        <#elseif userRole != "GUEST" && !favourites?seq_contains(book.title)>
-                            <a class="templatemo-edit-btn add-favourites" data-id-book="${book.id?c}"
-                               data-id-user="${userId}" style="white-space: nowrap">Dodaj do ulubionych</a>
+                        <br/>
+                        <#if userRole != "GUEST" && favourites?seq_contains(book.id)>
+                            <a class="btn templatemo-edit-btn remove-favourites" data-id-book="${book.id?c}"
+                               data-id-user="${userId}">Usuń z ulubionych</a>
+                        <#elseif userRole != "GUEST" && !favourites?seq_contains(book.id)>
+                            <a class="btn templatemo-edit-btn add-favourites" data-id-book="${book.id?c}"
+                               data-id-user="${userId}">Dodaj do ulubionych</a>
                         </#if>
                     </td>
                 </tr>
@@ -113,4 +114,4 @@
         </ul>
     </div>
 </#if>
-
+<script type="text/javascript" src="js/favourites.js"></script>

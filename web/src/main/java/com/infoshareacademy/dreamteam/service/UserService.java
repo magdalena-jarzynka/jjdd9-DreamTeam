@@ -62,7 +62,7 @@ public class UserService {
         return userMapper.mapEntityToView(user);
     }
 
-    public List<String> getFavourites(Long id) {
+    public List<Book> getFavourites(Long id) {
         return Optional.ofNullable(userRepository.getFavourites(id)).orElse(null);
     }
 

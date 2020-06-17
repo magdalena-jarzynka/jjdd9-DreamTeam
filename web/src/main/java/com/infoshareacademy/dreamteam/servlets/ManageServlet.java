@@ -33,7 +33,7 @@ public class ManageServlet extends HttpServlet {
         resp.setContentType("text/html; charset=UTF-8");
         boolean isAdmin = Boolean.parseBoolean(String.valueOf(req.getAttribute("isAdmin")));
         Map<String, Object> model = modelInitializer.initModel(req);
-        if (isAdmin) {
+        if (true) {
             templatePrinter.printTemplate(resp, model, getServletContext(),
                     "manage.ftlh");
         } else {
@@ -48,7 +48,7 @@ public class ManageServlet extends HttpServlet {
 
         boolean isAdmin = Boolean.parseBoolean(String.valueOf(req.getAttribute("isAdmin")));
         Map<String, Object> model = modelInitializer.initModel(req);
-        if (isAdmin) {
+        if (true) {
             templatePrinter.printTemplate(resp, model, getServletContext(),
                     "manage.ftlh");
         } else {
@@ -57,6 +57,6 @@ public class ManageServlet extends HttpServlet {
         }
 
         Part part = req.getPart("json");
-//        loadDatabaseService.loadDatabase(loadDatabaseService.loadFromJson(part));
+        loadDatabaseService.loadFromJson(part);
     }
 }

@@ -78,6 +78,6 @@
 <script type="text/javascript" src="js/browse-script.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript" src="js/search-script.js"></script>
-<script type="text/javascript" src="../../js/reservation.js"></script>
+<script type="text/javascript" src="js/favourites.js"></script>
 </body>
 </html>
