@@ -17,48 +17,49 @@
         </#list>
     </select>
 </div>
-    <div class="panel panel-default table-responsive">
-        <table class="table table-striped table-bordered templatemo-user-table">
-            <thead>
+<div class="panel panel-default table-responsive">
+    <table class="table table-striped table-bordered templatemo-user-table">
+        <thead>
+        <tr>
+            <td></td>
+            <td>Tytuł</td>
+            <td>Autor</td>
+            <td>Gatunek</td>
+            <td>Wersja audio</td>
+            <td>Zobacz szczegóły</td>
+        </tr>
+        </thead>
+        <tbody>
+        <#list books as book>
             <tr>
-                <td></td>
-                <td>Tytuł</td>
-                <td>Autor</td>
-                <td>Gatunek</td>
-                <td>Wersja audio</td>
-                <td>Zobacz szczegóły</td>
-            </tr>
-            </thead>
-            <tbody>
-            <#list books as book>
-                <tr>
-                    <td>
-                        <img src="${book.cover!}" class="img-responsive" width="180" height="250">
-                    </td>
-                    <td>${book.title!}</td>
-                    <td>
-                        <#if book.authorViews?has_content>
+                <td>
+                    <img src="${book.cover!}" class="img-responsive" width="180" height="250">
+                </td>
+                <td>${book.title!}</td>
+                <td>
+                    <#if book.authorViews?has_content>
                         <#list book.authorViews>
                             <#items as authorView>
                                 ${authorView.name}<#sep>,
                             </#items>
                         </#list>
-                        </#if>
-                    </td>
-                    <td>
-                        <#if book.genreViews?has_content>
+                    </#if>
+                </td>
+                <td>
+                    <#if book.genreViews?has_content>
                         <#list book.genreViews>
                             <#items as genreView>
                                 ${genreView.name}<#sep>,
                             </#items>
                         </#list>
-                        </#if>
-                    </td>
-                    <td>
+                    </#if>
+                </td>
+                <td>
                     ${book.audio?then("dostępna","niedostępna")}
                     </td>
                     <td>
-                        <a href="/single?id=${book.id}" class="templatemo-edit-btn" style="white-space: nowrap">SZCZEGÓŁY >>></a>
+                        <a href="/single?id=${book.id}" class="templatemo-edit-btn" style="white-space: nowrap">SZCZEGÓŁY
+                            >>></a>
                         <br/>
                         <#if userRole != "GUEST" && favourites?seq_contains(book.id)>
                             <a class="btn templatemo-edit-btn remove-favourites" data-id-book="${book.id?c}"

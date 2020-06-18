@@ -1,8 +1,8 @@
 package com.infoshareacademy.dreamteam.concurrent;
 
-import com.infoshareacademy.dreamteam.domain.entity.Book;
 import com.infoshareacademy.dreamteam.domain.api.BookDetailsPlain;
 import com.infoshareacademy.dreamteam.domain.api.BookPlain;
+import com.infoshareacademy.dreamteam.domain.entity.Book;
 import com.infoshareacademy.dreamteam.mapper.BookMapper;
 import com.infoshareacademy.dreamteam.service.BookService;
 import org.apache.http.client.HttpResponseException;

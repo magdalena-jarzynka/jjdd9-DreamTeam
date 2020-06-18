@@ -34,6 +34,10 @@ public class UserContextHolder {
         return Optional.ofNullable((String) httpSession.getAttribute(ROLE)).orElse(String.valueOf(RoleType.GUEST));
     }
 
+    public String getId() {
+        return (String.valueOf(httpSession.getAttribute(ID)));
+    }
+
     private void setContext(UserView userView) {
         httpSession.setAttribute(NAME, userView.getName());
         httpSession.setAttribute(EMAIL, userView.getEmail());
@@ -46,6 +50,10 @@ public class UserContextHolder {
         httpSession.removeAttribute(NAME);
         httpSession.removeAttribute(ROLE);
         httpSession.removeAttribute(ID);
+    }
+
+    public Boolean isAuthenticated(){
+        return getName() != null;
     }
 
 }

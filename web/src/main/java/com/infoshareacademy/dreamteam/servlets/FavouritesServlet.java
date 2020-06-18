@@ -2,6 +2,7 @@ package com.infoshareacademy.dreamteam.servlets;
 
 import com.infoshareacademy.dreamteam.context.UserContextHolder;
 import com.infoshareacademy.dreamteam.domain.entity.Book;
+import com.infoshareacademy.dreamteam.context.UserContextHolder;
 import com.infoshareacademy.dreamteam.freemarker.TemplatePrinter;
 import com.infoshareacademy.dreamteam.initializer.ModelInitializer;
 import com.infoshareacademy.dreamteam.service.BookService;
@@ -34,11 +35,16 @@ public class FavouritesServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
-        resp.setContentType("text/html; charset=UTF-8");
-
         Map<String, Object> model = modelInitializer.initModel(req);
-        templatePrinter.printTemplate(resp, model, getServletContext(),
-                "favourites.ftlh");
+        UserContextHolder userContextHolder = new UserContextHolder(req.getSession());
+
+        if (userContextHolder.isAuthenticated()) {
+            templatePrinter.printTemplate(resp, model, getServletContext(),
+                    "favourites.ftlh");
+        } else {
+            templatePrinter.printTemplate(resp, model, getServletContext(),
+                    "no-access.ftlh");
+        }
     }
 
     @Override

@@ -12,7 +12,6 @@ import com.infoshareacademy.dreamteam.role.RoleType;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,6 +37,11 @@ public class UserService {
 
     public User findUserByEmail(String email) {
         return userRepository.findUserByEmail(email).orElse(null);
+    }
+
+    public UserView findUserViewById(Long id) {
+        User user = userRepository.findUserById(id).orElseThrow();
+        return userMapper.mapEntityToView(user);
     }
 
     public User findUserById(Long id) {

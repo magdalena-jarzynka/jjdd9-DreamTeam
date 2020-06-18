@@ -22,8 +22,8 @@ public class StatsServlet extends HttpServlet {
     private ModelInitializer modelInitializer;
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html; charset=UTF-8");
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
+        
         boolean isAdmin = Boolean.parseBoolean(String.valueOf(req.getAttribute("isAdmin")));
         Map<String, Object> model = modelInitializer.initModel(req);
         if (isAdmin) {
