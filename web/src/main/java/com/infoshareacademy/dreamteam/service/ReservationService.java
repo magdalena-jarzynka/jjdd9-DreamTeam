@@ -7,6 +7,7 @@ import com.infoshareacademy.dreamteam.domain.view.ReservationView;
 import com.infoshareacademy.dreamteam.domain.view.UserView;
 import com.infoshareacademy.dreamteam.email.BookReservationEmailBuilder;
 import com.infoshareacademy.dreamteam.email.EmailManager;
+import com.infoshareacademy.dreamteam.email.OutdatedReservationEmailBuilder;
 import com.infoshareacademy.dreamteam.mapper.BookMapper;
 import com.infoshareacademy.dreamteam.mapper.ReservationMapper;
 import com.infoshareacademy.dreamteam.mapper.UserMapper;
@@ -73,7 +74,7 @@ public class ReservationService {
         reservation.setUser(user);
 
         reservation.setStartDate(LocalDateTime.now());
-        reservation.setEndDate(LocalDateTime.now().plusMinutes(15));
+        reservation.setEndDate(LocalDateTime.now().plusMinutes(2));
         user.getReservations().add(reservation);
         userRepository.update(user);
         reservationRepository.add(reservation);
@@ -149,7 +150,7 @@ public class ReservationService {
         reservationRepository.delete(reservationView.getId());
     }
 
-    public void removeUnconfirmedReservation(Reservation reservation) {
+    public void deleteReservation(Reservation reservation) {
         reservationRepository.delete(reservation.getId());
     }
 
@@ -159,7 +160,7 @@ public class ReservationService {
             reservations.stream()
                     .filter(reservation -> reservation.getEndDate().isBefore(LocalDateTime.now()))
                     .filter(reservation -> !reservation.getConfirmed())
-                    .forEach(this::removeUnconfirmedReservation);
+                    .forEach(this::deleteReservation);
         }
     }
 
@@ -170,5 +171,16 @@ public class ReservationService {
         return CONFIRMATION_FAILURE;
     }
 
-
+    public void cancelOutdatedReservations() {
+        List<Reservation> reservations = reservationRepository.findAllReservations();
+        if (!reservations.isEmpty()) {
+            reservations.stream()
+                    .filter(reservation -> LocalDateTime.now().isAfter(reservation.getEndDate().plusMinutes(3)))
+                    .forEach(reservation -> {
+                        emailManager.sendEmail(new OutdatedReservationEmailBuilder(reservation.getBook().getTitle()),
+                                reservation.getUser().getEmail());
+                        deleteReservation(reservation);
+                    });
+        }
+    }
 }

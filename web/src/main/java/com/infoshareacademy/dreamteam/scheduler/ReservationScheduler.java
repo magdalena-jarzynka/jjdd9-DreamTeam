@@ -19,4 +19,10 @@ public class ReservationScheduler {
         reservationService.cancelUnconfirmedReservations();
     }
 
+    @Schedule(hour = "*", minute = "1/2", second = "*")
+    public void cancelOutdatedReservations() {
+        reservationService.cancelOutdatedReservations();
+    }
+
+
 }
