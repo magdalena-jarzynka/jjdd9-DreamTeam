@@ -2,7 +2,6 @@ package com.infoshareacademy.dreamteam.servlets;
 
 import com.infoshareacademy.dreamteam.context.UserContextHolder;
 import com.infoshareacademy.dreamteam.domain.entity.Book;
-import com.infoshareacademy.dreamteam.context.UserContextHolder;
 import com.infoshareacademy.dreamteam.freemarker.TemplatePrinter;
 import com.infoshareacademy.dreamteam.initializer.ModelInitializer;
 import com.infoshareacademy.dreamteam.service.BookService;
@@ -14,7 +13,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -54,11 +52,8 @@ public class FavouritesServlet extends HttpServlet {
 
         int startPage = Integer.parseInt(req.getParameter("pageNum")) - 1;
         int pageSize = Integer.parseInt(req.getParameter("pageSize"));
-        String audio = req.getParameter("audio");
-        String genre = req.getParameter("genre");
-        String search = req.getParameter("search");
         String userRole = userContextHolder.getRole();
-        Long userId = userContextHolder.getId();
+        Long userId = userContextHolder.getIdValue();
         Map<String, Object> tableData = new HashMap<>();
         long rows;
         tableData.put("books", userService.getFavourites(userId));

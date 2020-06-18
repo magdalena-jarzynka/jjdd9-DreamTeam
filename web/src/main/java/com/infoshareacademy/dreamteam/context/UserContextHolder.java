@@ -26,7 +26,7 @@ public class UserContextHolder {
         return (String) httpSession.getAttribute(NAME);
     }
 
-    public Long getId() {
+    public Long getIdValue() {
         return (Long) httpSession.getAttribute(ID);
     }
 

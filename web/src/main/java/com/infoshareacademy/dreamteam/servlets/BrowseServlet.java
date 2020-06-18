@@ -49,7 +49,7 @@ public class BrowseServlet extends HttpServlet {
         String genre = req.getParameter("genre");
         String search = req.getParameter("search");
         String userRole = userContextHolder.getRole();
-        Long userId = userContextHolder.getId();
+        Long userId = userContextHolder.getIdValue();
         Map<String, Object> tableData = new HashMap<>();
         long rows;
 
@@ -76,7 +76,7 @@ public class BrowseServlet extends HttpServlet {
         tableData.put("userRole", userRole);
         tableData.put("userId", userId);
         tableData.put("favourites", userService
-                .getFavourites(userContextHolder.getId()).stream()
+                .getFavourites(userContextHolder.getIdValue()).stream()
                 .map(Book::getId).collect(Collectors.toList()));
         templatePrinter.printTemplate(resp, tableData, getServletContext(), "browse-table.ftlh");
     }
