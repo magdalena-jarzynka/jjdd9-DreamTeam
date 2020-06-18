@@ -57,7 +57,7 @@ public class FavouritesServlet extends HttpServlet {
         Map<String, Object> tableData = new HashMap<>();
         long rows;
         tableData.put("books", userService.getFavourites(userId));
-        rows = bookService.countBooks();
+        rows = userService.getFavourites(userId).size();
         tableData.put("pageNum", startPage + 1);
 
         long numberOfPages = rows / pageSize;
