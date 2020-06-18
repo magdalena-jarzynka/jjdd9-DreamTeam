@@ -22,13 +22,8 @@ public class Processor implements Runnable {
     }
 
     public void run() {
-        int i = 0;
         for (BookPlain bookPlain : bookPlains) {
             BookDetailsPlain bookDetailsPlain;
-            i++;
-            if(i > 2) {
-                break;
-            }
             try {
                 bookDetailsPlain = bookService.parseBookDetailsFromApi(bookPlain.getHref());
             } catch (HttpResponseException e) {

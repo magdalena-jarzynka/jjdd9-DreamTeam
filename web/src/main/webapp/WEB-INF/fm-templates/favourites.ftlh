@@ -52,10 +52,17 @@
         <div class="templatemo-content-container">
             <div class="templatemo-flex-row flex-content-row">
                 <div class="templatemo-content-widget white-bg col-2">
-                    <div class=""></div>
                     <h2 class="">ULUBIONE</h2>
                     <hr>
-                    <p>Przepraszamy. Strona w budowie.</p>
+                    <div class="templatemo-search-form" role="search">
+                        <div class="ui-widget">
+                            <input class="form-control" placeholder="Szukaj" name="search" id="search" onchange="toPageWithNoFilters(1)" oninput="doSearch(this.value)" autocomplete="off" minlength="3">
+                        </div>
+                    </div>
+
+
+                    <div class="container-fluid">
+                    </div>
                 </div>
             </div>
         </div>
@@ -67,6 +74,10 @@
 <script src="js/jquery-migrate-1.2.1.min.js"></script> <!--  jQuery Migrate Plugin -->
 <script src="https://www.google.com/jsapi"></script> <!-- Google Chart -->
 <script type="text/javascript" src="js/templatemo-script.js"></script>      <!-- Templatemo Script -->
+<script type="text/javascript" src="js/favourites-script.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript" src="js/search-script.js"></script>
+<script type="text/javascript" src="js/favourites.js"></script>
 
 </body>
 </html>

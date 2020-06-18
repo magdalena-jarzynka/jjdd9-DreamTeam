@@ -27,7 +27,7 @@ import java.util.concurrent.Executor;
 public class LoadDatabaseService {
     private static final Logger logger = LoggerFactory.getLogger(LoadDatabaseService.class.getName());
 
-    private static final int THREADS_NUMBER = 1;
+    private static final int THREADS_NUMBER = 4;
 
     private static final String BASE_URL = "http://isa-proxy.blueazurit.com/books";
     private static final String AUTHORS_URL = "/authors/";
