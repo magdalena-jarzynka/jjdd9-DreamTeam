@@ -21,11 +21,9 @@ import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
+import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @RequestScoped
@@ -74,7 +72,7 @@ public class ReservationService {
         reservation.setUser(user);
 
         reservation.setStartDate(LocalDateTime.now());
-        reservation.setEndDate(LocalDateTime.now().plusMinutes(2));
+        reservation.setEndDate(LocalDateTime.now().plusMinutes(getReservationProperty("confirm.reservation.time")));
         user.getReservations().add(reservation);
         userRepository.update(user);
         reservationRepository.add(reservation);
@@ -175,7 +173,9 @@ public class ReservationService {
         List<Reservation> reservations = reservationRepository.findAllReservations();
         if (!reservations.isEmpty()) {
             reservations.stream()
-                    .filter(reservation -> LocalDateTime.now().isAfter(reservation.getEndDate().plusMinutes(3)))
+                    .filter(reservation -> LocalDateTime.now()
+                            .isAfter(reservation.getEndDate()
+                                    .plusMinutes(getReservationProperty("outdated.reservation.time"))))
                     .forEach(reservation -> {
                         emailManager.sendEmail(new OutdatedReservationEmailBuilder(reservation.getBook().getTitle()),
                                 reservation.getUser().getEmail());
@@ -183,4 +183,17 @@ public class ReservationService {
                     });
         }
     }
+
+    private Long getReservationProperty(String property) {
+        Properties properties = new Properties();
+        try {
+            properties.load(Objects.requireNonNull(Thread.currentThread()
+                    .getContextClassLoader().getResource("reservation.properties"))
+                    .openStream());
+        } catch (IOException e) {
+            logger.error(e.getMessage());
+        }
+        return Long.valueOf(properties.getProperty(property));
+    }
+
 }
