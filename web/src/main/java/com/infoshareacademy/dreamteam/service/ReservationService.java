@@ -7,6 +7,7 @@ import com.infoshareacademy.dreamteam.domain.view.ReservationView;
 import com.infoshareacademy.dreamteam.domain.view.UserView;
 import com.infoshareacademy.dreamteam.email.BookReservationEmailBuilder;
 import com.infoshareacademy.dreamteam.email.EmailManager;
+import com.infoshareacademy.dreamteam.email.OutdatedReservationEmailBuilder;
 import com.infoshareacademy.dreamteam.mapper.BookMapper;
 import com.infoshareacademy.dreamteam.mapper.ReservationMapper;
 import com.infoshareacademy.dreamteam.mapper.UserMapper;
@@ -20,11 +21,9 @@ import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
+import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @RequestScoped
@@ -73,7 +72,7 @@ public class ReservationService {
         reservation.setUser(user);
 
         reservation.setStartDate(LocalDateTime.now());
-        reservation.setEndDate(LocalDateTime.now().plusMinutes(15));
+        reservation.setEndDate(LocalDateTime.now().plusMinutes(getReservationProperty("confirm.reservation.time")));
         user.getReservations().add(reservation);
         userRepository.update(user);
         reservationRepository.add(reservation);
@@ -149,7 +148,7 @@ public class ReservationService {
         reservationRepository.delete(reservationView.getId());
     }
 
-    public void removeUnconfirmedReservation(Reservation reservation) {
+    public void deleteReservation(Reservation reservation) {
         reservationRepository.delete(reservation.getId());
     }
 
@@ -159,7 +158,7 @@ public class ReservationService {
             reservations.stream()
                     .filter(reservation -> reservation.getEndDate().isBefore(LocalDateTime.now()))
                     .filter(reservation -> !reservation.getConfirmed())
-                    .forEach(this::removeUnconfirmedReservation);
+                    .forEach(this::deleteReservation);
         }
     }
 
@@ -170,5 +169,31 @@ public class ReservationService {
         return CONFIRMATION_FAILURE;
     }
 
+    public void cancelOutdatedReservations() {
+        List<Reservation> reservations = reservationRepository.findAllReservations();
+        if (!reservations.isEmpty()) {
+            reservations.stream()
+                    .filter(reservation -> LocalDateTime.now()
+                            .isAfter(reservation.getEndDate()
+                                    .plusMinutes(getReservationProperty("outdated.reservation.time"))))
+                    .forEach(reservation -> {
+                        emailManager.sendEmail(new OutdatedReservationEmailBuilder(reservation.getBook().getTitle()),
+                                reservation.getUser().getEmail());
+                        deleteReservation(reservation);
+                    });
+        }
+    }
+
+    private Long getReservationProperty(String property) {
+        Properties properties = new Properties();
+        try {
+            properties.load(Objects.requireNonNull(Thread.currentThread()
+                    .getContextClassLoader().getResource("reservation.properties"))
+                    .openStream());
+        } catch (IOException e) {
+            logger.error(e.getMessage());
+        }
+        return Long.valueOf(properties.getProperty(property));
+    }
 
 }
