@@ -26,10 +26,6 @@ public class UserContextHolder {
         return (String) httpSession.getAttribute(NAME);
     }
 
-    public Long getIdValue() {
-        return (Long) httpSession.getAttribute(ID);
-    }
-
     public String getRole() {
         return Optional.ofNullable((String) httpSession.getAttribute(ROLE)).orElse(String.valueOf(RoleType.GUEST));
     }
