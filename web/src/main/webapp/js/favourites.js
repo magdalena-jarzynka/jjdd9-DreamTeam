@@ -20,7 +20,7 @@ $.ajax({
         + '/books/'
         + $(this).attr('data-id-book'),
     success: function () {
-        alert("Książka została usunięta ulubionych")
+        alert("Książka została usunięta z ulubionych")
         location.reload();
     }
 })

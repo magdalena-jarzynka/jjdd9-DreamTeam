@@ -46,22 +46,54 @@
     <div class="templatemo-content col-1 light-gray-bg">
         <div class="templatemo-top-nav-container">
             <div class="row">
-<#include "navigation.ftlh">
+                <#include "navigation.ftlh">
             </div>
         </div>
         <div class="templatemo-content-container">
             <div class="templatemo-flex-row flex-content-row">
                 <div class="templatemo-content-widget white-bg col-2">
+                    <div class=""></div>
                     <h2 class="">ULUBIONE</h2>
                     <hr>
-                    <div class="templatemo-search-form" role="search">
-                        <div class="ui-widget">
-                            <input class="form-control" placeholder="Szukaj" name="search" id="search" onchange="toPageWithNoFilters(1)" oninput="doSearch(this.value)" autocomplete="off" minlength="3">
-                        </div>
-                    </div>
-
-
-                    <div class="container-fluid">
+                    <#if books?has_content>
+                    <div class="panel panel-default table-responsive">
+                        <table class="table table-striped table-bordered templatemo-user-table">
+                            <thead>
+                            <tr>
+                                <td>Okładka</td>
+                                <td>Tytuł</td>
+                                <td>Opcje</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <#list books as book>
+                                <tr>
+                                    <td>
+                                        <img src="${book.cover!}" class="img-responsive" width="180" height="250">
+                                    </td>
+                                    <td>${book.title!}</td>
+                                    <td>
+                                        <a href="/single?id=${book.id}" class="templatemo-edit-btn"
+                                           style="white-space: nowrap">SZCZEGÓŁY
+                                            >>></a>
+                                        <p></p>
+                                        <#if userRole != "GUEST" && favouritesId?seq_contains(book.id)>
+                                            <a class="btn templatemo-edit-btn remove-favourites"
+                                               data-id-book="${book.id?c}"
+                                               data-id-user="${userId}">Usuń z ulubionych</a>
+                                        <#elseif userRole != "GUEST" && !favouritesId?seq_contains(book.id)>
+                                            <a class="btn templatemo-edit-btn add-favourites"
+                                               data-id-book="${book.id?c}"
+                                               data-id-user="${userId}">Dodaj do ulubionych</a>
+                                        </#if>
+                                    </td>
+                                </tr>
+                            </#list>
+                            </tbody>
+                        </table>
+                        <#else>
+                            <p>Brak ulubionych książek</p>
+                        </#if>
                     </div>
                 </div>
             </div>
@@ -75,8 +107,6 @@
 <script src="https://www.google.com/jsapi"></script> <!-- Google Chart -->
 <script type="text/javascript" src="js/templatemo-script.js"></script>      <!-- Templatemo Script -->
 <script type="text/javascript" src="js/favourites-script.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script type="text/javascript" src="js/search-script.js"></script>
 <script type="text/javascript" src="js/favourites.js"></script>
 
 </body>
