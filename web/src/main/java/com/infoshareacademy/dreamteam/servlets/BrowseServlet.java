@@ -49,7 +49,6 @@ public class BrowseServlet extends HttpServlet {
         String audio = req.getParameter("audio");
         String genre = req.getParameter("genre");
         String search = req.getParameter("search");
-        String userRole = userContextHolder.getRole();
         String userId = userContextHolder.getId();
 
         Map<String, Object> tableData = new HashMap<>();
@@ -74,8 +73,7 @@ public class BrowseServlet extends HttpServlet {
 
         tableData.put("genres", bookService.getGenres());
         tableData.put("numberOfPages", numberOfPages);
-
-        tableData.put("userRole", userRole);
+        tableData.put("userRole", userContextHolder.getRole());
         if(ValidationService.validate(userId)) {
             Long userIdLong = Long.parseLong(userId);
             tableData.put("userId", userIdLong);
