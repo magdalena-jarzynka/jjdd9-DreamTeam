@@ -69,6 +69,9 @@ public class Book {
     @Column(length = 2000)
     private String translators;
 
+    @Column(name = "reservations")
+    private Integer reservationCount;
+
     @ManyToMany(mappedBy = "books", cascade = CascadeType.ALL)
     List<Genre> genres = new ArrayList<>();
 
@@ -198,4 +201,11 @@ public class Book {
         this.translators = translators;
     }
 
+    public Integer getReservationCount() {
+        return reservationCount;
+    }
+
+    public void setReservationCount(Integer reservationCount) {
+        this.reservationCount = reservationCount;
+    }
 }

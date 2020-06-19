@@ -100,6 +100,7 @@ public class BookMapper {
             kinds.add(kind);
         }
         book.setKinds(kinds);
+        book.setReservationCount(0);
 
         return book;
     }

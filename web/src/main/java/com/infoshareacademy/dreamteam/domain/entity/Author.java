@@ -22,6 +22,9 @@ public class Author {
     @NotNull
     private String name;
 
+    @Column(name = "reservations")
+    private Integer reservationCount;
+
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "authorship",
             joinColumns = @JoinColumn(name = "author_id", referencedColumnName = "id"),
@@ -50,5 +53,13 @@ public class Author {
 
     public void setBooks(List<Book> books) {
         this.books = books;
+    }
+
+    public Integer getReservationCount() {
+        return reservationCount;
+    }
+
+    public void setReservationCount(Integer reservationCount) {
+        this.reservationCount = reservationCount;
     }
 }

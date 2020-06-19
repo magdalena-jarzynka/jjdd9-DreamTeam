@@ -88,6 +88,9 @@ public class ReservationService {
         if (!expired) {
             reservation.setConfirmed(true);
             reservationRepository.update(reservation);
+            Long bookId = reservationView.getBookView().getId();
+            Long userId = reservationView.getUserView().getId();
+
             return true;
         } else {
             reservation.getBook().getReservations().remove(reservation);
