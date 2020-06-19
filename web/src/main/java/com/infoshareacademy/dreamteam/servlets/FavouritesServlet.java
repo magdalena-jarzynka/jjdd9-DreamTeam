@@ -6,6 +6,7 @@ import com.infoshareacademy.dreamteam.freemarker.TemplatePrinter;
 import com.infoshareacademy.dreamteam.initializer.ModelInitializer;
 import com.infoshareacademy.dreamteam.service.BookService;
 import com.infoshareacademy.dreamteam.service.UserService;
+import com.infoshareacademy.dreamteam.service.ValidationService;
 
 import javax.inject.Inject;
 import javax.servlet.annotation.WebServlet;
@@ -49,15 +50,22 @@ public class FavouritesServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
         resp.setContentType("text/html; charset=UTF-8");
         UserContextHolder userContextHolder = new UserContextHolder(req.getSession());
+        Map<String, Object> tableData = new HashMap<>();
 
         int startPage = Integer.parseInt(req.getParameter("pageNum")) - 1;
         int pageSize = Integer.parseInt(req.getParameter("pageSize"));
         String userRole = userContextHolder.getRole();
-        Long userId = userContextHolder.getIdValue();
-        Map<String, Object> tableData = new HashMap<>();
+        String userId = userContextHolder.getId();
+        Long userIdLong;
+        if(ValidationService.validate(userId)) {
+            userIdLong = Long.parseLong(userId);
+        } else {
+            return;
+        }
+
         long rows;
-        tableData.put("books", userService.getFavourites(userId));
-        rows = userService.getFavourites(userId).size();
+        tableData.put("books", userService.getFavourites(userIdLong));
+        rows = userService.getFavourites(userIdLong).size();
         tableData.put("pageNum", startPage + 1);
 
         long numberOfPages = rows / pageSize;
@@ -70,7 +78,7 @@ public class FavouritesServlet extends HttpServlet {
         tableData.put("userRole", userRole);
         tableData.put("userId", userId);
         tableData.put("favourites", userService
-                .getFavourites(userId).stream()
+                .getFavourites(userIdLong).stream()
                 .map(Book::getId).collect(Collectors.toList()));
         templatePrinter.printTemplate(resp, tableData, getServletContext(), "browse-table.ftlh");
     }

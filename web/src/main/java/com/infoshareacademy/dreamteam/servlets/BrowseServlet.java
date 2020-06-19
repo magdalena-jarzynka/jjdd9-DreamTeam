@@ -6,6 +6,7 @@ import com.infoshareacademy.dreamteam.freemarker.TemplatePrinter;
 import com.infoshareacademy.dreamteam.initializer.ModelInitializer;
 import com.infoshareacademy.dreamteam.service.BookService;
 import com.infoshareacademy.dreamteam.service.UserService;
+import com.infoshareacademy.dreamteam.service.ValidationService;
 
 import javax.inject.Inject;
 import javax.servlet.annotation.WebServlet;
@@ -49,7 +50,8 @@ public class BrowseServlet extends HttpServlet {
         String genre = req.getParameter("genre");
         String search = req.getParameter("search");
         String userRole = userContextHolder.getRole();
-        Long userId = userContextHolder.getIdValue();
+        String userId = userContextHolder.getId();
+
         Map<String, Object> tableData = new HashMap<>();
         long rows;
 
@@ -74,10 +76,13 @@ public class BrowseServlet extends HttpServlet {
         tableData.put("numberOfPages", numberOfPages);
 
         tableData.put("userRole", userRole);
-        tableData.put("userId", userId);
+        if(ValidationService.validate(userId)) {
+            Long userIdLong = Long.parseLong(userId);
+            tableData.put("userId", userIdLong);
         tableData.put("favourites", userService
-                .getFavourites(userContextHolder.getIdValue()).stream()
+                .getFavourites(userIdLong).stream()
                 .map(Book::getId).collect(Collectors.toList()));
+        }
         templatePrinter.printTemplate(resp, tableData, getServletContext(), "browse-table.ftlh");
     }
 }
