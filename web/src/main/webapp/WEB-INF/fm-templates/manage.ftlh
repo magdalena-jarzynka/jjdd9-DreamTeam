@@ -59,20 +59,31 @@
                     <div class="templatemo-flex-row flex-content-row">
                         <div class="col-1">
                             <div class="panel panel-default margin-10">
-                                <div class="panel-heading"><h2 class="text-uppercase">ŁADOWANIE DANYCH Z PLIKU</h2>
+                                <div class="panel-heading"><h2 class="text-uppercase">DODAJ POZYCJĘ</h2>
                                 </div>
                                 <div class="panel-body">
-                                    <form enctype="multipart/form-data" method="post" action="/manage">
-                                        <div class="row form-group">
-                                            <div class="col-lg-12">
-                                                <label class="margin-bottom-10">Wybierz plik</label>
-                                                <input type="file" name="json">
+                                <#include "manage-add-form.ftlh">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="templatemo-flex-row flex-content-row">
+                            <div class="col-1">
+                                <div class="panel panel-default margin-10">
+                                    <div class="panel-heading"><h2 class="text-uppercase">ŁADOWANIE DANYCH Z PLIKU</h2>
+                                    </div>
+                                    <div class="panel-body">
+                                        <form enctype="multipart/form-data" method="post" action="/manage">
+                                            <div class="row form-group">
+                                                <div class="col-lg-12">
+                                                    <label class="margin-bottom-10">Wybierz plik</label>
+                                                    <input type="file" name="json">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <button type="submit" name="save" value="save"
-                                                class="templatemo-blue-button">Zapisz
-                                        </button>
-                                    </form>
+                                            <button type="submit" name="save" value="save"
+                                                    class="templatemo-blue-button">Zapisz
+                                            </button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -87,6 +98,7 @@
 
 <!-- JS -->
 <script src="js/jquery-1.11.2.min.js"></script>      <!-- jQuery -->
+<script type="text/javascript" src="js/bootstrap-filestyle.min.js"></script>  <!-- http://markusslima.github.io/bootstrap-filestyle/ -->
 <script src="js/jquery-migrate-1.2.1.min.js"></script> <!--  jQuery Migrate Plugin -->
 <script src="https://www.google.com/jsapi"></script> <!-- Google Chart -->
 <script type="text/javascript" src="js/templatemo-script.js"></script>      <!-- Templatemo Script -->

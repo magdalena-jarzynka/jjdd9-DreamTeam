@@ -1,5 +1,6 @@
 package com.infoshareacademy.dreamteam.mapper;
 
+import com.infoshareacademy.dreamteam.domain.api.dto.*;
 import com.infoshareacademy.dreamteam.domain.entity.*;
 import com.infoshareacademy.dreamteam.domain.api.*;
 import com.infoshareacademy.dreamteam.domain.view.BookView;
@@ -25,6 +26,14 @@ public class BookMapper {
     private GenreService genreService;
     @Inject
     private KindService kindService;
+    @Inject
+    private AuthorMapper authorMapper;
+    @Inject
+    private EpochMapper epochMapper;
+    @Inject
+    private GenreMapper genreMapper;
+    @Inject
+    private KindMapper kindMapper;
 
 
     public BookView mapEntityToView(Book book) {
@@ -104,4 +113,48 @@ public class BookMapper {
         return book;
     }
 
+    public Book mapToEntity(BookDto bookDto) {
+        Book book = new Book();
+        book.setTitle(bookDto.getTitle());
+        book.setAudio(bookDto.getAudio());
+        book.setIsbn(bookDto.getIsbn());
+        book.setFragment(bookDto.getFragmentData());
+        book.setTranslators(bookDto.getTranslators());
+
+        if (bookDto.getCover() == null || bookDto.getCover().isEmpty()) {
+            book.setCover("/images/missing-cover.png");
+        } else {
+            book.setCover(bookDto.getCover());
+        }
+
+        List<Author> authors = new ArrayList<>();
+        for (AuthorDto authorDto : bookDto.getAuthors()) {
+            Author author = authorMapper.mapToEntity(authorDto);
+            authors.add(author);
+        }
+        book.setAuthors(authors);
+
+        List<Epoch> epochs = new ArrayList<>();
+        for (EpochDto epochDto : bookDto.getEpochs()) {
+            Epoch epoch = epochMapper.mapToEntity(epochDto);
+            epochs.add(epoch);
+        }
+        book.setEpochs(epochs);
+
+        List<Genre> genres = new ArrayList<>();
+        for (GenreDto genreDto : bookDto.getGenres()) {
+            Genre genre = genreMapper.mapToEntity(genreDto);
+            genres.add(genre);
+        }
+        book.setGenres(genres);
+
+        List<Kind> kinds = new ArrayList<>();
+        for (KindDto kindDto : bookDto.getKinds()) {
+            Kind kind = kindMapper.mapToEntity(kindDto);
+            kinds.add(kind);
+        }
+        book.setKinds(kinds);
+
+        return book;
+    }
 }

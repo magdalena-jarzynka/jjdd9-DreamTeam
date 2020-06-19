@@ -1,5 +1,6 @@
 package com.infoshareacademy.dreamteam.mapper;
 
+import com.infoshareacademy.dreamteam.domain.api.dto.GenreDto;
 import com.infoshareacademy.dreamteam.domain.entity.Genre;
 import com.infoshareacademy.dreamteam.domain.view.GenreView;
 
@@ -13,6 +14,12 @@ public class GenreMapper {
         genreView.setId(genre.getId());
         genreView.setName(genre.getName());
         return genreView;
+    }
+
+    public Genre mapToEntity(GenreDto genreDto) {
+        Genre genre = new Genre();
+        genre.setName(genreDto.getName());
+        return genre;
     }
 
 }

@@ -1,5 +1,6 @@
 package com.infoshareacademy.dreamteam.mapper;
 
+import com.infoshareacademy.dreamteam.domain.api.dto.EpochDto;
 import com.infoshareacademy.dreamteam.domain.entity.Epoch;
 import com.infoshareacademy.dreamteam.domain.view.EpochView;
 
@@ -15,4 +16,9 @@ public class EpochMapper {
         return epochView;
     }
 
+    public Epoch mapToEntity(EpochDto epochDto) {
+        Epoch epoch = new Epoch();
+        epoch.setName(epochDto.getName());
+        return epoch;
+    }
 }
