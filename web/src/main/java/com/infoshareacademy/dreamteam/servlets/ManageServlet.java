@@ -54,9 +54,7 @@ public class ManageServlet extends HttpServlet {
             templatePrinter.printTemplate(resp, model, getServletContext(),
                     "no-access.ftlh");
         }
-
         Part part = req.getPart("json");
-
         loadDatabaseService.loadFromJson(part);
     }
 }
