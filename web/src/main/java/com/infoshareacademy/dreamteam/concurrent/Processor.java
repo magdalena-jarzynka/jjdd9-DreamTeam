@@ -22,7 +22,12 @@ public class Processor implements Runnable {
     }
 
     public void run() {
+        int i = 0;
         for (BookPlain bookPlain : bookPlains) {
+            if (i > 25) {
+                break;
+            }
+            i++;
             BookDetailsPlain bookDetailsPlain;
             try {
                 bookDetailsPlain = bookService.parseBookDetailsFromApi(bookPlain.getHref());
