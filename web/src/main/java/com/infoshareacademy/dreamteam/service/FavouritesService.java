@@ -2,7 +2,6 @@ package com.infoshareacademy.dreamteam.service;
 
 import com.infoshareacademy.dreamteam.domain.entity.Book;
 import com.infoshareacademy.dreamteam.domain.entity.User;
-import com.infoshareacademy.dreamteam.email.BookReservationEmailBuilder;
 import com.infoshareacademy.dreamteam.email.EmailManager;
 import com.infoshareacademy.dreamteam.email.FavouriteBookEmailBuilder;
 
@@ -29,7 +28,7 @@ public class FavouritesService {
     public boolean addBookToFavourites(Long bookId, Long userId) {
         User user = userService.findUserById(userId);
         Book book = bookService.findById(bookId);
-        if(user.getFavourites().contains(book)) {
+        if (user.getFavourites().contains(book)) {
             return false;
         } else {
             user.getFavourites().add(book);
@@ -44,7 +43,7 @@ public class FavouritesService {
     public boolean removeBookFromFavourites(Long bookId, Long userId) {
         User user = userService.findUserById(userId);
         Book book = bookService.findById(bookId);
-        if(user.getFavourites().contains(book)) {
+        if (user.getFavourites().contains(book)) {
             user.getFavourites().remove(book);
             book.getFavourites().remove(user);
             userService.update(user);
@@ -56,12 +55,12 @@ public class FavouritesService {
     }
 
     @Transactional
-    public void favouriteRemoval(Long bookId) {
+    public void mailAboutFavouriteRemoval(Long bookId) {
         Book book = bookService.findById(bookId);
-        for(User user: userService.findAll()) {
+        for (User user : userService.findAll()) {
             List<Long> favouritesId = userService.getFavourites(user.getId()).stream()
                     .map(Book::getId).collect(Collectors.toList());
-            if(favouritesId.contains(bookId)) {
+            if (favouritesId.contains(bookId)) {
                 removeBookFromFavourites(bookId, user.getId());
                 emailManager.sendEmail(new FavouriteBookEmailBuilder(book.getTitle()), user.getEmail());
             }

@@ -3,7 +3,6 @@ package com.infoshareacademy.dreamteam.repository;
 
 import com.infoshareacademy.dreamteam.domain.entity.Book;
 import com.infoshareacademy.dreamteam.domain.entity.User;
-import com.infoshareacademy.dreamteam.domain.view.UserView;
 
 import javax.ejb.Local;
 import java.util.List;
