@@ -26,7 +26,7 @@
             <td>Autor</td>
             <td>Gatunek</td>
             <td>Wersja audio</td>
-            <td>Zobacz szczegóły</td>
+            <td>Opcje</td>
         </tr>
         </thead>
         <tbody>
@@ -60,7 +60,7 @@
                     <td>
                         <a href="/single?id=${book.id}" class="templatemo-edit-btn" style="white-space: nowrap">SZCZEGÓŁY
                             >>></a>
-                        <br/>
+                        <p></p>
                         <#if userRole != "GUEST" && favourites?seq_contains(book.id)>
                             <a class="btn templatemo-edit-btn remove-favourites" data-id-book="${book.id?c}"
                                data-id-user="${userId}">Usuń z ulubionych</a>
