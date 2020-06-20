@@ -60,23 +60,34 @@
                         <table class="table table-striped table-bordered templatemo-user-table">
                             <thead>
                             <tr>
-                                <td>Okładka</td>
-                                <td>Tytuł</td>
-                                <td>Opcje</td>
+                                <td>Pozycja</td>
+                                <td>Zobacz szczegóły</td>
+                                <td>Edytuj ulubione</td>
                             </tr>
                             </thead>
                             <tbody>
                             <#list books as book>
                                 <tr>
                                     <td>
-                                        <img src="${book.cover!}" class="img-responsive" width="180" height="250">
+                                        <table class="table borderless">
+                                            <tr>
+                                                <td width="100">
+                                                    <img src="${book.cover!}" class="img-responsive"
+                                                         width="68"
+                                                         height="93">
+                                                </td>
+                                                <td>
+                                                    ${book.title!}
+                                                </td>
+                                            </tr>
+                                        </table>
                                     </td>
-                                    <td>${book.title!}</td>
                                     <td>
                                         <a href="/single?id=${book.id}" class="templatemo-edit-btn"
                                            style="white-space: nowrap">SZCZEGÓŁY
                                             >>></a>
-                                        <p></p>
+                                    </td>
+                                    <td>
                                         <#if userRole != "GUEST" && favouritesId?seq_contains(book.id)>
                                             <a class="btn templatemo-edit-btn remove-favourites"
                                                data-id-book="${book.id?c}"
