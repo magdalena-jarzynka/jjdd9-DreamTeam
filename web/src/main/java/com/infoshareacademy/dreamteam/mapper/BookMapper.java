@@ -1,8 +1,8 @@
 package com.infoshareacademy.dreamteam.mapper;
 
+import com.infoshareacademy.dreamteam.domain.api.*;
 import com.infoshareacademy.dreamteam.domain.api.dto.*;
 import com.infoshareacademy.dreamteam.domain.entity.*;
-import com.infoshareacademy.dreamteam.domain.api.*;
 import com.infoshareacademy.dreamteam.domain.view.BookView;
 import com.infoshareacademy.dreamteam.service.AuthorService;
 import com.infoshareacademy.dreamteam.service.EpochService;
@@ -52,8 +52,8 @@ public class BookMapper {
         return bookView;
     }
 
-    public Book mapPlainAudioToEntity(BookPlain bookPlain, Book book){
-        if(bookPlain.getAudio() != null) {
+    public Book mapPlainAudioToEntity(BookPlain bookPlain, Book book) {
+        if (bookPlain.getAudio() != null) {
             book.setAudio(bookPlain.getAudio());
         } else {
             book.setAudio(false);
@@ -65,7 +65,7 @@ public class BookMapper {
         Book book = new Book();
         book.setId(bookDetailsPlain.getId());
         book.setTitle(bookDetailsPlain.getTitle());
-        if(bookDetailsPlain.getFragmentData() != null) {
+        if (bookDetailsPlain.getFragmentData() != null) {
             book.setFragment(bookDetailsPlain.getFragmentData().getHtml());
         }
         book.setIsbn(bookDetailsPlain.getIsbn());
@@ -129,28 +129,44 @@ public class BookMapper {
 
         List<Author> authors = new ArrayList<>();
         for (AuthorDto authorDto : bookDto.getAuthors()) {
-            Author author = authorMapper.mapToEntity(authorDto);
+            Author author = authorService.findByName(authorDto.getName());
+            if (author == null) {
+                author = authorMapper.mapToEntity(authorDto);
+            }
+            author.getBooks().add(book);
             authors.add(author);
         }
         book.setAuthors(authors);
 
         List<Epoch> epochs = new ArrayList<>();
         for (EpochDto epochDto : bookDto.getEpochs()) {
-            Epoch epoch = epochMapper.mapToEntity(epochDto);
+            Epoch epoch = epochService.findByName(epochDto.getName());
+            if (epoch == null) {
+                epoch = epochMapper.mapToEntity(epochDto);
+            }
+            epoch.getBooks().add(book);
             epochs.add(epoch);
         }
         book.setEpochs(epochs);
 
         List<Genre> genres = new ArrayList<>();
         for (GenreDto genreDto : bookDto.getGenres()) {
-            Genre genre = genreMapper.mapToEntity(genreDto);
+            Genre genre = genreService.findByName(genreDto.getName());
+            if (genre == null) {
+                genre = genreMapper.mapToEntity(genreDto);
+            }
+            genre.getBooks().add(book);
             genres.add(genre);
         }
         book.setGenres(genres);
 
         List<Kind> kinds = new ArrayList<>();
         for (KindDto kindDto : bookDto.getKinds()) {
-            Kind kind = kindMapper.mapToEntity(kindDto);
+            Kind kind = kindService.findByName(kindDto.getName());
+            if (kind == null) {
+                kind = kindMapper.mapToEntity(kindDto);
+            }
+            kind.getBooks().add(book);
             kinds.add(kind);
         }
         book.setKinds(kinds);

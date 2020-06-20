@@ -18,7 +18,7 @@ public class KindMapper {
 
     public Kind mapToEntity(KindDto kindDto) {
         Kind kind = new Kind();
-        kind.setName(kind.getName());
+        kind.setName(kindDto.getName());
         return kind;
     }
 }

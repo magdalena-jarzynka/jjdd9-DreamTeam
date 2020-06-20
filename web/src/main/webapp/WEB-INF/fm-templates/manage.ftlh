@@ -62,7 +62,7 @@
                                 <div class="panel-heading"><h2 class="text-uppercase">DODAJ POZYCJĘ</h2>
                                 </div>
                                 <div class="panel-body">
-                                <#include "manage-add-form.ftlh">
+                                <#include "manage-add-book-form.ftlh">
                                 </div>
                             </div>
                         </div>
