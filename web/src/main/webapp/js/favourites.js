@@ -8,10 +8,7 @@ $(".add-favourites").click(function () {
        + $(this).attr('data-id-book'),
        success: function () {
        alert("Książka została dodana do ulubionych")
-           // $(this.parent()).html("Usuń z ulubionych")
-           $a.text("Usuń z ulubionych");
-           $a.removeClass('btn templatemo-edit-btn add-favourites');
-           $a.addClass('btn templatemo-edit-btn remove-favourites');
+           location.reload();
        }
    })
 });
@@ -26,10 +23,7 @@ $(".remove-favourites").click(function () {
         + $(this).attr('data-id-book'),
     success: function () {
         alert("Książka została usunięta z ulubionych")
-        // $(this.parent()).html("Dodaj do ulubionych")
-        $a.text("Dodaj do ulubionych");
-        $a.removeClass('btn templatemo-edit-btn remove-favourites');
-        $a.addClass('btn templatemo-edit-btn add-favourites');
+        location.reload();
     }
 })
 });
