@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 @RequestScoped
 public class BookMapper {
 
+    private static final String DEFAULT_COVER = "/images/missing-cover.png";
     @Inject
     private AuthorService authorService;
     @Inject
@@ -45,7 +46,7 @@ public class BookMapper {
         bookView.setIsbn(book.getIsbn());
         bookView.setTranslators(book.getTranslators());
         if (book.getCover() == null || book.getCover().isEmpty()) {
-            bookView.setCover("/images/missing-cover.png");
+            bookView.setCover(DEFAULT_COVER);
         } else {
             bookView.setCover(book.getCover());
         }
@@ -74,7 +75,7 @@ public class BookMapper {
                 .map(TranslatorPlain::getName)
                 .collect(Collectors.joining(", ")));
         if (bookDetailsPlain.getCover() == null || bookDetailsPlain.getCover().isEmpty()) {
-            book.setCover("/images/missing-cover.png");
+            book.setCover(DEFAULT_COVER);
         } else {
             book.setCover(bookDetailsPlain.getCover());
         }
@@ -119,10 +120,13 @@ public class BookMapper {
         book.setAudio(bookDto.getAudio());
         book.setIsbn(bookDto.getIsbn());
         book.setFragment(bookDto.getFragmentData());
-        book.setTranslators(bookDto.getTranslators());
+        book.setTranslators(bookDto.getTranslators()
+                .stream()
+                .map(TranslatorDto::getName)
+                .collect(Collectors.joining(", ")));
 
         if (bookDto.getCover() == null || bookDto.getCover().isEmpty()) {
-            book.setCover("/images/missing-cover.png");
+            book.setCover(DEFAULT_COVER);
         } else {
             book.setCover(bookDto.getCover());
         }

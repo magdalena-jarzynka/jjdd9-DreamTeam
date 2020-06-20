@@ -20,7 +20,7 @@ public class ManageController {
     @POST
     public Response addBook(@FormParam("title") String title,
                             @FormParam("author") List<String> authors,
-                            @FormParam("translator") String translators,
+                            @FormParam("translator") List<String> translators,
                             @FormParam("epoch") List<String> epochs,
                             @FormParam("genre") List<String> genres,
                             @FormParam("kind") List<String> kinds,
@@ -38,7 +38,14 @@ public class ManageController {
             authorDto.setName(author);
             authorDtoList.add(authorDto);
         }
-        bookDto.setTranslators(translators);
+        List<TranslatorDto> translatorDtoList = new ArrayList<>();
+        bookDto.setTranslators(translatorDtoList);
+        for (String translator : translators) {
+            TranslatorDto translatorDto = new TranslatorDto();
+            translatorDto.setName(translator);
+            translatorDtoList.add(translatorDto);
+        }
+
         List<EpochDto> epochDtoList = new ArrayList<>();
         bookDto.setEpochs(epochDtoList);
         for(String epoch : epochs) {

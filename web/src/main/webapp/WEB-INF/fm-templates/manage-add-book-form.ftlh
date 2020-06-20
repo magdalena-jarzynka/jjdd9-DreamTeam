@@ -1,38 +1,65 @@
-<form action="/api/manage" class="templatemo-login-form" method="post">
+<form id="add-form" action="/api/manage" class="templatemo-login-form" method="post" accept-charset="UTF-8">
     <div class="row form-group">
         <div class="col-lg-12 form-group">
             <label for="inputTitle">Tytuł</label>
-            <input type="text" class="form-control" name="title">
+            <input type="text" class="form-control" name="title" id="title" required>
+        </div>
+    </div>
+    <div id="author_fields">
+    </div>
+    <div class="row form-group">
+        <div class="col-lg-12 form-group">
+            <label for="inputAuthor">Autor/Autorzy</label>
+            <div class="form-group multiple-form-group input-group">
+                <input type="text" class="form-control" name="author" required>
+            <span class="input-group-btn">
+                            <button type="button" class="btn blue-button btn-add">+</button>
+                        </span>
+                </div>
         </div>
     </div>
     <div class="row form-group">
         <div class="col-lg-12 form-group">
-            <label for="inputAuthor">Autor</label>
-            <input type="text" class="form-control" name="author" multiple>
-        </div>
-    </div>
-    <div class="row form-group">
-        <div class="col-lg-12 form-group">
-            <label for="inputTranslator">Translator</label>
+            <label for="inputTranslator">Tłumacz/Tłumacze</label>
+            <div class="form-group multiple-form-group input-group">
             <input type="text" class="form-control" name="translator">
+                <span class="input-group-btn">
+                            <button type="button" class="btn blue-button btn-add">+</button>
+                        </span>
+            </div>
         </div>
     </div>
     <div class="row form-group">
         <div class="col-lg-12 form-group">
-            <label for="inputEpoch">Epoka</label>
-            <input type="text" class="form-control" name="epoch">
+            <label for="inputEpoch">Epoka/Epoki</label>
+            <div class="form-group multiple-form-group input-group">
+            <input type="text" class="form-control" name="epoch" required>
+                <span class="input-group-btn">
+                            <button type="button" class="btn blue-button btn-add">+</button>
+                        </span>
+            </div>
         </div>
     </div>
     <div class="row form-group">
         <div class="col-lg-12 form-group">
-            <label for="inputGenre">Gatunek</label>
-            <input type="text" class="form-control" name="genre">
+            <label for="inputGenre">Gatunek/Gatunki</label>
+            <div class="form-group multiple-form-group input-group">
+            <input type="text" class="form-control" name="genre" required>
+                <span class="input-group-btn">
+                            <button type="button" class="btn blue-button btn-add">+</button>
+                        </span>
+            </div>
         </div>
     </div>
     <div class="row form-group">
         <div class="col-lg-12 form-group">
-            <label for="inputKind">Rodzaj</label>
-            <input type="text" class="form-control" name="kind">
+            <label for="inputKind">Gatunek literacki/Gatunki literackie</label>
+            <div class="form-group multiple-form-group input-group">
+            <input type="text" class="form-control" name="kind" required>
+                <span class="input-group-btn">
+                            <button type="button" class="btn blue-button btn-add">+</button>
+                        </span>
+            </div>
         </div>
     </div>
     <div class="row form-group">

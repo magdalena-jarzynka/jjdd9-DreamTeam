@@ -5,7 +5,7 @@ import java.util.List;
 public class BookDto {
     private String title;
     private List<AuthorDto> authors;
-    private String translators;
+    private List<TranslatorDto> translators;
     private List<EpochDto> epochs;
     private List<GenreDto> genres;
     private List<KindDto> kinds;
@@ -30,11 +30,11 @@ public class BookDto {
         this.authors = authors;
     }
 
-    public String getTranslators() {
+    public List<TranslatorDto> getTranslators() {
         return translators;
     }
 
-    public void setTranslators(String translators) {
+    public void setTranslators(List<TranslatorDto> translators) {
         this.translators = translators;
     }
 
