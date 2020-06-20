@@ -30,7 +30,7 @@ public class ManageServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
-        
+
         boolean isAdmin = Boolean.parseBoolean(String.valueOf(req.getAttribute("isAdmin")));
         Map<String, Object> model = modelInitializer.initModel(req);
         if (isAdmin) {
@@ -44,7 +44,7 @@ public class ManageServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        
+
         boolean isAdmin = Boolean.parseBoolean(String.valueOf(req.getAttribute("isAdmin")));
         Map<String, Object> model = modelInitializer.initModel(req);
         if (isAdmin) {
