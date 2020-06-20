@@ -1,8 +1,12 @@
 package com.infoshareacademy.dreamteam.servlets;
 
+import com.infoshareacademy.dreamteam.context.UserContextHolder;
+import com.infoshareacademy.dreamteam.domain.entity.Book;
 import com.infoshareacademy.dreamteam.freemarker.TemplatePrinter;
 import com.infoshareacademy.dreamteam.initializer.ModelInitializer;
 import com.infoshareacademy.dreamteam.service.BookService;
+import com.infoshareacademy.dreamteam.service.UserService;
+import com.infoshareacademy.dreamteam.service.ValidationService;
 
 import javax.inject.Inject;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @WebServlet("/browse")
 public class BrowseServlet extends HttpServlet {
@@ -24,6 +29,9 @@ public class BrowseServlet extends HttpServlet {
     @Inject
     private ModelInitializer modelInitializer;
 
+    @Inject
+    private UserService userService;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
 
@@ -34,12 +42,15 @@ public class BrowseServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
+        UserContextHolder userContextHolder = new UserContextHolder(req.getSession());
 
         int startPage = Integer.parseInt(req.getParameter("pageNum")) - 1;
         int pageSize = Integer.parseInt(req.getParameter("pageSize"));
         String audio = req.getParameter("audio");
         String genre = req.getParameter("genre");
         String search = req.getParameter("search");
+        String userId = userContextHolder.getId();
+
         Map<String, Object> tableData = new HashMap<>();
         long rows;
 
@@ -62,8 +73,14 @@ public class BrowseServlet extends HttpServlet {
 
         tableData.put("genres", bookService.getGenres());
         tableData.put("numberOfPages", numberOfPages);
-
+        tableData.put("userRole", userContextHolder.getRole());
+        if(ValidationService.validate(userId)) {
+            Long userIdLong = Long.parseLong(userId);
+            tableData.put("userId", userIdLong);
+        tableData.put("favourites", userService
+                .getFavourites(userIdLong).stream()
+                .map(Book::getId).collect(Collectors.toList()));
+        }
         templatePrinter.printTemplate(resp, tableData, getServletContext(), "browse-table.ftlh");
     }
 }
-
