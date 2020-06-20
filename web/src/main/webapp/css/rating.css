@@ -3,14 +3,14 @@
     overflow:   visible;
     padding:    10px;
     position:   relative;
-    width:      180px;
-    height:     32px;
+    width:      190px;
+    height:     48px;
 }
 .ratings_stars {
     background: url('/../images/star_empty.png') no-repeat;
     float:      left;
     height:     28px;
-    padding:    2px;
+    padding:    0px;
     width:      32px;
 }
 .ratings_vote {
