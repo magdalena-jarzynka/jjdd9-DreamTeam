@@ -11,6 +11,7 @@ import com.infoshareacademy.dreamteam.role.RoleType;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.List;
 
 @Stateless
@@ -42,8 +43,12 @@ public class UserService {
         return userRepository.findUserById(id).orElse(null);
     }
 
-    public List<User> findAll() {
-        return userRepository.findAll();
+    public List<UserView> findAll() {
+        List<UserView> userViews = new ArrayList<>();
+        for (User user : userRepository.findAll()) {
+            userViews.add(userMapper.mapEntityToView(user));
+        }
+        return userViews;
     }
 
     public User createUser(UserRequest userRequest) {
@@ -58,6 +63,16 @@ public class UserService {
     public UserView login(UserRequest userRequest) {
         User user = userRepository.findUserByEmail(userRequest.getEmail()).orElseGet(() -> createUser(userRequest));
         return userMapper.mapEntityToView(user);
+    }
+
+    public void changeUserAccessLevel(UserView userView) {
+        User user = findUserById(userView.getId());
+        if (user.getRole().getName() == RoleType.USER) {
+            user.setRole(roleRepositoryBean.findByRoleType(RoleType.ADMIN).orElseThrow());
+        } else if (user.getRole().getName() == RoleType.ADMIN) {
+            user.setRole(roleRepositoryBean.findByRoleType(RoleType.USER).orElseThrow());
+        }
+        userRepository.update(user);
     }
 
 }

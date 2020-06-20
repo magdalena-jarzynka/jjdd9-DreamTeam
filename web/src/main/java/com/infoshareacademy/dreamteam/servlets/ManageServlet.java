@@ -3,6 +3,7 @@ package com.infoshareacademy.dreamteam.servlets;
 import com.infoshareacademy.dreamteam.freemarker.TemplatePrinter;
 import com.infoshareacademy.dreamteam.initializer.ModelInitializer;
 import com.infoshareacademy.dreamteam.service.LoadDatabaseService;
+import com.infoshareacademy.dreamteam.service.UserService;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -28,12 +29,16 @@ public class ManageServlet extends HttpServlet {
     @Inject
     LoadDatabaseService loadDatabaseService;
 
+    @Inject
+    private UserService userService;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         
         boolean isAdmin = Boolean.parseBoolean(String.valueOf(req.getAttribute("isAdmin")));
         Map<String, Object> model = modelInitializer.initModel(req);
         if (isAdmin) {
+            model.put("users", userService.findAll());
             templatePrinter.printTemplate(resp, model, getServletContext(),
                     "manage.ftlh");
         } else {

@@ -82,12 +82,54 @@
                 </div>
             </div>
         </div>
+
+        <div class="templatemo-content-container">
+            <div class="templatemo-flex-row flex-content-row">
+                <div class="templatemo-content-widget white-bg col-2">
+                    <div class=""></div>
+                    <h2 class="">Zarejestrowani użytkownicy</h2>
+                    <hr>
+                    <div class="panel panel-default table-responsive">
+                        <table class="table table-striped table-bordered templatemo-user-table">
+                            <thead>
+                            <tr>
+                                <td>Id</td>
+                                <td>Imię i nazwisko</td>
+                                <td>Email</td>
+                                <td>Uprawnienia</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <#list users as user>
+                                <tr>
+                                    <td width="25">${user.id}.</td>
+                                    <td width="200">${user.name}</td>
+                                    <td>${user.email}</td>
+
+                                    <td>
+                                        <#if user.role="SUPER_ADMIN">
+                                            ${user.role}
+                                        <#else>
+                                            <a class="btn templatemo-edit-btn change-access" data-id-user="${user.id}">
+                                                ${user.role}
+                                            </a>
+                                        </#if>
+                                    </td>
+                                </tr>
+                            </#list>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
 <!-- JS -->
 <script src="js/jquery-1.11.2.min.js"></script>      <!-- jQuery -->
 <script src="js/jquery-migrate-1.2.1.min.js"></script> <!--  jQuery Migrate Plugin -->
+<script src="../../js/user.js"></script>
 <script src="https://www.google.com/jsapi"></script> <!-- Google Chart -->
 <script type="text/javascript" src="js/templatemo-script.js"></script>      <!-- Templatemo Script -->
 
