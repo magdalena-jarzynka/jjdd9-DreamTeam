@@ -43,7 +43,12 @@ public class UserService {
         return userRepository.findUserById(id).orElse(null);
     }
 
-    public List<UserView> findAll() {
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
+
+
+    public List<UserView> findAllUserViews() {
         List<UserView> userViews = new ArrayList<>();
         for (User user : userRepository.findAll()) {
             userViews.add(userMapper.mapEntityToView(user));

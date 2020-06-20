@@ -38,7 +38,7 @@ public class ManageServlet extends HttpServlet {
         boolean isAdmin = Boolean.parseBoolean(String.valueOf(req.getAttribute("isAdmin")));
         Map<String, Object> model = modelInitializer.initModel(req);
         if (isAdmin) {
-            model.put("users", userService.findAll());
+            model.put("users", userService.findAllUserViews());
             templatePrinter.printTemplate(resp, model, getServletContext(),
                     "manage.ftlh");
         } else {

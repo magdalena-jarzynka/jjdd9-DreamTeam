@@ -46,8 +46,6 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"))
     List<Book> favourites = new ArrayList<>();
 
-
-
     public Long getId() {
         return id;
     }
