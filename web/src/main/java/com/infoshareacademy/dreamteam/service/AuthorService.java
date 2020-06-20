@@ -2,6 +2,7 @@ package com.infoshareacademy.dreamteam.service;
 
 import com.infoshareacademy.dreamteam.domain.entity.Author;
 import com.infoshareacademy.dreamteam.domain.api.AuthorPlain;
+import com.infoshareacademy.dreamteam.domain.view.stats.AuthorStatsView;
 import com.infoshareacademy.dreamteam.repository.AuthorRepository;
 
 import javax.ejb.EJB;
@@ -13,6 +14,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @RequestScoped
 public class AuthorService {
@@ -40,5 +42,16 @@ public class AuthorService {
                 });
     }
 
+    public List<AuthorStatsView> findAuthorReservationCount() {
+        return authorRepository.findAuthorReservationCount();
+    }
 
+    public void increaseReservationCount(Long authorId) {
+        Optional<Author> authorOpt = authorRepository.findById(authorId);
+        if(authorOpt.isPresent()) {
+            Author author = authorOpt.get();
+            author.setReservationCount(author.getReservationCount() + 1L);
+            update(author);
+        }
+    }
 }

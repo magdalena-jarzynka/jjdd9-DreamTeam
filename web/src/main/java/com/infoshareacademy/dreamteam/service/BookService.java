@@ -7,6 +7,8 @@ import com.infoshareacademy.dreamteam.domain.api.BookPlain;
 import com.infoshareacademy.dreamteam.domain.entity.Author;
 import com.infoshareacademy.dreamteam.domain.entity.Book;
 import com.infoshareacademy.dreamteam.domain.view.BookView;
+import com.infoshareacademy.dreamteam.domain.view.stats.AuthorStatsView;
+import com.infoshareacademy.dreamteam.domain.view.stats.BookStatsView;
 import com.infoshareacademy.dreamteam.mapper.*;
 import com.infoshareacademy.dreamteam.repository.BookRepository;
 import org.apache.http.client.HttpResponseException;
@@ -23,6 +25,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Stateless
@@ -196,5 +199,16 @@ public class BookService {
         }
         return searchList;
     }
+    public List<BookStatsView> findBookReservationCount() {
+        return bookRepository.findBookReservationCount();
+    }
 
+    public void increaseReservationCount(Long bookId) {
+        Optional<Book> bookOpt = bookRepository.findBookById(bookId);
+        if(bookOpt.isPresent()) {
+            Book book = bookOpt.get();
+            book.setReservationCount(book.getReservationCount() + 1L);
+            update(book);
+        }
+    }
 }

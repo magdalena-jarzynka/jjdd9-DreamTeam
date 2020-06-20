@@ -11,7 +11,16 @@ import java.util.List;
         @NamedQuery(
                 name="Author.findAuthorByName",
                 query="SELECT a FROM Author a WHERE a.name = :name"
-        )
+        ),
+        @NamedQuery(
+                name="Author.findAuthorById",
+                query="SELECT a FROM Author a WHERE a.id = :id"
+        ),
+        @NamedQuery(
+                name="Author.getReservationsStats",
+                query="SELECT new com.infoshareacademy.dreamteam.domain.view.stats" +
+                        ".AuthorStatsView(a.name, a.reservationCount) FROM Author a"
+                )
 })
 public class Author {
 
@@ -23,7 +32,7 @@ public class Author {
     private String name;
 
     @Column(name = "reservations")
-    private Integer reservationCount;
+    private Long reservationCount;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "authorship",
@@ -55,11 +64,11 @@ public class Author {
         this.books = books;
     }
 
-    public Integer getReservationCount() {
+    public Long getReservationCount() {
         return reservationCount;
     }
 
-    public void setReservationCount(Integer reservationCount) {
+    public void setReservationCount(Long reservationCount) {
         this.reservationCount = reservationCount;
     }
 }

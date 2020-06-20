@@ -58,7 +58,7 @@ public class LoadDatabaseService {
         for (AuthorPlain authorPlain : authors) {
             Author author = new Author();
             author.setName(authorPlain.getName());
-            author.setReservationCount(0);
+            author.setReservationCount(0L);
             authorService.save(author);
         }
     }

@@ -1,6 +1,8 @@
 package com.infoshareacademy.dreamteam.repository;
 
 import com.infoshareacademy.dreamteam.domain.entity.Book;
+import com.infoshareacademy.dreamteam.domain.view.stats.AuthorStatsView;
+import com.infoshareacademy.dreamteam.domain.view.stats.BookStatsView;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -85,6 +87,12 @@ public class BookRepositoryBean implements BookRepository {
     @Override
     public List<String> getGenres() {
         Query query = entityManager.createNamedQuery("Genre.getGenres");
+        return query.getResultList();
+    }
+
+    @Override
+    public List<BookStatsView> findBookReservationCount() {
+        Query query = entityManager.createNamedQuery("Book.getReservationsStats");
         return query.getResultList();
     }
 }

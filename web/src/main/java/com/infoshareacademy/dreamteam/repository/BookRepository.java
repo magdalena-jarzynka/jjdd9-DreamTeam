@@ -1,6 +1,8 @@
 package com.infoshareacademy.dreamteam.repository;
 
 import com.infoshareacademy.dreamteam.domain.entity.Book;
+import com.infoshareacademy.dreamteam.domain.view.stats.AuthorStatsView;
+import com.infoshareacademy.dreamteam.domain.view.stats.BookStatsView;
 
 import javax.ejb.Local;
 import java.util.List;
@@ -27,4 +29,6 @@ public interface BookRepository {
     List<Book> findBooksByStringOfCharacters(String stringOfCharacters);
 
     List<String> getGenres();
+
+    List<BookStatsView> findBookReservationCount();
 }

@@ -3,6 +3,7 @@ package com.infoshareacademy.dreamteam.service;
 import com.infoshareacademy.dreamteam.domain.entity.Book;
 import com.infoshareacademy.dreamteam.domain.entity.Reservation;
 import com.infoshareacademy.dreamteam.domain.entity.User;
+import com.infoshareacademy.dreamteam.domain.view.AuthorView;
 import com.infoshareacademy.dreamteam.domain.view.ReservationView;
 import com.infoshareacademy.dreamteam.domain.view.UserView;
 import com.infoshareacademy.dreamteam.email.BookReservationEmailBuilder;
@@ -59,6 +60,12 @@ public class ReservationService {
     @Inject
     private UserService userService;
 
+    @Inject
+    private BookService bookService;
+
+    @Inject
+    private AuthorService authorService;
+
     @Transactional
     public Reservation addReservation(Long userId, Long bookId) {
         Reservation reservation = new Reservation();
@@ -90,6 +97,11 @@ public class ReservationService {
             reservationRepository.update(reservation);
             Long bookId = reservationView.getBookView().getId();
             Long userId = reservationView.getUserView().getId();
+            List<AuthorView> authors = reservationView.getBookView().getAuthorViews();
+            for(AuthorView author: authors) {
+                authorService.increaseReservationCount(author.getId());
+            }
+            bookService.increaseReservationCount(bookId);
 
             return true;
         } else {

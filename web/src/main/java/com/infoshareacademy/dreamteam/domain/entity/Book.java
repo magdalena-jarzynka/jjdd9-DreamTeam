@@ -46,6 +46,11 @@ import java.util.List;
                         "INNER JOIN b.authors a " +
                         "WHERE b.title like :stringOfCharacters OR a.name like :stringOfCharacters"
         ),
+        @NamedQuery(
+                name="Book.getReservationsStats",
+                query="SELECT new com.infoshareacademy.dreamteam.domain.view.stats" +
+                        ".BookStatsView(b.title, b.reservationCount) FROM Book b"
+        )
 })
 
 @Entity
@@ -70,7 +75,7 @@ public class Book {
     private String translators;
 
     @Column(name = "reservations")
-    private Integer reservationCount;
+    private Long reservationCount;
 
     @ManyToMany(mappedBy = "books", cascade = CascadeType.ALL)
     List<Genre> genres = new ArrayList<>();
@@ -201,11 +206,11 @@ public class Book {
         this.translators = translators;
     }
 
-    public Integer getReservationCount() {
+    public Long getReservationCount() {
         return reservationCount;
     }
 
-    public void setReservationCount(Integer reservationCount) {
+    public void setReservationCount(Long reservationCount) {
         this.reservationCount = reservationCount;
     }
 }
