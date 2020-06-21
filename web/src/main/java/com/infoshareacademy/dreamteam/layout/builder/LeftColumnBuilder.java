@@ -17,6 +17,7 @@ public class LeftColumnBuilder {
 
         leftColumn.put("stats", LeftColumnMenuList.STATS.getLabel());
         leftColumn.put("manage", LeftColumnMenuList.MANAGE.getLabel());
+        leftColumn.put("accounts", LeftColumnMenuList.ACCOUNTS.getLabel());
 
         return leftColumn;
     }

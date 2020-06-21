@@ -16,9 +16,9 @@ import javax.servlet.http.Part;
 import java.io.IOException;
 import java.util.Map;
 
-@WebServlet("/manage")
+@WebServlet("/users")
 @MultipartConfig
-public class ManageServlet extends HttpServlet {
+public class UserServlet extends HttpServlet {
 
     @Inject
     private TemplatePrinter templatePrinter;
@@ -29,33 +29,22 @@ public class ManageServlet extends HttpServlet {
     @Inject
     LoadDatabaseService loadDatabaseService;
 
+    @Inject
+    private UserService userService;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
 
         boolean isAdmin = Boolean.parseBoolean(String.valueOf(req.getAttribute("isAdmin")));
         Map<String, Object> model = modelInitializer.initModel(req);
         if (isAdmin) {
+            model.put("users", userService.findAllUserViews());
             templatePrinter.printTemplate(resp, model, getServletContext(),
-                    "manage.ftlh");
+                    "users.ftlh");
         } else {
             templatePrinter.printTemplate(resp, model, getServletContext(),
                     "no-access.ftlh");
         }
     }
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-
-        boolean isAdmin = Boolean.parseBoolean(String.valueOf(req.getAttribute("isAdmin")));
-        Map<String, Object> model = modelInitializer.initModel(req);
-        if (isAdmin) {
-            templatePrinter.printTemplate(resp, model, getServletContext(),
-                    "manage.ftlh");
-        } else {
-            templatePrinter.printTemplate(resp, model, getServletContext(),
-                    "no-access.ftlh");
-        }
-        Part part = req.getPart("json");
-        loadDatabaseService.loadFromJson(part);
-    }
 }
