@@ -2,10 +2,7 @@ package com.infoshareacademy.dreamteam.service;
 
 import com.infoshareacademy.dreamteam.concurrent.Processor;
 import com.infoshareacademy.dreamteam.domain.api.*;
-import com.infoshareacademy.dreamteam.domain.entity.Author;
-import com.infoshareacademy.dreamteam.domain.entity.Epoch;
-import com.infoshareacademy.dreamteam.domain.entity.Genre;
-import com.infoshareacademy.dreamteam.domain.entity.Kind;
+import com.infoshareacademy.dreamteam.domain.entity.*;
 import com.infoshareacademy.dreamteam.mapper.BookMapper;
 import com.infoshareacademy.dreamteam.parser.FileParser;
 import com.infoshareacademy.dreamteam.parser.FileUploadProcessor;
@@ -115,9 +112,16 @@ public class LoadDatabaseService {
         logger.info("Loading took: {}", System.currentTimeMillis() - start);
     }
 
-    public List<BookPlain> loadFromJson(Part part) throws IOException {
+    public void loadFromJson(Part part) throws IOException {
         FileParser fileParser = new FileParser();
-        return fileParser.readBookList(fileUploadProcessor.uploadFile(part));
+        List<BookDetailsPlain> bookList = fileParser.readBookList(fileUploadProcessor.uploadFile(part));
+
+        bookList.forEach(bookDetailsPlain -> {
+            Book book = bookMapper.mapPlainToEntity(bookDetailsPlain);
+            book.setAudio(!bookDetailsPlain.getAudioLength().isEmpty());
+            bookService.save(book);
+        });
+
     }
 
 }

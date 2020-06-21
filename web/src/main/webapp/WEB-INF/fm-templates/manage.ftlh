@@ -99,8 +99,6 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
 
 <!-- JS -->
 <script src="js/jquery-1.11.2.min.js"></script>      <!-- jQuery -->
