@@ -35,7 +35,6 @@ public class SingleBookViewServlet extends HttpServlet {
     @Inject
     private RatingService ratingService;
 
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
 
@@ -48,9 +47,11 @@ public class SingleBookViewServlet extends HttpServlet {
         BookView bookView = bookService.findBookViewById(bookId);
         model.put("book", bookView);
         model.put("reserved", !bookView.getReservationViews().isEmpty());
-        Rating rating = ratingService.findByBookId(bookView.getId());
-        model.put("average", ratingService.calculateAverageRating(rating));
 
+        String userIp = getClientIp(req);
+        Rating rating = ratingService.findByBookId(bookView.getId());
+        model.put("rating", rating);
+        model.put("average", ratingService.calculateAverageRating(rating));
 
         UserContextHolder userContextHolder = new UserContextHolder(req.getSession());
         model.put("userRole", userContextHolder.getRole());
@@ -61,7 +62,19 @@ public class SingleBookViewServlet extends HttpServlet {
 
         templatePrinter.printTemplate(resp, model, getServletContext(),
                 "single-book-view.ftlh");
+    }
 
+    private String getClientIp(HttpServletRequest request) {
+
+        String remoteAddr = "";
+
+        if (request != null) {
+            remoteAddr = request.getHeader("X-FORWARDED-FOR");
+            if (remoteAddr == null || "".equals(remoteAddr)) {
+                remoteAddr = request.getRemoteAddr();
+            }
+        }
+        return remoteAddr;
     }
 
 }

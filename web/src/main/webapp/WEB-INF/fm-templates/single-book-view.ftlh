@@ -60,34 +60,37 @@
                             </p>
                         </div>
                         <div class="col-sm-6">
-                            <#if book.id??>
                             <p>
-                                <button class="star_1 ratings_stars" data-id-book="${book.id?c}"
-                                        data-id-rating="1"></button>
-                                <button class="star_2 ratings_stars" data-id-book="${book.id?c}"
-                                        data-id-rating="2"></button>
-                                <button class="star_3 ratings_stars" data-id-book="${book.id?c}"
-                                        data-id-rating="3"></button>
-                                <button class="star_4 ratings_stars" data-id-book="${book.id?c}"
-                                        data-id-rating="4"></button>
-                                <button class="star_5 ratings_stars" data-id-book="${book.id?c}"
-                                        data-id-rating="5"></button>
-                            </p>
-                            <br>
-                            <p><h5>Średnia ocena: ${average?string["0.##"]}</h5></p>
-                            </#if>
-                            <p><h2><strong>${book.title!}</strong></h2></p>
+                            <h2><strong>${book.title!}</strong></h2></p>
                             <h4 style="font-style: italic"><#list book.authorViews>
                                     <#items as authorView>
                                         ${authorView.name}<#sep>,
                                     </#items>
                                 </#list></h4>
                             <hr>
+                            <#if book.id??>
+                                <p>
+                                    <button class="star_1 ratings_stars" data-id-book="${book.id?c}"
+                                            data-id-rating="1"></button>
+                                    <button class="star_2 ratings_stars" data-id-book="${book.id?c}"
+                                            data-id-rating="2"></button>
+                                    <button class="star_3 ratings_stars" data-id-book="${book.id?c}"
+                                            data-id-rating="3"></button>
+                                    <button class="star_4 ratings_stars" data-id-book="${book.id?c}"
+                                            data-id-rating="4"></button>
+                                    <button class="star_5 ratings_stars" data-id-book="${book.id?c}"
+                                            data-id-rating="5"></button>
+                                </p>
+                                <br>
+                                <p><h5>Ilość głosów: ${rating.numberOfVotes}</h5></p>
+                                <p><h5>Średnia ocena: ${average?string["0.##"]}</h5></p>
+                            </#if>
                             <p>
-                                <#if userRole != "GUEST" && reserved == false>
-                                    <a class="btn templatemo-edit-btn add-reservation" data-id-book="${book.id?c}"
-                                       data-id-user="${userId}">ZAREZERWUJ KSIĄŻKĘ</a>
-                                </#if>
+                            <hr>
+                            <#if userRole != "GUEST" && reserved == false>
+                                <a class="btn templatemo-edit-btn add-reservation" data-id-book="${book.id?c}"
+                                   data-id-user="${userId}">ZAREZERWUJ KSIĄŻKĘ</a>
+                            </#if>
                             </p>
                             <#if book.translators?has_content>
                                 <p style="font-style: italic">tłum. ${book.translators}</p>
