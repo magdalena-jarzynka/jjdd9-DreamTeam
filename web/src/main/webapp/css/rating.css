@@ -7,6 +7,7 @@
     height:     48px;
 }
 .ratings_stars {
+    border: none;
     background: url('/../images/star_empty.png') no-repeat;
     float:      left;
     height:     28px;

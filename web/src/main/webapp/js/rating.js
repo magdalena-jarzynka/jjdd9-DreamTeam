@@ -16,6 +16,7 @@ $('.ratings_stars').click(function () {
             + '/rating/'
             + $(this).attr('data-id-rating'),
         success: function (result) {
+            $(this).prevAll().andSelf().addClass('ratings_vote');
             alert('Ocena została wystawiona.');
             location.reload();
         }
