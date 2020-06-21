@@ -4,8 +4,8 @@ package com.infoshareacademy.dreamteam.domain.entity;
 import javax.persistence.*;
 
 @NamedQueries({
-        @NamedQuery(name = "Rating.findByBook",
-                query = "SELECT r FROM Rating r WHERE r.book=:book")
+        @NamedQuery(name = "Rating.findByBookId",
+                query = "SELECT r FROM Rating r WHERE r.book.id=:bookId")
 })
 @Entity
 @Table(name = "rating")

@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface RatingRepository {
 
 
-    void save (Rating rating);
+    void update (Rating rating);
 
-    Optional<Rating> findByBook(Book book);
+    Optional<Rating> findByBookId(Long bookId);
 }

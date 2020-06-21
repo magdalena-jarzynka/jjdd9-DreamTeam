@@ -15,9 +15,10 @@ public class RatingController {
     private RatingService ratingService;
 
     @POST
-    @Path("/books/{bookId}")
-    public Response addRating(@PathParam("bookId") Long bookId) {
-        ratingService.addRating(bookId);
+    @Path("/books/{bookId}/rating/{rate}")
+    public Response addRating(@PathParam("bookId") Long bookId,
+                              @PathParam("rate") int rate) {
+        ratingService.addRating(bookId, rate);
         return Response.status(Response.Status.CREATED).build();
     }
 

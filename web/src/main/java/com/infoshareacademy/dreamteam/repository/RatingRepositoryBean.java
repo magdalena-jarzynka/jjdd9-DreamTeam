@@ -16,14 +16,14 @@ public class RatingRepositoryBean implements RatingRepository {
     EntityManager entityManager;
 
     @Override
-    public void save(Rating rating) {
-        entityManager.persist(rating);
+    public void update(Rating rating) {
+        entityManager.merge(rating);
     }
 
     @Override
-    public Optional<Rating> findByBook(Book book) {
-        Query query = entityManager.createNamedQuery("Rating.findByBook");
-        query.setParameter("book", book);
+    public Optional<Rating> findByBookId(Long bookId) {
+        Query query = entityManager.createNamedQuery("Rating.findByBookId");
+        query.setParameter("bookId", bookId);
         return query.getResultList().stream().findAny();
     }
 

@@ -18,19 +18,31 @@ public class RatingService {
     @EJB
     private BookRepository bookRepository;
 
-    public void addRating(Long bookId) {
+    public void addRating(Long bookId, int rate) {
         Book book = bookRepository.findBookById(bookId).get();
-        Rating rating = findByBook(book);
+        Rating rating = (findByBookId(bookId));
         rating.setBook(book);
-        ratingRepository.save(rating);
+        rating.setNumberOfVotes(rating.getNumberOfVotes() + 1);
+        rating.setSumOfVotes(rating.getSumOfVotes() + rate);
+        ratingRepository.update(rating);
     }
 
     public Double calculateAverageRating(Rating rating) {
+        if (rating.getNumberOfVotes() == 0) {
+            return 0.0;
+        }
         return (double) rating.getSumOfVotes() / (double) rating.getNumberOfVotes();
     }
 
-    public Rating findByBook(Book book) {
-        return ratingRepository.findByBook(book).orElseThrow();
+    public Rating findByBookId(Long bookId) {
+        return ratingRepository.findByBookId(bookId).orElse(createNewRating());
+    }
+
+    public Rating createNewRating() {
+        Rating rating = new Rating();
+        rating.setSumOfVotes(0L);
+        rating.setNumberOfVotes(0L);
+        return rating;
     }
 
 }

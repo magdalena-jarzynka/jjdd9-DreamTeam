@@ -60,22 +60,26 @@
                             </p>
                         </div>
                         <div class="col-sm-6">
-<#--                            <div class='book_choice'>-->
-                                <div id="r1" class="rate_widget">
-                                    <div class="star_1 ratings_stars"></div>
-                                    <div class="star_2 ratings_stars"></div>
-                                    <div class="star_3 ratings_stars"></div>
-                                    <div class="star_4 ratings_stars"></div>
-                                    <div class="star_5 ratings_stars"></div>
-<#--                                    <div class="total_votes">vote data</div>-->
-                                </div>
-<#--                            </div>-->
-                            <h2><strong>${book.title!}</strong></h2>
-                            <h5 style="font-style: italic"><#list book.authorViews>
+                            <p>
+                                <button class="star_1 ratings_stars" data-id-book="${book.id?c}"
+                                        data-id-rating="1"></button>
+                                <button class="star_2 ratings_stars" data-id-book="${book.id?c}"
+                                        data-id-rating="2"></button>
+                                <button class="star_3 ratings_stars" data-id-book="${book.id?c}"
+                                        data-id-rating="3"></button>
+                                <button class="star_4 ratings_stars" data-id-book="${book.id?c}"
+                                        data-id-rating="4"></button>
+                                <button class="star_5 ratings_stars" data-id-book="${book.id?c}"
+                                        data-id-rating="5"></button>
+                            </p>
+                            <br>
+                            <p><h5>Średnia ocena: ${average?string["0.##"]}</h5></p>
+                            <p><h2><strong>${book.title!}</strong></h2></p>
+                            <h4 style="font-style: italic"><#list book.authorViews>
                                     <#items as authorView>
                                         ${authorView.name}<#sep>,
                                     </#items>
-                                </#list></h5>
+                                </#list></h4>
                             <hr>
                             <p>
                                 <#if userRole != "GUEST" && reserved == false>
