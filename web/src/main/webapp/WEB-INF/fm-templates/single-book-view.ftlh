@@ -111,10 +111,10 @@
                                     </#list>
                                 </p>
                             </#if>
-                            <#if book.isbn??>
+                            <#if book.isbn?has_content>
                                 <p>ISBN: ${book.isbn!}</p>
                             </#if>
-                            <#if book.fragment??>
+                            <#if book.fragment?has_content>
                                 <p>Fragment książki: ${book.fragment!}</p>
                             </#if>
                             <#if book.authorViews?has_content>
