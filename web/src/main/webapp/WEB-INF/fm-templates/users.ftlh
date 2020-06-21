@@ -53,58 +53,38 @@
             <div class="templatemo-flex-row flex-content-row">
                 <div class="templatemo-content-widget white-bg col-2">
                     <div class=""></div>
-                    <h2 class="">ULUBIONE</h2>
+                    <h2 class="">Zarejestrowani użytkownicy</h2>
                     <hr>
-                    <#if books?has_content>
                     <div class="panel panel-default table-responsive">
                         <table class="table table-striped table-bordered templatemo-user-table">
                             <thead>
                             <tr>
-                                <td>Pozycja</td>
-                                <td>Zobacz szczegóły</td>
-                                <td>Edytuj ulubione</td>
+                                <td>Id</td>
+                                <td>Imię i nazwisko</td>
+                                <td>Email</td>
+                                <td>Uprawnienia</td>
                             </tr>
                             </thead>
                             <tbody>
-                            <#list books as book>
+                            <#list users as user>
                                 <tr>
+                                    <td width="25">${user.id}.</td>
+                                    <td width="200">${user.name}</td>
+                                    <td>${user.email}</td>
+
                                     <td>
-                                        <table class="table borderless">
-                                            <tr>
-                                                <td width="100">
-                                                    <img src="${book.cover!}" class="img-responsive"
-                                                         width="68"
-                                                         height="93">
-                                                </td>
-                                                <td>
-                                                    ${book.title!}
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                    <td>
-                                        <a href="/single?id=${book.id}" class="templatemo-edit-btn"
-                                           style="white-space: nowrap">SZCZEGÓŁY
-                                            >>></a>
-                                    </td>
-                                    <td>
-                                        <#if userRole != "GUEST" && favouritesId?seq_contains(book.id)>
-                                            <a class="btn templatemo-edit-btn remove-favourites"
-                                               data-id-book="${book.id?c}"
-                                               data-id-user="${userId}">Usuń z ulubionych</a>
-                                        <#elseif userRole != "GUEST" && !favouritesId?seq_contains(book.id)>
-                                            <a class="btn templatemo-edit-btn add-favourites"
-                                               data-id-book="${book.id?c}"
-                                               data-id-user="${userId}">Dodaj do ulubionych</a>
+                                        <#if user.role="SUPER_ADMIN">
+                                            ${user.role}
+                                        <#else>
+                                            <a class="btn templatemo-edit-btn change-access" data-id-user="${user.id}">
+                                                ${user.role}
+                                            </a>
                                         </#if>
                                     </td>
                                 </tr>
                             </#list>
                             </tbody>
                         </table>
-                        <#else>
-                            <p>Brak ulubionych książek</p>
-                        </#if>
                     </div>
                 </div>
             </div>
@@ -115,10 +95,9 @@
 <!-- JS -->
 <script src="js/jquery-1.11.2.min.js"></script>      <!-- jQuery -->
 <script src="js/jquery-migrate-1.2.1.min.js"></script> <!--  jQuery Migrate Plugin -->
+<script src="../../js/user.js"></script>
 <script src="https://www.google.com/jsapi"></script> <!-- Google Chart -->
 <script type="text/javascript" src="js/templatemo-script.js"></script>      <!-- Templatemo Script -->
-<script type="text/javascript" src="js/favourites-script.js"></script>
-<script type="text/javascript" src="js/favourites.js"></script>
 
 </body>
 </html>

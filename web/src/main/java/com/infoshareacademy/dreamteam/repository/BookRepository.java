@@ -27,4 +27,6 @@ public interface BookRepository {
     List<Book> findBooksByStringOfCharacters(String stringOfCharacters);
 
     List<String> getGenres();
+
+    void delete(Long bookId);
 }

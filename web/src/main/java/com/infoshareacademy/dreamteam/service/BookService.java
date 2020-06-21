@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.infoshareacademy.dreamteam.domain.api.BookDetailsPlain;
 import com.infoshareacademy.dreamteam.domain.api.BookPlain;
+import com.infoshareacademy.dreamteam.domain.api.dto.BookDto;
 import com.infoshareacademy.dreamteam.domain.entity.Author;
 import com.infoshareacademy.dreamteam.domain.entity.Book;
 import com.infoshareacademy.dreamteam.domain.view.BookView;
@@ -21,7 +22,6 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -52,6 +52,12 @@ public class BookService {
 
     @Inject
     private ReservationMapper reservationMapper;
+
+    @Inject
+    private FavouritesService favouritesService;
+
+    @Inject
+    private ReservationService reservationService;
 
     public void save(Book book) {
         bookRepository.save(book);
@@ -89,6 +95,11 @@ public class BookService {
                 .add(reservationMapper.mapEntityToView(reservation)));
 
         return bookView;
+    }
+
+    public Book findById(Long id) {
+        return bookRepository.findBookById(id)
+                .orElse(null);
     }
 
     public List<String> getGenres() {
@@ -191,6 +202,25 @@ public class BookService {
             searchList.add(book.getTitle() + book.getAuthors().stream().map(Author::getName).collect(Collectors.joining(", ")));
         }
         return searchList;
+    }
+
+    public long updateBookDto(BookDto bookDto, Long bookId) {
+        Book book = findById(bookId);
+        book = bookMapper.updateBookEntity(book, bookDto);
+        bookRepository.save(book);
+        return book.getId();
+    }
+
+    public long saveBookDto(BookDto bookDto) {
+        Book book = bookMapper.mapToEntity(bookDto);
+        bookRepository.save(book);
+        return book.getId();
+    }
+
+    public void deleteBook(Long bookId) {
+        favouritesService.mailAboutFavouriteBookRemoval(bookId);
+        reservationService.mailAboutReservedBookRemoval(bookId);
+        bookRepository.delete(bookId);
     }
 
 }

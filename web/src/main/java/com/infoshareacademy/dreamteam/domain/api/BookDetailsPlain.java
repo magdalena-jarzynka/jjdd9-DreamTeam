@@ -2,6 +2,8 @@ package com.infoshareacademy.dreamteam.domain.api;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.json.bind.annotation.JsonbProperty;
 import java.util.List;
 
@@ -21,6 +23,8 @@ public class BookDetailsPlain {
     private FragmentData fragmentData;
     private List<MediaPlain> media;
     private Long id;
+    @JsonProperty("audio_length")
+    private String audioLength;
 
     public Long getId() {
         return id;
@@ -108,5 +112,13 @@ public class BookDetailsPlain {
 
     public void setMedia(List<MediaPlain> media) {
         this.media = media;
+    }
+
+    public String getAudioLength() {
+        return audioLength;
+    }
+
+    public void setAudioLength(String audioLength) {
+        this.audioLength = audioLength;
     }
 }

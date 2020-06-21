@@ -69,22 +69,22 @@ public class Book {
     @Column(length = 2000)
     private String translators;
 
-    @ManyToMany(mappedBy = "books", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "books", cascade = { CascadeType.MERGE, CascadeType.PERSIST })
     List<Genre> genres = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "books", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "books", cascade = { CascadeType.MERGE, CascadeType.PERSIST })
     List<Epoch> epochs = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "books", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "books", cascade = { CascadeType.MERGE, CascadeType.PERSIST })
     List<Kind> kinds = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "books", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "books", cascade = { CascadeType.MERGE, CascadeType.PERSIST })
     List<Author> authors = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "favourites")
+    @ManyToMany(mappedBy = "favourites", cascade = { CascadeType.MERGE, CascadeType.PERSIST })
     List<User> favourites = new ArrayList<>();
 
-    @OneToMany(mappedBy = "book")
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
     List<Reservation> reservations = new ArrayList<>();
 
     public Book() {

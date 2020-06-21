@@ -1,6 +1,5 @@
 function doSearch(search) {
     if (search.length < 3) {
-        console.log(search);
         $("#search").autocomplete({source: []});
             return;
     }

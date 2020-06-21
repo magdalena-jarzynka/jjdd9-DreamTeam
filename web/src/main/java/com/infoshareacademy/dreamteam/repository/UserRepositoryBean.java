@@ -1,5 +1,6 @@
 package com.infoshareacademy.dreamteam.repository;
 
+import com.infoshareacademy.dreamteam.domain.entity.Book;
 import com.infoshareacademy.dreamteam.domain.entity.User;
 
 import javax.ejb.Stateless;
@@ -42,6 +43,20 @@ public class UserRepositoryBean implements UserRepository {
     @Override
     public List<User> findAll() {
         Query query = entityManager.createNamedQuery("User.findAll");
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Book> getFavourites(Long id) {
+        Query query = entityManager.createNamedQuery("User.getFavourites");
+        query.setParameter("id", id);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Book> getReservations(Long id) {
+        Query query = entityManager.createNamedQuery("User.getReservations");
+        query.setParameter("id", id);
         return query.getResultList();
     }
 

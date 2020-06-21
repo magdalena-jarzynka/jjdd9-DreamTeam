@@ -1,5 +1,6 @@
 package com.infoshareacademy.dreamteam.service;
 
+import com.infoshareacademy.dreamteam.domain.entity.Book;
 import com.infoshareacademy.dreamteam.domain.entity.User;
 import com.infoshareacademy.dreamteam.domain.request.UserRequest;
 import com.infoshareacademy.dreamteam.domain.view.UserView;
@@ -11,7 +12,9 @@ import com.infoshareacademy.dreamteam.role.RoleType;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Stateless
 public class UserService {
@@ -27,6 +30,10 @@ public class UserService {
 
     public void save(User user) {
         userRepository.save(user);
+    }
+
+    public void update(User user) {
+        userRepository.update(user);
     }
 
     public User findUserByEmail(String email) {
@@ -46,6 +53,15 @@ public class UserService {
         return userRepository.findAll();
     }
 
+
+    public List<UserView> findAllUserViews() {
+        List<UserView> userViews = new ArrayList<>();
+        for (User user : userRepository.findAll()) {
+            userViews.add(userMapper.mapEntityToView(user));
+        }
+        return userViews;
+    }
+
     public User createUser(UserRequest userRequest) {
         User user = new User();
         user.setName(userRequest.getName());
@@ -59,5 +75,24 @@ public class UserService {
         User user = userRepository.findUserByEmail(userRequest.getEmail()).orElseGet(() -> createUser(userRequest));
         return userMapper.mapEntityToView(user);
     }
+
+    public void changeUserAccessLevel(UserView userView) {
+        User user = findUserById(userView.getId());
+        if (user.getRole().getName() == RoleType.USER) {
+            user.setRole(roleRepositoryBean.findByRoleType(RoleType.ADMIN).orElseThrow());
+        } else if (user.getRole().getName() == RoleType.ADMIN) {
+            user.setRole(roleRepositoryBean.findByRoleType(RoleType.USER).orElseThrow());
+        }
+        userRepository.update(user);
+    }
+
+    public List<Book> getFavourites(Long id) {
+        return Optional.ofNullable(userRepository.getFavourites(id)).orElse(null);
+    }
+
+    public List<Book> findReservations(Long id) {
+        return Optional.ofNullable(userRepository.getReservations(id)).orElse(null);
+    }
+
 
 }
