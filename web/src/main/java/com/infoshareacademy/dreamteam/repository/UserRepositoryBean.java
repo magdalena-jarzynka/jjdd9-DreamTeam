@@ -52,4 +52,12 @@ public class UserRepositoryBean implements UserRepository {
         query.setParameter("id", id);
         return query.getResultList();
     }
+
+    @Override
+    public List<Book> getReservations(Long id) {
+        Query query = entityManager.createNamedQuery("User.getReservations");
+        query.setParameter("id", id);
+        return query.getResultList();
+    }
+
 }

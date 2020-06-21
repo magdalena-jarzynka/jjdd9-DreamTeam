@@ -21,6 +21,10 @@ import java.util.List;
         @NamedQuery(
                 name = "User.getFavourites",
                 query = "SELECT u.favourites FROM User u WHERE u.id = :id"
+        ),
+        @NamedQuery(
+                name = "User.getReservations",
+                query = "SELECT u.reservations FROM User u WHERE u.id = :id"
         )
 })
 

@@ -90,5 +90,9 @@ public class UserService {
         return Optional.ofNullable(userRepository.getFavourites(id)).orElse(null);
     }
 
+    public List<Book> findReservations(Long id) {
+        return Optional.ofNullable(userRepository.getReservations(id)).orElse(null);
+    }
+
 
 }
