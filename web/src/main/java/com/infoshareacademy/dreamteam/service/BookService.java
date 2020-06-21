@@ -198,6 +198,13 @@ public class BookService {
         return searchList;
     }
 
+    public long updateBookDto(BookDto bookDto, Long bookId) {
+        Book book = findById(bookId);
+        book = bookMapper.updateBookEntity(book, bookDto);
+        bookRepository.save(book);
+        return book.getId();
+    }
+
     public long saveBookDto(BookDto bookDto) {
         Book book = bookMapper.mapToEntity(bookDto);
         bookRepository.save(book);

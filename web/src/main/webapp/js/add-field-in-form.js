@@ -13,6 +13,7 @@
                 .html('–');
 
             $formGroupClone.find('input').val('');
+            $formGroupClone.find('input').prop('required', false);
             $formGroupClone.insertAfter($formGroup);
 
             var $lastFormGroupLast = $multipleFormGroup.find('.form-group:last');

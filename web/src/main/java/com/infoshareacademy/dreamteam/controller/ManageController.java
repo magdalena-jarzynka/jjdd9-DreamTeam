@@ -25,7 +25,8 @@ public class ManageController {
                             @FormParam("isbn") String isbn,
                             @FormParam("cover") String cover,
                             @FormParam("fragment") String fragment,
-                            @FormParam("isAudio") boolean isAudio) {
+                            @FormParam("isAudio") boolean isAudio,
+                            @FormParam("bookId") Long bookId) {
 
         BookDto bookDto = new BookDto();
         bookDto.setTitle(title);
@@ -70,7 +71,11 @@ public class ManageController {
         bookDto.setFragmentData(fragment);
         bookDto.setAudio(isAudio);
 
-        bookService.saveBookDto(bookDto);
+        if (bookId == null) {
+            bookService.saveBookDto(bookDto);
+        } else {
+            bookService.updateBookDto(bookDto, bookId);
+        }
         return Response.status(Response.Status.CREATED).build();
     }
 

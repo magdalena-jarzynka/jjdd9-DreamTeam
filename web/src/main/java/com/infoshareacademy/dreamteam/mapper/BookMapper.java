@@ -116,6 +116,10 @@ public class BookMapper {
 
     public Book mapToEntity(BookDto bookDto) {
         Book book = new Book();
+        return updateBookEntity(book, bookDto);
+    }
+
+    public Book updateBookEntity(Book book, BookDto bookDto) {
         book.setTitle(bookDto.getTitle());
         book.setAudio(bookDto.getAudio());
         book.setIsbn(bookDto.getIsbn());
@@ -125,10 +129,12 @@ public class BookMapper {
                 .map(TranslatorDto::getName)
                 .collect(Collectors.joining(", ")));
 
-        if (bookDto.getCover() == null || bookDto.getCover().isEmpty()) {
-            book.setCover(DEFAULT_COVER);
-        } else {
-            book.setCover(bookDto.getCover());
+        if (book.getCover() == null) {
+            if (bookDto.getCover() == null || bookDto.getCover().isEmpty()) {
+                book.setCover(DEFAULT_COVER);
+            } else {
+                book.setCover(bookDto.getCover());
+            }
         }
 
         List<Author> authors = new ArrayList<>();
@@ -137,7 +143,9 @@ public class BookMapper {
             if (author == null) {
                 author = authorMapper.mapToEntity(authorDto);
             }
-            author.getBooks().add(book);
+            if (!author.getBooks().contains(book)) {
+                author.getBooks().add(book);
+            }
             authors.add(author);
         }
         book.setAuthors(authors);
@@ -148,7 +156,9 @@ public class BookMapper {
             if (epoch == null) {
                 epoch = epochMapper.mapToEntity(epochDto);
             }
-            epoch.getBooks().add(book);
+            if (!epoch.getBooks().contains(book)) {
+                epoch.getBooks().add(book);
+            }
             epochs.add(epoch);
         }
         book.setEpochs(epochs);
@@ -159,7 +169,9 @@ public class BookMapper {
             if (genre == null) {
                 genre = genreMapper.mapToEntity(genreDto);
             }
-            genre.getBooks().add(book);
+            if(!genre.getBooks().contains(book)) {
+                genre.getBooks().add(book);
+            }
             genres.add(genre);
         }
         book.setGenres(genres);
@@ -170,7 +182,9 @@ public class BookMapper {
             if (kind == null) {
                 kind = kindMapper.mapToEntity(kindDto);
             }
-            kind.getBooks().add(book);
+            if(!kind.getBooks().contains(book)) {
+                kind.getBooks().add(book);
+            }
             kinds.add(kind);
         }
         book.setKinds(kinds);

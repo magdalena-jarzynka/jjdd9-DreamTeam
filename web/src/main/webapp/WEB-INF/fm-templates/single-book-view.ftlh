@@ -74,6 +74,12 @@
                             </p>
                             <p>
                                 <#if userRole == "ADMIN" || userRole == "SUPER_ADMIN">
+                                    <a class="btn templatemo-edit-btn edit-book" href="/manage?bookId=${book.id?c}">
+                                        EDYTUJ KSIĄŻKĘ</a>
+                                </#if>
+                            </p>
+                            <p>
+                                <#if userRole == "ADMIN" || userRole == "SUPER_ADMIN">
                                     <a class="btn templatemo-edit-btn remove-book" data-id-book="${book.id?c}"
                                        data-id-user="${userId}">USUŃ KSIĄŻKĘ</a>
                                 </#if>
