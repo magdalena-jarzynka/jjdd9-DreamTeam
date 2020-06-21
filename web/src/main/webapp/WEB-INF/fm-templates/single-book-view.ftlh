@@ -60,6 +60,7 @@
                             </p>
                         </div>
                         <div class="col-sm-6">
+                            <#if book.id??>
                             <p>
                                 <button class="star_1 ratings_stars" data-id-book="${book.id?c}"
                                         data-id-rating="1"></button>
@@ -74,6 +75,7 @@
                             </p>
                             <br>
                             <p><h5>Średnia ocena: ${average?string["0.##"]}</h5></p>
+                            </#if>
                             <p><h2><strong>${book.title!}</strong></h2></p>
                             <h4 style="font-style: italic"><#list book.authorViews>
                                     <#items as authorView>

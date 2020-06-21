@@ -41,14 +41,16 @@ public class SingleBookViewServlet extends HttpServlet {
 
         Map<String, Object> model = modelInitializer.initModel(req);
         String bookIdParameter = req.getParameter("id");
-
+        long bookId = 0L;
         if (ValidationService.validate(bookIdParameter)) {
-            BookView bookView = bookService.findBookViewById(Long.parseLong(bookIdParameter));
-            model.put("book", bookView);
-            model.put("reserved", !bookView.getReservationViews().isEmpty());
-            Rating rating = ratingService.findByBookId(bookView.getId());
-            model.put("average", ratingService.calculateAverageRating(rating));
+            bookId = Long.parseLong(bookIdParameter);
         }
+        BookView bookView = bookService.findBookViewById(bookId);
+        model.put("book", bookView);
+        model.put("reserved", !bookView.getReservationViews().isEmpty());
+        Rating rating = ratingService.findByBookId(bookView.getId());
+        model.put("average", ratingService.calculateAverageRating(rating));
+
 
         UserContextHolder userContextHolder = new UserContextHolder(req.getSession());
         model.put("userRole", userContextHolder.getRole());
