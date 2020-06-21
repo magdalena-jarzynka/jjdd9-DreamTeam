@@ -4,7 +4,7 @@ public class FavouriteBookEmailBuilder implements EmailMessageBuilder{
     public static final String EMAIL_SUBJECT = "Książka z twojej listy ulubionych została usunięta";
     public static final String EMAIL_BODY = "Szanowny czytelniku/Szanowna czytelniczko, %n%n" +
             " Z przykrością informujemy, że książka \"%s\" z twojej listy ulubionych została usunięta " +
-            "z bazy danych biblioteki %n%n" +
+            "z bazy danych biblioteki. %n%n" +
             "Życzymy miłego dnia, załoga DreamTeam.";
 
     private String var;

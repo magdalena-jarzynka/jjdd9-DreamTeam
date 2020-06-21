@@ -16,6 +16,7 @@
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/templatemo-style.css" rel="stylesheet">
+    <link href="css/button.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -59,20 +60,36 @@
                     <div class="templatemo-flex-row flex-content-row">
                         <div class="col-1">
                             <div class="panel panel-default margin-10">
-                                <div class="panel-heading"><h2 class="text-uppercase">ŁADOWANIE DANYCH Z PLIKU</h2>
+                                <div class="panel-heading">
+                                    <#if book?? && book?has_content>
+                                    <h2 class="text-uppercase">EDYTUJ POZYCJĘ</h2>
+                                    <#else>
+                                    <h2 class="text-uppercase">DODAJ POZYCJĘ</h2>
+                                    </#if>
                                 </div>
                                 <div class="panel-body">
-                                    <form enctype="multipart/form-data" method="post" action="/manage">
-                                        <div class="row form-group">
-                                            <div class="col-lg-12">
-                                                <label class="margin-bottom-10">Wybierz plik</label>
-                                                <input type="file" name="json">
+                                <#include "manage-add-book-form.ftlh">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="templatemo-flex-row flex-content-row">
+                            <div class="col-1">
+                                <div class="panel panel-default margin-10">
+                                    <div class="panel-heading"><h2 class="text-uppercase">ŁADOWANIE DANYCH Z PLIKU</h2>
+                                    </div>
+                                    <div class="panel-body">
+                                        <form enctype="multipart/form-data" method="post" action="/manage">
+                                            <div class="row form-group">
+                                                <div class="col-lg-12">
+                                                    <label class="margin-bottom-10">Wybierz plik</label>
+                                                    <input type="file" name="json">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <button type="submit" name="save" value="save"
-                                                class="templatemo-blue-button">Zapisz
-                                        </button>
-                                    </form>
+                                            <button type="submit" name="save" value="save"
+                                                    class="templatemo-blue-button">Zapisz
+                                            </button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -85,9 +102,13 @@
 
 <!-- JS -->
 <script src="js/jquery-1.11.2.min.js"></script>      <!-- jQuery -->
+<script type="text/javascript" src="js/bootstrap-filestyle.min.js"></script>  <!-- http://markusslima.github.io/bootstrap-filestyle/ -->
 <script src="js/jquery-migrate-1.2.1.min.js"></script> <!--  jQuery Migrate Plugin -->
 <script src="https://www.google.com/jsapi"></script> <!-- Google Chart -->
 <script type="text/javascript" src="js/templatemo-script.js"></script>      <!-- Templatemo Script -->
+<script src="js/submit-form.js"></script>
+<script src="js/add-field-in-form.js"></script>
+
 
 </body>
 </html>

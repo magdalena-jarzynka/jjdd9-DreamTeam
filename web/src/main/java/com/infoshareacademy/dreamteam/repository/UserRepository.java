@@ -23,4 +23,5 @@ public interface UserRepository {
 
     List<Book> getFavourites(Long id);
 
+    List<Book> getReservations(Long id);
 }

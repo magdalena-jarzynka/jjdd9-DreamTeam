@@ -5,9 +5,7 @@ import com.infoshareacademy.dreamteam.domain.entity.Reservation;
 import com.infoshareacademy.dreamteam.domain.entity.User;
 import com.infoshareacademy.dreamteam.domain.view.ReservationView;
 import com.infoshareacademy.dreamteam.domain.view.UserView;
-import com.infoshareacademy.dreamteam.email.BookReservationEmailBuilder;
-import com.infoshareacademy.dreamteam.email.EmailManager;
-import com.infoshareacademy.dreamteam.email.OutdatedReservationEmailBuilder;
+import com.infoshareacademy.dreamteam.email.*;
 import com.infoshareacademy.dreamteam.mapper.BookMapper;
 import com.infoshareacademy.dreamteam.mapper.ReservationMapper;
 import com.infoshareacademy.dreamteam.mapper.UserMapper;
@@ -58,6 +56,9 @@ public class ReservationService {
 
     @Inject
     private UserService userService;
+
+    @Inject
+    private BookService bookService;
 
     @Transactional
     public Reservation addReservation(Long userId, Long bookId) {
@@ -194,6 +195,18 @@ public class ReservationService {
             logger.error(e.getMessage());
         }
         return Long.valueOf(properties.getProperty(property));
+    }
+
+    @Transactional
+    public void mailAboutReservedBookRemoval(Long bookId) {
+        for (User user : userService.findAll()) {
+            List<Long> favouritesId = userService.getFavourites(user.getId()).stream()
+                    .map(Book::getId).collect(Collectors.toList());
+            if (favouritesId.contains(bookId)) {
+                emailManager.sendEmail(new RemovedBookReservationEmailBuilder(bookService.findById(bookId).getTitle()),
+                        user.getEmail());
+            }
+        }
     }
 
 }
