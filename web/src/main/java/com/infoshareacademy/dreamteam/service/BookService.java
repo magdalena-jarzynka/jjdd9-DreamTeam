@@ -198,4 +198,8 @@ public class BookService {
         bookRepository.save(book);
         return book.getId();
     }
+
+    public void deleteBook(Long bookId) {
+        bookRepository.delete(bookId);
+    }
 }

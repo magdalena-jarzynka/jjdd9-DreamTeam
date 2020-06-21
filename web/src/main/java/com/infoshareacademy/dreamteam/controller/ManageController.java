@@ -4,9 +4,7 @@ import com.infoshareacademy.dreamteam.domain.api.dto.*;
 import com.infoshareacademy.dreamteam.service.BookService;
 
 import javax.inject.Inject;
-import javax.ws.rs.FormParam;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +46,7 @@ public class ManageController {
 
         List<EpochDto> epochDtoList = new ArrayList<>();
         bookDto.setEpochs(epochDtoList);
-        for(String epoch : epochs) {
+        for (String epoch : epochs) {
             EpochDto epochDto = new EpochDto();
             epochDto.setName(epoch);
             epochDtoList.add(epochDto);
@@ -74,5 +72,12 @@ public class ManageController {
 
         bookService.saveBookDto(bookDto);
         return Response.status(Response.Status.CREATED).build();
+    }
+
+    @DELETE
+    @Path("/{bookId}")
+    public Response removeBook(@PathParam("bookId") Long bookId) {
+        bookService.deleteBook(bookId);
+        return Response.status(Response.Status.NO_CONTENT).build();
     }
 }

@@ -6,7 +6,7 @@ public enum LeftColumnMenuList {
     FAVOURITES("ULUBIONE"),
     RESERVATIONS("REZERWACJE"),
     STATS("STATYSTYKI"),
-    MANAGE("ZARZĄDZANIE");
+    MANAGE("ZARZĄDZANIE KSIĄŻKAMI");
 
     private String label;
 

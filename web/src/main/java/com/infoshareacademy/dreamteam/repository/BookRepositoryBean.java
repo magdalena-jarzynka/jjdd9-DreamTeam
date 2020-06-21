@@ -1,6 +1,6 @@
 package com.infoshareacademy.dreamteam.repository;
 
-import com.infoshareacademy.dreamteam.domain.entity.Book;
+import com.infoshareacademy.dreamteam.domain.entity.*;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -11,6 +11,7 @@ import java.util.Optional;
 
 @Stateless
 public class BookRepositoryBean implements BookRepository {
+    private static final String STRING_OF_CHARACTERS = "stringOfCharacters";
     @PersistenceContext
     EntityManager entityManager;
 
@@ -49,7 +50,7 @@ public class BookRepositoryBean implements BookRepository {
         Query query = entityManager.createNamedQuery("Book.countByAudioAndGenreAndStringOfCharacters");
         query.setParameter("audio", audio);
         query.setParameter("genre", genre);
-        query.setParameter("stringOfCharacters", "%" + stringOfCharacters + "%");
+        query.setParameter(STRING_OF_CHARACTERS, "%" + stringOfCharacters + "%");
         return (long) query.getSingleResult();
     }
 
@@ -70,7 +71,7 @@ public class BookRepositoryBean implements BookRepository {
         query.setMaxResults(limit);
         query.setParameter("audio", audio);
         query.setParameter("genre", genre);
-        query.setParameter("stringOfCharacters", "%" + stringOfCharacters + "%");
+        query.setParameter(STRING_OF_CHARACTERS, "%" + stringOfCharacters + "%");
         return query.getResultList();
     }
 
@@ -78,7 +79,7 @@ public class BookRepositoryBean implements BookRepository {
     public List<Book> findBooksByStringOfCharacters(String stringOfCharacters) {
 
         Query query = entityManager.createNamedQuery("Book.findByStringOfCharacters");
-        query.setParameter("stringOfCharacters", "%" + stringOfCharacters + "%");
+        query.setParameter(STRING_OF_CHARACTERS, "%" + stringOfCharacters + "%");
         return query.getResultList();
     }
 
@@ -86,5 +87,30 @@ public class BookRepositoryBean implements BookRepository {
     public List<String> getGenres() {
         Query query = entityManager.createNamedQuery("Genre.getGenres");
         return query.getResultList();
+    }
+
+    @Override
+    public void delete(Long bookId) {
+
+        Optional<Book> bookOptional = findBookById(bookId);
+        if (bookOptional.isPresent()) {
+            Book book = bookOptional.get();
+            entityManager.remove(book);
+            for (Author author : book.getAuthors()) {
+                author.getBooks().remove(book);
+            }
+            for (Genre genre : book.getGenres()) {
+                genre.getBooks().remove(book);
+            }
+            for (Epoch epoch : book.getEpochs()) {
+                epoch.getBooks().remove(book);
+            }
+            for (Kind kind : book.getKinds()) {
+                kind.getBooks().remove(book);
+            }
+            for (User user : book.getFavourites()) {
+                user.getFavourites().remove(book);
+            }
+        }
     }
 }
