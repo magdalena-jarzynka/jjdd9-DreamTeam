@@ -9,6 +9,7 @@
         <#if role = "ADMIN" || role = "SUPER_ADMIN">
             <li><a href="stats" class="${stats_active!}">${stats}</a></li>
             <li><a href="manage" class="${manage_active!}">${manage}</a></li>
+            <li><a href="users" class="${users_active!}">${accounts}</a></li>
         </#if>
     </ul>
 </nav>
