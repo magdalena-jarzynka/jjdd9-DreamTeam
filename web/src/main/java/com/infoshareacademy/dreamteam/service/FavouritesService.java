@@ -55,13 +55,12 @@ public class FavouritesService {
     }
 
     @Transactional
-    public void mailAboutFavouriteRemoval(Long bookId) {
+    public void mailAboutFavouriteBookRemoval(Long bookId) {
         Book book = bookService.findById(bookId);
         for (User user : userService.findAll()) {
             List<Long> favouritesId = userService.getFavourites(user.getId()).stream()
                     .map(Book::getId).collect(Collectors.toList());
             if (favouritesId.contains(bookId)) {
-                removeBookFromFavourites(bookId, user.getId());
                 emailManager.sendEmail(new FavouriteBookEmailBuilder(book.getTitle()), user.getEmail());
             }
         }

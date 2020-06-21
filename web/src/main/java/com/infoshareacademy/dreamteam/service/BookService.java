@@ -53,6 +53,9 @@ public class BookService {
     @Inject
     private ReservationMapper reservationMapper;
 
+    @Inject
+    private FavouritesService favouritesService;
+
     public void save(Book book) {
         bookRepository.save(book);
     }
@@ -212,6 +215,7 @@ public class BookService {
     }
 
     public void deleteBook(Long bookId) {
+        favouritesService.mailAboutFavouriteBookRemoval(bookId);
         bookRepository.delete(bookId);
     }
 }
