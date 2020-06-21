@@ -1,5 +1,6 @@
 package com.infoshareacademy.dreamteam.repository;
 
+import com.infoshareacademy.dreamteam.domain.entity.Book;
 import com.infoshareacademy.dreamteam.domain.entity.User;
 
 import javax.ejb.Stateless;
@@ -45,4 +46,10 @@ public class UserRepositoryBean implements UserRepository {
         return query.getResultList();
     }
 
+    @Override
+    public List<Book> getFavourites(Long id) {
+        Query query = entityManager.createNamedQuery("User.getFavourites");
+        query.setParameter("id", id);
+        return query.getResultList();
+    }
 }

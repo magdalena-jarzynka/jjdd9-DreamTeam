@@ -67,12 +67,12 @@ public class BookService {
 
     public BookView findBookViewById(Long id) {
         Book book = bookRepository.findBookById(id)
-                .orElse(new Book("Nie znaleziono książki o podanym identyfikatorze."));
+                .orElse(new Book("Nie znaleziono książki o podanym identyfikatorze." ));
         return mapBookEntityWithRelationsToView(book);
     }
 
     public Book findBookById(Long id) {
-        return bookRepository.findBookById(id).orElse(new Book("Nie znaleziono książki o podanym identyfikatorze."));
+        return bookRepository.findBookById(id).orElse(new Book("Nie znaleziono książki o podanym identyfikatorze." ));
     }
 
     private BookView mapBookEntityWithRelationsToView(Book book) {
@@ -89,6 +89,11 @@ public class BookService {
                 .add(reservationMapper.mapEntityToView(reservation)));
 
         return bookView;
+    }
+
+    public Book findById(Long id) {
+        return bookRepository.findBookById(id)
+                .orElse(null);
     }
 
     public List<String> getGenres() {
@@ -179,7 +184,7 @@ public class BookService {
         } catch (
                 Exception e) {
             logger.error(e.getMessage() + " " + url, e);
-            throw new HttpResponseException(422, "Bad response from book rest api");
+            throw new HttpResponseException(422, "Bad response from book rest api" );
         }
         return bookDetailsPlain;
     }
@@ -188,7 +193,7 @@ public class BookService {
         List<String> searchList = new ArrayList<>();
 
         for (Book book : bookRepository.findBooksByStringOfCharacters(searchString)) {
-            searchList.add(book.getTitle() + book.getAuthors().stream().map(Author::getName).collect(Collectors.joining(", ")));
+            searchList.add(book.getTitle() + book.getAuthors().stream().map(Author::getName).collect(Collectors.joining(", " )));
         }
         return searchList;
     }
