@@ -1,5 +1,6 @@
 package com.infoshareacademy.dreamteam.service;
 
+import com.infoshareacademy.dreamteam.domain.entity.Book;
 import com.infoshareacademy.dreamteam.domain.entity.User;
 import com.infoshareacademy.dreamteam.domain.request.UserRequest;
 import com.infoshareacademy.dreamteam.domain.view.UserView;
@@ -13,6 +14,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Stateless
 public class UserService {
@@ -28,6 +30,10 @@ public class UserService {
 
     public void save(User user) {
         userRepository.save(user);
+    }
+
+    public void update(User user) {
+        userRepository.update(user);
     }
 
     public User findUserByEmail(String email) {
@@ -79,5 +85,10 @@ public class UserService {
         }
         userRepository.update(user);
     }
+
+    public List<Book> getFavourites(Long id) {
+        return Optional.ofNullable(userRepository.getFavourites(id)).orElse(null);
+    }
+
 
 }

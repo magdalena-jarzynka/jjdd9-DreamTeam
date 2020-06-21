@@ -26,7 +26,7 @@
             <td>Autor</td>
             <td>Gatunek</td>
             <td>Wersja audio</td>
-            <td>Zobacz szczegóły</td>
+            <td>Opcje</td>
         </tr>
         </thead>
         <tbody>
@@ -56,16 +56,24 @@
                 </td>
                 <td>
                     ${book.audio?then("dostępna","niedostępna")}
-                </td>
-                <td>
-                    <a href="/single?id=${book.id}" class="templatemo-edit-btn" style="white-space: nowrap">SZCZEGÓŁY
-                        >>></a>
-                </td>
-            </tr>
-        </#list>
-        </tbody>
-    </table>
-</div>
+                    </td>
+                    <td>
+                        <a href="/single?id=${book.id}" class="templatemo-edit-btn" style="white-space: nowrap">SZCZEGÓŁY
+                            >>></a>
+                        <p></p>
+                        <#if userRole != "GUEST" && favourites?seq_contains(book.id)>
+                            <a class="btn templatemo-edit-btn remove-favourites" data-id-book="${book.id?c}"
+                               data-id-user="${userId}">Usuń z ulubionych</a>
+                        <#elseif userRole != "GUEST" && !favourites?seq_contains(book.id)>
+                            <a class="btn templatemo-edit-btn add-favourites" data-id-book="${book.id?c}"
+                               data-id-user="${userId}">Dodaj do ulubionych</a>
+                        </#if>
+                    </td>
+                </tr>
+            </#list>
+            </tbody>
+        </table>
+    </div>
 <#if numberOfPages gt 1>
     <div class="pagination-wrap">
         <ul class="pagination">
@@ -107,3 +115,4 @@
         </ul>
     </div>
 </#if>
+<script type="text/javascript" src="js/favourites.js"></script>
