@@ -14,6 +14,7 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,700' rel='stylesheet'
           type='text/css'>
     <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="../../css/rating.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/templatemo-style.css" rel="stylesheet">
 
@@ -59,18 +60,37 @@
                             </p>
                         </div>
                         <div class="col-sm-6">
-                            <h2><strong>${book.title!}</strong></h2>
-                            <h5 style="font-style: italic"><#list book.authorViews>
+                            <p>
+                            <h2><strong>${book.title!}</strong></h2></p>
+                            <h4 style="font-style: italic"><#list book.authorViews>
                                     <#items as authorView>
                                         ${authorView.name}<#sep>,
                                     </#items>
-                                </#list></h5>
+                                </#list></h4>
                             <hr>
+                            <#if book.id??>
+                                <p>
+                                    <button class="star_1 ratings_stars" data-id-book="${book.id?c}"
+                                            data-id-rating="1"></button>
+                                    <button class="star_2 ratings_stars" data-id-book="${book.id?c}"
+                                            data-id-rating="2"></button>
+                                    <button class="star_3 ratings_stars" data-id-book="${book.id?c}"
+                                            data-id-rating="3"></button>
+                                    <button class="star_4 ratings_stars" data-id-book="${book.id?c}"
+                                            data-id-rating="4"></button>
+                                    <button class="star_5 ratings_stars" data-id-book="${book.id?c}"
+                                            data-id-rating="5"></button>
+                                </p>
+                                <br>
+                                <p><h5>Ilość głosów: ${rating.numberOfVotes}</h5></p>
+                                <p><h5>Średnia ocena: ${average?string["0.##"]}</h5></p>
+                            </#if>
                             <p>
-                                <#if userRole != "GUEST" && reserved == false>
-                                    <a class="btn templatemo-edit-btn add-reservation" data-id-book="${book.id?c}"
-                                       data-id-user="${userId}">ZAREZERWUJ KSIĄŻKĘ</a>
-                                </#if>
+                            <hr>
+                            <#if userRole != "GUEST" && reserved == false>
+                                <a class="btn templatemo-edit-btn add-reservation" data-id-book="${book.id?c}"
+                                   data-id-user="${userId}">ZAREZERWUJ KSIĄŻKĘ</a>
+                            </#if>
                             </p>
                             <p>
                                 <#if userRole == "ADMIN" || userRole == "SUPER_ADMIN">
@@ -136,6 +156,7 @@
 <!-- JS -->
 <script src="js/jquery-1.11.2.min.js"></script>      <!-- jQuery -->
 <script src="js/jquery-migrate-1.2.1.min.js"></script> <!--  jQuery Migrate Plugin -->
+<script src="../../js/rating.js"></script>
 <script src="https://www.google.com/jsapi"></script> <!-- Google Chart -->
 <script type="text/javascript" src="js/templatemo-script.js"></script>      <!-- Templatemo Script -->
 <script type="text/javascript" src="../../js/reservation.js"></script>
