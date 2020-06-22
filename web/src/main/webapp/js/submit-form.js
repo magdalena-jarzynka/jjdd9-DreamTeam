@@ -11,7 +11,7 @@ $("#add-form").submit(function (e) {
         data: form.serialize(), // serializes the form's elements.
         success: function (data) {
             alert('Książka o tytule "' + title + '" została zapisana w bazie danych'); // show response from the php script.
-            location.reload();
+            // location.reload();
         }
     });
 });

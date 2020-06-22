@@ -207,7 +207,7 @@ public class BookService {
     public long updateBookDto(BookDto bookDto, Long bookId) {
         Book book = findById(bookId);
         book = bookMapper.updateBookEntity(book, bookDto);
-        bookRepository.save(book);
+        bookRepository.update(book);
         return book.getId();
     }
 
@@ -218,6 +218,11 @@ public class BookService {
     }
 
     public void deleteBook(Long bookId) {
+        Book book = findBookById(bookId);
+        book.getKinds().forEach(kind -> kind.getBooks().remove(book));
+        book.getGenres().forEach(genre -> genre.getBooks().remove(book));
+        book.getEpochs().forEach(epoch -> epoch.getBooks().remove(book));
+        book.getAuthors().forEach(author -> author.getBooks().remove(book));
         favouritesService.mailAboutFavouriteBookRemoval(bookId);
         reservationService.mailAboutReservedBookRemoval(bookId);
         bookRepository.delete(bookId);

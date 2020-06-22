@@ -148,7 +148,16 @@ public class BookMapper {
             }
             authors.add(author);
         }
+        for (Author author : book.getAuthors()) {
+            author.getBooks().remove(book);
+        }
         book.setAuthors(authors);
+        for (Author author : book.getAuthors()) {
+            List<Book> books = author.getBooks();
+            if (!books.contains(book)) {
+                author.getBooks().add(book);
+            }
+        }
 
         List<Epoch> epochs = new ArrayList<>();
         for (EpochDto epochDto : bookDto.getEpochs()) {
@@ -161,7 +170,16 @@ public class BookMapper {
             }
             epochs.add(epoch);
         }
+        for (Epoch epoch : book.getEpochs()) {
+            epoch.getBooks().remove(book);
+        }
         book.setEpochs(epochs);
+        for (Epoch epoch : book.getEpochs()) {
+            List<Book> books = epoch.getBooks();
+            if (!books.contains(book)) {
+                epoch.getBooks().add(book);
+            }
+        }
 
         List<Genre> genres = new ArrayList<>();
         for (GenreDto genreDto : bookDto.getGenres()) {
@@ -169,12 +187,21 @@ public class BookMapper {
             if (genre == null) {
                 genre = genreMapper.mapToEntity(genreDto);
             }
-            if(!genre.getBooks().contains(book)) {
+            if (!genre.getBooks().contains(book)) {
                 genre.getBooks().add(book);
             }
             genres.add(genre);
         }
+        for (Genre genre : book.getGenres()) {
+            genre.getBooks().remove(book);
+        }
         book.setGenres(genres);
+        for (Genre genre : book.getGenres()) {
+            List<Book> books = genre.getBooks();
+            if (!books.contains(book)) {
+                genre.getBooks().add(book);
+            }
+        }
 
         List<Kind> kinds = new ArrayList<>();
         for (KindDto kindDto : bookDto.getKinds()) {
@@ -182,13 +209,21 @@ public class BookMapper {
             if (kind == null) {
                 kind = kindMapper.mapToEntity(kindDto);
             }
-            if(!kind.getBooks().contains(book)) {
+            if (!kind.getBooks().contains(book)) {
                 kind.getBooks().add(book);
             }
             kinds.add(kind);
         }
+        for (Kind kind : book.getKinds()) {
+            kind.getBooks().remove(book);
+        }
         book.setKinds(kinds);
-
+        for (Kind kind : book.getKinds()) {
+            List<Book> books = kind.getBooks();
+            if (!books.contains(book)) {
+                kind.getBooks().add(book);
+            }
+        }
         return book;
     }
 }
