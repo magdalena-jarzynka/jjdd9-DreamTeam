@@ -5,7 +5,7 @@
     <div class="row form-group">
         <div class="col-lg-12 form-group">
             <label for="inputTitle">Tytuł</label>
-            <input type="text" class="form-control" name="title" id="title" autocomplete="off" required
+            <input type="text" class="form-control" name="title" id="title" autocomplete="off"
                    value="${(book.title)!""}">
         </div>
     </div>
@@ -15,18 +15,20 @@
             <#if book?? && book?has_content>
                 <#list book.authorViews as author>
                     <div class="form-group multiple-form-group input-group">
-                        <input type="text" class="form-control" name="author" autocomplete="off" required
+                        <input type="text" class="form-control" name="author" autocomplete="off"
                                value="${(author.name)!""}">
                         <span class="input-group-btn">
                             <button type="button" class="btn blue-button btn-add">+</button>
+                            <button type="button" class="btn blue-button btn-remove">-</button>
                         </span>
                     </div>
                 </#list>
             <#else>
                 <div class="form-group multiple-form-group input-group">
-                    <input type="text" class="form-control" name="author" autocomplete="off" required>
+                    <input type="text" class="form-control" name="author" autocomplete="off">
                     <span class="input-group-btn">
                             <button type="button" class="btn blue-button btn-add">+</button>
+                        <button type="button" class="btn blue-button btn-remove">-</button>
                         </span>
                 </div>
             </#if>
@@ -35,8 +37,8 @@
     <div class="row form-group">
         <div class="col-lg-12 form-group">
             <label for="inputTranslator">Tłumacz</label>
-                <input type="text" class="form-control" name="translator" autocomplete="off"
-                       value="${(book.translators)!""}">
+            <input type="text" class="form-control" name="translator" autocomplete="off"
+                   value="${(book.translators)!""}">
             <p>Jeżeli chcesz dodać więcej tłumaczy wymień ich po przecinku.</p>
         </div>
     </div>
@@ -46,19 +48,23 @@
             <#if book?? && book?has_content>
                 <#list book.epochViews as epoch>
                     <div class="form-group multiple-form-group input-group">
-                        <input type="text" class="form-control" name="epoch" autocomplete="off" required
+                        <input type="text" class="form-control" name="epoch" autocomplete="off"
                                value="${(epoch.name)!""}">
                         <span class="input-group-btn">
                             <button type="button" class="btn blue-button btn-add">+</button>
+                            <button type="button" class="btn blue-button btn-remove">-</button>
+
                         </span>
                     </div>
                 </#list>
             <#else>
                 <div class="form-group multiple-form-group input-group">
-                    <input type="text" class="form-control" name="epoch" autocomplete="off" required>
+                    <input type="text" class="form-control" name="epoch" autocomplete="off">
                     <span class="input-group-btn">
                             <button type="button" class="btn blue-button btn-add">+</button>
-                        </span>
+                        <button type="button" class="btn blue-button btn-remove">-</button>
+
+                    </span>
                 </div>
             </#if>
         </div>
@@ -69,18 +75,22 @@
             <#if book?? && book?has_content>
                 <#list book.genreViews as genre>
                     <div class="form-group multiple-form-group input-group">
-                        <input type="text" class="form-control" name="genre" autocomplete="off" required
+                        <input type="text" class="form-control" name="genre" autocomplete="off"
                                value="${(genre.name)!""}">
                         <span class="input-group-btn">
                             <button type="button" class="btn blue-button btn-add">+</button>
+                            <button type="button" class="btn blue-button btn-remove">-</button>
+
                         </span>
                     </div>
                 </#list>
             <#else>
                 <div class="form-group multiple-form-group input-group">
-                    <input type="text" class="form-control" name="genre" autocomplete="off" required>
+                    <input type="text" class="form-control" name="genre" autocomplete="off">
                     <span class="input-group-btn">
                             <button type="button" class="btn blue-button btn-add">+</button>
+                        <button type="button" class="btn blue-button btn-remove">-</button>
+
                         </span>
                 </div>
             </#if>
@@ -92,18 +102,22 @@
             <#if book?? && book?has_content>
                 <#list book.kindViews as kind>
                     <div class="form-group multiple-form-group input-group">
-                        <input type="text" class="form-control" name="kind" autocomplete="off" required
+                        <input type="text" class="form-control" name="kind" autocomplete="off"
                                value="${(kind.name)!""}">
                         <span class="input-group-btn">
                             <button type="button" class="btn blue-button btn-add">+</button>
+                            <button type="button" class="btn blue-button btn-remove">-</button>
+
                         </span>
                     </div>
                 </#list>
             <#else>
                 <div class="form-group multiple-form-group input-group">
-                    <input type="text" class="form-control" name="kind" autocomplete="off" required>
+                    <input type="text" class="form-control" name="kind" autocomplete="off">
                     <span class="input-group-btn">
                             <button type="button" class="btn blue-button btn-add">+</button>
+                        <button type="button" class="btn blue-button btn-remove">-</button>
+
                         </span>
                 </div>
             </#if>
@@ -139,9 +153,9 @@
     </div>
     <div class="form-group text-right">
         <#if book??>
-        <button type="submit" class="templatemo-blue-button save">Zapisz</button>
+            <button type="submit" class="templatemo-blue-button save">Zapisz</button>
         <#else>
-        <button type="submit" class="templatemo-blue-button">Dodaj</button>
+            <button type="submit" class="templatemo-blue-button">Dodaj</button>
         </#if>
     </div>
 </form>

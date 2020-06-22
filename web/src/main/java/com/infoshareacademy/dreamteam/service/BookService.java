@@ -207,7 +207,7 @@ public class BookService {
     public long updateBookDto(BookDto bookDto, Long bookId) {
         Book book = findById(bookId);
         book = bookMapper.updateBookEntity(book, bookDto);
-        bookRepository.save(book);
+        bookRepository.update(book);
         return book.getId();
     }
 

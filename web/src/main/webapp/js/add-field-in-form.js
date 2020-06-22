@@ -8,9 +8,9 @@
             var $multipleFormGroup = $formGroup.closest('.multiple-form-group');
             var $formGroupClone = $formGroup.clone();
 
-            $(this)
-                .toggleClass('blue-button btn-add btn-remove')
-                .html('–');
+            // $(this)
+            //     .toggleClass('blue-button btn-add btn-remove')
+            //     .html('–');
 
             $formGroupClone.find('input').val('');
             $formGroupClone.find('input').prop('required', false);
