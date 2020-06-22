@@ -5,7 +5,7 @@
     <div class="row form-group">
         <div class="col-lg-12 form-group">
             <label for="inputTitle">Tytuł</label>
-            <input type="text" class="form-control" name="title" id="title" autocomplete="off"
+            <input type="text" class="form-control" name="title" id="title" autocomplete="off" required
                    value="${(book.title)!""}">
         </div>
     </div>
@@ -15,20 +15,20 @@
             <#if book?? && book?has_content>
                 <#list book.authorViews as author>
                     <div class="form-group multiple-form-group input-group">
-                        <input type="text" class="form-control" name="author" autocomplete="off"
+                        <input type="text" class="form-control" name="author" autocomplete="off" required
                                value="${(author.name)!""}">
                         <span class="input-group-btn">
                             <button type="button" class="btn blue-button btn-add">+</button>
-                            <button type="button" class="btn blue-button btn-remove">-</button>
+                            <button type="button" class="btn btn-remove">–</button>
                         </span>
                     </div>
                 </#list>
             <#else>
                 <div class="form-group multiple-form-group input-group">
-                    <input type="text" class="form-control" name="author" autocomplete="off">
+                    <input type="text" class="form-control" name="author" autocomplete="off" required>
                     <span class="input-group-btn">
                             <button type="button" class="btn blue-button btn-add">+</button>
-                        <button type="button" class="btn blue-button btn-remove">-</button>
+                        <button type="button" class="btn btn-remove">–</button>
                         </span>
                 </div>
             </#if>
@@ -52,7 +52,7 @@
                                value="${(epoch.name)!""}">
                         <span class="input-group-btn">
                             <button type="button" class="btn blue-button btn-add">+</button>
-                            <button type="button" class="btn blue-button btn-remove">-</button>
+                            <button type="button" class="btn btn-remove">–</button>
 
                         </span>
                     </div>
@@ -62,7 +62,7 @@
                     <input type="text" class="form-control" name="epoch" autocomplete="off">
                     <span class="input-group-btn">
                             <button type="button" class="btn blue-button btn-add">+</button>
-                        <button type="button" class="btn blue-button btn-remove">-</button>
+                        <button type="button" class="btn btn-remove">–</button>
 
                     </span>
                 </div>
@@ -75,21 +75,21 @@
             <#if book?? && book?has_content>
                 <#list book.genreViews as genre>
                     <div class="form-group multiple-form-group input-group">
-                        <input type="text" class="form-control" name="genre" autocomplete="off"
+                        <input type="text" class="form-control" name="genre" autocomplete="off" required
                                value="${(genre.name)!""}">
                         <span class="input-group-btn">
                             <button type="button" class="btn blue-button btn-add">+</button>
-                            <button type="button" class="btn blue-button btn-remove">-</button>
+                            <button type="button" class="btn btn-remove">–</button>
 
                         </span>
                     </div>
                 </#list>
             <#else>
                 <div class="form-group multiple-form-group input-group">
-                    <input type="text" class="form-control" name="genre" autocomplete="off">
+                    <input type="text" class="form-control" name="genre" autocomplete="off" required>
                     <span class="input-group-btn">
                             <button type="button" class="btn blue-button btn-add">+</button>
-                        <button type="button" class="btn blue-button btn-remove">-</button>
+                        <button type="button" class="btn btn-remove">–</button>
 
                         </span>
                 </div>
@@ -106,7 +106,7 @@
                                value="${(kind.name)!""}">
                         <span class="input-group-btn">
                             <button type="button" class="btn blue-button btn-add">+</button>
-                            <button type="button" class="btn blue-button btn-remove">-</button>
+                            <button type="button" class="btn btn-remove">–</button>
 
                         </span>
                     </div>
@@ -116,7 +116,7 @@
                     <input type="text" class="form-control" name="kind" autocomplete="off">
                     <span class="input-group-btn">
                             <button type="button" class="btn blue-button btn-add">+</button>
-                        <button type="button" class="btn blue-button btn-remove">-</button>
+                        <button type="button" class="btn btn-remove">–</button>
 
                         </span>
                 </div>

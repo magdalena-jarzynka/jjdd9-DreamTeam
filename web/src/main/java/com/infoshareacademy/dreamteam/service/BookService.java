@@ -218,6 +218,11 @@ public class BookService {
     }
 
     public void deleteBook(Long bookId) {
+        Book book = findBookById(bookId);
+        book.getKinds().forEach(kind -> kind.getBooks().remove(book));
+        book.getGenres().forEach(genre -> genre.getBooks().remove(book));
+        book.getEpochs().forEach(epoch -> epoch.getBooks().remove(book));
+        book.getAuthors().forEach(author -> author.getBooks().remove(book));
         favouritesService.mailAboutFavouriteBookRemoval(bookId);
         reservationService.mailAboutReservedBookRemoval(bookId);
         bookRepository.delete(bookId);
