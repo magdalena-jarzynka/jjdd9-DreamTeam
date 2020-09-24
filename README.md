@@ -1,7 +1,5 @@
 Project created during Junior Java Developer course at InfoShare Academy in Gdansk. The aim of the project was to create a fully functional online library.
 
-To access website click: http://dreamteam.jjdd9.is-academy.pl/.  
-To access user’s features sign in with google.
 
 **Features:**
 1. guests (not logged in): 
