@@ -21,6 +21,7 @@ Project created during Junior Java Developer course at InfoShare Academy in Gdan
 - Hibernate,
 - MySQL,
 - FreeMarker,
+- REST,
 - JavaScript with jQuery and AJAX,
 - CSS,
 - WildFly,
